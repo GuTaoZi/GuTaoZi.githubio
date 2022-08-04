@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一周创造的奇迹">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS213 Project Report">
+<meta property="og:url" content="https://gutaozi.github.io/2022/08/04/CS213_Project_Report/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="一周创造的奇迹">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/08/04/C2ws39iOpHMBmVW.png">
+<meta property="og:image" content="https://s2.loli.net/2022/08/04/VAjGMkTDOovw76y.png">
+<meta property="article:published_time" content="2022-08-04T05:54:31.076Z">
+<meta property="article:modified_time" content="2022-08-04T05:55:52.709Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="Database">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/08/04/C2ws39iOpHMBmVW.png">
+
+<link rel="canonical" href="https://gutaozi.github.io/2022/08/04/CS213_Project_Report/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CS213 Project Report | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2022/08/04/CS213_Project_Report/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS213 Project Report
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-04 13:54:31 / 修改时间：13:55:52" itemprop="dateCreated datePublished" datetime="2022-08-04T13:54:31+08:00">2022-08-04</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">一周创造的奇迹</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="CS213-Project-Report"><a href="#CS213-Project-Report" class="headerlink" title="CS213 Project Report"></a>CS213 Project Report</h1><h2 id="Team-Member"><a href="#Team-Member" class="headerlink" title="Team Member"></a>Team Member</h2><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>SID</th>
+<th>Contribution</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>樊 斯特</td>
+<td>12111624</td>
+<td>100%</td>
+</tr>
+</tbody></table>
+<h2 id="Task-1-Database-Design"><a href="#Task-1-Database-Design" class="headerlink" title="Task 1 Database Design"></a>Task 1 Database Design</h2><h3 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h3><ul>
+<li><p><input checked="" disabled="" type="checkbox"> 
+The tables created should satisfy the three normal forms;</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+Use the primary key and the foreign keys to indicate important attributes and relationships about your data. Every row in each table should be uniquely identified by its primary key;</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+Every table should be involved in a link. No isolate tables included;</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+Your design should contain no circular links;</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+Each table should always have at least one mandatory (“Not Null”) column (including the primary key but not the system-generated ID column);</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+Tables with no other unique columns than possibly a system-generated ID is not allowed; </p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+Use appropriate types for different fields of data;</p>
+</li>
+<li><p><input checked="" disabled="" type="checkbox"> 
+Your design should better be as easy to expand as possible.</p>
+</li>
+</ul>
+<h3 id="Entity-Relationship-Structure"><a href="#Entity-Relationship-Structure" class="headerlink" title="Entity Relationship Structure"></a>Entity Relationship Structure</h3><p>The ER diagram of the database designed for <code>course_info.json </code>and <code>select_course.csv</code> is shown as the following structure.</p>
+<p><img src="https://s2.loli.net/2022/08/04/C2ws39iOpHMBmVW.png" alt="task1_database"></p>
+<h3 id="Many-to-Many-Relations"><a href="#Many-to-Many-Relations" class="headerlink" title="Many-to-Many Relations"></a>Many-to-Many Relations</h3><p>通过观察数据发现，同一门course会因instructor不同而开设不同section，同一section也会因上课时间不同而分为不同class，因此课程采用了course-section-class三张表进行存储以避免冗余，满足三大范式。</p>
+<p>student和section之间、instructor和section之间也存在多对多关系，因此建立了selection和teach表进行存储以满足三大范式。</p>
+<h3 id="Prerequisite-Relation-Storage"><a href="#Prerequisite-Relation-Storage" class="headerlink" title="Prerequisite Relation Storage"></a>Prerequisite Relation Storage</h3><p>在本项目数据库的设计中，先修课关系由两张表存储：prerequisite_group和prerequisite_combination。一门非叶子结点课的先修课之间有两种关系：AndPrerequisite和OrPrerequisite，观察数据得知先修课关系树的层数并不高，因此可以通过列举一门课的所有先修课组合的方式来存储，这种存储方法便于操作者理解和维护，能规避建树存储时在本地所需的递归等复杂操作，用空间换时间，分析得知对于course_info.json中&lt;1000门课程而言，空间是绰绰有余的。</p>
+<p>在prerequisite_group表中，存储了一门课对应的先修组和先修组内课程总数的计数；在prerequisite_combination表中，则存储了各先修组内包含的课程，统计学生是否满足先修时，先通过prerequisite_group确认所有可能的group_id，通过join操作和prerequisite_combination建立联系，当学生已经通过的课程计数满足某一组要求时，判定为满足先修要求，逻辑非常直观，嵌套层数较低，且避免了大量本地运算，节约了带宽。</p>
+<h2 id="Task-2-Import-the-data"><a href="#Task-2-Import-the-data" class="headerlink" title="Task 2 Import the data"></a>Task 2 Import the data</h2><h3 id="Prepare-JDBC-Connection"><a href="#Prepare-JDBC-Connection" class="headerlink" title="Prepare JDBC Connection"></a>Prepare JDBC Connection</h3><p>首先导入java.sql包，初始化postgresql驱动程序，并使用<code>DriverManager.getConnection()</code>创建<code>Connection</code>对象，随后的SQL语句将调用该连接对象创建并执行。</p>
+<h3 id="Import-Data-from-course-info-json"><a href="#Import-Data-from-course-info-json" class="headerlink" title="Import Data from course_info.json"></a>Import Data from <code>course_info.json</code></h3><h4 id="Import-GSON"><a href="#Import-GSON" class="headerlink" title="Import GSON"></a>Import GSON</h4><p><code>course_info.json</code>中以json格式存储了如下信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">totalCapacity,courseId,prerequisite,courseHour,courseCredit,courseName,className,courseDept,teacher,classList:[weekList,location,classTime,weekday]</span><br></pre></td></tr></table></figure>
+
+<p>该json文件信息量大，格式较csv更为复杂，且存在嵌套关系，因此考虑调用Google提供的用来在Java对象和json数据之间进行映射的<code>GSON</code>库。利用Maven引入<code>com.google.code.gson</code>依赖后，本项目主要调用了<strong>反序列化</strong>功能，将复杂json映射到Java类中。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; T <span class="title function_">complexJsonToObj</span><span class="params">(String json, Class&lt;T&gt; cls)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">Gson</span> <span class="variable">gson</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Gson</span>();</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(json)) <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="type">T</span> <span class="variable">obj</span> <span class="operator">=</span> gson.fromJson(json, cls);</span><br><span class="line">    <span class="keyword">if</span> (Objects.isNull(obj))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Formalize-the-data"><a href="#Formalize-the-data" class="headerlink" title="Formalize the data"></a>Formalize the data</h4><p>但在导入之前，最大的问题是数据的不规范性和复杂性，例如使用全角符号，课程名中存在空格，先修课逻辑连接词使用“或者”、“并且”等，对此本项目在导入数据到类对象前，先对数据进行了标准化操作。</p>
+<ol>
+<li><p>更换括号，去除空格</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">prerequisite=prerequisite.replace(<span class="string">&#x27;（&#x27;</span>,<span class="string">&#x27;(&#x27;</span>).replace(<span class="string">&#x27;）&#x27;</span>,<span class="string">&#x27;)&#x27;</span>)</span><br><span class="line">                            .replace(<span class="string">&quot;SUSTech English &quot;</span>,<span class="string">&quot;SUSTech_English_&quot;</span>)</span><br><span class="line">                            .replace(<span class="string">&quot;大学物理 B&quot;</span>,<span class="string">&quot;大学物理B&quot;</span>)</span><br><span class="line">                            .replace(<span class="string">&quot;化学原理 A&quot;</span>,<span class="string">&quot;化学原理A&quot;</span>)</span><br><span class="line">                            .replace(<span class="string">&quot;化学原理 B&quot;</span>,<span class="string">&quot;化学原理B&quot;</span>)</span><br><span class="line">                            .replace(<span class="string">&quot;学术英语 &quot;</span>,<span class="string">&quot;学术英语&quot;</span>)</span><br><span class="line">                            .replace(<span class="string">&quot;生理学与病理生理学 I&quot;</span>,<span class="string">&quot;生理学与病理生理学I&quot;</span>)</span><br><span class="line">                            .replace(<span class="string">&quot;线性代数I A&quot;</span>,<span class="string">&quot;线性代数I-A&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>更换逻辑连接词</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prerequisite=prerequisite.replace(<span class="string">&quot; 并且 &quot;</span>,<span class="string">&quot;&amp;&quot;</span>).replace(<span class="string">&quot; 或者 &quot;</span>,<span class="string">&quot;|&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>去重</p>
+<p>部分课程先修课列表中存在重复的情况，例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;totalCapacity&quot;</span><span class="punctuation">:</span> <span class="number">20</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;courseId&quot;</span><span class="punctuation">:</span> <span class="string">&quot;EE332&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;prerequisite&quot;</span><span class="punctuation">:</span> <span class="string">&quot;(数字电路 或者 数字电路 或者 数字电路)&quot;</span><span class="punctuation">,</span></span><br><span class="line">    ...</span><br><span class="line">  <span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样的情况实际是可以通过数据库层面解决的，我们在数据库的prerequisite_combination中，将group_id和course_id作为联合主键，因此(group, course_id)二元组受<code>unique</code>限制只能出现一次，非法的插入将会被拒绝。</p>
+</li>
+</ol>
+<h3 id="Import-Data-from-select-course-csv"><a href="#Import-Data-from-select-course-csv" class="headerlink" title="Import Data from select_course.csv"></a>Import Data from <code>select_course.csv</code></h3><p><code>select_course.csv</code>中以comma separated values格式存储了如下信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Name(3 CN characters),Gender(F/M),CN_College_name(EN_College_name),SID,[list of courses]</span><br></pre></td></tr></table></figure>
+
+<p>导入数据时，本项目对逐行读入的数据采用了String的split方法，沿逗号分离数据，并根据读入信息建立SQL INSERT语句导入数据。</p>
+<p>本项目中，选课信息存储于selection表，因此先将其他学生信息导入student表，再将选课信息导入selection表。</p>
+<p>以下是根据课程中给出的若干Loader的例子写出的几个数据导入程序。</p>
+<h4 id="Very-Loader"><a href="#Very-Loader" class="headerlink" title="Very Loader"></a>Very Loader</h4><p>使用字符串拼接的Statement，无法阻止SQL注入，而且很慢（</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Awful loader</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">veryBadLoader</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="type">Statement</span> <span class="variable">stmt</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        conn = DatabaseManipulation.getConnection();</span><br><span class="line">        <span class="type">BufferedReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">FileReader</span>(pathToCsvFile));</span><br><span class="line">        String line;</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> ((line = reader.readLine()) != <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            String[] info = line.split(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">            <span class="comment">//导入表Student中的数据</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">studentId</span> <span class="operator">=</span> Integer.parseInt(info[<span class="number">3</span>]);</span><br><span class="line">            <span class="type">char</span> <span class="variable">gender</span> <span class="operator">=</span> info[<span class="number">1</span>].charAt(<span class="number">0</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> info[<span class="number">0</span>];</span><br><span class="line">            <span class="type">String</span> <span class="variable">cn_college_name</span> <span class="operator">=</span> info[<span class="number">2</span>].substring(<span class="number">5</span>, info[<span class="number">2</span>].length() - <span class="number">1</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">en_college_name</span> <span class="operator">=</span> info[<span class="number">2</span>].substring(<span class="number">0</span>, <span class="number">4</span>);</span><br><span class="line">            <span class="keyword">if</span>(!College.containsValue(en_college_name))</span><br><span class="line">            &#123;</span><br><span class="line">                addCollege(cn_college_name,en_college_name);</span><br><span class="line">            &#125;</span><br><span class="line">            stmt = conn.createStatement();</span><br><span class="line">            <span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;insert into student(student_id, college_id, name, gender) values (&quot;</span>+studentId+<span class="string">&quot;, &quot;</span>+College.get(en_college_name)+<span class="string">&quot;, &quot;</span>+name+<span class="string">&quot;, &quot;</span>+gender+<span class="string">&quot;)&quot;</span>;</span><br><span class="line">            stmt.execute(sql);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//导入表course_selection中的数据</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">4</span>; i &lt; info.length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">courseId</span> <span class="operator">=</span> info[i];</span><br><span class="line">                sql = <span class="string">&quot;insert into selection(section_id,student_id) &quot;</span> +</span><br><span class="line">                    <span class="string">&quot;values(&#x27;&quot;</span> + courseId + <span class="string">&quot;&#x27;,&quot;</span> + studentId + <span class="string">&quot;)&quot;</span>;</span><br><span class="line">                stmt.execute(sql);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (count % <span class="number">1000</span> == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                System.out.println(count);</span><br><span class="line">            &#125;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOException | SQLException e)</span><br><span class="line">    &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; <span class="keyword">finally</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (conn != <span class="literal">null</span>) conn.setAutoCommit(<span class="literal">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (SQLException e)</span><br><span class="line">        &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        DatabaseManipulation.closeResource(conn, stmt);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Bad-Loader"><a href="#Bad-Loader" class="headerlink" title="Bad Loader"></a>Bad Loader</h4><p>使用预编译Prepared Statement，可以防止SQL注入，在执行大量相同的语句时效率会有提升</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">badLoader</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">Connection</span> <span class="variable">conn</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        conn = DatabaseManipulation.getConnection();</span><br><span class="line">        <span class="type">BufferedReader</span> <span class="variable">reader</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedReader</span>(<span class="keyword">new</span> <span class="title class_">FileReader</span>(pathToCsvFile));</span><br><span class="line">        String line;</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> ((line = reader.readLine()) != <span class="literal">null</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            String[] info = line.split(<span class="string">&quot;,&quot;</span>);</span><br><span class="line">            <span class="comment">//导入表Student中的数据</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">studentId</span> <span class="operator">=</span> Integer.parseInt(info[<span class="number">3</span>]);</span><br><span class="line">            <span class="type">char</span> <span class="variable">gender</span> <span class="operator">=</span> info[<span class="number">1</span>].charAt(<span class="number">0</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> info[<span class="number">0</span>];</span><br><span class="line">            <span class="type">String</span> <span class="variable">cn_college_name</span> <span class="operator">=</span> info[<span class="number">2</span>].substring(<span class="number">5</span>, info[<span class="number">2</span>].length() - <span class="number">1</span>);</span><br><span class="line">            <span class="type">String</span> <span class="variable">en_college_name</span> <span class="operator">=</span> info[<span class="number">2</span>].substring(<span class="number">0</span>, <span class="number">4</span>);</span><br><span class="line">            <span class="keyword">if</span>(!College.containsValue(en_college_name))</span><br><span class="line">            &#123;</span><br><span class="line">                addCollege(cn_college_name,en_college_name);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="type">String</span> <span class="variable">sql</span> <span class="operator">=</span> <span class="string">&quot;insert into student(student_id, college_id, name, gender) values (?,?,?,?)&quot;</span>;</span><br><span class="line">            PreparedStatement stmt=conn.prepareStatement(sql);</span><br><span class="line">            stmt.setInt(<span class="number">1</span>,studentId);</span><br><span class="line">            stmt.setInt(<span class="number">2</span>,College.get(en_college_name));</span><br><span class="line">            stmt.setString(<span class="number">3</span>,name);</span><br><span class="line">            stmt.setObject(<span class="number">4</span>,gender);</span><br><span class="line">            stmt.executeUpdate();</span><br><span class="line">            <span class="comment">//导入表course_selection中的数据</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">4</span>; i &lt; info.length; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">String</span> <span class="variable">courseId</span> <span class="operator">=</span> info[i];</span><br><span class="line">                sql = <span class="string">&quot;insert into selection(section_id,student_id) values(?,?)&quot;</span>;</span><br><span class="line">                stmt=conn.prepareStatement(sql);</span><br><span class="line">                stmt.setObject(<span class="number">1</span>,courseId);</span><br><span class="line">                stmt.setObject(<span class="number">2</span>,studentId);</span><br><span class="line">                stmt.executeUpdate();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (count % <span class="number">1000</span> == <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                System.out.println(count);</span><br><span class="line">            &#125;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (IOException | SQLException e)</span><br><span class="line">    &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Average-Loader"><a href="#Average-Loader" class="headerlink" title="Average Loader"></a>Average Loader</h4><p>在打开数据库连接后，关闭了 <strong>AutoCommit</strong>并在关闭连接前一次性Commit所有更改。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">conn.setAutoCommit(<span class="literal">false</span>);</span><br><span class="line"><span class="comment">//SQL PreparedStatement excution</span></span><br><span class="line">conn.commit();</span><br><span class="line">DatabaseManipulation.closeResource(conn);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Good-Loader"><a href="#Good-Loader" class="headerlink" title="Good Loader"></a>Good Loader</h4><p>由于Task1中的数据完整性较差，在这里未使用BatchStatement进行优化，但对于接口完备数据完善的Task5，我采用了BatchStatement进行进一步优化。</p>
+<h2 id="Task-5-Remake-Database-Design"><a href="#Task-5-Remake-Database-Design" class="headerlink" title="Task 5 Remake Database Design"></a>Task 5 Remake Database Design</h2><p>The ER diagram designed for data in Task5 is shown as the following structure.</p>
+<p><img src="https://s2.loli.net/2022/08/04/VAjGMkTDOovw76y.png" alt="屏幕截图 2022-08-04 125507.png"></p>
+<h2 id="Task-6-Implement-service-interfaces"><a href="#Task-6-Implement-service-interfaces" class="headerlink" title="Task 6 Implement service interfaces"></a>Task 6 Implement service interfaces</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p>Task5的数据较为完善，并且接口要求明确，因此我将主要精力放在Task5~Task6上。</p>
+<p>以下是我实现接口的文件树，同时在根目录下的DDL.sql是建库所需的sql源文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">src</span><br><span class="line">  └─main</span><br><span class="line">    └─java                    </span><br><span class="line">       ├─GuTao_Impl</span><br><span class="line">       │      GT_CourseService.java</span><br><span class="line">       │      GT_DepartmentService.java</span><br><span class="line">       │      GT_InstructorService.java</span><br><span class="line">       │      GT_MajorService.java</span><br><span class="line">       │      GT_SemesterService.java</span><br><span class="line">       │      GT_ServiceFactory.java</span><br><span class="line">       │      GT_StudentService.java</span><br><span class="line">       │      GT_UserService.java              </span><br><span class="line">       └─GuTao_Util</span><br><span class="line">              BatchStatement.java</span><br><span class="line">              CheckedBiConsumer.java</span><br><span class="line">              CheckedConsumer.java</span><br><span class="line">              Query.java</span><br><span class="line">              StatementBuilder.java</span><br><span class="line">              Updates.java</span><br></pre></td></tr></table></figure>
+
+<h3 id="本地运行"><a href="#本地运行" class="headerlink" title="本地运行"></a>本地运行</h3><p>Task6的具体效率依据ProjectJudge决定，此处贴上本地运行结果作为参考，本地配置为：</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>设备名称</td>
+<td>MICROSOFT Surface Pro7</td>
+</tr>
+<tr>
+<td>处理器</td>
+<td>Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz   1.50 GHz</td>
+</tr>
+<tr>
+<td>机带 RAM</td>
+<td>16.0 GB (15.6 GB 可用)</td>
+</tr>
+<tr>
+<td>系统类型</td>
+<td>64 位操作系统, 基于 x64 的处理器</td>
+</tr>
+<tr>
+<td>系统规格</td>
+<td>Windows 11 家庭版 21H1</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Run on local </span></span><br><span class="line">Import departments</span><br><span class="line">Import majors</span><br><span class="line">Import users</span><br><span class="line">Import semesters</span><br><span class="line">Import courses</span><br><span class="line">Import sections</span><br><span class="line">Import classes</span><br><span class="line">Import major courses</span><br><span class="line">Import time usage: <span class="number">0.</span>86s</span><br><span class="line">Test search course <span class="number">1</span>: <span class="number">1000</span></span><br><span class="line">Test search course <span class="number">1</span> time: <span class="number">18.</span>32s</span><br><span class="line">Test enroll course <span class="number">1</span>: <span class="number">1000</span></span><br><span class="line">Test enroll course <span class="number">1</span> time: <span class="number">3.</span>57s</span><br><span class="line">Test drop enrolled course <span class="number">1</span>: <span class="number">813</span></span><br><span class="line">Test drop enrolled course <span class="number">1</span> time: <span class="number">0.</span>05s</span><br><span class="line">Import student courses</span><br><span class="line">Import student courses time: <span class="number">9.</span>73s</span><br><span class="line">Test drop course: <span class="number">416637</span></span><br><span class="line">Test drop course time: <span class="number">13.</span>40s</span><br><span class="line">Test course table <span class="number">2</span>: <span class="number">1000</span></span><br><span class="line">Test course table <span class="number">2</span> time: <span class="number">0.</span>53s</span><br><span class="line">Test search course <span class="number">2</span>: <span class="number">1000</span></span><br><span class="line">Test search course <span class="number">2</span> time: <span class="number">30.</span>13s</span><br><span class="line">Test enroll course <span class="number">2</span>: <span class="number">1000</span></span><br><span class="line">Test enroll course <span class="number">2</span> time: <span class="number">4.</span>45s</span><br></pre></td></tr></table></figure>
+
+
+
+
+<p>​	<br>​	</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Database/" rel="tag"># Database</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/11/SUSTech%E9%80%89%E8%AF%BE%E6%8C%87%E5%8D%97%20by%20%E5%92%95%E6%A1%83/" rel="prev" title="SUSTech 选课指南 by 咕桃">
+      <i class="fa fa-chevron-left"></i> SUSTech 选课指南 by 咕桃
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CS213-Project-Report"><span class="nav-number">1.</span> <span class="nav-text">CS213 Project Report</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Team-Member"><span class="nav-number">1.1.</span> <span class="nav-text">Team Member</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Task-1-Database-Design"><span class="nav-number">1.2.</span> <span class="nav-text">Task 1 Database Design</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Requirements"><span class="nav-number">1.2.1.</span> <span class="nav-text">Requirements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Entity-Relationship-Structure"><span class="nav-number">1.2.2.</span> <span class="nav-text">Entity Relationship Structure</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Many-to-Many-Relations"><span class="nav-number">1.2.3.</span> <span class="nav-text">Many-to-Many Relations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prerequisite-Relation-Storage"><span class="nav-number">1.2.4.</span> <span class="nav-text">Prerequisite Relation Storage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Task-2-Import-the-data"><span class="nav-number">1.3.</span> <span class="nav-text">Task 2 Import the data</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Prepare-JDBC-Connection"><span class="nav-number">1.3.1.</span> <span class="nav-text">Prepare JDBC Connection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Import-Data-from-course-info-json"><span class="nav-number">1.3.2.</span> <span class="nav-text">Import Data from course_info.json</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Import-GSON"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">Import GSON</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Formalize-the-data"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">Formalize the data</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Import-Data-from-select-course-csv"><span class="nav-number">1.3.3.</span> <span class="nav-text">Import Data from select_course.csv</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Very-Loader"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">Very Loader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bad-Loader"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">Bad Loader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Average-Loader"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">Average Loader</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Good-Loader"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">Good Loader</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Task-5-Remake-Database-Design"><span class="nav-number">1.4.</span> <span class="nav-text">Task 5 Remake Database Design</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Task-6-Implement-service-interfaces"><span class="nav-number">1.5.</span> <span class="nav-text">Task 6 Implement service interfaces</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.5.1.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8C"><span class="nav-number">1.5.2.</span> <span class="nav-text">本地运行</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+</body>
+</html>
