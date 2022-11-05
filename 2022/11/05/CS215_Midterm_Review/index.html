@@ -20,19 +20,20 @@
     var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Just Do It, But Not Just Do It.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://gutaozi.github.io/categories/index.html">
+  <meta name="description" content="我愿称之为，究极缝合课">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS215 离散数学 半期复习">
+<meta property="og:url" content="https://gutaozi.github.io/2022/11/05/CS215_Midterm_Review/index.html">
 <meta property="og:site_name" content="咕桃w！">
-<meta property="og:description" content="Just Do It, But Not Just Do It.">
+<meta property="og:description" content="我愿称之为，究极缝合课">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-07-10T06:16:14.000Z">
-<meta property="article:modified_time" content="2022-07-10T06:44:20.595Z">
+<meta property="article:published_time" content="2022-11-05T05:32:02.411Z">
+<meta property="article:modified_time" content="2022-11-05T13:20:57.923Z">
 <meta property="article:author" content="咕桃">
+<meta property="article:tag" content="Discrete Math">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://gutaozi.github.io/categories/">
+<link rel="canonical" href="https://gutaozi.github.io/2022/11/05/CS215_Midterm_Review/">
 
 
 <script id="page-configurations">
@@ -40,13 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>categories | 咕桃w！
-</title>
+  <title>CS215 离散数学 半期复习 | 咕桃w！</title>
   
 
 
@@ -159,51 +159,238 @@
       <div class="main-inner">
         <div class="content-wrap">
           
-  
-  
 
-          <div class="content page posts-expand">
+          <div class="content post posts-expand">
             
 
     
-    
-    
-    <div class="post-block" lang="zh-CN">
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2022/11/05/CS215_Midterm_Review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
       <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS215 离散数学 半期复习
+        </h1>
 
-<h1 class="post-title" itemprop="name headline">categories
-</h1>
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
 
-<div class="post-meta">
+              <time title="创建时间：2022-11-05 13:32:02 / 修改时间：21:20:57" itemprop="dateCreated datePublished" datetime="2022-11-05T13:32:02+08:00">2022-11-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index"><span itemprop="name">Math</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">我愿称之为，究极缝合课</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Part-I-逻辑"><a href="#Part-I-逻辑" class="headerlink" title="Part I. 逻辑"></a>Part I. 逻辑</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
+<p><strong>Logic</strong> is the basis of all mathematical reasoning.</p>
+</blockquote>
+<blockquote>
+<p>A <strong>proposition</strong> is a declarative statement that is either true or false, usually condition-based.</p>
+</blockquote>
+<blockquote>
+<p>A <strong>bit</strong> is sufficient to represent two possible values: 0 (false) or 1 (true)</p>
+</blockquote>
+<blockquote>
+<p>A variable that takes on values 0 and 1 is called a <strong>Boolean variable</strong>.</p>
+</blockquote>
+<blockquote>
+<p>A <strong>bit string</strong> is a sequence of zero or more bits. The length of this string is the number of bits in the string.</p>
+</blockquote>
+<blockquote>
+<p><strong>bitwise operations</strong>: replace “T” and “F” with 1 and 0.</p>
+</blockquote>
+<blockquote>
+<p>A compound proposition that is always true for all possible truth values is called a <strong>tautology</strong>. </p>
+</blockquote>
+<blockquote>
+<p>A compound proposition that is always false for all possible truth values is called a <strong>contradiction</strong>. </p>
+</blockquote>
+<blockquote>
+<p>A compound proposition that is neither a tautology nor a contradiction is called a <strong>contingency</strong>.</p>
+</blockquote>
+<blockquote>
+<p>Two propositions are <strong>equivalent</strong> if they always have the same truth value, denoted by $p ≡ q$ or $p ⇔ q$.</p>
+</blockquote>
+<h3 id="6个逻辑连接词"><a href="#6个逻辑连接词" class="headerlink" title="6个逻辑连接词"></a>6个逻辑连接词</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Notation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>⋄ Negation</td>
+<td>¬p</td>
+</tr>
+<tr>
+<td>⋄ Conjunction</td>
+<td>p ∧ q</td>
+</tr>
+<tr>
+<td>⋄ Disjunction</td>
+<td>p ∨ q</td>
+</tr>
+<tr>
+<td>⋄ Exclusive or</td>
+<td>p ⊕ q</td>
+</tr>
+<tr>
+<td>⋄ Implication</td>
+<td>p → q</td>
+</tr>
+<tr>
+<td>⋄ Biconditional</td>
+<td>p ↔ q</td>
+</tr>
+</tbody></table>
+<h4 id="与、或、非、异或"><a href="#与、或、非、异或" class="headerlink" title="与、或、非、异或"></a>与、或、非、异或</h4><p>略。</p>
+<h4 id="蕴含-p-→-q"><a href="#蕴含-p-→-q" class="headerlink" title="蕴含: $p → q$"></a>蕴含: $p → q$</h4><p>a.k.a. conditional statement</p>
+<p>$p$ : hypothesis</p>
+<p>$q$ :  conclusion</p>
+<p>$q$ unless $¬p$</p>
+<p>$p$ only if $q$</p>
+<table>
+<thead>
+<tr>
+<th><strong>converse</strong></th>
+<th>contrapositive</th>
+<th><strong>inverse</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>逆命题</td>
+<td>逆否命题</td>
+<td>否命题</td>
+</tr>
+</tbody></table>
+<h4 id="双向蕴含-p-↔-q"><a href="#双向蕴含-p-↔-q" class="headerlink" title="双向蕴含: $p ↔ q$"></a>双向蕴含: $p ↔ q$</h4><p>a.k.a. bi-implications</p>
+<p><strong>$p$ if and only if $q$</strong></p>
+<p><strong>$p$ is necessary and sufficient for $q$</strong></p>
+<h3 id="真值表"><a href="#真值表" class="headerlink" title="真值表"></a>真值表</h3><p>$k$个变量，$2^k$行，全都一样则两式等价。</p>
+<h3 id="翻译：自然语言→逻辑式"><a href="#翻译：自然语言→逻辑式" class="headerlink" title="翻译：自然语言→逻辑式"></a>翻译：自然语言→逻辑式</h3><ol>
+<li>提取Atomic (elementary) propositions</li>
+<li>提取逻辑连接词</li>
+<li>构建式子</li>
+</ol>
+<h3 id="Important-Logical-Equivalences"><a href="#Important-Logical-Equivalences" class="headerlink" title="Important Logical Equivalences"></a>Important Logical Equivalences</h3><table>
+<thead>
+<tr>
+<th>Name</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Identity laws</td>
+<td>$p ∧ T ≡ p $，$ p ∨ F ≡ p$</td>
+</tr>
+<tr>
+<td>Domination laws</td>
+<td>$p ∨ T ≡ T$，$p ∧ F ≡ F $</td>
+</tr>
+<tr>
+<td>Idempotent laws</td>
+<td>$p ∨ p ≡ p$ ，$p ∧ p ≡ p$</td>
+</tr>
+<tr>
+<td>Double negation laws</td>
+<td>$\neg\neg p\equiv p$</td>
+</tr>
+<tr>
+<td>Commutative laws</td>
+<td>$p ∨ q ≡ q ∨ p$，$ p ∧ q ≡ q ∧ p$</td>
+</tr>
+<tr>
+<td>Associative laws</td>
+<td>$(p ∨ q) ∨ r ≡ p ∨ (q ∨ r) $，$ (p ∧ q) ∧ r ≡ p ∧ (q ∧ r)$</td>
+</tr>
+<tr>
+<td>Distributive laws</td>
+<td>$(p ∨ q) ∧ r ≡ (p∧r) ∨ (q ∨ r) $，$ (p ∧ q) ∨ r ≡ (p∨r) ∧ (q∨r)$</td>
+</tr>
+<tr>
+<td>De Morgan’s laws</td>
+<td>$\neg(p∧ q) \equiv \neg p ∨ \neg q$，$\neg(p ∨ q)\equiv \neg p ∧ \neg q$</td>
+</tr>
+<tr>
+<td>Absorption laws</td>
+<td>$p∨(p∧ q) \equiv p$，$p∧(p∨ q)\equiv p$</td>
+</tr>
+<tr>
+<td>Negation laws</td>
+<td>$p∧\neg p \equiv F$，$p∨\neg p \equiv T$</td>
+</tr>
+<tr>
+<td>Useful law</td>
+<td>$p→q \equiv \neg p ∨ q$</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Discrete-Math/" rel="tag"># Discrete Math</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/05/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix_Library/" rel="prev" title="CS205 C/C++ Project03设计报告 C语言矩阵库">
+      <i class="fa fa-chevron-left"></i> CS205 C/C++ Project03设计报告 C语言矩阵库
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/05/MA212_Probability_Statistics_Midterm/" rel="next" title="MA212 概率论与数理统计 半期复习">
+      MA212 概率论与数理统计 半期复习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
   
 
-</div>
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
-          <div class="category-all-page">
-            <div class="category-all-title">
-              目前共计 5 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/CS/">CS</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Math/">Math</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SUSTech/">SUSTech</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AD%A6%E9%95%BF%E5%9B%A2/">学长团</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9D%82/">杂</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
-        
-      </div>
-      
-      
-      
-    </div>
-    
-
-    
-    
-    
 
 
           </div>
@@ -254,6 +441,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-I-%E9%80%BB%E8%BE%91"><span class="nav-number">1.</span> <span class="nav-text">Part I. 逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E4%B8%AA%E9%80%BB%E8%BE%91%E8%BF%9E%E6%8E%A5%E8%AF%8D"><span class="nav-number">1.2.</span> <span class="nav-text">6个逻辑连接词</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8E%E3%80%81%E6%88%96%E3%80%81%E9%9D%9E%E3%80%81%E5%BC%82%E6%88%96"><span class="nav-number">1.2.1.</span> <span class="nav-text">与、或、非、异或</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%95%B4%E5%90%AB-p-%E2%86%92-q"><span class="nav-number">1.2.2.</span> <span class="nav-text">蕴含: $p → q$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E5%90%91%E8%95%B4%E5%90%AB-p-%E2%86%94-q"><span class="nav-number">1.2.3.</span> <span class="nav-text">双向蕴含: $p ↔ q$</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%9F%E5%80%BC%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">真值表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BF%BB%E8%AF%91%EF%BC%9A%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E2%86%92%E9%80%BB%E8%BE%91%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">翻译：自然语言→逻辑式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Important-Logical-Equivalences"><span class="nav-number">1.5.</span> <span class="nav-text">Important Logical Equivalences</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
