@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="只具有乘法功能的计算器，高精度，用户友好">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS205 C&#x2F;C++ Project01设计报告 乘法计算器">
+<meta property="og:url" content="https://gutaozi.github.io/2022/11/05/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Multiplication_Calculator/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="只具有乘法功能的计算器，高精度，用户友好">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925015232703.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925083649225.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925015341290.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925083735712.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925015438229.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925083840850.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925015645989.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925084538204.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925015809404.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925021142752.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925022112312.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925083224925.png">
+<meta property="og:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925083249101.png">
+<meta property="article:published_time" content="2022-11-05T05:02:14.728Z">
+<meta property="article:modified_time" content="2022-11-05T05:17:24.560Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/first_fan/AppData/Roaming/Typora/typora-user-images/image-20220925015232703.png">
+
+<link rel="canonical" href="https://gutaozi.github.io/2022/11/05/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Multiplication_Calculator/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CS205 C/C++ Project01设计报告 乘法计算器 | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2022/11/05/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Multiplication_Calculator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS205 C/C++ Project01设计报告 乘法计算器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-05 13:02:14 / 修改时间：13:17:24" itemprop="dateCreated datePublished" datetime="2022-11-05T13:02:14+08:00">2022-11-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">只具有乘法功能的计算器，高精度，用户友好</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Part-0-团队成员"><a href="#Part-0-团队成员" class="headerlink" title="Part 0. 团队成员"></a>Part 0. <del>团队</del>成员</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>学号</th>
+<th><del>贡献率</del></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>咕桃</td>
+<td>-</td>
+<td><del>100%</del></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Part-1-Analysis"><a href="#Part-1-Analysis" class="headerlink" title="Part 1 - Analysis"></a>Part 1 - Analysis</h2><h3 id="题目重述-amp-主要思路"><a href="#题目重述-amp-主要思路" class="headerlink" title="题目重述&amp;主要思路"></a>题目重述&amp;主要思路</h3><p>本题目要求实现一个能将若干格式下的两个数进行乘法运算的简单计算器。</p>
+<p>根据题目所给样例，可以分析出题目基础要求的数据类型：</p>
+<ol>
+<li>整数</li>
+<li>浮点数</li>
+<li>大整数</li>
+<li>浮点数(科学计数法)</li>
+</ol>
+<p>其中对于程序设计要求最高的为<strong>大整数</strong>和<strong>浮点数(科学计数法格式)</strong>的运算，因此笔者在设计程序时选择实现<strong>大整数(科学计数法格式)</strong>以便一次性适配题目要求的所有格式，除基础要求外，本项目支持以下功能：</p>
+<ol>
+<li>大整数(科学计数法)</li>
+<li>带有K/M/G/T后缀的大整数</li>
+<li>大浮点数</li>
+<li>大浮点数(科学计数法)</li>
+<li>带有K/M/G/T后缀的大浮点数</li>
+<li>简写形式大浮点数</li>
+<li>自定义精度计算</li>
+<li>显示数据类型</li>
+<li>显示科学计数法格式转换过程</li>
+<li>交互式输入输出</li>
+</ol>
+<h3 id="模型假设"><a href="#模型假设" class="headerlink" title="模型假设"></a>模型假设</h3><p>由于题目所给信息较少，笔者对输入的数据范围等进行了假设，并根据假设设计程序。</p>
+<p>以下是本程序适配的数据范围：</p>
+<p>对于一个科学计数法浮点数，格式记为$A.BeC$</p>
+<p>整数部分$A$与小数部分$B$位数之和记为$n$，$1\leq n \leq 10^{4}$，即存储一万位有效数字</p>
+<p>10的幂指数记为$C$，$-10^{18}\leq C \leq 10^{18}$，即存储上限为$10^{10^{18}}$量级</p>
+<h3 id="高精度乘法"><a href="#高精度乘法" class="headerlink" title="高精度乘法"></a>高精度乘法</h3><p>对于<code>__int128</code>也无法存下的大数，此处使用了高精度乘法的算法进行运算。</p>
+<p>模拟竖式计算的基础高精度乘法算法复杂度为$O(n^2)$，对于10000位有效数字，一般能在秒级时间内得出运算结果，因此使用该算法解决问题是可以接受的，<del>就不劳压位乃至FFT和NTT牛刀杀鸡了</del>。</p>
+<p>高精度乘法作为广为人知的入门算法，此处不再过多赘述细节，仅简述其思路：</p>
+<p>以$A*B=C$为例，$A$和$B$位数记为$n_A,n_B$</p>
+<ol>
+<li><p>调整$A&gt;B$。</p>
+</li>
+<li><p>采用<code>short</code>数组，按位存储$A$和$B$的有效数字。</p>
+</li>
+<li><p>模拟竖式计算，先遍历两个乘数每一位相乘的值，加到结果数的对应位。</p>
+<p>$C[p]=\sum^{p-1}_{i=1}\sum^{p-i}_{j=1}A[i]*B[j]$</p>
+</li>
+<li><p>从低位到高位取模进位。</p>
+</li>
+<li><p>调整结果数位数，加和幂指数，输出结果。</p>
+</li>
+</ol>
+<h3 id="多类型数据的输入、互化、交叉运算"><a href="#多类型数据的输入、互化、交叉运算" class="headerlink" title="多类型数据的输入、互化、交叉运算"></a>多类型数据的输入、互化、交叉运算</h3><p>对于合法输入的多类型数据，程序将其分为7类，并使用简洁的正则表达式进行类型识别，识别不同类型后，再通过分支使用不同构造方法进行拆分存储。</p>
+<p>本题中的运算涉及科学计数法，因此笔者采用了向上兼容，将所有数字预处理为科学计数法整数格式，即通过将位数存储于幂指数中的方式，保证次幂前数字在$(1,10)$之间，免去了传统高精度浮点运算中对齐小数点的繁杂，同时规避了不同类型数据之间的互化问题。</p>
+<p>由于上述处理，程序仅需满足同一类型的乘法，笔者采用简洁的重载运算符写法，具有优秀的普适性和拓展性。</p>
+<h2 id="Part-2-Code"><a href="#Part-2-Code" class="headerlink" title="Part 2 - Code"></a>Part 2 - Code</h2><h3 id="正则表达式与数据类型"><a href="#正则表达式与数据类型" class="headerlink" title="正则表达式与数据类型"></a>正则表达式与数据类型</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">const</span> regex <span class="title">pure_int</span><span class="params">(<span class="string">&quot;^[+-]?[0-9]+$&quot;</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">const</span> regex <span class="title">int_with_e</span><span class="params">(<span class="string">&quot;^[+-]?[0-9]+e[+-]?[0-9]+$&quot;</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">const</span> regex <span class="title">int_with_suffix</span><span class="params">(<span class="string">&quot;^[+-]?[0-9]+[kKmMgGtT]$&quot;</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">const</span> regex <span class="title">pure_float</span><span class="params">(<span class="string">&quot;^[+-]?[0-9]+.[0-9]+$&quot;</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">const</span> regex <span class="title">float_with_e</span><span class="params">(<span class="string">&quot;^[+-]?[0-9]+.[0-9]+e[+-]?[0-9]+$&quot;</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">const</span> regex <span class="title">float_with_suffix</span><span class="params">(<span class="string">&quot;^[+-]?[0-9]+.[0-9]+[kKmMgGtT]$&quot;</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">const</span> regex <span class="title">abbreviated_float</span><span class="params">(<span class="string">&quot;^[+-]?.[0-9]+$&quot;</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">enum</span> <span class="title class_">data_type</span></span><br><span class="line">&#123;</span><br><span class="line">    NaN, PURE_INT, INT_WITH_E, INT_WITH_SUFFIX, PURE_FLOAT, FLOAT_WITH_E, FLOAT_WITH_SUFFIX, ABBR_FLOAT</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">const</span> string type_name[] = &#123;<span class="string">&quot;NaN&quot;</span>, <span class="string">&quot;PURE_INT&quot;</span>, <span class="string">&quot;INT_WITH_E&quot;</span>, <span class="string">&quot;INT_WITH_SUFFIX&quot;</span>, <span class="string">&quot;PURE_FLOAT&quot;</span>, <span class="string">&quot;FLOAT_WITH_E&quot;</span>, <span class="string">&quot;FLOAT_WITH_SUFFIX&quot;</span>, <span class="string">&quot;ABBR_FLOAT&quot;</span>&#125;;</span><br></pre></td></tr></table></figure>
+<p>上文提到，程序将合法输入数据分为7类，分别为：纯整数、带有幂指数的整数、带有后缀的整数(kmgt)、纯浮点数、带有幂指数的浮点数、带有后缀的浮点数、简写浮点数。</p>
+<p>此处使用enum进行记录，<code>classifier()</code>函数中集成正则表达式进行识别分类。在本程序中，以下样例所示格式的输入均合法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">PURE_INT : <span class="number">-19260817</span></span><br><span class="line">INT_WITH_E : <span class="number">-1926e-0817</span></span><br><span class="line">INT_WITH_SUFFIX : <span class="number">-19260817</span>k</span><br><span class="line">PURE_FLOAT : <span class="number">-1926.0817</span></span><br><span class="line">FLOAT_WITH_E : <span class="number">-1926.08e-17</span></span><br><span class="line">FLOAT_WITH_SUFFIX : <span class="number">-1926.0817</span>k</span><br><span class="line">ABBR_FLOAT : <span class="number">-.19260817</span></span><br></pre></td></tr></table></figure>
+<h3 id="存储结构"><a href="#存储结构" class="headerlink" title="存储结构"></a>存储结构</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">BigNum</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> len;</span><br><span class="line">    <span class="type">short</span> val[<span class="number">10005</span>];<span class="comment">//1e4 digits, from low to high</span></span><br><span class="line">    <span class="type">bool</span> sign;<span class="comment">//true: +</span></span><br><span class="line">    ll exp;</span><br><span class="line">    data_type type;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>对于数据，此处使用结构体进行统一存储，$len$存储有效位数、$val[]$从低位到高位存储各位数字，$sign$存储符号，$exp$存储幂指数，$type$则存储数据类型(其实最后几乎都会变成<code>INT_WITH_E</code>)。使用结构体为后续的构造器、重载运算符带来便利。</p>
+<h3 id="构造器"><a href="#构造器" class="headerlink" title="构造器"></a>构造器</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">BigNum</span>(string s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">transform</span>(s.<span class="built_in">begin</span>(), s.<span class="built_in">end</span>(), s.<span class="built_in">begin</span>(), ::tolower);</span><br><span class="line">        <span class="keyword">this</span>-&gt;type = <span class="built_in">classifier</span>(s);</span><br><span class="line">        <span class="keyword">switch</span> (type)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">case</span> PURE_INT:...</span><br><span class="line">            <span class="keyword">case</span> INT_WITH_E:...</span><br><span class="line">            <span class="keyword">case</span> INT_WITH_SUFFIX:...</span><br><span class="line">            <span class="keyword">case</span> PURE_FLOAT:...</span><br><span class="line">            <span class="keyword">case</span> FLOAT_WITH_E:</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">int</span> dot_pos = s.<span class="built_in">find</span>(<span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">                <span class="keyword">this</span>-&gt;sign = <span class="literal">true</span>;</span><br><span class="line">                <span class="type">int</span> e_pos = s.<span class="built_in">find</span>(<span class="string">&#x27;e&#x27;</span>);</span><br><span class="line">                ll base_exp = -(e_pos - dot_pos - <span class="number">1</span>);</span><br><span class="line">                s.<span class="built_in">erase</span>(dot_pos, <span class="number">1</span>);</span><br><span class="line">                e_pos--;</span><br><span class="line">                <span class="keyword">if</span> (s[e_pos + <span class="number">1</span>] == <span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    e_pos++;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = e_pos + <span class="number">1</span>; i &lt; s.<span class="built_in">size</span>(); i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    exp *= <span class="number">10</span>;</span><br><span class="line">                    exp += s[i] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (s[e_pos] == <span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    exp = -exp;</span><br><span class="line">                    e_pos--;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span> (s[<span class="number">0</span>] == <span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">this</span>-&gt;sign = <span class="literal">false</span>;</span><br><span class="line">                    s.<span class="built_in">erase</span>(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">                    e_pos--;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= e_pos; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">this</span>-&gt;val[i] = s[e_pos - i] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">this</span>-&gt;exp += base_exp;</span><br><span class="line">                <span class="keyword">this</span>-&gt;len = e_pos;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">case</span> FLOAT_WITH_SUFFIX:...</span><br><span class="line">            <span class="keyword">case</span> ABBR_FLOAT:...</span><br><span class="line">            <span class="keyword">default</span>:...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>classifier()</code>识别类别后，构造器针对不同类别数据，传入字符串，生成新结构体。</p>
+<p>各类型思路类似，此处仅展示相对复杂的<code>FLOAT_WITH_E</code>类型的构造过程，主要分为以下三步:</p>
+<ol>
+<li>记录小数点对$exp$的贡献，抹除小数点，加和原有$exp$。</li>
+<li>记录符号并抹除。</li>
+<li>按位取模存储，记录$len$。</li>
+</ol>
+<h3 id="规范化格式"><a href="#规范化格式" class="headerlink" title="规范化格式"></a>规范化格式</h3><p>在运算前，首先进行格式规范化，将末位0全部纳入幂指数后抹除，降低计算复杂度。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BigNum <span class="title">standardize_exp</span><span class="params">(BigNum a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    BigNum c;</span><br><span class="line">    c.type = PURE_INT;</span><br><span class="line">    c.len = <span class="number">0</span>;</span><br><span class="line">    c.sign = a.sign;</span><br><span class="line">    c.exp = a.exp;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= a.len; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a.val[i] == <span class="number">0</span> &amp;&amp; c.len == <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            c.exp++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            c.val[++c.len] = a.val[i];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (c.exp)</span><br><span class="line">    &#123;</span><br><span class="line">        c.type = INT_WITH_E;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="重载运算符"><a href="#重载运算符" class="headerlink" title="重载运算符"></a>重载运算符</h3><p>此处重载了比较符<code>&lt;</code>和乘法符<code>*</code>。</p>
+<p>比较符的主要作用是将较大的数放在竖式上方，因此不考虑符号。思路简单：规范化→比幂指数→从高到低逐位比较。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> <span class="keyword">operator</span>&lt;(BigNum a, BigNum b)<span class="comment">//抛开符号比大小</span></span><br><span class="line">&#123;</span><br><span class="line">    a = <span class="built_in">standardize_exp</span>(a);</span><br><span class="line">    b = <span class="built_in">standardize_exp</span>(b);</span><br><span class="line">    <span class="keyword">if</span> (a.exp == b.exp)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = a.len; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (a.val[i] != b.val[i])</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> a.val[i] &lt; b.val[i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;<span class="comment">//a==b</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> a.exp &lt; b.exp;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>乘法重载原理已在上文提过，此处模拟竖式计算就好。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">BigNum <span class="keyword">operator</span>*(BigNum a, BigNum b)</span><br><span class="line">&#123;</span><br><span class="line">    a = <span class="built_in">standardize_exp</span>(a);</span><br><span class="line">    b = <span class="built_in">standardize_exp</span>(b);</span><br><span class="line">    BigNum c, t;</span><br><span class="line">    c.exp = a.exp + b.exp;</span><br><span class="line">    c.sign = !(a.sign <span class="keyword">xor</span> b.sign);</span><br><span class="line">    c.len = a.len + b.len + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; b)</span><br><span class="line">    &#123;</span><br><span class="line">        t = a;</span><br><span class="line">        a = b;</span><br><span class="line">        b = t;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= a.len; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= b.len; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            c.val[i + j - <span class="number">1</span>] += a.val[i] * b.val[j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= c.len; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (c.val[i] &gt;= <span class="number">10</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            c.val[i + <span class="number">1</span>] += c.val[i] / <span class="number">10</span>;</span><br><span class="line">            c.val[i] %= <span class="number">10</span>;</span><br><span class="line">            c.len = <span class="built_in">max</span>(c.len, i + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    c = <span class="built_in">standardize_exp</span>(c);</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="输出结果"><a href="#输出结果" class="headerlink" title="输出结果"></a>输出结果</h3><p>输出函数<code>print_BigNum(BigNum a, ll constraint)</code>初始默认以科学计数法格式，输出无精度损失的结果。</p>
+<p>但有时候我们并不关心小数点后第10位是什么，因此该函数的<code>constraint</code>参数限定了小数点后的位数，通过四舍五入的方式，使得输出结果不会过于冗长。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">print_BigNum</span><span class="params">(BigNum a, ll constraint)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    string res = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    a = <span class="built_in">standardize_exp</span>(a);</span><br><span class="line">    <span class="type">bool</span> flg = <span class="literal">false</span>;</span><br><span class="line">    ll cnt = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = a.len; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a.val[i] != <span class="number">0</span> || flg)</span><br><span class="line">        &#123;</span><br><span class="line">            cnt++;</span><br><span class="line">            <span class="keyword">if</span> (constraint != <span class="number">-1</span> &amp;&amp; cnt &lt;= constraint + <span class="number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                flg = <span class="literal">true</span>;</span><br><span class="line">                <span class="keyword">if</span>(cnt==constraint+<span class="number">1</span>&amp;&amp;(i&gt;<span class="number">1</span>&amp;&amp;a.val[i<span class="number">-1</span>]&gt;=<span class="number">5</span>))<span class="comment">//四舍五入</span></span><br><span class="line">                &#123;</span><br><span class="line">                    res = res + (<span class="type">char</span>) (a.val[i] + <span class="string">&#x27;1&#x27;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    res = res + (<span class="type">char</span>) (a.val[i] + <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (constraint == <span class="number">-1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                res = res + (<span class="type">char</span>) (a.val[i] + <span class="string">&#x27;0&#x27;</span>);</span><br><span class="line">                flg = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!flg)</span><br><span class="line">    &#123;</span><br><span class="line">        res = res + <span class="string">&quot;0&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (res.<span class="built_in">size</span>() &gt; <span class="number">1</span> || a.exp)</span><br><span class="line">    &#123;</span><br><span class="line">        ll new_exp = a.exp + cnt - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (res.<span class="built_in">size</span>() &gt; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            res.<span class="built_in">insert</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="string">&#x27;.&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (new_exp)</span><br><span class="line">        &#123;</span><br><span class="line">            res += <span class="string">&quot;e&quot;</span>;</span><br><span class="line">            stringstream ss;</span><br><span class="line">            string tmp_s;</span><br><span class="line">            ss.<span class="built_in">clear</span>();</span><br><span class="line">            ss &lt;&lt; new_exp;</span><br><span class="line">            res = res + ss.<span class="built_in">str</span>();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!a.sign)</span><br><span class="line">    &#123;</span><br><span class="line">        res = <span class="string">&quot;-&quot;</span> + res;</span><br><span class="line">    &#125;</span><br><span class="line">    cout &lt;&lt; res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="用户交互"><a href="#用户交互" class="headerlink" title="用户交互"></a>用户交互</h3><p>本程序设计了用户友好的交互命令，命令列表如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-h help</span><br><span class="line">-t type_list</span><br><span class="line">-p [num] set precision</span><br><span class="line">-s show datatype</span><br><span class="line">-c show data convert</span><br><span class="line">-q quit</span><br></pre></td></tr></table></figure>
+<p>分别实现了：帮助列表、支持的数据类型列表、设置小数点后保留位数、展示输入数据类型、展示转换后数据类型、退出功能，且本程序除了支持命令行参数输入单次计算外，在收到<code>-q</code>指令前也支持多次输入计算，并对错误输入进行报错。<del>并且使用了&gt;&gt;&gt;来让计算器看起来比较像某种语言的交互式界面。</del></p>
+<h2 id="Part-3-Result-amp-Verification"><a href="#Part-3-Result-amp-Verification" class="headerlink" title="Part 3 - Result &amp; Verification"></a>Part 3 - Result &amp; Verification</h2><h3 id="基础要求"><a href="#基础要求" class="headerlink" title="基础要求"></a>基础要求</h3><p>Test case #1: 整数乘法</p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925015232703.png" alt="image-20220925015232703" style="zoom:67%;" /></p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925083649225.png" alt="image-20220925083649225" style="zoom: 33%;" /></p>
+<p>Test case #2: 浮点数乘法</p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925015341290.png" alt="image-20220925015341290" style="zoom:67%;" /></p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925083735712.png" alt="image-20220925083735712" style="zoom:50%;" /></p>
+<p>Test case #3: 大整数乘法</p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925015438229.png" alt="image-20220925015438229"></p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925083840850.png" alt="image-20220925083840850"></p>
+<p>Test case #4: 大浮点数乘法</p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925015645989.png" alt="image-20220925015645989" style="zoom:67%;" /></p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925084538204.png" alt="image-20220925084538204"></p>
+<p>(windows的科学计算器到这里精度就不够了)</p>
+<p>Test case #5: 错误输入</p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925015809404.png" alt="image-20220925015809404" style="zoom: 67%;" /></p>
+<h3 id="进阶测试"><a href="#进阶测试" class="headerlink" title="进阶测试"></a>进阶测试</h3><p>Bunched test cases : 混合格式多组输入、鲁棒性…</p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925021142752.png" alt="image-20220925021142752"></p>
+<h3 id="拓展测试"><a href="#拓展测试" class="headerlink" title="拓展测试"></a>拓展测试</h3><p>Bunched test cases : 用户交互、精度设置、数据类型、数据转换、鲁棒性…</p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925022112312.png" alt="image-20220925022112312"></p>
+<p>Big number test case : 1000位*1000位，运行耗时52ms(含IO时间)，用户态CPU耗时11ms，系统态CPU耗时12ms。</p>
+<p>输入：</p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925083224925.png" alt="image-20220925083224925"></p>
+<p>输出：</p>
+<p><img src="C:\Users\first_fan\AppData\Roaming\Typora\typora-user-images\image-20220925083249101.png" alt="image-20220925083249101"></p>
+<h2 id="Part-4-Difficulties-amp-Solutions"><a href="#Part-4-Difficulties-amp-Solutions" class="headerlink" title="Part 4 - Difficulties &amp; Solutions"></a>Part 4 - Difficulties &amp; Solutions</h2><h3 id="读入与存储"><a href="#读入与存储" class="headerlink" title="读入与存储"></a>读入与存储</h3><p><strong>Difficulty</strong>：本次项目的一大难题在于输入数据的格式多样且未知，因此如何将各种格式的字符串转化为数字，以何种形式存储再进行计算是项目的核心所在。</p>
+<p><strong>Solution</strong>：通过自己可能的输入格式进行设计，利用正则表达式处理字符串，向上兼容全部以<code>INT_WITH_E</code>格式存储，减少了对齐小数点等繁杂过程。</p>
+<h3 id="高精度"><a href="#高精度" class="headerlink" title="高精度"></a>高精度</h3><p><strong>Difficulty</strong>：对于大数的运算，无法使用原生的数据类型进行存储。</p>
+<p><strong>Solution</strong>：利用结构体按位存储，重载高精度乘法运算，计算时直接使用即可。</p>
+<h3 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h3><p><strong>Difficulty</strong>：对于不同的输入，应该采用怎样的输出格式？</p>
+<p><strong>Solution</strong>：本项目定位是科学计算器，且采用了归一化的数据存储，因此结果只要不是-9~9的<code>PURE_INT</code>，那么就会采用科学计数法格式进行输出，统一且优雅。</p>
+<h3 id="用户友好设计"><a href="#用户友好设计" class="headerlink" title="用户友好设计"></a>用户友好设计</h3><p><strong>Difficulty</strong>：用户不知道本项目支持的输入格式，需要查看数据类型、科学计数法转换结果等调试信息，有不同精度需求，有多次计算需求…</p>
+<p><strong>Solution</strong>：<del>为了调试的时候更舒服，</del>实现了帮助菜单，显示调试信息命令，自定义保留位数命令，交互式输入输出…</p>
+<h2 id="Part-5-Summary"><a href="#Part-5-Summary" class="headerlink" title="Part 5 - Summary"></a>Part 5 - Summary</h2><p>​        初见题目时，一眼高精，觉得相对简单；仔细一看样例，没说输入格式，样例中包含题目要求，被不同类型数据的交叉运算困扰许久；回过头一想，不管什么输入，干脆都用科学计数法存就好了，遂切。</p>
+<p>​        <strong>Simple is beautiful.</strong> 写项目时，笔者也在不断删改：</p>
+<ul>
+<li>自学了简单的正则表达式用法，代替了原有冗长缓慢的条件语句判断。</li>
+<li>使用重构运算符写法，而非函数。</li>
+<li>利用构造器对输入数据进行归一化，避免了不同结构体的交叉运算。</li>
+<li>对于实际需求选择了合适的算法，而非小题大做。</li>
+<li>……</li>
+</ul>
+<p>​        笔者经过本次项目，也对WSL环境下使用命令行进行编译、调试、运行等操作有了一定的熟悉，在使用一些陌生语法时对输入输出、结构体、字符串处理有了更深的理解。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/11/2022%E5%9F%B9%E5%85%BB%E6%96%B9%E6%A1%88%E8%A7%A3%E8%AF%BB%E6%95%99%E7%A8%8B/" rel="prev" title="SUSTech 培养方案指南 by 咕桃">
+      <i class="fa fa-chevron-left"></i> SUSTech 培养方案指南 by 咕桃
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/05/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Simple_Calculator/" rel="next" title="CS205 C/C++ Project02设计报告 简易计算器">
+      CS205 C/C++ Project02设计报告 简易计算器 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-0-%E5%9B%A2%E9%98%9F%E6%88%90%E5%91%98"><span class="nav-number">1.</span> <span class="nav-text">Part 0. 团队成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-1-Analysis"><span class="nav-number">2.</span> <span class="nav-text">Part 1 - Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E9%87%8D%E8%BF%B0-amp-%E4%B8%BB%E8%A6%81%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">题目重述&amp;主要思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%81%87%E8%AE%BE"><span class="nav-number">2.2.</span> <span class="nav-text">模型假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%B2%BE%E5%BA%A6%E4%B9%98%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">高精度乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%93%E5%85%A5%E3%80%81%E4%BA%92%E5%8C%96%E3%80%81%E4%BA%A4%E5%8F%89%E8%BF%90%E7%AE%97"><span class="nav-number">2.4.</span> <span class="nav-text">多类型数据的输入、互化、交叉运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-2-Code"><span class="nav-number">3.</span> <span class="nav-text">Part 2 - Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">正则表达式与数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="nav-number">3.2.</span> <span class="nav-text">存储结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">构造器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%84%E8%8C%83%E5%8C%96%E6%A0%BC%E5%BC%8F"><span class="nav-number">3.4.</span> <span class="nav-text">规范化格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">3.5.</span> <span class="nav-text">重载运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E7%BB%93%E6%9E%9C"><span class="nav-number">3.6.</span> <span class="nav-text">输出结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E4%BA%A4%E4%BA%92"><span class="nav-number">3.7.</span> <span class="nav-text">用户交互</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-3-Result-amp-Verification"><span class="nav-number">4.</span> <span class="nav-text">Part 3 - Result &amp; Verification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%A6%81%E6%B1%82"><span class="nav-number">4.1.</span> <span class="nav-text">基础要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E9%98%B6%E6%B5%8B%E8%AF%95"><span class="nav-number">4.2.</span> <span class="nav-text">进阶测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E5%B1%95%E6%B5%8B%E8%AF%95"><span class="nav-number">4.3.</span> <span class="nav-text">拓展测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-4-Difficulties-amp-Solutions"><span class="nav-number">5.</span> <span class="nav-text">Part 4 - Difficulties &amp; Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%85%A5%E4%B8%8E%E5%AD%98%E5%82%A8"><span class="nav-number">5.1.</span> <span class="nav-text">读入与存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98%E7%B2%BE%E5%BA%A6"><span class="nav-number">5.2.</span> <span class="nav-text">高精度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="nav-number">5.3.</span> <span class="nav-text">输出格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E5%8F%8B%E5%A5%BD%E8%AE%BE%E8%AE%A1"><span class="nav-number">5.4.</span> <span class="nav-text">用户友好设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-5-Summary"><span class="nav-number">6.</span> <span class="nav-text">Part 5 - Summary</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>
