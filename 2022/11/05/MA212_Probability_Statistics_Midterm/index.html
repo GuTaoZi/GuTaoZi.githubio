@@ -28,7 +28,7 @@
 <meta property="og:description" content="概统怎么这么多东西要背啊（绝望">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-05T13:19:37.270Z">
-<meta property="article:modified_time" content="2022-11-10T15:27:51.593Z">
+<meta property="article:modified_time" content="2022-11-11T13:21:12.686Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Probability &amp; Statistics">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-10 23:27:51" itemprop="dateModified" datetime="2022-11-10T23:27:51+08:00">2022-11-10</time>
+                <time title="修改时间：2022-11-11 21:21:12" itemprop="dateModified" datetime="2022-11-11T21:21:12+08:00">2022-11-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -375,7 +375,8 @@
 <script type="math/tex; mode=display">p(k)=P\{X=k\}=(1-p)^{k-1}p,\ k=1,2,3,...</script><p><strong>负二项分布</strong>：连续独立地试验直到成功$r$次为止，停止时做了$k$次试验</p>
 <script type="math/tex; mode=display">p(k)=P\{X=k\}=C_{k-1}^{r-1} p^{r}(1-p)^{k-r}</script><p><strong>超几何分布</strong>：$n$个球，$r$黑，$n-r$白，盒中不放回地抽取$m$球，$X$代表抽到的黑球个数</p>
 <script type="math/tex; mode=display">P\{X=k\}=\frac{C^k_rC^{m-k}_{n-r}}{C_n^m},\ k=1,...m</script><p><strong>泊松分布</strong>：参数$\lambda&gt;0$，r.v. $X$的取值为0,1,2…，取值概率为</p>
-<script type="math/tex; mode=display">P\{X=k\}=\frac{\lambda^k}{k!}e^{-\lambda},\ k=0,1,2,...$，记为$X\sim \pi(\lambda)$或$X\sim P.(\lambda)</script><p><strong>泊松分布的性质</strong>：</p>
+<script type="math/tex; mode=display">P\{X=k\}=\frac{\lambda^k}{k!}e^{-\lambda},\ k=0,1,2,...</script><p>记为$X\sim \pi(\lambda)$或$X\sim P.(\lambda)$</p>
+<p><strong>泊松分布的性质</strong>：</p>
 <ul>
 <li>$P\{X=k\}&gt;0,\ k=0,1,2,…$</li>
 <li>$\sum_{k=0}^{\infty}P\{X=k\}=\sum_{k=0}^{\infty}\frac{\lambda^k}{k!}e^{-\lambda}=e^{\lambda}\cdot e^{-\lambda}=1$</li>
@@ -453,7 +454,8 @@ f(x) \geq 0, \int_{-\infty}^{\infty} f(x) d x=1
 <p>当$r$为自然数时，$\Gamma(r)=(r-1)!$</p>
 <p><strong>伽马分布的应用</strong>：假如在$(0,t]$内元件受到的冲击次数$N_t$是一个Poisson流。 当$r$是任意自然数时，元件寿命就是第$r$次冲击来到的时间， 记为$X$，则$X\sim\Gamma(r,\lambda)$，它的可靠度函数</p>
 <script type="math/tex; mode=display">R(t)=P\{X>t\}=\sum_{i=0}^{r-1} P\left\{N_{t}=i\right\}=e^{-\lambda t} \sum_{i=0}^{r-1} \frac{(\lambda t)^{i}}{i !}</script><p><strong>贝塔分布</strong>：</p>
-<p>贝塔密度用来刻画$[0,1]$区间上的随机变量：$f(u)=\frac{\Gamma(a+b)}{\Gamma(a) \Gamma(b)} u^{a-1}(1-u)^{b-1}, \quad 0 \leq u \leq 1$</p>
+<p>贝塔密度用来刻画$[0,1]$区间上的随机变量：</p>
+<p>$f(u)=\frac{\Gamma(a+b)}{\Gamma(a) \Gamma(b)} u^{a-1}(1-u)^{b-1}, \quad 0 \leq u \leq 1$</p>
 <p>特别地，$a=b=1$时为均匀分布</p>
 <h2 id="§2-3-随机变量的函数"><a href="#§2-3-随机变量的函数" class="headerlink" title="§2.3 随机变量的函数"></a>§2.3 随机变量的函数</h2><p><strong>随机变量的函数</strong>：对于r.v. $X$，$g(\cdot):𝑹\to 𝑹$是一个函数，将$X$代入函数$g(\cdot)$，得到新的随机变量$𝒀=g(X):\ 𝛀 → 𝑹$，即$𝒀(\omega)=g(X(\omega)),\forall \omega\in 𝛀 $</p>
 <p>随机变量$𝒀$称为随机变量$X$的函数</p>
@@ -462,9 +464,11 @@ f(x) \geq 0, \int_{-\infty}^{\infty} f(x) d x=1
 <li>找出$\{ Y=y\}$的等价事件$\{ X\in D\}$</li>
 <li>$P\{ Y=y\}=P\{ X\in D\}$</li>
 </ol>
-<p><strong>离散→离散</strong>：$y=g(x_1)=g(x_2)=…=g(x_k)$，$P\{𝒀=y\}=\sum_{i=1}^{k}P\{X=x_i\}$</p>
-<p><strong>连续→离散</strong>：$ Y=c,a&lt; X\leq b$，$P\{ Y=c\}=P\{a&lt; X\leq b\}=F_{ X}(b)-F_{ X}(a)$</p>
-<h3 id="连续型-r-v-函数的频率函数"><a href="#连续型-r-v-函数的频率函数" class="headerlink" title="连续型 r.v. 函数的频率函数"></a>连续型 r.v. 函数的频率函数</h3><ol>
+<p><strong>离散→离散</strong>：</p>
+<p>$y=g(x_1)=g(x_2)=…=g(x_k)$，$P\{𝒀=y\}=\sum_{i=1}^{k}P\{X=x_i\}$</p>
+<p><strong>连续→离散</strong>：</p>
+<p>$ Y=c,a&lt; X\leq b$，$P\{ Y=c\}=P\{a&lt; X\leq b\}=F_{ X}(b)-F_{ X}(a)$</p>
+<h3 id="连续型-r-v-的频率函数"><a href="#连续型-r-v-的频率函数" class="headerlink" title="连续型 r.v. 的频率函数"></a>连续型 r.v. 的频率函数</h3><ol>
 <li>求$ Y$的分布函数$F_{ Y}(y)=P\{ Y\leq y\}=P\{g( X)\leq y\}$</li>
 <li>转化为关于r.v. $ X$的概率计算问题(用到$y=g(x)$的性质)</li>
 <li>求导得$f_{ Y}(y)=\frac{d}{dy}F_{ Y}(y)$</li>
@@ -520,7 +524,97 @@ f(x) \geq 0, \int_{-\infty}^{\infty} f(x) d x=1
 n \\
 n_{i}
 \end{array}\right) p_{i}^{n_{i}}\left(1-p_{i}\right)^{n-n_{i}}</script></p>
-<h2 id="§3-3-二维连续随机变量"><a href="#§3-3-二维连续随机变量" class="headerlink" title="§3.3 二维连续随机变量"></a>§3.3 二维连续随机变量</h2><p>二维连续型随机变量：</p>
+<h2 id="§3-3-二维连续随机变量"><a href="#§3-3-二维连续随机变量" class="headerlink" title="§3.3 二维连续随机变量"></a>§3.3 二维连续随机变量</h2><h3 id="二维连续型r-v"><a href="#二维连续型r-v" class="headerlink" title="二维连续型r.v."></a>二维连续型r.v.</h3><p><strong>二维连续型随机变量</strong>：设r.v. $(X,Y)$的联合分布函数为$F(x,y)=P\{X\leq x,Y\leq y\}$，若存在非负可积函数$f(x,y)\ge 0$使得</p>
+<script type="math/tex; mode=display">F(x,y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f(u,v)dvdu,\ (\forall (x,y)\in R^2)</script><p>则称$(X,Y)$为二维连续型随机变量</p>
+<p><strong>联合概率密度</strong>：上述$f(x,y)$称为$X,Y$的联合概率密度</p>
+<p><strong>密度函数的本质特征</strong>：</p>
+<ol>
+<li><p>$f(x,y)\ge0\ (\forall (x,y)\in R^2)$</p>
+</li>
+<li><p>$\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}f(u,v)dudv=1$</p>
+</li>
+</ol>
+<p><strong>密度函数的基本性质</strong>：</p>
+<ol>
+<li><p>$\forall D⊂R^2$，其中$D$为由逐段光滑曲线围成的平面区域</p>
+<script type="math/tex; mode=display">P\{(X,Y)\in D\}=\iint\limits_Df(x,y)dxdy</script></li>
+<li><p>在$f(x,y)$的连续点处，有</p>
+<p>$\frac{\partial^2F(x,y)}{\partial x\partial y}=f(x,y)$</p>
+</li>
+</ol>
+<p><strong>约定</strong>：</p>
+<p>$\left(X_{1}, X_{2}, \cdots, X_{n}\right) \sim F\left(x_{1}, x_{2}, \cdots, x_{n}\right)$，$n$维随机变量的分布函数是$F$</p>
+<p>$\left(X_{1}, X_{2}, \cdots, X_{n}\right) \sim f\left(x_{1}, x_{2}, \cdots, x_{n}\right)$，$n$维随机变量的频率函数是$f$</p>
+<p><strong>边际分布函数</strong>：</p>
+<script type="math/tex; mode=display">F_X(x)=P\{X\leq x\}=P\{X\leq x, Y\leq \infty\}=\int_{-\infty}^{x}\int_{-\infty}^{\infty}f(u,y)dydu</script><p><strong>边际密度函数</strong>：</p>
+<script type="math/tex; mode=display">f_X(x)=\int_{-\infty}^{\infty}f(x,y)dy</script><p><strong>$n$维边际密度函数</strong>：</p>
+<script type="math/tex; mode=display">f_{X}(x)=\int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f(x, y, z) d y d z</script><h3 id="二维联合分布"><a href="#二维联合分布" class="headerlink" title="二维联合分布"></a>二维联合分布</h3><p><strong>二维均匀分布</strong>：设$G$是平面上的有界区域,面积为$A$,若二维随机变量$(X,Y)$具有概率密度</p>
+<script type="math/tex; mode=display">f(x, y)=\left\{\begin{array}{lr}
+\frac{1}{A}, & (x, y) \in G \\
+0, & \text { 其他 }
+\end{array}\right.</script><p>则称$(X,Y)$在$G$上服从均匀分布。若$G_1$是$G$内的面积为$A_1$的子区域，则有</p>
+<script type="math/tex; mode=display">P\{(X,Y)\in G_1\}=\iint\limits_{G_1}\frac{1}{A}dxdy=\frac{A_1}{A}</script><p><strong>二维正态分布</strong>：设$X,Y$的联合密度为：</p>
+<script type="math/tex; mode=display">f(x, y)=\frac{1}{2 \pi \sigma_{1} \sigma_{2} \sqrt{1-\rho^{2}}} e^{-\frac{1}{2\left(1-\rho^{2}\right)}\left[\frac{\left(x-\mu_{1}\right)^{2}}{\sigma_{1}^{2}}-\frac{2 \rho\left(x-\mu_{1}\right)\left(y-\mu_{2}\right)}{\sigma_{1} \sigma_{2}}+\frac{\left(y-\mu_{2}\right)^{2}}{\sigma_{2}^{2}}\right]}</script><p>则称$(X,Y)$服从参数为$(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$的二维正态分布，记为</p>
+<script type="math/tex; mode=display">(X,Y)\sim \mathbf N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)</script><p>其中各参数满足$-\infty&lt;\mu&lt;\infty,\sigma&gt;0,|\rho|&lt;1$，峰值$f(\mu_1,\mu_2)=\frac{1}{2 \pi \sigma_{1} \sigma_{2} \sqrt{1-\rho^{2}}}$</p>
+<p><strong>二维正态分布的性质</strong>：二维正态r.v.的边际分布均为一维正态分布，若$(X,Y)\sim \mathbf N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，则$X\sim\mathbf N(\mu_1,\sigma_1^2),Y\sim\mathbf N(\mu_2,\sigma_2^2)$</p>
+<p>边际密度均为正态分布的随机变量，其联合分布不一定是二维正态分布。</p>
+<p>由随机变量的边际分布不能确定联合分布，反之可以。</p>
+<p><strong>连接函数(了解)</strong>：略</p>
+<h2 id="§3-4-独立随机变量"><a href="#§3-4-独立随机变量" class="headerlink" title="§3.4 独立随机变量"></a>§3.4 独立随机变量</h2><p><strong>相互独立</strong>：设$(X,Y)\sim F(x,y),\ X\sim F_X(x),\ Y\sim F_Y(y)$，若$\forall x,y\in(-\infty,\infty)$有</p>
+<script type="math/tex; mode=display">P\{X\leq x,Y\leq y\}=P\{X\leq x\}\cdot P\{Y\leq y\}</script><p>即$F(x,y)=F_X(x)\cdot F_Y(y)$，则称随机变量$X,Y$相互独立</p>
+<p>若$(X,Y)$相互独立，对于“合理”的集合$A,B⊂R$，$\{X\in A\},\{Y\in B\}$相互独立</p>
+<p><strong>离散r.v.相互独立</strong>：两个离散r.v.相互独立的充要条件是$p_{ij}=p_{i\cdot}\cdot p_{\cdot j}$</p>
+<p><strong>连续r.v.相互独立</strong>：$f(x,y)\overset{a.e.}=f_X(x)f_Y(y)$</p>
+<p>若$(X,Y)$的密度函数能分解为$f(x,y)=g(x)h(y)$，$g(x)\ge0$且$h(y)\ge0$且支撑区域可分离，则$X,Y$相互独立</p>
+<p><strong>二维正态分布的性质</strong>：设$(X,Y)\sim \mathbf N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，则$X,Y$相互独立⇔$\rho=0$</p>
+<p><strong>$n$维随机变量的独立性</strong>：</p>
+<ol>
+<li><p>$\forall x_1,x_2,…x_n\in R$，若有</p>
+<script type="math/tex; mode=display">F(x_1,x_2,...x_n)=F_{X_1}(x_1)F_{X_2}(x_2)\cdots F_{X_n}(x_n)</script><p>则称$X_1,X_2,…,X_n$相互独立</p>
+</li>
+<li><p>设</p>
+<script type="math/tex; mode=display">\begin{array}{c}
+\left(X_{1}, X_{2}, \cdots, X_{m}\right) \sim F_{1}\left(x_{1}, x_{2}, \cdots, x_{m}\right) \\
+\left(Y_{1}, Y_{2}, \cdots, Y_{n}\right) \sim F_{2}\left(y_{1}, y_{2}, \cdots, y_{n}\right) \\
+\left(X_{1}, X_{2}, \cdots, X_{m}, Y_{1}, Y_{2}, \cdots, Y_{n}\right) \sim F\left(x_{1}, x_{2}, \cdots, x_{m}, y_{1}, y_{2}, \cdots, y_{n}\right)
+\end{array}</script><p>$\forall x_1,x_2,…,x_m,y_1,y_2,…,y_n\in R$，若有</p>
+<script type="math/tex; mode=display">F(x_1,...,x_m,y_1,...,y_n)=F_1(x_1,...,x_m)\cdot F_2(y_1,...,y_n)</script><p>则称$(X_1,…,X_m)$，$(Y_1,…,Y_n)$相互独立</p>
+</li>
+<li><p>设$(X_1,…,X_m)$，$(Y_1,…,Y_n)$相互独立，则</p>
+<ul>
+<li>$X_i,Y_j$相互独立</li>
+<li>设$h,g$分别是$m$元和$n$元的连续函数，则$h(X_1,…,X_m),g(Y_1,…,Y_n)$相互独立。</li>
+</ul>
+</li>
+</ol>
+<h2 id="§3-5-条件分布"><a href="#§3-5-条件分布" class="headerlink" title="§3.5 条件分布"></a>§3.5 条件分布</h2><p><strong>二维离散型r.v.的条件频率函数</strong>：设$(X,Y)$的频率函数为$P\{X=x_i,Y=y_j\}=p_{ij}$</p>
+<p>考虑在$\{Y=y_j\}$已发生的条件下，${X=x_i}$发生的条件概率$P\{X=x_i|Y=y_j\}$为</p>
+<script type="math/tex; mode=display">P\{X=x_i|Y=y_j\}=\frac{P\{X=x_i,Y=y_j\}}{P\{Y=y_j\}}=\frac{p_{ij}}{p_{\cdot j}}</script><p>记为$P_{X|Y}(x_i|y_j)$，即为在$Y=y_j$的条件下，r.v. $X$的条件频率函数</p>
+<p><strong>条件频率函数的性质</strong>：</p>
+<ul>
+<li><p>若$X,Y$独立，则$P_{X|Y}(x|y)=f_X(x)$</p>
+</li>
+<li><p>$P\{X=x_i|Y=y_j\}\ge0$</p>
+</li>
+<li><p>$\overset{\infty}\sum\limits_{i=1}P\{X=x_i|Y=y_j\}=1$，由上述两条可知条件频率函数也是频率函数</p>
+</li>
+<li><p>全概率公式：$f_X(x)=\sum\limits_{y}P_{X|Y}(x|y)f_Y(y)$</p>
+<p>若$f_Y(y)=0$，则定义$P_{X|Y}(x|y)=0$</p>
+</li>
+</ul>
+<p><strong>二维r.v.的条件分布函数</strong>：$F_{X|Y}(x|y)=P\{X\leq x| Y= y\}=\frac{P\{X\leq x, Y=y\}}{P\{Y=y\}}$</p>
+<ul>
+<li>对于连续型随机变量，若极限$\lim\limits_{𝜺→0^+}P\{X\leq x|y&lt;Y\leq y+𝜺\}$存在，则称其为在条件$Y=y$下$X$的条件分布函数</li>
+</ul>
+<p><strong>二维连续型随机变量的条件概率密度</strong>：</p>
+<script type="math/tex; mode=display">\lim\limits_{𝜺→0^+}P\{X\leq x|y<Y\leq y+𝜺\}=\int_{-\infty}^{x}\frac{f(u,y)}{f_Y(y)}du</script><p><strong>条件密度</strong>：$f_{X|Y}(x|y)≜\frac{f(x,y)}{f_Y(y)}$</p>
+<p><strong>条件分布</strong>：$F_{X|Y}(x|y)≜\int_{-\infty}^{x}f_{X|Y}(u|y)du$</p>
+<p><strong>全概率公式 连续ver.</strong>：$f_Y(y)=\int_{-\infty}^{\infty}f_{Y|X}(y|x)f_X(x)dx$</p>
+<p><strong>条件密度的性质</strong>：</p>
+<ul>
+<li>$f_{X|Y}(x|y)\ge0$</li>
+<li>$\int_{-\infty}^{\infty}f_{X|Y}(x|y)dx=1$</li>
+</ul>
 
     </div>
 
@@ -601,7 +695,7 @@ n_{i}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-1"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-2-%E6%A0%B7%E6%9C%AC%E7%A9%BA%E9%97%B4"><span class="nav-number">1.1.</span> <span class="nav-text">§1.2 样本空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%95%E9%AA%8C"><span class="nav-number">1.1.1.</span> <span class="nav-text">试验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.1.2.</span> <span class="nav-text">事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-3-%E6%A6%82%E7%8E%87%E6%B5%8B%E5%BA%A6"><span class="nav-number">1.2.</span> <span class="nav-text">§1.3 概率测度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%91%E7%8E%87"><span class="nav-number">1.2.1.</span> <span class="nav-text">频率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E7%8E%87"><span class="nav-number">1.2.2.</span> <span class="nav-text">概率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-4-%E6%A6%82%E7%8E%87%E8%AE%A1%E7%AE%97%EF%BC%9A%E8%AE%A1%E6%95%B0%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">§1.4 概率计算：计数方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-5-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87"><span class="nav-number">1.4.</span> <span class="nav-text">§1.5 条件概率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E5%9F%BA%E7%A1%80"><span class="nav-number">1.4.1.</span> <span class="nav-text">条件概率基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E7%9B%B8%E5%85%B3%E5%85%AC%E5%BC%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">条件概率相关公式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-6-%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">1.5.</span> <span class="nav-text">§1.6 独立性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-2"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A72-1-%E7%A6%BB%E6%95%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.</span> <span class="nav-text">§2.1 离散随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%9F%BA%E7%A1%80"><span class="nav-number">2.1.1.</span> <span class="nav-text">离散型随机变量基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">2.1.2.</span> <span class="nav-text">离散随机变量的分布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A72-2-%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">§2.2 连续随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E5%9E%8B%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%9F%BA%E7%A1%80"><span class="nav-number">2.2.1.</span> <span class="nav-text">连续型随机变量基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">2.2.2.</span> <span class="nav-text">连续随机变量的分布</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">正态分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">均匀分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">指数分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%BD%E9%A9%AC%E5%88%86%E5%B8%83%E3%80%81%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83-%E4%BA%86%E8%A7%A3"><span class="nav-number">2.2.2.4.</span> <span class="nav-text">伽马分布、贝塔分布(了解)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A72-3-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">§2.3 随机变量的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B-r-v-%E5%87%BD%E6%95%B0%E7%9A%84%E9%A2%91%E7%8E%87%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">离散型 r.v. 函数的频率函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E5%9E%8B-r-v-%E5%87%BD%E6%95%B0%E7%9A%84%E9%A2%91%E7%8E%87%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.2.</span> <span class="nav-text">连续型 r.v. 函数的频率函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-1-%E8%81%94%E5%90%88%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">§3.1 联合累积分布函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-2-%E4%BA%8C%E7%BB%B4%E7%A6%BB%E6%95%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">§3.2 二维离散随机变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-3-%E4%BA%8C%E7%BB%B4%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.3.</span> <span class="nav-text">§3.3 二维连续随机变量</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-1"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-2-%E6%A0%B7%E6%9C%AC%E7%A9%BA%E9%97%B4"><span class="nav-number">1.1.</span> <span class="nav-text">§1.2 样本空间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%95%E9%AA%8C"><span class="nav-number">1.1.1.</span> <span class="nav-text">试验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6"><span class="nav-number">1.1.2.</span> <span class="nav-text">事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-3-%E6%A6%82%E7%8E%87%E6%B5%8B%E5%BA%A6"><span class="nav-number">1.2.</span> <span class="nav-text">§1.3 概率测度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%91%E7%8E%87"><span class="nav-number">1.2.1.</span> <span class="nav-text">频率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E7%8E%87"><span class="nav-number">1.2.2.</span> <span class="nav-text">概率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-4-%E6%A6%82%E7%8E%87%E8%AE%A1%E7%AE%97%EF%BC%9A%E8%AE%A1%E6%95%B0%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">§1.4 概率计算：计数方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-5-%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87"><span class="nav-number">1.4.</span> <span class="nav-text">§1.5 条件概率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E5%9F%BA%E7%A1%80"><span class="nav-number">1.4.1.</span> <span class="nav-text">条件概率基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%A6%82%E7%8E%87%E7%9B%B8%E5%85%B3%E5%85%AC%E5%BC%8F"><span class="nav-number">1.4.2.</span> <span class="nav-text">条件概率相关公式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-6-%E7%8B%AC%E7%AB%8B%E6%80%A7"><span class="nav-number">1.5.</span> <span class="nav-text">§1.6 独立性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-2"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A72-1-%E7%A6%BB%E6%95%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">2.1.</span> <span class="nav-text">§2.1 离散随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%9F%BA%E7%A1%80"><span class="nav-number">2.1.1.</span> <span class="nav-text">离散型随机变量基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">2.1.2.</span> <span class="nav-text">离散随机变量的分布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A72-2-%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">§2.2 连续随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E5%9E%8B%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%9F%BA%E7%A1%80"><span class="nav-number">2.2.1.</span> <span class="nav-text">连续型随机变量基础</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">2.2.2.</span> <span class="nav-text">连续随机变量的分布</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">正态分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9D%87%E5%8C%80%E5%88%86%E5%B8%83"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">均匀分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E6%95%B0%E5%88%86%E5%B8%83"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">指数分布</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%BD%E9%A9%AC%E5%88%86%E5%B8%83%E3%80%81%E8%B4%9D%E5%A1%94%E5%88%86%E5%B8%83-%E4%BA%86%E8%A7%A3"><span class="nav-number">2.2.2.4.</span> <span class="nav-text">伽马分布、贝塔分布(了解)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A72-3-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">§2.3 随机变量的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A6%BB%E6%95%A3%E5%9E%8B-r-v-%E5%87%BD%E6%95%B0%E7%9A%84%E9%A2%91%E7%8E%87%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">离散型 r.v. 函数的频率函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E5%9E%8B-r-v-%E7%9A%84%E9%A2%91%E7%8E%87%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.2.</span> <span class="nav-text">连续型 r.v. 的频率函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-1-%E8%81%94%E5%90%88%E7%B4%AF%E7%A7%AF%E5%88%86%E5%B8%83%E5%87%BD%E6%95%B0"><span class="nav-number">3.1.</span> <span class="nav-text">§3.1 联合累积分布函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-2-%E4%BA%8C%E7%BB%B4%E7%A6%BB%E6%95%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">§3.2 二维离散随机变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-3-%E4%BA%8C%E7%BB%B4%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.3.</span> <span class="nav-text">§3.3 二维连续随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E8%BF%9E%E7%BB%AD%E5%9E%8Br-v"><span class="nav-number">3.3.1.</span> <span class="nav-text">二维连续型r.v.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E7%BB%B4%E8%81%94%E5%90%88%E5%88%86%E5%B8%83"><span class="nav-number">3.3.2.</span> <span class="nav-text">二维联合分布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-4-%E7%8B%AC%E7%AB%8B%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F"><span class="nav-number">3.4.</span> <span class="nav-text">§3.4 独立随机变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-5-%E6%9D%A1%E4%BB%B6%E5%88%86%E5%B8%83"><span class="nav-number">3.5.</span> <span class="nav-text">§3.5 条件分布</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
