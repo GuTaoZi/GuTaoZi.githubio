@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="再说一遍，矩阵乘法要开始加速了！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS205 C&#x2F;C++ Project04设计报告 C语言矩阵乘法">
+<meta property="og:url" content="https://gutaozi.github.io/2022/11/27/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix%20Multiplication%20in%20C/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="再说一遍，矩阵乘法要开始加速了！">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/11/26/xqpjyZkn4iAw8R9.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/26/GlN51cUPIfbYRAj.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/27/sv3hRyKUmHkXWZS.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/27/ABndj2HIe15kpzU.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/27/RpjzcnNgLvCIUwH.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/27/Fv2xEQBUVMs5g4m.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/27/2mTCa3kMiZybIA8.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/27/c2mNhHgYivPzoEk.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/27/iXV5fbZHFLzBm71.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/27/c2mNhHgYivPzoEk.png">
+<meta property="article:published_time" content="2022-11-27T09:29:08.097Z">
+<meta property="article:modified_time" content="2022-11-27T09:33:23.610Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/11/26/xqpjyZkn4iAw8R9.png">
+
+<link rel="canonical" href="https://gutaozi.github.io/2022/11/27/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix%20Multiplication%20in%20C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CS205 C/C++ Project04设计报告 C语言矩阵乘法 | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2022/11/27/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix%20Multiplication%20in%20C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS205 C/C++ Project04设计报告 C语言矩阵乘法
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-27 17:29:08 / 修改时间：17:33:23" itemprop="dateCreated datePublished" datetime="2022-11-27T17:29:08+08:00">2022-11-27</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">再说一遍，矩阵乘法要开始加速了！</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Part-0-团队成员"><a href="#Part-0-团队成员" class="headerlink" title="Part 0. 团队成员"></a>Part 0. <del>团队</del>成员</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>学号</th>
+<th><del>贡献率</del></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>咕桃</td>
+<td>-</td>
+<td><del>100%</del></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">CS205_Project04</span><br><span class="line">│  CMakeLists.txt</span><br><span class="line">│  README.md</span><br><span class="line">│</span><br><span class="line">├─build</span><br><span class="line">│	   <span class="comment">//makefile here</span></span><br><span class="line">├─doc</span><br><span class="line">│      Report.pdf</span><br><span class="line">│</span><br><span class="line">├─inc</span><br><span class="line">│      matmul.h</span><br><span class="line">│      matrix.h</span><br><span class="line">│</span><br><span class="line">└─src</span><br><span class="line">        benchmark.c</span><br><span class="line">        matmul.c</span><br><span class="line">        matrix.c</span><br></pre></td></tr></table></figure>
+<h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><p>运行本项目前，请预先安装OpenBLAS与OpenMP。您可以使用以下命令下载本项目：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone https://github.com/GuTaoZi/CS205_Project04.git</span><br></pre></td></tr></table></figure>
+<p>下载完成后，请在<code>CMakeLists.txt</code>中调整OpenBLAS目录，您也可以根据您的系统架构调整编译选项。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include_directories</span>(/usr/local/<span class="keyword">include</span> ./inc)</span><br><span class="line"><span class="keyword">link_libraries</span>(/usr/local/lib/libopenblas.a)</span><br></pre></td></tr></table></figure>
+<p>使用以下命令编译、运行可执行文件<code>matmul</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd build</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br><span class="line">./matmul</span><br></pre></td></tr></table></figure>
+<h2 id="Part-1-Analysis"><a href="#Part-1-Analysis" class="headerlink" title="Part 1 - Analysis"></a>Part 1 - Analysis</h2><h3 id="题目重述-amp-主要思路"><a href="#题目重述-amp-主要思路" class="headerlink" title="题目重述&amp;主要思路"></a>题目重述&amp;主要思路</h3><p>本题目要求<strong>使用C语言</strong>实现正确而尽可能高效的矩阵乘法，使用<code>OpenMP</code>, <code>SIMD</code>等工具提升效率，并与<code>OpenBLAS</code>库中的矩阵乘法在各平台进行效率比较。</p>
+<p>根据题目描述，题目要求的矩阵乘法需要支持的主要功能为：</p>
+<ol>
+<li>实现朴素乘法，用于检验高效矩阵乘法的正确性</li>
+<li><code>OpenMP</code>, <code>SIMD</code>等工具实现提升效率的矩阵乘法</li>
+<li>测试$16\times16$、$128\times128$、$1k\times1k$、$8k\times8k$、$64k\times64k$等尺寸的矩阵乘法效率</li>
+<li>与<code>OpenBLAS</code>进行效率比较</li>
+<li>进行<code>ARM</code>等多平台效率测试</li>
+</ol>
+<p>本项目完成了上述基础要求，并在其中几项进行了拓展，本次报告将侧重于矩阵乘法的优化过程，与上次报告重复处将略讲，详见下文。</p>
+<h3 id="模型假设"><a href="#模型假设" class="headerlink" title="模型假设"></a>模型假设</h3><p>本项目按题设要求继承了前一项目的数据类型，在实现矩阵乘法时以效率为主，小幅降低了安全性检查的严格程度。</p>
+<ul>
+<li>单个元素均为4字节<code>float</code>类型，有效位数默认为6位，数据范围约$-3.4<em>10^{-38}&lt;val&lt;3.4</em>10^{38}$</li>
+<li>参与运算的矩阵均为<strong>方阵</strong>，且阶数为<strong>8的倍数</strong></li>
+<li>可接受<code>&lt;0.01</code>的单精度浮点数计算误差</li>
+</ul>
+<h2 id="Part-2-Code"><a href="#Part-2-Code" class="headerlink" title="Part 2 - Code"></a>Part 2 - Code</h2><h3 id="宏与结构体"><a href="#宏与结构体" class="headerlink" title="宏与结构体"></a>宏与结构体</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//matrix.c</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> float_equal(x, y) ((x-y)&lt;1e-3&amp;&amp;(y-x)&lt;1e-3)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">Matrix_</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">size_t</span> row;</span><br><span class="line">    <span class="type">size_t</span> col;</span><br><span class="line">    <span class="type">float</span> *data;</span><br><span class="line">&#125; Matrix;</span><br></pre></td></tr></table></figure>
+<p>在题设条件下，矩阵尺寸默认$row=col$(其实可以存成一个，但部分矩阵乘法函数简单修改后可支持非方阵情况)，使用<code>size_t</code>存储，满足跨平台需求。</p>
+<p>使用浮点型指针指向存储数据，采用行优先方式存储，空间由创建函数动态分配，分配后可通过释放函数释放。</p>
+<h3 id="创建、释放与合法性检查"><a href="#创建、释放与合法性检查" class="headerlink" title="创建、释放与合法性检查"></a>创建、释放与合法性检查</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//matrix.c</span></span><br><span class="line"><span class="function">Matrix *<span class="title">createMatFromArr</span><span class="params">(<span class="type">size_t</span> row, <span class="type">size_t</span> col,<span class="type">float</span> *src)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (row==<span class="number">0</span>||col==<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Rows/cols number is 0.\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(src==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr,<span class="string">&quot;Source array is NULL.\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Matrix *pMatrix = <span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(Matrix));</span><br><span class="line">    <span class="keyword">if</span> (pMatrix == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Failed to allocate memory for a matrix.\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pMatrix-&gt;row = row;</span><br><span class="line">    pMatrix-&gt;col = col;</span><br><span class="line">    pMatrix-&gt;data = <span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">float</span>) * row * col);</span><br><span class="line">    <span class="keyword">if</span> (pMatrix-&gt;data == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Failed to allocate memory for the matrix data.\n&quot;</span>);</span><br><span class="line">        <span class="built_in">free</span>(pMatrix);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">memcpy</span>(pMatrix-&gt;data,src,<span class="built_in">sizeof</span>(<span class="type">float</span>)*row*col);</span><br><span class="line">    <span class="keyword">return</span> pMatrix;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以从数组创建矩阵为例，本项目该部分与前一项目的差别在于：优化了安全性检查与报错，使用fprintf的stderr报错，使其变得更加合理和规范，同时采用了memcpy()代替手动赋值。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//matrix.c</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">releaseMat</span><span class="params">(Matrix **pMatrix)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (pMatrix == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr,<span class="string">&quot;Pointer to the pointer of matrix is NULL.\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>((*pMatrix)==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr,<span class="string">&quot;The pointer to the matrix is NULL.\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>((*pMatrix)-&gt;data==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr,<span class="string">&quot;The pointer to the matrix data is NULL.\n&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>((*pMatrix)-&gt;data);</span><br><span class="line">    <span class="built_in">free</span>(*pMatrix);</span><br><span class="line">    *pMatrix = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>释放矩阵与此前的差别同样在与报错与安全性的优化。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//matmul.c</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">safe_check</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (src1 == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;File %s, Line %d, Function %s(): The 1st parameter is NULL.\n&quot;</span>, __FILE__, __LINE__,</span><br><span class="line">                __FUNCTION__);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (src1-&gt;data == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;%s(): The 1st parameter has no valid data.\n&quot;</span>, __FUNCTION__);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (src2 == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;File %s, Line %d, Function %s(): The 2nd parameter is NULL.\n&quot;</span>, __FILE__, __LINE__,</span><br><span class="line">                __FUNCTION__);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (src2-&gt;data == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;%s(): The 2nd parameter has no valid data.\n&quot;</span>, __FUNCTION__);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (dst == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;File %s, Line %d, Function %s(): The 3rd parameter is NULL.\n&quot;</span>, __FILE__, __LINE__,</span><br><span class="line">                __FUNCTION__);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (dst-&gt;data == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;%s(): The 3rd parameter has no valid data.\n&quot;</span>, __FUNCTION__);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (src1-&gt;row != src1-&gt;col || src1-&gt;row != src2-&gt;row || src1-&gt;col != src2-&gt;col || src1-&gt;row != dst-&gt;row || src1-&gt;col != dst-&gt;col)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;The input and the output do not match, they should have the same square size.\n&quot;</span>);</span><br><span class="line">        <span class="built_in">fprintf</span>(stderr, <span class="string">&quot;Their sizes are (%zu,%zu), (%zu,%zu) and (%zu,%zu).\n&quot;</span>,</span><br><span class="line">                src1-&gt;row, src1-&gt;col, src2-&gt;row, src2-&gt;col, dst-&gt;row, dst-&gt;col);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在进行矩阵乘法前，本项目对三个参数矩阵都进行了安全性检查，并用更规范的形式报错和处理。此处的最后一个<code>if</code>限定了三个矩阵应均为方阵，修改条件后可解除方阵要求。</p>
+<h3 id="矩阵乘法"><a href="#矩阵乘法" class="headerlink" title="矩阵乘法"></a>矩阵乘法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//matmul.h</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">safe_check</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_plain</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_divide</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_omp</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_avx_vec8</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_avx_block8</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_thread</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst, <span class="type">size_t</span> num_threads)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>项目实现了6个矩阵乘法函数，依次为：朴素乘法，4×4分块乘法，<code>OpenMP</code>优化朴素乘法，向量点乘级<code>SIMD</code>优化朴素乘法，<code>SIMD</code>优化8×8分块乘法，手动多线程算法(基于<code>pthread.h</code>)。</p>
+<p>下文将逐个展开解析优化策略和原理，效率比较部分将在后文体现。</p>
+<h3 id="朴素乘法"><a href="#朴素乘法" class="headerlink" title="朴素乘法"></a>朴素乘法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_plain</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">safe_check</span>(src1, src2, dst))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">size_t</span> n = src1-&gt;row;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">size_t</span> i_n = i * n;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">size_t</span> k = <span class="number">0</span>; k &lt; n; k++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">float</span> t = src1-&gt;data[i_n + k];</span><br><span class="line">            <span class="type">size_t</span> k_n = k * n;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">size_t</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">            &#123;</span><br><span class="line">                dst-&gt;data[i_n + j] += t * src2-&gt;data[k_n + j];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>说是朴素，但要是为了衬托其他算法把朴素写得太朴素没什么意思，所以这个朴素版其实是小幅优化后的朴素版，继承了上一项目的乘法，时间复杂度$O(N^3)$。</p>
+<p>硬件优化：通过交换循环顺序将内存访问的跳跃次数从$n^3+n^2-n$降低到$n^2$次。</p>
+<p>软件优化：暂存了$i×n$和$k×n$，小幅减少了乘法的次数。</p>
+<h3 id="4×4分块乘法-Tiling"><a href="#4×4分块乘法-Tiling" class="headerlink" title="4×4分块乘法(Tiling)"></a>4×4分块乘法(Tiling)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_divide</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">safe_check</span>(src1, src2, dst))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">size_t</span> n = src1-&gt;row;</span><br><span class="line">    <span class="type">size_t</span> k, j;</span><br><span class="line">    <span class="type">float</span> *data1 = src1-&gt;data;</span><br><span class="line">    <span class="type">float</span> *data2 = <span class="built_in">transpose</span>(src2-&gt;data, n);</span><br><span class="line">    <span class="type">float</span> *data3 = dst-&gt;data;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i += <span class="number">4</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n; j += <span class="number">4</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; n; k += <span class="number">4</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">size_t</span> i2 = <span class="number">0</span>; i2 &lt; <span class="number">4</span>; i2++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">size_t</span> j2 = <span class="number">0</span>; j2 &lt; <span class="number">4</span>; j2++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="keyword">for</span> (<span class="type">size_t</span> k2 = <span class="number">0</span>; k2 &lt; <span class="number">4</span>; k2++)</span><br><span class="line">                        &#123;</span><br><span class="line">                            data3[(i + i2) * n + (j + j2)] += data1[(i + i2) * n + (k + k2)] * data2[(k + k2) + (j + j2) * n];</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>硬件优化：在大规模矩阵乘法时，两个元素间隔可能很远，因此CPU往往需要将两个元素都加载进<code>cache</code>，耗费大量访存时间。考虑到小矩阵的数据可以存储进<code>CPU cache</code>中，我们可以将原先的大矩阵按行和列切割成若干4×4的小块再进行运算。同时，通过转置矩阵将内存访问变得连续。</p>
+<h3 id="OpenMP优化朴素乘法"><a href="#OpenMP优化朴素乘法" class="headerlink" title="OpenMP优化朴素乘法"></a>OpenMP优化朴素乘法</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_omp</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">safe_check</span>(src1, src2, dst))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">register</span> <span class="type">size_t</span> n = src1-&gt;row;</span><br><span class="line">    <span class="keyword">register</span> <span class="type">size_t</span> k, j;</span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> omp parallel</span></span><br><span class="line">    &#123;</span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> omp for private(k, j)</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="type">size_t</span> i_n = i * n;</span><br><span class="line">            <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; n; k++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="type">float</span> t = src1-&gt;data[i_n + k];</span><br><span class="line">                <span class="type">size_t</span> k_n = k * n;</span><br><span class="line">                <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">                &#123;</span><br><span class="line">                    dst-&gt;data[i_n + j] += t * src2-&gt;data[k_n + j];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>硬件优化：将原本串行执行的多次乘法通过<code>OpenMP</code>变为多线程并行，双线程效率较单线程折半，四线程较双线程接近折半，不过在线程数增加的过程中耗时减少的幅度逐渐降低，但总体而言较朴素算法有若干倍的提升，详见下文测试部分。</p>
+<h3 id="向量化SIMD优化"><a href="#向量化SIMD优化" class="headerlink" title="向量化SIMD优化"></a>向量化SIMD优化</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_avx_vec8</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">safe_check</span>(src1, src2, dst))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">size_t</span> n = src1-&gt;row;</span><br><span class="line">    <span class="type">size_t</span> k, j;</span><br><span class="line">    <span class="type">float</span> *data1 = src1-&gt;data;</span><br><span class="line">    <span class="type">float</span> *data2 = <span class="built_in">transpose</span>(src2-&gt;data, n);</span><br><span class="line">    <span class="type">float</span> *data3 = dst-&gt;data;</span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> omp parallel</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> omp for private(k, j)</span></span><br><span class="line">        <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            __m256 sx = _mm256_setzero_ps();</span><br><span class="line">            <span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; n; k += <span class="number">8</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                sx = _mm256_add_ps(sx, _mm256_mul_ps(_mm256_loadu_ps(data1 + i * n + k), _mm256_loadu_ps(data2 + j * n + k)));</span><br><span class="line">            &#125;</span><br><span class="line">            sx = _mm256_add_ps(sx, _mm256_permute2f128_ps(sx, sx, <span class="number">1</span>));</span><br><span class="line">            sx = _mm256_hadd_ps(sx, sx);</span><br><span class="line">            data3[i * n + j] = _mm256_cvtss_f32(_mm256_hadd_ps(sx, sx));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于计算对象矩阵默认阶数为8的倍数，因此可以将8个连续的元素使用<code>__m256</code>进行合并，再进行批量乘法。在使用了<code>OpenMP</code>并行优化的基础上，进行维数为8的向量乘法代替8次串行的逐元素运算，将效率再次大幅提高。</p>
+<p><img src="https://s2.loli.net/2022/11/26/xqpjyZkn4iAw8R9.png" alt="向量化"></p>
+<h3 id="8×8分块SIMD优化"><a href="#8×8分块SIMD优化" class="headerlink" title="8×8分块SIMD优化"></a>8×8分块SIMD优化</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_avx_block8</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">safe_check</span>(src1, src2, dst))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">register</span> <span class="type">size_t</span> n = src1-&gt;row;</span><br><span class="line">    <span class="type">float</span> *data1 = src1-&gt;data;</span><br><span class="line">    <span class="type">float</span> *data2 = src2-&gt;data;</span><br><span class="line">    <span class="type">float</span> *data3 = dst-&gt;data;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> omp parallel for</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="type">size_t</span> i = <span class="number">0</span>; i &lt; n; i += <span class="number">8</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="type">size_t</span> j = <span class="number">0</span>; j &lt; n; j += <span class="number">8</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">register</span> <span class="type">size_t</span> k = <span class="number">0</span>; k &lt; n; k += <span class="number">8</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">register</span> <span class="type">size_t</span> u = i; u &lt; i + <span class="number">8</span>; u++)</span><br><span class="line">                &#123;</span><br><span class="line">                    __m256 a_1 = _mm256_set1_ps(data1[u * n + j]);</span><br><span class="line">                    __m256 a_2 = _mm256_set1_ps(data1[u * n + j + <span class="number">1</span>]);</span><br><span class="line">                    __m256 a_3 = _mm256_set1_ps(data1[u * n + j + <span class="number">2</span>]);</span><br><span class="line">                    __m256 a_4 = _mm256_set1_ps(data1[u * n + j + <span class="number">3</span>]);</span><br><span class="line">                    __m256 a_5 = _mm256_set1_ps(data1[u * n + j + <span class="number">4</span>]);</span><br><span class="line">                    __m256 a_6 = _mm256_set1_ps(data1[u * n + j + <span class="number">5</span>]);</span><br><span class="line">                    __m256 a_7 = _mm256_set1_ps(data1[u * n + j + <span class="number">6</span>]);</span><br><span class="line">                    __m256 a_8 = _mm256_set1_ps(data1[u * n + j + <span class="number">7</span>]);</span><br><span class="line"></span><br><span class="line">                    __m256 b_1 = _mm256_loadu_ps(data2 + j * n + k);</span><br><span class="line">                    __m256 b_2 = _mm256_loadu_ps(data2 + (j + <span class="number">1</span>) * n + k);</span><br><span class="line">                    __m256 b_3 = _mm256_loadu_ps(data2 + (j + <span class="number">2</span>) * n + k);</span><br><span class="line">                    __m256 b_4 = _mm256_loadu_ps(data2 + (j + <span class="number">3</span>) * n + k);</span><br><span class="line">                    __m256 b_5 = _mm256_loadu_ps(data2 + (j + <span class="number">4</span>) * n + k);</span><br><span class="line">                    __m256 b_6 = _mm256_loadu_ps(data2 + (j + <span class="number">5</span>) * n + k);</span><br><span class="line">                    __m256 b_7 = _mm256_loadu_ps(data2 + (j + <span class="number">6</span>) * n + k);</span><br><span class="line">                    __m256 b_8 = _mm256_loadu_ps(data2 + (j + <span class="number">7</span>) * n + k);</span><br><span class="line"></span><br><span class="line">                    b_1 = _mm256_mul_ps(b_1, a_1);</span><br><span class="line">                    b_2 = _mm256_mul_ps(b_2, a_2);</span><br><span class="line">                    b_3 = _mm256_mul_ps(b_3, a_3);</span><br><span class="line">                    b_4 = _mm256_mul_ps(b_4, a_4);</span><br><span class="line">                    b_5 = _mm256_mul_ps(b_5, a_5);</span><br><span class="line">                    b_6 = _mm256_mul_ps(b_6, a_6);</span><br><span class="line">                    b_7 = _mm256_mul_ps(b_7, a_7);</span><br><span class="line">                    b_8 = _mm256_mul_ps(b_8, a_8);</span><br><span class="line"></span><br><span class="line">                    __m256 t_1 = _mm256_add_ps(b_1, b_2);</span><br><span class="line">                    __m256 t_2 = _mm256_add_ps(b_3, b_4);</span><br><span class="line">                    __m256 t_3 = _mm256_add_ps(b_5, b_6);</span><br><span class="line">                    __m256 t_4 = _mm256_add_ps(b_7, b_8);</span><br><span class="line"></span><br><span class="line">                    __m256 t_5 = _mm256_add_ps(t_1, t_2);</span><br><span class="line">                    __m256 t_6 = _mm256_add_ps(t_3, t_4);</span><br><span class="line">                    __m256 t_7 = _mm256_add_ps(t_5, t_6);</span><br><span class="line"></span><br><span class="line">                    __m256 t_c = _mm256_loadu_ps(data3 + u * n + k);</span><br><span class="line">                    __m256 t_8 = _mm256_add_ps(t_7, t_c);</span><br><span class="line"></span><br><span class="line">                    _mm256_storeu_ps(data3 + u * n + k, t_8);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/11/26/GlN51cUPIfbYRAj.png" alt="image.png"></p>
+<p>这是上述计算过程的图像解释，我们每次将$B$中的8个元素合并载入<code>__mm256</code>，再将$A$中的单个元素广播载入<code>__mm256</code>，二者批量相乘后再累加至对应8个元素中，通过u的循环就可以得到8×8分块的值。</p>
+<p>为了便于说明，我们以4×4的例子入手讲解，以下是计算<code>C[0][0..3]</code>的式子</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">C0[<span class="number">0</span>]+=A0[<span class="number">0</span>]+B0[<span class="number">0</span>]	C0[<span class="number">0</span>]+=A0[<span class="number">1</span>]+B1[<span class="number">0</span>]	C0[<span class="number">0</span>]+=A0[<span class="number">2</span>]+B2[<span class="number">0</span>]	C0[<span class="number">0</span>]+=A0[<span class="number">3</span>]+B3[<span class="number">0</span>]</span><br><span class="line">C0[<span class="number">1</span>]+=A0[<span class="number">0</span>]+B0[<span class="number">1</span>]	C0[<span class="number">1</span>]+=A0[<span class="number">1</span>]+B1[<span class="number">1</span>]	C0[<span class="number">1</span>]+=A0[<span class="number">2</span>]+B2[<span class="number">1</span>]	C0[<span class="number">1</span>]+=A0[<span class="number">3</span>]+B3[<span class="number">1</span>]</span><br><span class="line">C0[<span class="number">2</span>]+=A0[<span class="number">0</span>]+B0[<span class="number">2</span>]	C0[<span class="number">2</span>]+=A0[<span class="number">1</span>]+B1[<span class="number">2</span>]	C0[<span class="number">2</span>]+=A0[<span class="number">2</span>]+B2[<span class="number">2</span>]	C0[<span class="number">2</span>]+=A0[<span class="number">3</span>]+B3[<span class="number">2</span>]</span><br><span class="line">C0[<span class="number">3</span>]+=A0[<span class="number">0</span>]+B0[<span class="number">3</span>]	C0[<span class="number">3</span>]+=A0[<span class="number">1</span>]+B1[<span class="number">3</span>]	C0[<span class="number">3</span>]+=A0[<span class="number">2</span>]+B2[<span class="number">3</span>]	C0[<span class="number">3</span>]+=A0[<span class="number">3</span>]+B3[<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>对于朴素乘法，我们对上述16个式子是“行优先”执行的，但如果按“列优先”的视角重排后，我们发现A可以一次性载入用作输出的计算，对于B则逐行拆分使用。利用AVX指令集，我们将四个元素的访存与计算向量化，则能达到提高效率的目的。</p>
+<p><img src="https://s2.loli.net/2022/11/27/sv3hRyKUmHkXWZS.png" alt="image.png"></p>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a><pthread.h>多线程</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">PartialMatMulParams</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">size_t</span> fromColumn, toColum, n;</span><br><span class="line">    <span class="type">float</span> *a, *b, *c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> *<span class="title">partialMatMul</span><span class="params">(<span class="type">void</span> *params)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">PartialMatMulParams</span> *p = (<span class="keyword">struct</span> PartialMatMulParams *)params;</span><br><span class="line">    <span class="type">size_t</span> n = p-&gt;n;</span><br><span class="line">    <span class="type">float</span> *a = p-&gt;a;</span><br><span class="line">    <span class="type">float</span> *b = p-&gt;b;</span><br><span class="line">    <span class="type">float</span> *c = p-&gt;c;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> omp parallel for</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = p-&gt;fromColumn; i &lt; p-&gt;toColum; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">size_t</span> j = <span class="number">0</span>; j &lt; n; j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">size_t</span> k = <span class="number">0</span>; k &lt; n; k++)</span><br><span class="line">            &#123;</span><br><span class="line">                c[j * n + i] += a[j * n + k] * b[k * n + i];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">matmul_thread</span><span class="params">(Matrix *src1, Matrix *src2, Matrix *dst, <span class="type">size_t</span> num_threads)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">safe_check</span>(src1, src2, dst))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">register</span> <span class="type">size_t</span> n = src1-&gt;row;</span><br><span class="line">    <span class="type">float</span> *data1 = src1-&gt;data;</span><br><span class="line">    <span class="type">float</span> *data2 = src2-&gt;data;</span><br><span class="line">    <span class="type">float</span> *data3 = dst-&gt;data;</span><br><span class="line">    <span class="type">pthread_t</span> *threads = <span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="type">pthread_t</span>) * num_threads);</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">PartialMatMulParams</span> *params = <span class="built_in">malloc</span>(<span class="built_in">sizeof</span>(<span class="keyword">struct</span> PartialMatMulParams) * num_threads);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; num_threads; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        params[i].a = data1;</span><br><span class="line">        params[i].b = data2;</span><br><span class="line">        params[i].c = data3;</span><br><span class="line">        params[i].n = n;</span><br><span class="line"></span><br><span class="line">        params[i].fromColumn = i * (n / num_threads);</span><br><span class="line">        params[i].toColum = (i + <span class="number">1</span>) * (n / num_threads);</span><br><span class="line">        <span class="built_in">pthread_create</span>(&amp;threads[i], <span class="literal">NULL</span>, partialMatMul, &amp;params[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; num_threads; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">pthread_join</span>(threads[i], <span class="literal">NULL</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">free</span>(threads);</span><br><span class="line">    <span class="built_in">free</span>(params);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上函数是笔者对于<code>&lt;pthread.h&gt;</code>库的实验品，在浅略阅读相关讲解与教程后所写，在实际运行测试中，虽然能正确得到结果，但以16线程运行的效率甚至低于无优化的朴素算法，且笔者对于该库的线程安全问题并不了解，因此仅作为学习过程的副产品，不参与后续效率比较。</p>
+<h2 id="Part-3-Test-amp-Comparison"><a href="#Part-3-Test-amp-Comparison" class="headerlink" title="Part 3 - Test &amp; Comparison"></a>Part 3 - Test &amp; Comparison</h2><h3 id="测试说明"><a href="#测试说明" class="headerlink" title="测试说明"></a>测试说明</h3><p><code>benchmark.c</code>为本项目测试用代码，其中依次测试了矩阵乘法的各类实现的正确性与耗时。</p>
+<p>矩阵尺寸由调试者输入，矩阵元素为随机生成的$[0,1]$的单精度浮点数。</p>
+<p>乘法标准答案由<code>cblas.h</code>的<code>cblas_sgemm()</code>函数输出至矩阵$C$，其余函数输出至$D$并与之比较，会打印出首次误差情况。</p>
+<p>考虑到使用了<code>OpenMP</code>提高效率，此处使用<code>double omp_get_wtime()</code>计算运行时间，单位为秒。</p>
+<p>在运行一个函数前，程序会“预热”两次，即预先运行2次再计时。</p>
+<p>下面是以<code>matmul_avx_block8()</code>为例的测试片段。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">matmul_avx_block8</span>(A, B, D);</span><br><span class="line"><span class="built_in">matmul_avx_block8</span>(A, B, D);</span><br><span class="line"><span class="built_in">memset</span>(D-&gt;data, <span class="number">0</span>, <span class="built_in">sizeof</span>(<span class="type">float</span>) * nn);</span><br><span class="line">time1 = <span class="built_in">omp_get_wtime</span>();</span><br><span class="line"><span class="built_in">matmul_avx_block8</span>(A, B, D);</span><br><span class="line">time2 = <span class="built_in">omp_get_wtime</span>();</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;[AVX_block+OpenMP] %ld ms used\n&quot;</span>, (<span class="type">long</span> <span class="type">int</span>)(<span class="number">1000</span> * (time2 - time1)));</span><br><span class="line"><span class="built_in">printf</span>(<span class="built_in">equals</span>(C, D) ? <span class="string">&quot;Result Accepted.\n&quot;</span> : <span class="string">&quot;Wrong Result.\n&quot;</span>);</span><br><span class="line"><span class="built_in">memset</span>(D-&gt;data, <span class="number">0</span>, <span class="built_in">sizeof</span>(<span class="type">float</span>) * nn);</span><br></pre></td></tr></table></figure>
+<h3 id="x64平台测试结果"><a href="#x64平台测试结果" class="headerlink" title="x64平台测试结果"></a>x64平台测试结果</h3><p>笔记本型号：Surface Pro7 <del>孱弱的主动散热</del>+外置风扇</p>
+<p>系统：Linux version 5.10.16.3(WSL2)，64位系统，基于x64处理器</p>
+<p>处理器：Intel(R) Core(TM) i7-1065G7 CPU @ 1.30GHz   1.50 GHz</p>
+<p>时间单位:毫秒(ms)，<code>0</code>代表1ms内完成，<code>/</code>表示等待时间在作者的耐心之外(超过5分钟)</p>
+<p><del>由于要预热，超出5分钟的函数笔者要等15分钟以上</del></p>
+<h4 id="Without-addition-compilation-option"><a href="#Without-addition-compilation-option" class="headerlink" title="Without addition compilation option"></a>Without addition compilation option</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>阶数/函数</th>
+<th>plain</th>
+<th>divide</th>
+<th>plain+omp</th>
+<th>avx_vec8</th>
+<th>avx_block8</th>
+<th>OpenBLAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>128</td>
+<td>7</td>
+<td>7</td>
+<td>1</td>
+<td>0</td>
+<td>30</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1024</td>
+<td>3657</td>
+<td>1366</td>
+<td>792</td>
+<td>194</td>
+<td>257</td>
+<td>7</td>
+</tr>
+<tr>
+<td>2048</td>
+<td>27677</td>
+<td>11123</td>
+<td>6783</td>
+<td>1835</td>
+<td>1496</td>
+<td>43</td>
+</tr>
+<tr>
+<td>4096</td>
+<td>205834</td>
+<td>116130</td>
+<td>61203</td>
+<td>12968</td>
+<td>11397</td>
+<td>395</td>
+</tr>
+<tr>
+<td>8192</td>
+<td>/</td>
+<td>/</td>
+<td>543397</td>
+<td>124802</td>
+<td>107255</td>
+<td>2940</td>
+</tr>
+<tr>
+<td>16384</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+<td>24763</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="With-O2"><a href="#With-O2" class="headerlink" title="With -O2"></a>With -O2</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>阶数/函数</th>
+<th>plain</th>
+<th>divide</th>
+<th>plain+omp</th>
+<th>avx_vec8</th>
+<th>avx_block8</th>
+<th>OpenBLAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>128</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>28</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1024</td>
+<td>515</td>
+<td>165</td>
+<td>110</td>
+<td>32</td>
+<td>52</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2048</td>
+<td>4746</td>
+<td>1727</td>
+<td>933</td>
+<td>623</td>
+<td>232</td>
+<td>46</td>
+</tr>
+<tr>
+<td>4096</td>
+<td>34098</td>
+<td>15463</td>
+<td>11363</td>
+<td>5395</td>
+<td>1765</td>
+<td>395</td>
+</tr>
+<tr>
+<td>8192</td>
+<td>270939</td>
+<td>139216</td>
+<td>89797</td>
+<td>46394</td>
+<td>14359</td>
+<td>3015</td>
+</tr>
+<tr>
+<td>16384</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+<td>196830^</td>
+<td>24433</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>^: 在测试16384×16384矩阵的avx_block8函数时，即便笔者使用了外置散热手段，还是无法避免CPU长期高负荷计算过热导致的降频，因此该数据效率有明显下降。</p>
+<h4 id="With-O3"><a href="#With-O3" class="headerlink" title="With -O3"></a>With -O3</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>阶数/函数</th>
+<th>plain</th>
+<th>divide</th>
+<th>plain+omp</th>
+<th>avx_vec8</th>
+<th>avx_block8</th>
+<th>OpenBLAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>6</td>
+<td>0</td>
+</tr>
+<tr>
+<td>128</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>115</td>
+<td>59</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1024</td>
+<td>134</td>
+<td>131</td>
+<td>47</td>
+<td>112</td>
+<td>89</td>
+<td>7</td>
+</tr>
+<tr>
+<td>2048</td>
+<td>1648</td>
+<td>975</td>
+<td>357</td>
+<td>607</td>
+<td>299</td>
+<td>48</td>
+</tr>
+<tr>
+<td>4096</td>
+<td>13601</td>
+<td>7905</td>
+<td>3099</td>
+<td>5386</td>
+<td>1837</td>
+<td>388</td>
+</tr>
+<tr>
+<td>8192</td>
+<td>112437</td>
+<td>74809</td>
+<td>41208</td>
+<td>44041</td>
+<td>14188</td>
+<td>3069</td>
+</tr>
+<tr>
+<td>16384</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+<td>188428^</td>
+<td>24325</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>笔者将电脑关闭冷却后，使用-O3编译，发现如下现象：</p>
+<ul>
+<li>对于阶数在2048以下的矩阵，自行实现的<code>SIMD</code>优化函数效率有所下降，而对于较大矩阵，自行实现的<code>SIMD</code>优化函数效率基本不变。</li>
+<li>未引入手动<code>SIMD</code>优化的函数效率有较大提高，但在大规模计算时效率低于<code>SIMD</code>优化</li>
+<li>又降频了，说明效率门槛从访存速度转移至算力。</li>
+</ul>
+<p>随后尝试了-Ofast编译，效果在误差允许范围内与-O3几乎相同。</p>
+<p>经过查询</p>
+<h3 id="图表比较"><a href="#图表比较" class="headerlink" title="图表比较"></a>图表比较</h3><p>下图是矩阵乘法的不同实现对于各规模矩阵的用时柱状图，单位ms，超时部分未画出。</p>
+<p>为了方便观察比较，此处对时间取<code>log2</code>对数，得到右侧各图。</p>
+<p>自行实现的各算法中，开启<code>-O2</code>时耗时比约为：</p>
+<script type="math/tex; mode=display">T_{plain}≈1.95T_{divide}≈3.01T_{plain+omp}≈5.83T_{avx\_vec8}≈18.87T_{avx\_block8}≈89.86T_{OpenBLAS}</script><p>由上述原因，只看n=16384时，自行实现的最快算法<code>avx_block8</code>耗时也达到了OpenBLAS的8倍左右，但在其他规模下，<code>avx__block8</code>可以达到OpenBLAS的4~5倍。</p>
+<p>由右侧各图可以观察到，在开启<code>-O2</code>编译后，<code>avx_block8</code>的<code>log2(time)</code>与<code>OpenBLAS</code>相差只有2左右，即达到了约1/4的效率。</p>
+<p><img src="https://s2.loli.net/2022/11/27/ABndj2HIe15kpzU.png" alt="Plain"></p>
+<p><img src="https://s2.loli.net/2022/11/27/RpjzcnNgLvCIUwH.png" alt="with O2"></p>
+<p><img src="https://s2.loli.net/2022/11/27/Fv2xEQBUVMs5g4m.png" alt="O3"></p>
+<h3 id="ARM平台测试结果"><a href="#ARM平台测试结果" class="headerlink" title="ARM平台测试结果"></a>ARM平台测试结果</h3><p>除在本机运行外，笔者在EAIDK310开发板上运行了基于<code>&lt;arm_neon.h&gt;</code>的版本。</p>
+<p>开发板运行内存1GB，内置存储8GB。</p>
+<p>CPU为ARM 4核 64位处理器，四核Cortex-A53，最高1.3GHz。</p>
+<p>理论上，开发板可以为16k×16k的矩阵分配空间，但实际运行时，进程则被系统killed掉了，说明EAIDK310可能实际上无法支持申请这么大的空间。同时，由于更大规模的矩阵乘法运行时间过长，此处仅测试了16~4096规模的矩阵。</p>
+<h4 id="Without-addition-compilation-option-1"><a href="#Without-addition-compilation-option-1" class="headerlink" title="Without addition compilation option"></a>Without addition compilation option</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>阶数/函数</th>
+<th>plain</th>
+<th>divide</th>
+<th>plain+omp</th>
+<th>neon_vec4</th>
+<th>neon_block4</th>
+<th>OpenBLAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>128</td>
+<td>87</td>
+<td>48</td>
+<td>31</td>
+<td>44</td>
+<td>48</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1024</td>
+<td>44629</td>
+<td>20449</td>
+<td>11230</td>
+<td>4749</td>
+<td>5536</td>
+<td>156</td>
+</tr>
+<tr>
+<td>2048</td>
+<td>/</td>
+<td>/</td>
+<td>89900</td>
+<td>30015</td>
+<td>59238</td>
+<td>1226</td>
+</tr>
+<tr>
+<td>4096</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+<td>/</td>
+<td>9659</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="With-O2-1"><a href="#With-O2-1" class="headerlink" title="With -O2"></a>With -O2</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>阶数/函数</th>
+<th>plain</th>
+<th>divide</th>
+<th>plain+omp</th>
+<th>neon_vec4</th>
+<th>neon_block4</th>
+<th>OpenBLAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr>
+<td>128</td>
+<td>20</td>
+<td>9</td>
+<td>5</td>
+<td>76</td>
+<td>11</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1024</td>
+<td>10283</td>
+<td>3930</td>
+<td>2611</td>
+<td>1196</td>
+<td>1473</td>
+<td>167</td>
+</tr>
+<tr>
+<td>2048</td>
+<td>82239</td>
+<td>32929</td>
+<td>20859</td>
+<td>9483</td>
+<td>30989</td>
+<td>1228</td>
+</tr>
+<tr>
+<td>4096</td>
+<td>/</td>
+<td>/</td>
+<td>169994</td>
+<td>75110</td>
+<td>/</td>
+<td>9670</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="With-O3-1"><a href="#With-O3-1" class="headerlink" title="With -O3"></a>With -O3</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>阶数/函数</th>
+<th>plain</th>
+<th>divide</th>
+<th>plain+omp</th>
+<th>neon_vec4</th>
+<th>neon_block4</th>
+<th>OpenBLAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr>
+<td>128</td>
+<td>6</td>
+<td>2</td>
+<td>1</td>
+<td>75</td>
+<td>12</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1024</td>
+<td>3021</td>
+<td>1781</td>
+<td>893</td>
+<td>1221</td>
+<td>1098</td>
+<td>159</td>
+</tr>
+<tr>
+<td>2048</td>
+<td>24062</td>
+<td>16943</td>
+<td>7828</td>
+<td>9495</td>
+<td>34779</td>
+<td>1223</td>
+</tr>
+<tr>
+<td>4096</td>
+<td>/</td>
+<td>136914</td>
+<td>82110</td>
+<td>74115</td>
+<td>/</td>
+<td>10050</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>让人比较郁闷的是NEON仅有4个一组绑定的float，而没有<code>__mm256</code>的代替品，因此笔者将分块步长从8变成4，牺牲了效率，分块效率变得不如向量化效率，可能也有开发板算力弱于电脑的原因。上述三种编译下的耗时比例关系与上文类似，故此不做赘述。</p>
+<h3 id="跨平台的比较"><a href="#跨平台的比较" class="headerlink" title="跨平台的比较"></a>跨平台的比较</h3><p>本项目分别在x64和ARM架构的平台进行了测试，从结果可以大致算出x64平台的效率大约是ARM平台的16倍，在下图中表现为：相同算法下左柱(ARM)比相邻的右柱(x64)高出大约4。</p>
+<p>随着矩阵阶数的按2倍乘，各算法耗时也大致呈8倍增长，符合$O(N^3)$算法的特征，由此可见，OpenBLAS底层似乎也采用的是$O(N^3)$的算法，但对许多细节进行了展开和优化来降低常数。</p>
+<p><img src="https://s2.loli.net/2022/11/27/2mTCa3kMiZybIA8.png" alt="compare.png"></p>
+<h2 id="Part-4-Difficulties-amp-Solutions"><a href="#Part-4-Difficulties-amp-Solutions" class="headerlink" title="Part 4 - Difficulties &amp; Solutions"></a>Part 4 - Difficulties &amp; Solutions</h2><h4 id="Difficulty-I-误差处理"><a href="#Difficulty-I-误差处理" class="headerlink" title="Difficulty I. 误差处理"></a>Difficulty I. 误差处理</h4><p>笔者在测试时发现，对于规模在2048以上的矩阵乘法，很容易产生<code>0.001</code>的误差，(通常是OpenBLAS与自己实现的不同，而自己实现的几个往往成对相同)。下图是某个凌晨一点钟，没开风扇降频跑16k规模矩阵时得到的结果。</p>
+<p><img src="https://s2.loli.net/2022/11/27/c2mNhHgYivPzoEk.png" alt="image-20221127014002130.png" style="zoom: 50%;" /></p>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p>经同学提醒，可以将误差设置为数据的1‰而非0.001，这样的误差要求对于进行了很多次加、乘法得到的结果也都是可以接受的。</p>
+<p>不过为了比较时的效率，<code>benchmark.c</code>依然采用旧版比较，适当放宽误差到<code>0.01</code>时可以验证乘法的正确性，既然保证了正确性，精确到哪一位才算正确似乎也没有那么重要了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> float_equal(x, y) ((x - y) &lt; 1e-3 &amp;&amp; (y - x) &lt; 1e-3) <span class="comment">//old</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> mx(x, y) ((x) &gt; (y) ? (x) : (y))</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> float_equal2(x, y) (x &gt; y ? (x - y &lt; mx(x, 1) * 1e-3) : (y - x &lt; mx(y, 1) * 1e-3)) <span class="comment">// new</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="Difficulty-II-Strassen"><a href="#Difficulty-II-Strassen" class="headerlink" title="Difficulty II. Strassen"></a>Difficulty II. Strassen</h4><p>与同学讨论的过程中，笔者了解到$O(N^{lg7})≈O(N^{2.81})$复杂度的<code>Strassen</code>算法，并且尝试自己写了一下，通过了正确性测试，但效率非常悲观，仅比朴素略快一筹。</p>
+<h4 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h4><p>随后笔者分析了原因：<code>Strassen</code>算法将矩阵运算中的8次子矩阵乘法与4次子矩阵加法，分别变为了7次和18次，即以额外的14次加法为代价减少一次乘法，在阶数很高时才能体现差距，且笔者在实现Strassen时并未使用<code>SIMD</code>进行加速，导致加法运算并未得到很好的优化，而分治的截取、合并等操作导致内存访问的跳跃数较高，虽然从软件层面降低了复杂度，但在硬件层面增大了操作复杂性。</p>
+<p>另外，该算法的优化幅度为$O(N^{0.19})$，而当$N=16384$时，也只有理论上限6.32倍的提升，矩阵规模越小优化越不明显。加上访问不连续、矩阵分块等操作带来的额外复杂度，总体呈现负优化。也许加上合适的<code>SIMD</code>优化能提高其效率。</p>
+<h4 id="Difficulty-III-Segmentation-Fault"><a href="#Difficulty-III-Segmentation-Fault" class="headerlink" title="Difficulty III. Segmentation Fault"></a>Difficulty III. Segmentation Fault</h4><p><code>SIMD</code>优化过程中屡次出现段错误，笔者试图使用<code>memalign</code>函数在创建矩阵时将<code>data</code>对齐，粒度设置为32，以便后续的load等操作，但发现写入数据时会导致段错误。</p>
+<h4 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h4><p>查询<code>memalign</code>的用法后发现并无异常，但就是无法对申请的内存进行正常读写，于是笔者推测可能是申请的空间过大，无法通过该函数申请到一块连续、对齐的内存用于存储数据，导致并未将data指向一段合法内存，因此读写时会段错误。考虑到申请如此大块的内存的确不太现实，笔者选择在载入时牺牲一定效率，换用<code>loadu_ps</code>来对未对齐的数据进行载入，效率还算不错，借此实现了本项目最快的函数，对齐后也许还能更快。</p>
+<h4 id="Difficulty-IV-64k×64k"><a href="#Difficulty-IV-64k×64k" class="headerlink" title="Difficulty IV. 64k×64k"></a>Difficulty IV. 64k×64k</h4><p>一个float四字节，$64k×64k=2^{32}=4,294,967,296$个元素，也就是对于仅一个64k阶矩阵，就要为<code>data</code>指针分配$2^{32}×4/1024^3=16GB$内存，实在是有点难为渣机了。而对于运行内存1GB，内置存储8GB的EAIDK310而言，条件会更加苛刻。</p>
+<h4 id="Solution-3"><a href="#Solution-3" class="headerlink" title="Solution"></a>Solution</h4><p>办法总比问题多，但效果不一定好。对于如此巨大的矩阵，我们可以将其写入文件，在访问某块元素时再读取载入进行运算，运算后写回文件。笔者不得不承认这是一个办法，但对于能存下的矩阵，运算耗时也已经到了难以等待的程度，如果在每次读写元素时再加上文件操作时间，恐怕要等到天荒地老、海枯石烂了，因此虽然能这样解决，但并没有必要。</p>
+<h2 id="Part-5-Summary-amp-Blooper"><a href="#Part-5-Summary-amp-Blooper" class="headerlink" title="Part 5 - Summary &amp; Blooper"></a>Part 5 - Summary &amp; Blooper</h2><p>首先，感谢您能读到这里，该部分是对项目开发过程的总结与花絮的分享。</p>
+<p>本项目在尝试了若干种优化方法后，结合<code>OpenMP</code>、<code>SIMD</code>和分块等方法对矩阵乘法进行了不同程度的优化，将耗时门槛从访存转移到了计算，效率达到了<code>OpenBLAS</code>的1/4左右。</p>
+<p>由于笔者的电脑只有一块<code>Intel Iris Plus Graphics</code>核显，且本次项目的大致重心在于如何最大限度利用CPU进行矩阵乘法的运算，笔者几乎用尽解数才写出了本项目最快的函数，然而与<code>OpenBLAS</code>依然相差甚远，大约可以理解于老师当年与完备的库相比时感受到的“绝望”的感觉了。不过想想那个项目无论从开发周期还是开发团队都远超这个用时二十余小时的单人项目，内心倒也释然许多。</p>
+<p><img src="https://s2.loli.net/2022/11/27/iXV5fbZHFLzBm71.png" alt="image-20221127012543083.png" style="zoom: 25%;" /></p>
+<p>11.27凌晨一点，笔者在测试16k矩阵乘法时，CPU八核顶着高温降频运转，为了等待自己最快的一个函数的运行结果，守在电脑前近二十分钟(预热两次真的很慢)，得到了下面的结果：</p>
+<p><img src="https://s2.loli.net/2022/11/27/c2mNhHgYivPzoEk.png" alt="image-20221127014002130.png" style="zoom: 50%;" /></p>
+<p>本来已经完全不抱希望了，但就在快要没耐心的时候程序给出了答案，虽然有一点误差，但当时还是挺感动的。然而第二天在加上外置风扇、酒精喷雾等外置散热的帮助下，效率得到了很大的提升，令人感慨好硬件的重要性。</p>
+<p>本次项目兼具技术性和挑战性，还是非常有趣的，<del>也让人深刻意识到自己和行业标准的差距</del>，此后这门课仅剩一次project，且做且珍惜啦。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/12/String%20matching%20based%20on%20repetition%20factors/" rel="prev" title="基于重复因子的字符串匹配">
+      <i class="fa fa-chevron-left"></i> 基于重复因子的字符串匹配
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-0-%E5%9B%A2%E9%98%9F%E6%88%90%E5%91%98"><span class="nav-number">1.</span> <span class="nav-text">Part 0. 团队成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="nav-number">1.2.</span> <span class="nav-text">使用说明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-1-Analysis"><span class="nav-number">2.</span> <span class="nav-text">Part 1 - Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E9%87%8D%E8%BF%B0-amp-%E4%B8%BB%E8%A6%81%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">题目重述&amp;主要思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%81%87%E8%AE%BE"><span class="nav-number">2.2.</span> <span class="nav-text">模型假设</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-2-Code"><span class="nav-number">3.</span> <span class="nav-text">Part 2 - Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8F%E4%B8%8E%E7%BB%93%E6%9E%84%E4%BD%93"><span class="nav-number">3.1.</span> <span class="nav-text">宏与结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E3%80%81%E9%87%8A%E6%94%BE%E4%B8%8E%E5%90%88%E6%B3%95%E6%80%A7%E6%A3%80%E6%9F%A5"><span class="nav-number">3.2.</span> <span class="nav-text">创建、释放与合法性检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95"><span class="nav-number">3.3.</span> <span class="nav-text">矩阵乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%B4%E7%B4%A0%E4%B9%98%E6%B3%95"><span class="nav-number">3.4.</span> <span class="nav-text">朴素乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4%C3%974%E5%88%86%E5%9D%97%E4%B9%98%E6%B3%95-Tiling"><span class="nav-number">3.5.</span> <span class="nav-text">4×4分块乘法(Tiling)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OpenMP%E4%BC%98%E5%8C%96%E6%9C%B4%E7%B4%A0%E4%B9%98%E6%B3%95"><span class="nav-number">3.6.</span> <span class="nav-text">OpenMP优化朴素乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E9%87%8F%E5%8C%96SIMD%E4%BC%98%E5%8C%96"><span class="nav-number">3.7.</span> <span class="nav-text">向量化SIMD优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8%C3%978%E5%88%86%E5%9D%97SIMD%E4%BC%98%E5%8C%96"><span class="nav-number">3.8.</span> <span class="nav-text">8×8分块SIMD优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">3.9.</span> <span class="nav-text">多线程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-3-Test-amp-Comparison"><span class="nav-number">4.</span> <span class="nav-text">Part 3 - Test &amp; Comparison</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%AF%B4%E6%98%8E"><span class="nav-number">4.1.</span> <span class="nav-text">测试说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x64%E5%B9%B3%E5%8F%B0%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="nav-number">4.2.</span> <span class="nav-text">x64平台测试结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Without-addition-compilation-option"><span class="nav-number">4.2.1.</span> <span class="nav-text">Without addition compilation option</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#With-O2"><span class="nav-number">4.2.2.</span> <span class="nav-text">With -O2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#With-O3"><span class="nav-number">4.2.3.</span> <span class="nav-text">With -O3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E8%A1%A8%E6%AF%94%E8%BE%83"><span class="nav-number">4.3.</span> <span class="nav-text">图表比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARM%E5%B9%B3%E5%8F%B0%E6%B5%8B%E8%AF%95%E7%BB%93%E6%9E%9C"><span class="nav-number">4.4.</span> <span class="nav-text">ARM平台测试结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Without-addition-compilation-option-1"><span class="nav-number">4.4.1.</span> <span class="nav-text">Without addition compilation option</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#With-O2-1"><span class="nav-number">4.4.2.</span> <span class="nav-text">With -O2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#With-O3-1"><span class="nav-number">4.4.3.</span> <span class="nav-text">With -O3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%AF%94%E8%BE%83"><span class="nav-number">4.5.</span> <span class="nav-text">跨平台的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-4-Difficulties-amp-Solutions"><span class="nav-number">5.</span> <span class="nav-text">Part 4 - Difficulties &amp; Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Difficulty-I-%E8%AF%AF%E5%B7%AE%E5%A4%84%E7%90%86"><span class="nav-number">5.0.1.</span> <span class="nav-text">Difficulty I. 误差处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution"><span class="nav-number">5.0.2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Difficulty-II-Strassen"><span class="nav-number">5.0.3.</span> <span class="nav-text">Difficulty II. Strassen</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution-1"><span class="nav-number">5.0.4.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Difficulty-III-Segmentation-Fault"><span class="nav-number">5.0.5.</span> <span class="nav-text">Difficulty III. Segmentation Fault</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution-2"><span class="nav-number">5.0.6.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Difficulty-IV-64k%C3%9764k"><span class="nav-number">5.0.7.</span> <span class="nav-text">Difficulty IV. 64k×64k</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution-3"><span class="nav-number">5.0.8.</span> <span class="nav-text">Solution</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-5-Summary-amp-Blooper"><span class="nav-number">6.</span> <span class="nav-text">Part 5 - Summary &amp; Blooper</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>
