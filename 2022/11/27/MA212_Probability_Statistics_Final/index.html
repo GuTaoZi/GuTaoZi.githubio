@@ -28,7 +28,7 @@
 <meta property="og:description" content="概统怎么这么多东西要背啊（绝望">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-27T14:07:11.860Z">
-<meta property="article:modified_time" content="2022-11-28T01:15:23.916Z">
+<meta property="article:modified_time" content="2022-12-29T14:00:52.273Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Probability &amp; Statistics">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-28 09:15:23" itemprop="dateModified" datetime="2022-11-28T09:15:23+08:00">2022-11-28</time>
+                <time title="修改时间：2022-12-29 22:00:52" itemprop="dateModified" datetime="2022-12-29T22:00:52+08:00">2022-12-29</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -232,6 +232,8 @@
 <p><strong>独立正态r.v.之和</strong>：独立r.v. 集$\{X_n\}$，$X_i\sim N(\mu_i,\sigma_i^2)$</p>
 <p>则其非零线性组合$\overset{n}\sum\limits_{i=1}a_iX_i\sim N(\overset{n}\sum\limits_{i=1}a_i\mu_i,\overset{n}\sum\limits_{i=1}a_i^2\sigma_i^2)$</p>
 <p>即：独立正态r.v.的非零线性组合仍服从正态分布</p>
+<p><strong>非独立正态r.v.之和</strong>：</p>
+<p>若$(X,Y)\sim\mathbf N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，则$(C_1X+C_2Y)\sim \mathbf N(C_1\mu_1+C_2\mu_2,C_1^2\sigma_1^2+C_2^2\sigma_2^2+2C_1C_2\sigma_1\sigma_2\rho)$</p>
 <p><strong>离散卷积公式</strong>：$P\{Z=k\}=\sum\limits_{i}P\{X=i\}P\{Y=k-i\}=\sum\limits_{i}P\{X=k-i\}P\{Y=i\}$</p>
 <p><strong>离散r.v.函数的分布</strong>：对于$Z=g(X,Y)$，$P\{Z=z_k\}=\sum\limits_{g(x_i,y_j)=z_k}p(x_i,y_i)$</p>
 <p><strong>r.v.商的分布</strong>：$(X,Y)\sim f(x,y)$，$Z=\frac{X}{Y}$，$F_Z(z)=P\{\frac{x}{y}\leq z\}=\iint\limits_{\frac{x}{y}\leq z}f(x,y)dxdy$</p>
@@ -250,13 +252,75 @@
 <p>更一般地，若两个r.v.的联合分布为二元正态分布，则其非奇异线性变换还是二元正态分布。</p>
 <p><strong>构造生成标准正态分布r.v.</strong>：构造独立r.v. $U_1\sim U[0,1]$，$U_2\sim U[0,1]$</p>
 <p>则$X=\sqrt{-2logU_1}\cos(2\pi U_2)，Y=\sqrt{-2logU_1}\sin(2\pi U_2)$是独立标准正态r.v.</p>
-<h2 id="§3-7-极值和顺序统计量"><a href="#§3-7-极值和顺序统计量" class="headerlink" title="§3.7 极值和顺序统计量"></a>§3.7 极值和顺序统计量</h2><h3 id="r-v-极值的分布"><a href="#r-v-极值的分布" class="headerlink" title="r.v.极值的分布"></a>r.v.极值的分布</h3><p><strong>max分布</strong>：</p>
-<p>$\{X_n\}$为独立r.v.集，$F_{max}(z)=P\{\bigcap\limits_{i=1}^{n} (X_i\leq z)\}=\prod\limits_{i=1}^{n}F_{X_i}(z)$</p>
-<p><strong>min分布</strong>：</p>
-<p>$\{X_n\}$为独立r.v.集，$F_{max}(z)=P\{\bigcup\limits_{i=1}^{n} (X_i\leq z)\}=1-\prod\limits_{i=1}^{n}(1-F_{X_i}(z))$</p>
-<p><strong>n个独立同分布r.v.的极值的密度</strong>：</p>
-<p>$f_{max}(z)=nf(z)[F(z)]^{n-1},\ f_{min}(z)=nf(z)[1-F(z)]^{n-1}$</p>
-<p>指数分布的串联系统仍服从指数分布，失效率为各部件失效率之和。</p>
+<h2 id="§3-7-极值和顺序统计量"><a href="#§3-7-极值和顺序统计量" class="headerlink" title="§3.7 极值和顺序统计量"></a>§3.7 极值和顺序统计量</h2><h3 id="r-v-极值的分布"><a href="#r-v-极值的分布" class="headerlink" title="r.v.极值的分布"></a>r.v.极值的分布</h3><p><strong>max分布</strong>：$\{X_n\}$为独立r.v.集，$F_{max}(z)=P\{\bigcap\limits_{i=1}^{n} (X_i\leq z)\}=\prod\limits_{i=1}^{n}F_{X_i}(z)$</p>
+<p><strong>min分布</strong>：$\{X_n\}$为独立r.v.集，$F_{max}(z)=P\{\bigcup\limits_{i=1}^{n} (X_i\leq z)\}=1-\prod\limits_{i=1}^{n}(1-F_{X_i}(z))$</p>
+<p><strong>n个独立同分布r.v.的极值的密度</strong>：$f_{max}(z)=nf(z)[F(z)]^{n-1},\ f_{min}(z)=nf(z)[1-F(z)]^{n-1}$</p>
+<p>指数分布的<strong>串联系统</strong>仍服从指数分布，失效率为各部件失效率之和。</p>
+<p><strong>顺序统计量$X_{(k)}$的密度</strong>：$f_k(x)=\frac{n!}{(k-1)!(n-k)!}f(x)F^{k-1}(x)[1-F(x)]^{n-k}$</p>
+<p>若$X_i\sim \mathbf U[0,1]$且相互独立，则$X_{(k)}\sim \mathbf{Beta}(k,n-k+1)$</p>
+<h1 id="Chapter-4"><a href="#Chapter-4" class="headerlink" title="Chapter 4"></a>Chapter 4</h1><h2 id="§4-1-随机变量的期望"><a href="#§4-1-随机变量的期望" class="headerlink" title="§4.1 随机变量的期望"></a>§4.1 随机变量的期望</h2><p><strong>数学期望(离散型)</strong>：</p>
+<p>若级数$\sum\limits_{k=1}^{\infty}|x_k|p_k&lt;+\infty$，则数学期望$E(x)\overset{\Delta}=\sum\limits_{k=1}^{\infty}x_kp_k=\sum\limits_{k=1}^{\infty}x_kP\{X=x_k\}$</p>
+<p>否则无法说明级数$\sum\limits_{k=1}^{\infty}x_kp_k$收敛，期望不存在</p>
+<p><strong>数学期望(连续型)</strong>：</p>
+<p>r.v.$X$的cdf为$f(x)$，若$\int_{-\infty}^{\infty}|x|f(x)dx&lt;+\infty$，则数学期望$E(x)=\int_{-\infty}^{\infty}xf(x)dx$</p>
+<p>否则$\int_{-\infty}^{\infty}|x|f(x)dx=+\infty$，期望不存在(标准柯西分布：$f(x)=\frac{1}{\pi(1+x^2)}$)</p>
+<p><strong>Markov不等式</strong>：</p>
+<p>r.v.$X$非负，且$E(X)$存在，则$P\{X\ge t\}\leq\frac{E(X)}{t}$</p>
+<p><strong>函数的期望</strong>：</p>
+<p>对于普通函数$y=g(x)$，其期望$E(Y)=E(g(X))=\sum\limits_{k=1}^{\infty}g(x_k)p_k$ 或 $\int_{-\infty}^{\infty}g(x)f(x)dx$</p>
+<p>对于二元函数$z=g(x,y)$，其期望$E(Z)=E(g(X,Y))=\sum\limits_{i=1}^{\infty}\sum\limits_{j=1}^{\infty}g(x_i,y_j)p_{ij}$或$\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}g(x,y)f(x,y)dxdy$</p>
+<p><strong>数学期望的基本性质</strong>：</p>
+<ul>
+<li>设$a\leq X\leq b\ (a.e)$，则$a\leq E(X)\leq b$</li>
+<li>对于常数$c$，$E(cX)=cE(X)$</li>
+<li>对于r.v. $X,Y$，$E(X+Y)=E(X)+E(Y)$</li>
+<li>对于<strong>独立</strong>r.v. $X,Y$，$E(XY)=E(X)E(Y)$</li>
+</ul>
+<p><strong>数学期望的几个推论</strong>：</p>
+<ul>
+<li>若$X=c\ (a.e)$，则$E(X)=c$</li>
+<li>线性组合的期望等于期望的线性组合</li>
+<li>$\{X_n\}$相互独立，则$E(\prod\limits_{k=1}^{n}X_k)=\prod\limits_{k=1}^{n}E(X_k)$</li>
+</ul>
+<p><strong>超几何分布等式</strong>：$N$件产品，$M$件次品，摸出次品个数的期望值(前置证明：每次摸中次品概率相同)</p>
+<p>$\sum\limits_{k=0}^{n}k\frac{C^k_MC^{n-k}_{N-M}}{C^n_N}=\frac{nM}{N}$</p>
+<h3 id="§4-2-方差与标准差"><a href="#§4-2-方差与标准差" class="headerlink" title="§4.2 方差与标准差"></a>§4.2 方差与标准差</h3><p><strong>方差</strong>：$Var(X)\overset{\Delta}=E[(X-E(X))^2]$</p>
+<p><strong>标准差</strong>：$\sqrt{Var(X)}$</p>
+<p><strong>方差的计算</strong>：$Var(X)=E(X^2)-[E(X)]^2$</p>
+<p><strong>方差的基本性质</strong>：</p>
+<ul>
+<li>$X=c\ (a.e)⇌Var(X)=0$</li>
+<li>对于常数$a,b$，$Var(aX±b)=a^2Var(X)$</li>
+<li>对于r.v. $X,Y$，$Var(X±Y)=Var(X)+Var(Y)±2E[(X-E(x))(Y-E(Y)]$</li>
+<li>对于相互独立的$\{X_n\}$，$Var(\sum\limits_{k=1}^{n}X_i)=\sum\limits_{k=1}^{n}Var(X_i)$</li>
+</ul>
+<p><strong>正态r.v.的标准化</strong>：$X\sim \mathbf N(\mu,\sigma^2)$，$X^\star=\frac{X-\mu}{\sigma}$，$X^\star\sim \mathbf N(0,1)$</p>
+<p><strong>Chebyshev不等式</strong>：</p>
+<p>期望$\mu$、方差$\sigma^2$均存在，则$\forallε&gt;0$，有$P\{|X-\mu|\ge ε\}\leq\frac{\sigma^2}{ε^2}$</p>
+<p>证明用Markov不等式，$Y=(X-\mu)^2$，$E(Y)=\sigma^2$</p>
+<h3 id="§4-3-协方差与相关系数"><a href="#§4-3-协方差与相关系数" class="headerlink" title="§4.3 协方差与相关系数"></a>§4.3 协方差与相关系数</h3><p><strong>协方差</strong>：$Cov(X,Y)\overset{\Delta}=E[(X-E(X))(Y-E(Y))]=E(XY)-E(X)E(Y)$</p>
+<p><strong>协方差的基本性质</strong></p>
+<ul>
+<li><p>若r.v. $X,Y$相互独立，则$Cov(X,Y)=0$，但协方差为0不一定独立</p>
+</li>
+<li><p>$Var(X+Y)=Var(X)+Var(Y)+Cov(X,Y)$</p>
+</li>
+<li><p>双线性性：</p>
+<ul>
+<li><p>$Cov(aX,bY)=abCov(X,Y)$</p>
+</li>
+<li><p>$Cov(X_1+X_2,Y)=Cov(X_1,Y)+Cov(X_2,Y)$</p>
+</li>
+<li><p>$U=a+\sum\limits_{i=1}^{n}b_iX_i$，$V=c+\sum\limits_{j=1}^{m}d_jY_j$，则</p>
+<p>$Cov(U,V)=\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{m}b_id_jCov(X_i,Y_j)$</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>相关系数</strong>：$\rho_{XY}\overset{\Delta}=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$，$|\rho_{XY}|\leq1$，取等当且仅当$Y\overset{a.e}=a+bX$</p>
+<p><strong>均方误差</strong>：对于线性近似$\hat Y=a+bX$，均方误差$e=E[(Y-\hat Y)^2]$</p>
+<p>$e_{min}=Var(Y)(1-\rho^2_{XY})$，此时$b_0=\frac{Cov(X,Y)}{Var(X)}$，$a_0=E(Y)-b_0E(X)$</p>
+<p><strong>相关</strong>：正相关，负相关，不相关。不相关不一定独立，独立一定不相关。</p>
 
     </div>
 
@@ -279,8 +343,8 @@
       <i class="fa fa-chevron-left"></i> CS205 C/C++ Project04设计报告 C语言矩阵乘法
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/12/09/%E5%85%AD%E7%BA%A7%E5%86%99%E4%BD%9C%E5%BA%9F%E8%AF%9D/" rel="next" title="六级写作废话">
-      六级写作废话 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/12/29/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix_Class/" rel="next" title="CS205 C/C++ Project02设计报告 矩阵类">
+      CS205 C/C++ Project02设计报告 矩阵类 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -340,7 +404,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3"><span class="nav-number">1.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-6-%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">§3.6 联合分布随机变量函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-7-%E6%9E%81%E5%80%BC%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">§3.7 极值和顺序统计量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#r-v-%E6%9E%81%E5%80%BC%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">r.v.极值的分布</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3"><span class="nav-number">1.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-6-%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">§3.6 联合分布随机变量函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-7-%E6%9E%81%E5%80%BC%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">§3.7 极值和顺序统计量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#r-v-%E6%9E%81%E5%80%BC%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">r.v.极值的分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4"><span class="nav-number">2.</span> <span class="nav-text">Chapter 4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-1-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.1.</span> <span class="nav-text">§4.1 随机变量的期望</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-2-%E6%96%B9%E5%B7%AE%E4%B8%8E%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">2.1.1.</span> <span class="nav-text">§4.2 方差与标准差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-3-%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">§4.3 协方差与相关系数</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -363,13 +427,13 @@
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>

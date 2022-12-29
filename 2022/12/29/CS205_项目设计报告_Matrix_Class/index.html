@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="使用C++写成的矩阵类模板，尽可能地提高了可拓展性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS205 C&#x2F;C++ Project02设计报告 矩阵类">
+<meta property="og:url" content="https://gutaozi.github.io/2022/12/29/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix_Class/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="使用C++写成的矩阵类模板，尽可能地提高了可拓展性">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/12/18/21tVGCweI3EmWMk.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/18/21tVGCweI3EmWMk.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/18/pyFZHVbaCPJK5rO.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/18/Fwjtcd83zkGHAgR.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/18/j4zUN8Z2ESCveI5.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/18/pSGhUAc7Fy2IlZ5.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/18/ktnxOPo5Tqcymaf.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/18/K3TdByV8M9bIJ4k.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/18/oDMiHWk8xXLcfJG.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/18/oDMiHWk8xXLcfJG.png">
+<meta property="article:published_time" content="2022-12-29T09:30:35.282Z">
+<meta property="article:modified_time" content="2022-12-29T09:33:46.050Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/12/18/21tVGCweI3EmWMk.png">
+
+<link rel="canonical" href="https://gutaozi.github.io/2022/12/29/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix_Class/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CS205 C/C++ Project02设计报告 矩阵类 | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2022/12/29/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix_Class/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS205 C/C++ Project02设计报告 矩阵类
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-29 17:30:35 / 修改时间：17:33:46" itemprop="dateCreated datePublished" datetime="2022-12-29T17:30:35+08:00">2022-12-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">使用C++写成的矩阵类模板，尽可能地提高了可拓展性</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Part-0-团队成员"><a href="#Part-0-团队成员" class="headerlink" title="Part 0. 团队成员"></a>Part 0. <del>团队</del>成员</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>学号</th>
+<th><del>贡献率</del></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>咕桃</td>
+<td>-</td>
+<td><del>100%</del></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">E:\CPP\PROJECT05</span><br><span class="line">│  CMakeLists.txt</span><br><span class="line">│  README.md</span><br><span class="line">│</span><br><span class="line">├─build</span><br><span class="line">│      <span class="comment">//makefile here</span></span><br><span class="line">│</span><br><span class="line">├─doc</span><br><span class="line">│      Report.pdf</span><br><span class="line">│</span><br><span class="line">└─src</span><br><span class="line">        benchmark.cpp</span><br><span class="line">        data.hpp</span><br><span class="line">        matrix.hpp</span><br></pre></td></tr></table></figure>
+<p>*编译时添加选项 -DSAFE 可以调用严格版函数实现。</p>
+<h2 id="Part-1-Analysis"><a href="#Part-1-Analysis" class="headerlink" title="Part 1 - Analysis"></a>Part 1 - Analysis</h2><h3 id="题目重述-amp-主要思路"><a href="#题目重述-amp-主要思路" class="headerlink" title="题目重述&amp;主要思路"></a>题目重述&amp;主要思路</h3><p>本题目要求使用C++语言实现一个具有一定功能的矩阵类。</p>
+<p>根据题目描述，题目要求的矩阵乘法需要支持的主要功能为：</p>
+<ol>
+<li>支持多通道存储数据</li>
+<li>支持多种数据类型</li>
+<li>赋值时避免深拷贝(Hard Copy)，安全管理内存</li>
+<li>重载基本运算符</li>
+<li>不使用深拷贝实现ROI</li>
+</ol>
+<p>本项目除完成上述基础要求外，支持以下内容：</p>
+<ol>
+<li><strong>支持任意合理重载运算符的数据类型</strong></li>
+<li><strong>跨数据类型运算、转换、赋值</strong>(提供转换函数接口)</li>
+<li><strong>异常处理机制</strong>(另提供严格版函数)</li>
+<li><strong>子矩阵/掩膜提取两类ROI实现</strong></li>
+<li><strong>逐元素一元/二元自定义运算</strong>(提供运算函数接口)</li>
+<li><strong>默认重载软拷贝(Shallow Copy)，提供硬拷贝函数</strong></li>
+<li><strong>更多易用重载运算符</strong></li>
+<li><strong><del>用户友好的足量注释</del></strong></li>
+</ol>
+<h3 id="模型假设"><a href="#模型假设" class="headerlink" title="模型假设"></a>模型假设</h3><p>项目要求矩阵类需要适用于不同数据类型，因此本项目主体使用类模板完成，笔者考虑该库所可能使用的数据范围作为本项目支持的数据规模，如下：</p>
+<ul>
+<li>可适用的矩阵尺寸因元素类型而异，因此未设置<code>rows</code>和<code>cols</code>上限(不抛出<code>bad alloc exception</code>即可)。</li>
+<li>通道数上限<code>MAX_CHANNEL</code>通过宏默认设置为4(适用于ARGB存储图像)，有更大需求修改宏即可</li>
+<li>矩阵元素的数据兼容基本数据类型，适用于满足前置条件的自定义类型：<ul>
+<li>无参数构造器，重载<code>=</code>，<code>==(!=)</code></li>
+<li>与其他类型的隐式转换/显式的转换函数</li>
+<li>与不同类型进行运算的结果类型推导</li>
+</ul>
+</li>
+<li>多通道矩阵连续访问同一通道不同元素次数&gt;同一元素不同通道值次数，因此选择对通道进行稀疏存储，即同一通道内行优先存储。</li>
+</ul>
+<h2 id="Part-2-Code"><a href="#Part-2-Code" class="headerlink" title="Part 2 - Code"></a>Part 2 - Code</h2><p>本项目实现了严格版和普通版两版实现，安全性均可保证，但严格版的异常抛出信息更为具体，便于调试，此处展示严格版实现。</p>
+<h3 id="矩阵数据类"><a href="#矩阵数据类" class="headerlink" title="矩阵数据类"></a>矩阵数据类</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//data.hpp</span></span><br><span class="line"><span class="comment">//data class</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">data</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Tp *value;</span><br><span class="line">    <span class="type">size_t</span> length;</span><br><span class="line">    <span class="type">size_t</span> *ref_count;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>本项目根据尽可能避免Hard Copy的要求，参考课上所述的形式将矩阵内数据以私有成员的形式安全封装为类模板，在以<code>Tp *</code>指针<code>value</code>存储数据头外，附加存储了<code>size_t</code>类型的数据长度<code>length</code>，以及<code>size_t *</code>类型的“数据复用次数”统计变量<code>ref_count</code>，表示该数据可被多少个对象调用，便于析构矩阵时安全地释放内存。</p>
+<h3 id="矩阵类"><a href="#矩阵类" class="headerlink" title="矩阵类"></a>矩阵类</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//matrix.hpp</span></span><br><span class="line"><span class="comment">//matrix class</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_CHANNEL (4)</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_CHANNEL (4)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">matrix</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">typedef</span> matrix&lt;<span class="type">bool</span>&gt; mask;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="type">char</span> channel_number;</span><br><span class="line"></span><br><span class="line">    <span class="type">size_t</span> rows;</span><br><span class="line">    <span class="type">size_t</span> cols;</span><br><span class="line">    <span class="comment">//number of channels should be [1,MAX_CHANNEL]</span></span><br><span class="line">    channel_number channels;</span><br><span class="line">    <span class="comment">//padding of relative position</span></span><br><span class="line">    <span class="type">size_t</span> channel_pad;</span><br><span class="line">    <span class="type">size_t</span> step;</span><br><span class="line">    <span class="type">size_t</span> shift;</span><br><span class="line">    data&lt;Tp&gt; *dat;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">	...</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>本项目的矩阵类实现为类模板，以私有成员的形式存储了包括行数、列数、通道数、内部数据的基本信息，其中行列数使用<code>size_t</code>存储，通道数限定在<code>[1, MAX_CHANNEL]</code>间，使用<code>char(channel_number)</code>存储，最大通道数默认为4，数据使用<code>data</code>类以行优先、通道稀疏存储，下图是一个<code>5*5</code>的RGB三通道矩阵在类中的存储方式：</p>
+<p><img src="https://s2.loli.net/2022/12/18/21tVGCweI3EmWMk.png" alt="P0~QOP3BOMINV6PH_J@9YEU.png" style="zoom:50%;" /></p>
+<p>根据题目对<code>Non-Hard-Copy ROI</code>的要求，为了复用同一<code>dat</code>，矩阵类多存了三个<code>size_t</code>类型变量：<code>shift</code>，<code>step</code>，<code>channel_pad</code>。</p>
+<ul>
+<li><code>shift</code>：存储当前矩阵相对<code>dat-&gt;value</code>的数据起始位置</li>
+<li><code>step</code>：存储该数据原本的列数</li>
+<li><code>channel_pad</code>：跳转到下一通道该元素所需加的数，即单个通道的尺寸</li>
+</ul>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><h4 id="data"><a href="#data" class="headerlink" title="data"></a>data</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//data.hpp</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">data</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//! constructor using the given source data</span></span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">data</span><span class="params">(Tp *dat, <span class="type">size_t</span> length)</span></span>;</span><br><span class="line">    <span class="comment">//! constructor that malloc new memory of the given length</span></span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">data</span><span class="params">(<span class="type">size_t</span> length)</span></span>;</span><br><span class="line">    <span class="comment">//! soft copy constructor</span></span><br><span class="line">    <span class="built_in">data</span>(<span class="type">const</span> data &amp;p);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于<code>data</code>类，项目支持源数据指针+数据长和仅传入数据长两种构造器以及软拷贝构造器(直接传递<code>value</code>指针)，此处展示<strong>仅传入数据长的构造器</strong>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! constructor that malloc new memory of the given length</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line">data&lt;Tp&gt;::<span class="built_in">data</span>(<span class="type">size_t</span> length):<span class="built_in">length</span>(length)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        value = <span class="keyword">new</span> Tp[length];</span><br><span class="line">        ref_count = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">1</span>]&#123;<span class="number">1</span>&#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (std::bad_alloc &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Bad Alloc Exception: Failed to allocate memory of the given length &quot;</span> &lt;&lt; length &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">bad_alloc</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>仅传入数据长的构造器要求<code>Tp</code>类型需要有无参构造器，在为<code>value</code>申请空间时能捕获异常，通过错误流输出报错信息。</p>
+<h4 id="matrix"><a href="#matrix" class="headerlink" title="matrix"></a>matrix</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//matrix.hpp</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">matrix</span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">//! constructor that sets matrix elements to given source data</span></span><br><span class="line">    <span class="built_in">matrix</span>(<span class="type">size_t</span> rows, <span class="type">size_t</span> cols, Tp *src, channel_number channels = <span class="number">1</span>);</span><br><span class="line">    <span class="comment">//! constructor that sets each matrix element to specified value</span></span><br><span class="line">    <span class="built_in">matrix</span>(<span class="type">size_t</span> rows, <span class="type">size_t</span> cols, <span class="type">const</span> Tp &amp;value, channel_number channels = <span class="number">1</span>);</span><br><span class="line">    <span class="comment">//! submatrix constructor(ROI)</span></span><br><span class="line">    <span class="built_in">matrix</span>(matrix &amp;src, <span class="type">size_t</span> row1, <span class="type">size_t</span> col1, <span class="type">size_t</span> row2, <span class="type">size_t</span> col2);</span><br><span class="line">    <span class="comment">//! copy constructor (soft copy)</span></span><br><span class="line">    <span class="built_in">matrix</span>(<span class="type">const</span> matrix &amp;p);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>matrix</code>严格意义上的构造器有4个，分别是尺寸+数据源、尺寸+单个值、子矩阵、软拷贝构造器，此处展示<strong>尺寸+数据源构造器</strong>和<strong>软拷贝构造器</strong>，子矩阵构造器会在ROI部分详讲。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! constructor that sets matrix elements to given source data</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line">matrix&lt;Tp&gt;::<span class="built_in">matrix</span>(<span class="type">size_t</span> rows, <span class="type">size_t</span> cols, Tp *src, channel_number channels):<span class="built_in">rows</span>(rows), <span class="built_in">cols</span>(cols), <span class="built_in">channels</span>(channels)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (rows * cols == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">invalid_argument</span>(<span class="string">&quot;Invalid Argument Exception: row number and column number should be positive.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (channels &gt; MAX_CHANNEL || channels &lt;= <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">invalid_argument</span>(<span class="string">&quot;Invalid Argument Exception: channel number should be in [1,MAX_CHANNEL].\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>-&gt;shift = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">this</span>-&gt;step = cols;</span><br><span class="line">    <span class="keyword">this</span>-&gt;channel_pad = rows * cols;</span><br><span class="line">    <span class="keyword">this</span>-&gt;dat = <span class="keyword">new</span> <span class="built_in">data</span>&lt;Tp&gt;(src, <span class="built_in">size</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在生成与其他矩阵不存在包含关系的新矩阵时，将<code>shift</code>置零，<code>step</code>设为<code>cols</code>，<code>channel_pad</code>设为<code>rows*cols</code>，使用数据源创建<code>data</code>即可，过程中对矩阵的尺寸也做了检查和异常处理。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! copy constructor (soft copy)</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line">matrix&lt;Tp&gt;::<span class="built_in">matrix</span>(<span class="type">const</span> matrix &amp;p)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (p.<span class="built_in">get_dat</span>() == <span class="literal">nullptr</span> || p.<span class="built_in">get_dat</span>() == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">invalid_argument</span>(<span class="string">&quot;Null Pointer Exception: The data of source matrix is null.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    rows = p.<span class="built_in">get_rows</span>();</span><br><span class="line">    cols = p.<span class="built_in">get_cols</span>();</span><br><span class="line">    channels = p.<span class="built_in">get_channels</span>();</span><br><span class="line">    step = p.<span class="built_in">get_step</span>();</span><br><span class="line">    shift = p.<span class="built_in">get_shift</span>();</span><br><span class="line">    dat = p.<span class="built_in">get_dat</span>();</span><br><span class="line">    dat-&gt;<span class="built_in">inc_ref_count</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>软拷贝构造器，直接传递成员即可，同时将被引用的数据的<code>ref_count</code>自增。使用getter是因为原计划再包一个template，支持不同模板类之间的拷贝(不同模板类之间私有成员互不可见)，但转换过程是硬拷贝的，因此未在此函数实现跨类复制。</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! increase refcount</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="type">void</span> data&lt;Tp&gt;::<span class="built_in">inc_ref_count</span>()</span><br><span class="line">&#123;</span><br><span class="line">    (*ref_count)++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//! decrease refcount</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="type">void</span> data&lt;Tp&gt;::<span class="built_in">dec_ref_count</span>()</span><br><span class="line">&#123;</span><br><span class="line">    (*ref_count)--;</span><br><span class="line">    <span class="keyword">if</span> (!(*ref_count))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;~<span class="built_in">data</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为避免硬拷贝，同一块数据可能同时被若干个矩阵中的<code>data *</code>指向。在创建/复制矩阵时，若使用了已经存在的data，则调用<code>inc_ref_count</code>，在删除矩阵时，不能直接释放数据，而是调用<code>dec_ref_count</code>，待<code>ref_count</code>归零，即这块数据没有被任何地方调用时才能释放。</p>
+<p>这里的<code>ref_count</code>也使用指针的原因是当data被引用时，加入一个新的引用对象调用的<code>inc_ref_count</code>需要作用于所有指向<code>value</code>这块内存的data上，即便数据头有所不同。</p>
+<h3 id="类型转换函数"><a href="#类型转换函数" class="headerlink" title="类型转换函数"></a>类型转换函数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1, <span class="keyword">typename</span> T2&gt;</span></span><br><span class="line"><span class="function">T1 <span class="title">default_convert</span><span class="params">(T2 src)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (T1) src;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//customized type conversion</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> target_type&gt;</span><br><span class="line">matrix&lt;target_type&gt; matrix&lt;Tp&gt;::<span class="built_in">convert_to</span>(<span class="built_in">target_type</span> (*convert_function)(Tp src)) <span class="type">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        target_type *NewArr = <span class="keyword">new</span> target_type[<span class="built_in">size</span>()]&#123;&#125;;</span><br><span class="line">        <span class="type">size_t</span> it = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (matrix::channel_number ch = <span class="number">1</span>; ch &lt;= channels; ch++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">size_t</span> r = <span class="number">1</span>; r &lt;= rows; r++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">size_t</span> c = <span class="number">1</span>; c &lt;= cols; c++)</span><br><span class="line">                &#123;</span><br><span class="line">                    NewArr[it++] = <span class="built_in">convert_function</span>(<span class="built_in">at</span>(r, c, ch));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">matrix</span>&lt;target_type&gt;(rows, cols, NewArr, channels);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (std::bad_alloc &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Bad Alloc Exception: Failed to allocate memory of the given length &quot;</span> &lt;&lt; <span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">bad_alloc</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此处展示类型转换函数的实现，此函数可根据传入的<strong>转换函数指针</strong><code>convert_function</code>将<code>matrix&lt;Tp&gt;</code>转换为<code>matrix&lt;target_type&gt;</code>，过程由于产生了类型转换而无法避免硬拷贝。</p>
+<p>在类模板声明中，函数参数的默认值为显式转换函数<code>default_convert</code>，因此只要使用支持显式转换的基础类型(int, float…)，或是用户所给的类型间重载了显式转换，则可以不用传参数直接使用转换函数。</p>
+<p>当然，如果用户希望使用自己的转换方式，例如手写<code>int round(float)</code>、<code>double ln(int)</code>等，也可以将自己的转换传入提供的参数接口即可：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">my_round</span><span class="params">(<span class="type">float</span> x)</span></span>;</span><br><span class="line"><span class="function">matrix&lt;<span class="type">float</span>&gt; <span class="title">mat</span><span class="params">(<span class="number">4</span>,<span class="number">4</span>,src,<span class="number">3</span>)</span></span>;</span><br><span class="line">mat=mat.<span class="built_in">convert_to</span>(myround);</span><br><span class="line"><span class="comment">//这里右值是matrix&lt;int&gt;，左值是matrix&lt;float&gt;，赋值过程隐式调用了convert_to&lt;float&gt;(default_convert)</span></span><br></pre></td></tr></table></figure>
+<p>实际上用这个接口就能实现<strong>任意逐元素一元运算操作</strong>，上面提的两个例子就是逐元素四舍五入和逐元素取对数，一切交给用户的想象力！</p>
+<h3 id="重载赋值符"><a href="#重载赋值符" class="headerlink" title="重载赋值符"></a>重载赋值符</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! override same type assign operator(soft copy)</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line">matrix&lt;Tp&gt; &amp;matrix&lt;Tp&gt;::<span class="keyword">operator</span>=(<span class="type">const</span> matrix&lt;Tp&gt; &amp;p)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == &amp;p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">return</span> (*<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (p.dat == <span class="literal">nullptr</span> || p.dat == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">invalid_argument</span>(<span class="string">&quot;Null Pointer Exception: The data of source matrix is null.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    rows = p.rows;</span><br><span class="line">    cols = p.cols;</span><br><span class="line">    channels = p.channels;</span><br><span class="line">    step = p.step;</span><br><span class="line">    shift = p.shift;</span><br><span class="line">    channel_pad = p.channel_pad;</span><br><span class="line">    <span class="keyword">if</span> (dat != p.dat)</span><br><span class="line">    &#123;</span><br><span class="line">        dat-&gt;<span class="built_in">dec_ref_count</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    dat = p.dat;</span><br><span class="line">    dat-&gt;<span class="built_in">inc_ref_count</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>首先是同类型的赋值，彼此可以访问私有成员，在检查右值合法性后，将左值数据的引用数自减，将右值逐成员复制即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! override implicit type transform assign operator(convert &amp; hard copy)</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> rhs&gt;</span><br><span class="line">matrix&lt;Tp&gt; &amp;matrix&lt;Tp&gt;::<span class="keyword">operator</span>=(<span class="type">const</span> matrix&lt;rhs&gt; &amp;p)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (p.<span class="built_in">get_dat</span>() == <span class="literal">nullptr</span> || p.<span class="built_in">get_dat</span>() == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">invalid_argument</span>(<span class="string">&quot;Null Pointer Exception: The data of source matrix is null.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    dat-&gt;<span class="built_in">dec_ref_count</span>();</span><br><span class="line">    (*<span class="keyword">this</span>) = p.<span class="keyword">template</span> <span class="built_in">convert_to</span>&lt;Tp&gt;();<span class="comment">//调用默认转换器</span></span><br><span class="line">    <span class="keyword">return</span> (*<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其次是跨类型的赋值，彼此的私有成员不可见，因此使用getter，在检查右值合法性后，将左值数据的引用数自减，将右值逐成员复制即可。</p>
+<p>由于等式左右类型不同，函数会调用默认转换器，如果用户此时定义好了显式类型转换，赋值时就会<strong>隐式调用显式转换</strong>来达成赋值的目的。左右类型一定是不同的，因此左值的数据需要释放，引用数自减，根据转换后的右值新建一块数据。</p>
+<h3 id="ROI"><a href="#ROI" class="headerlink" title="ROI"></a>ROI</h3><p>本部分在参观<code>OpenCV::mat</code>后实现，借鉴了课程所述的方式实现了<code>ROI</code>。</p>
+<p>由于时间和技术力有限，笔者在参观<code>OpenCV::mat</code>的多边形、圆形ROI后并未能成功复现仅传入<code>vector&lt;point&gt;</code>即可根据凸包生成<code>ROI</code>的高超函数，但此处实现了基础的<strong>矩形ROI</strong>和<strong>掩膜ROI</strong>两种形式，后者的可拓展性很强，只要配合一个能根据<code>vector&lt;point&gt;</code>输出某个元素是否在凸包内的函数即可实现任意形状的ROI的效果。</p>
+<h4 id="矩形ROI"><a href="#矩形ROI" class="headerlink" title="矩形ROI"></a>矩形ROI</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! submatrix constructor(ROI)</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line">matrix&lt;Tp&gt;::<span class="built_in">matrix</span>(matrix &amp;src, <span class="type">size_t</span> row1, <span class="type">size_t</span> col1, <span class="type">size_t</span> row2, <span class="type">size_t</span> col2)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (row1 &gt; row2 || col1 &gt; col2)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">out_of_range</span>(<span class="string">&quot;Out Of Range Exception: row2 and col2 should be greater than row1 and col1.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (row2 &gt; src.rows || col2 &gt; src.cols)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">out_of_range</span>(<span class="string">&quot;Out Of Range Exception: row2 and col2 exceed the size of source matrix.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (row1 * col1 == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">out_of_range</span>(<span class="string">&quot;Invalid Argument Exception: row number and column number should be positive.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (src.<span class="built_in">get_dat</span>() == <span class="literal">nullptr</span> || src.<span class="built_in">get_dat</span>() == <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">invalid_argument</span>(<span class="string">&quot;Null Pointer Exception: The data of source matrix is null.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    rows = row2 - row1 + <span class="number">1</span>;</span><br><span class="line">    cols = col2 - col1 + <span class="number">1</span>;</span><br><span class="line">    channels = src.channels;</span><br><span class="line">    step = src.step;</span><br><span class="line">    channel_pad = src.channel_pad;</span><br><span class="line">    shift = (row1 - <span class="number">1</span>) * step + col1 - <span class="number">1</span>;</span><br><span class="line">    dat = src.get_dat;</span><br><span class="line">    dat-&gt;<span class="built_in">inc_ref_count</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实现原理说起来也很简单，构造时推导出<code>shift</code>，<code>step</code>以及<code>channel_pad</code>并存储，在取出矩阵元素时再加上行数、列数、通道数总共六个参数即可算出<code>mat[i][j][channel]</code>在一维数组<code>value[]</code>中的位置，此处用<strong>重载括号</strong>的方式实现：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! get element reference from matrix</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line">Tp &amp;matrix&lt;Tp&gt;::<span class="built_in">operator</span>()(<span class="type">size_t</span> row, <span class="type">size_t</span> col, channel_number channel) <span class="type">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (row &gt; rows || col &gt; cols || channel &gt; channels)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">out_of_range</span>(</span><br><span class="line">                <span class="string">&quot;Out Of Range Exception: arguments should be in the range of source matrix.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (*dat)[shift + (channel - <span class="number">1</span>) * channel_pad + (row - <span class="number">1</span>) * step + col - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/12/18/21tVGCweI3EmWMk.png" alt="P0~QOP3BOMINV6PH_J@9YEU.png" style="zoom:50%;" /></p>
+<p>上图所示的例子是从<code>5*5</code>三通道矩阵中取出一个<code>2*2</code>三通道ROI，图中的38对应的是ROI的<strong>第二通道第二行第二列</strong>的元素，经计算<code>roi(2,2,2)==dat[37]=38</code>，取出即可。</p>
+<p>重载括号的传回值为引用类型，用户可以直接访问和修改矩阵元素。为了防止用户犯傻和便于部分声明为const的函数，项目还提供了只读版：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! get element from matrix (read only)</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line">Tp matrix&lt;Tp&gt;::<span class="built_in">at</span>(<span class="type">size_t</span> row, <span class="type">size_t</span> col, channel_number channel) <span class="type">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (row &gt; rows || col &gt; cols || channel &gt; channels)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">out_of_range</span>(</span><br><span class="line">                <span class="string">&quot;Out Of Range Exception: arguments should be in the range of source matrix.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> (*dat)[shift + (channel - <span class="number">1</span>) * channel_pad + (row - <span class="number">1</span>) * step + col - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="掩膜ROI"><a href="#掩膜ROI" class="headerlink" title="掩膜ROI"></a>掩膜ROI</h4><p>不知道读者有没有注意到matrix类中的<code>typedef matrix&lt;bool&gt; mask</code>，重命名了零一矩阵，实际上<code>OpenCV::mat</code>中也有类似的实现，即将零一矩阵作为<strong>掩膜</strong>，其中为1的部分即为ROI。</p>
+<p>这里笔者模仿OpenCV实现了<code>copy_to</code>函数，根据当前矩阵和掩膜填充目标矩阵。出于对原数据的负责态度，此处未使用软拷贝(因为这样会修改原数据导致引用该数据的所有矩阵内容变化，而我们只是希望取出一块我们感兴趣的数据进行操作而已)。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! ROI using mask(matrix&lt;bool&gt;)</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="type">bool</span> matrix&lt;Tp&gt;::<span class="built_in">copy_to</span>(matrix&lt;Tp&gt; &amp;dst, <span class="type">const</span> matrix::mask &amp;mask)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        dst.~<span class="built_in">matrix</span>();</span><br><span class="line">        Tp *NewArr = <span class="keyword">new</span> Tp[<span class="built_in">size</span>()]&#123;&#125;;</span><br><span class="line">        <span class="type">size_t</span> it = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (channel_number ch = <span class="number">1</span>; ch &lt;= channels; ch++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">size_t</span> r = <span class="number">1</span>; r &lt;= rows; r++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">size_t</span> c = <span class="number">1</span>; c &lt;= cols; c++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (<span class="built_in">mask</span>(r, c, ch))</span><br><span class="line">                    &#123;</span><br><span class="line">                        NewArr[it] = <span class="built_in">at</span>(r, c, ch);</span><br><span class="line">                    &#125;</span><br><span class="line">                    it++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        dst = <span class="built_in">matrix</span>&lt;Tp&gt;(rows, cols, NewArr, channels);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (std::bad_alloc &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Bad Alloc Exception: Failed to allocate memory of the given length &quot;</span> &lt;&lt; <span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">bad_alloc</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>所以只要知道如何根据需求生成零一矩阵，就能通过调用copy_to函数取出ROI了。</p>
+<p><img src="https://s2.loli.net/2022/12/18/pyFZHVbaCPJK5rO.png" alt="IZ_G_@H1C5F_44_`1M46_F0.png" style="zoom:50%;" /></p>
+<h4 id="通道提取"><a href="#通道提取" class="headerlink" title="通道提取"></a>通道提取</h4><p>掩膜也是多通道的，所以只想要某个通道的内容可以遮住其他通道，但是有时候我们真的只关心其中的某个通道，比如透明度，本项目为此实现了<code>Channel Of Interest</code>效果的函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! split out a single channel</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line">matrix&lt;Tp&gt; matrix&lt;Tp&gt;::<span class="built_in">split_channel</span>(matrix::channel_number channel_id)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (channel_id &gt; channels || channel_id &lt;= <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">out_of_range</span>(</span><br><span class="line">                <span class="string">&quot;Out Of Range Exception: channel id should be within the channel number of source matrix.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">matrix&lt;Tp&gt; <span class="title">New</span><span class="params">(*<span class="keyword">this</span>)</span></span>;</span><br><span class="line">    New.channels = <span class="number">1</span>;</span><br><span class="line">    New.shift += channel_pad * (channel_id - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> New;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里，我们通过将<code>shift</code>后推若干个<code>channel_pad</code>，让数据头起点到达目标通道，再将通道数置一，即剥离出了对应通道，然后我们就可以对多个通道间进行各种各样的运算和变换了。</p>
+<p>考虑到剥离通道后通常需要进行不影响原数据的操作，因此此处选择使用硬拷贝取出数据。若希望对原数据进行操作就更简单了，直接对原矩阵的<code>shift</code>后推，<code>channels</code>置一即可，不过在操作后需要调整回原值。如果真的要为软拷贝做到这么复杂，为什么不用重载的括号，指定行列通道后直接进行操作呢？</p>
+<h3 id="重载-与比较"><a href="#重载-与比较" class="headerlink" title="重载==与比较"></a>重载==与比较</h3><p>项目重载了<code>==</code>，用于严格地比较两个矩阵的各元素是否相同，实现非常简单：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! override equation(strict equal)</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="type">bool</span> matrix&lt;Tp&gt;::<span class="keyword">operator</span>==(<span class="type">const</span> matrix &amp;p) <span class="type">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == &amp;p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (rows != p.<span class="built_in">get_rows</span>() || cols != p.<span class="built_in">get_cols</span>() || channels != p.<span class="built_in">get_channels</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (channel_number ch = <span class="number">1</span>; ch &lt;= channels; ch++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">size_t</span> r = <span class="number">1</span>; r &lt;= rows; r++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">size_t</span> c = <span class="number">1</span>; c &lt;= cols; c++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (<span class="built_in">at</span>(r, c, ch) != p.<span class="built_in">at</span>(r, c, ch))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但众所周知，数据类型的比较向来不那么简单。例如，对于基础数据类型<code>float</code>，直接使用<code>==</code>经常会因为误差而错判相等。但是用户又不想或是不能为此将一整个类型的<code>==</code>重载为更弱的比较条件，此时就要用到<code>equals</code>函数了：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//! equal with customized compare function</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="type">bool</span> matrix&lt;Tp&gt;::<span class="built_in">equals</span>(<span class="type">const</span> matrix&lt;Tp&gt; &amp;p, <span class="built_in">bool</span> (*equal)(Tp, Tp)) <span class="type">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> == &amp;p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (rows != p.<span class="built_in">get_rows</span>() || cols != p.<span class="built_in">get_cols</span>() || channels != p.<span class="built_in">get_channels</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (channel_number ch = <span class="number">1</span>; ch &lt;= channels; ch++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">size_t</span> r = <span class="number">1</span>; r &lt;= rows; r++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">size_t</span> c = <span class="number">1</span>; c &lt;= cols; c++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (!<span class="built_in">equal</span>(<span class="built_in">at</span>(r, c, ch), p.<span class="built_in">at</span>(r, c, ch)))</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本项目的<code>equals</code>函数支持用户自行传入函数，例如<code>float</code>的例子就可以：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">float_eq</span><span class="params">(<span class="type">float</span> x, <span class="type">float</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (x-y&lt;<span class="number">1e-3</span>)&amp;&amp;(y-x&lt;<span class="number">1e-3</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">matrix&lt;<span class="type">float</span>&gt; <span class="title">mat1</span><span class="params">(<span class="number">3</span>,<span class="number">3</span>,<span class="number">1.0001f</span>)</span></span>;</span><br><span class="line"><span class="function">matrix&lt;<span class="type">float</span>&gt; <span class="title">mat2</span><span class="params">(<span class="number">3</span>,<span class="number">3</span>,<span class="number">1.0f</span>)</span></span>;</span><br><span class="line"><span class="type">bool</span> eq=mat1.<span class="built_in">equals</span>(mat2,float_eq);</span><br></pre></td></tr></table></figure>
+<p>可拓展性很强：哪怕用户传入的函数说0和1是相等的，<code>equals</code>也会忠诚地认为0和1是相等的！</p>
+<h3 id="重载加减乘"><a href="#重载加减乘" class="headerlink" title="重载加减乘"></a>重载加减乘</h3><p>如果说实现稳健的运算是Project03的亮点，高效率是Project04的亮点，那本项目的亮点则在于：类模板让跨类型成为可能，因此本项目中重载的运算均支持不同类型矩阵的运算，此处仅展示朴素乘法。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T1&gt;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line">matrix&lt;<span class="keyword">decltype</span>(<span class="built_in">T1</span>() * <span class="built_in">T2</span>())&gt; matrix&lt;T1&gt;::<span class="keyword">operator</span>*(matrix&lt;T2&gt; &amp;p)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (cols != p.<span class="built_in">get_rows</span>() )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">invalid_argument</span>(</span><br><span class="line">                <span class="string">&quot;Invalid Argument Exception: The col number of left matrix should equal the row number of right matrix.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(channels != p.<span class="built_in">get_channels</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">invalid_argument</span>(</span><br><span class="line">                <span class="string">&quot;Invalid Argument Exception: The channel number of two matrix should be the same.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">typedef</span> <span class="title">decltype</span><span class="params">(T1() * T2())</span> result_type</span>;</span><br><span class="line">        <span class="keyword">auto</span> *NewArr = <span class="keyword">new</span> result_type[rows * p.<span class="built_in">get_cols</span>() * channels]&#123;&#125;;</span><br><span class="line">        <span class="function">matrix&lt;result_type&gt; <span class="title">New</span><span class="params">(rows, p.get_cols(), NewArr, channels)</span></span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">size_t</span> ch = <span class="number">1</span>; ch &lt;= channels; ch++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">1</span>; i &lt;= rows; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">size_t</span> k = <span class="number">1</span>; k &lt;= cols; k++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="type">size_t</span> j = <span class="number">1</span>; j &lt;= p.<span class="built_in">get_cols</span>(); j++)</span><br><span class="line">                    &#123;</span><br><span class="line">                        <span class="built_in">New</span>(i, j, ch) = New.<span class="built_in">at</span>(i, j, ch) + <span class="built_in">at</span>(i, k, ch) * p.<span class="built_in">at</span>(k, j, ch);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> New;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (std::bad_alloc &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Bad Alloc Exception: Failed to allocate memory of the given length &quot;</span> &lt;&lt; <span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">bad_alloc</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此处在赋值时调用了隐式类型转换，若用户提供的类型已重载好类型转换则可以直接使用。</p>
+<p><code>decltype</code>是C++ 11加入的特性之一，可以根据表达式推导数据类型，有如此方便的自动类型推导，完成跨类型运算也算是信手拈来，不过需要注意的是用户提供的类型需要是可以推导的。</p>
+<p>其实这里有想过要不要特例化<code>int*int</code>、<code>float*float</code>、<code>double*double</code>等，使用OpenBLAS进行运算，但思索了一下似乎有点跑题，而且需要用户安装OpenBLAS，徒然提升了使用门槛，就未作实现。</p>
+<h3 id="想自己动手？没问题！"><a href="#想自己动手？没问题！" class="headerlink" title="想自己动手？没问题！"></a>想自己动手？没问题！</h3><p>本项目延续了一贯的高拓展性，实现了自定义一元/二元运算的框架，用户传入函数指针即可，而且二元运算也支持跨类型运算，即支持传入形如<code>T3 foo(T1, T2)</code>的函数指针。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//customized element-wise calculation</span></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> result_type&gt;</span><br><span class="line">matrix&lt;result_type&gt; matrix&lt;Tp&gt;::<span class="built_in">unary_calc</span>(<span class="built_in">result_type</span> (*unary_function)(Tp)) <span class="type">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        result_type *NewArr = <span class="keyword">new</span> result_type[<span class="built_in">size</span>()]&#123;&#125;;</span><br><span class="line">        <span class="type">size_t</span> it = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (matrix::channel_number ch = <span class="number">1</span>; ch &lt;= channels; ch++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">size_t</span> r = <span class="number">1</span>; r &lt;= rows; r++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">size_t</span> c = <span class="number">1</span>; c &lt;= cols; c++)</span><br><span class="line">                &#123;</span><br><span class="line">                    NewArr[it++] = <span class="built_in">unary_function</span>(<span class="built_in">at</span>(r, c, ch));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">matrix</span>&lt;result_type&gt;(rows, cols, NewArr, channels);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (std::bad_alloc &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Bad Alloc Exception: Failed to allocate memory of the given length &quot;</span> &lt;&lt; <span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">bad_alloc</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Tp&gt;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> result_type, <span class="keyword">typename</span> T2&gt;</span><br><span class="line">matrix&lt;result_type&gt; matrix&lt;Tp&gt;::<span class="built_in">binary_calc</span>(<span class="type">const</span> matrix&lt;T2&gt; &amp;p, <span class="built_in">result_type</span> (*binary_function)(Tp, T2)) <span class="type">const</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(cols!=p.<span class="built_in">get_cols</span>()||rows!=p.<span class="built_in">get_rows</span>()||channels!=p.<span class="built_in">get_channels</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">invalid_argument</span>(</span><br><span class="line">                <span class="string">&quot;Invalid Argument Exception: The size and channel number of two matrix should be the same.\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        result_type *NewArr = <span class="keyword">new</span> result_type[<span class="built_in">size</span>()]&#123;&#125;;</span><br><span class="line">        <span class="type">size_t</span> it = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (matrix::channel_number ch = <span class="number">1</span>; ch &lt;= channels; ch++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">size_t</span> r = <span class="number">1</span>; r &lt;= rows; r++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">size_t</span> c = <span class="number">1</span>; c &lt;= cols; c++)</span><br><span class="line">                &#123;</span><br><span class="line">                    NewArr[it++] = <span class="built_in">binary_function</span>(<span class="built_in">at</span>(r, c, ch), p.<span class="built_in">at</span>(r, c, ch));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">matrix</span>&lt;result_type&gt;(rows, cols, NewArr, channels);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">catch</span> (std::bad_alloc &amp;e)</span><br><span class="line">    &#123;</span><br><span class="line">        std::cerr &lt;&lt; <span class="string">&quot;Bad Alloc Exception: Failed to allocate memory of the given length &quot;</span> &lt;&lt; <span class="built_in">size</span>() &lt;&lt; <span class="string">&quot;\n&quot;</span>;</span><br><span class="line">        <span class="keyword">throw</span> std::<span class="built_in">bad_alloc</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="其他功能"><a href="#其他功能" class="headerlink" title="其他功能"></a>其他功能</h3><p>没有太多技术含量，包含了开发过程中为了方便而实现的中间产物等。</p>
+<ul>
+<li>data和matrix的硬拷贝：copy_to以及clone，总归是有用到它们的一天（</li>
+<li>data的重构中括号，==以及equals</li>
+<li>矩阵的getters，因为不同模板类间私有成员不可见</li>
+<li>矩阵的单个元素赋值set以及区域赋值fill，都可以轻易通过重载后的括号手动实现</li>
+<li>矩阵输出流<code>&lt;&lt;</code>的重载</li>
+<li>矩阵的转置</li>
+</ul>
+<h2 id="Part-3-Result-amp-Verification"><a href="#Part-3-Result-amp-Verification" class="headerlink" title="Part 3 - Result &amp; Verification"></a>Part 3 - Result &amp; Verification</h2><p>本项目的测试用程序为<code>./src/benchmark.cpp</code>，以下测试结果均由矩阵计算器验证正确。</p>
+<p>由于本项目并未使用跨平台时存在差异的内容，各组测试在开发板上运行结果一致，此处不做重复展示。</p>
+<h3 id="Testcase-1-创建矩阵，跨类型的乘法"><a href="#Testcase-1-创建矩阵，跨类型的乘法" class="headerlink" title="Testcase #1 创建矩阵，跨类型的乘法"></a>Testcase #1 创建矩阵，跨类型的乘法</h3><p>三个通道的<code>4*4</code>整型矩阵<code>i_4_4_3</code>和三通道的<code>4*1 char</code>向量相乘</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *i_4_4_3 = <span class="keyword">new</span> <span class="type">int</span>[]</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">                <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>,</span><br><span class="line">                <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>,</span><br><span class="line"></span><br><span class="line">                <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>,</span><br><span class="line">                <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>,</span><br><span class="line">                <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>,</span><br><span class="line">                <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">27</span>,</span><br><span class="line"></span><br><span class="line">                <span class="number">28</span>, <span class="number">29</span>, <span class="number">30</span>, <span class="number">31</span>,</span><br><span class="line">                <span class="number">32</span>, <span class="number">33</span>, <span class="number">34</span>, <span class="number">35</span>,</span><br><span class="line">                <span class="number">36</span>, <span class="number">37</span>, <span class="number">38</span>, <span class="number">39</span>,</span><br><span class="line">                <span class="number">40</span>, <span class="number">41</span>, <span class="number">42</span>, <span class="number">43</span>,</span><br><span class="line">                <span class="number">44</span>, <span class="number">45</span>, <span class="number">46</span>, <span class="number">47</span></span><br><span class="line">        &#125;;</span><br><span class="line"><span class="type">char</span> *uc_4_1_3 = <span class="keyword">new</span> <span class="type">char</span>[]</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="number">48</span>, <span class="number">49</span>, <span class="number">48</span>, <span class="number">49</span>,</span><br><span class="line">                <span class="number">49</span>, <span class="number">48</span>, <span class="number">49</span>, <span class="number">48</span>,</span><br><span class="line">                <span class="number">48</span>, <span class="number">48</span>, <span class="number">48</span>, <span class="number">48</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">matrix&lt;<span class="type">int</span>&gt; <span class="title">i443</span><span class="params">(<span class="number">4</span>, <span class="number">4</span>, i_4_4_3, <span class="number">3</span>)</span></span>;</span><br><span class="line">    <span class="function">matrix&lt;<span class="type">char</span>&gt; <span class="title">uc413</span><span class="params">(<span class="number">4</span>, <span class="number">1</span>, uc_4_1_3, <span class="number">3</span>)</span></span>;</span><br><span class="line">    cout &lt;&lt; i443 &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; uc413 &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; i443 * uc413 &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/12/18/Fwjtcd83zkGHAgR.png" alt="image.png" style="zoom:50%;" /></p>
+<h3 id="Testcase-2-矩形ROI，软拷贝与内存管理"><a href="#Testcase-2-矩形ROI，软拷贝与内存管理" class="headerlink" title="Testcase #2 矩形ROI，软拷贝与内存管理"></a>Testcase #2 矩形ROI，软拷贝与内存管理</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> *f = <span class="keyword">new</span> <span class="type">float</span>[]</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>,</span><br><span class="line">                <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>,</span><br><span class="line">                <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>,</span><br><span class="line">                <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>,</span><br><span class="line">                <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span></span><br><span class="line">        &#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">matrix&lt;<span class="type">float</span>&gt; <span class="title">f55</span><span class="params">(<span class="number">5</span>, <span class="number">5</span>, f)</span></span>;</span><br><span class="line">    <span class="function">matrix&lt;<span class="type">float</span>&gt; <span class="title">sub</span><span class="params">(f55,<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">4</span>)</span></span>;</span><br><span class="line">    <span class="comment">//submatrix</span></span><br><span class="line">    cout&lt;&lt;<span class="built_in">sub</span>(<span class="number">2</span>,<span class="number">2</span>)&lt;&lt;endl;</span><br><span class="line">    <span class="comment">//modify the data shared by two matrices</span></span><br><span class="line">    <span class="built_in">f55</span>(<span class="number">3</span>,<span class="number">3</span>)=<span class="number">1.2</span>;</span><br><span class="line">    cout&lt;&lt;<span class="built_in">sub</span>(<span class="number">2</span>,<span class="number">2</span>)&lt;&lt;endl;</span><br><span class="line">    <span class="comment">//delete the paraent matrix</span></span><br><span class="line">    f55.~<span class="built_in">matrix</span>();</span><br><span class="line">    cout&lt;&lt;<span class="built_in">sub</span>(<span class="number">2</span>,<span class="number">2</span>)&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/12/18/j4zUN8Z2ESCveI5.png" alt="image.png" style="zoom:50%;" /></p>
+<p>可以看到两个矩阵的确共用一块数据，并且在析构其中一个之后不影响另一个访问这块数据。</p>
+<p>且经过在析构函数中输出ref_count检查，确认该项目不会存在内存的多次释放或是内存泄漏问题。</p>
+<h3 id="Testcase-3-掩膜ROI"><a href="#Testcase-3-掩膜ROI" class="headerlink" title="Testcase #3 掩膜ROI"></a>Testcase #3 掩膜ROI</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">float</span> *f = <span class="keyword">new</span> <span class="type">float</span>[]</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>,</span><br><span class="line">                <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>,</span><br><span class="line">                <span class="number">10</span>, <span class="number">11</span>, <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>,</span><br><span class="line">                <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>,</span><br><span class="line">                <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span></span><br><span class="line">        &#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">matrix&lt;<span class="type">float</span>&gt; <span class="title">f55</span><span class="params">(<span class="number">5</span>, <span class="number">5</span>, f)</span></span>;</span><br><span class="line">    <span class="function">matrix&lt;<span class="type">bool</span>&gt; <span class="title">b55</span><span class="params">(<span class="number">5</span>,<span class="number">5</span>,<span class="literal">true</span>)</span></span>;</span><br><span class="line">    b55.<span class="built_in">fill</span>(<span class="number">2</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">4</span>, <span class="literal">false</span>);</span><br><span class="line">    <span class="function">matrix&lt;<span class="type">float</span>&gt; <span class="title">sub</span><span class="params">(<span class="number">5</span>,<span class="number">5</span>,<span class="number">6.6f</span>)</span></span>;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;before:\n&quot;</span>&lt;&lt;sub&lt;&lt;endl;</span><br><span class="line">    f55.<span class="built_in">copy_to</span>(sub,b55);</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;after:\n&quot;</span>&lt;&lt;sub&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/12/18/pSGhUAc7Fy2IlZ5.png" alt="image.png" style="zoom:50%;" /></p>
+<h3 id="Testcase-4-通道拆分与自定义运算"><a href="#Testcase-4-通道拆分与自定义运算" class="headerlink" title="Testcase #4 通道拆分与自定义运算"></a>Testcase #4 通道拆分与自定义运算</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *i_4_4_3 = <span class="keyword">new</span> <span class="type">int</span>[]</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">                <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>,</span><br><span class="line">                <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>,</span><br><span class="line"></span><br><span class="line">                <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>,</span><br><span class="line">                <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>,</span><br><span class="line">                <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>,</span><br><span class="line">                <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">27</span>,</span><br><span class="line"></span><br><span class="line">                <span class="number">28</span>, <span class="number">29</span>, <span class="number">30</span>, <span class="number">31</span>,</span><br><span class="line">                <span class="number">32</span>, <span class="number">33</span>, <span class="number">34</span>, <span class="number">35</span>,</span><br><span class="line">                <span class="number">36</span>, <span class="number">37</span>, <span class="number">38</span>, <span class="number">39</span>,</span><br><span class="line">                <span class="number">40</span>, <span class="number">41</span>, <span class="number">42</span>, <span class="number">43</span>,</span><br><span class="line">                <span class="number">44</span>, <span class="number">45</span>, <span class="number">46</span>, <span class="number">47</span></span><br><span class="line">        &#125;;</span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">HALF</span><span class="params">(<span class="type">int</span> p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> p/<span class="number">2.0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">float</span> <span class="title">DOUBLE</span><span class="params">(<span class="type">int</span> p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> p*<span class="number">2.0f</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    matrix&lt;<span class="type">int</span>&gt;<span class="built_in">main</span>(<span class="number">4</span>,<span class="number">4</span>,i_4_4_3,<span class="number">3</span>);</span><br><span class="line">    matrix&lt;<span class="type">float</span>&gt;double_red=main.<span class="built_in">split_channel</span>(<span class="number">1</span>).<span class="built_in">unary_calc</span>(DOUBLE);</span><br><span class="line">    matrix&lt;<span class="type">int</span>&gt;green=main.<span class="built_in">split_channel</span>(<span class="number">2</span>);</span><br><span class="line">    matrix&lt;<span class="type">double</span>&gt;half_blue=main.<span class="built_in">split_channel</span>(<span class="number">3</span>).<span class="built_in">unary_calc</span>(HALF);</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;double_red\n&quot;</span>&lt;&lt;double_red&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;green\n&quot;</span>&lt;&lt;green&lt;&lt;endl;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;half_blue\n&quot;</span>&lt;&lt;half_blue&lt;&lt;endl;</span><br><span class="line">    matrix&lt;<span class="type">double</span>&gt;sum=double_red+green+half_blue;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;sum\n&quot;</span>&lt;&lt;sum&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/12/18/ktnxOPo5Tqcymaf.png" alt="image.png" style="zoom:50%;" /></p>
+<p>三种类型存储，红色加倍，绿色不变，蓝色减半，三者相加。</p>
+<h3 id="Testcase-5-自定义二元运算生成矩阵"><a href="#Testcase-5-自定义二元运算生成矩阵" class="headerlink" title="Testcase #5 自定义二元运算生成矩阵"></a>Testcase #5 自定义二元运算生成矩阵</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *i_4_4_3 = <span class="keyword">new</span> <span class="type">int</span>[]</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>,</span><br><span class="line">                <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>,</span><br><span class="line">                <span class="number">8</span>, <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>,</span><br><span class="line"></span><br><span class="line">                <span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>,</span><br><span class="line">                <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>,</span><br><span class="line">                <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>,</span><br><span class="line">                <span class="number">24</span>, <span class="number">25</span>, <span class="number">26</span>, <span class="number">27</span>,</span><br><span class="line"></span><br><span class="line">                <span class="number">28</span>, <span class="number">29</span>, <span class="number">30</span>, <span class="number">31</span>,</span><br><span class="line">                <span class="number">32</span>, <span class="number">33</span>, <span class="number">34</span>, <span class="number">35</span>,</span><br><span class="line">                <span class="number">36</span>, <span class="number">37</span>, <span class="number">38</span>, <span class="number">39</span>,</span><br><span class="line">                <span class="number">40</span>, <span class="number">41</span>, <span class="number">42</span>, <span class="number">43</span>,</span><br><span class="line">                <span class="number">44</span>, <span class="number">45</span>, <span class="number">46</span>, <span class="number">47</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">greater_than</span><span class="params">(<span class="type">int</span> x, <span class="type">float</span> y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((<span class="type">float</span>) x) &gt; y;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> *f=<span class="keyword">new</span> <span class="type">float</span>[<span class="number">48</span>]&#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">48</span>;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        f[i]=i%<span class="number">2</span>?<span class="number">48.0</span>:<span class="number">-1.0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">matrix&lt;<span class="type">int</span>&gt; <span class="title">X</span><span class="params">(<span class="number">4</span>, <span class="number">4</span>, i_4_4_3, <span class="number">3</span>)</span></span>;</span><br><span class="line">    <span class="function">matrix&lt;<span class="type">float</span>&gt; <span class="title">Y</span><span class="params">(<span class="number">4</span>, <span class="number">4</span>, f,<span class="number">3</span>)</span></span>;</span><br><span class="line">    matrix&lt;<span class="type">bool</span>&gt; R=X.<span class="built_in">binary_calc</span>(Y, greater_than);</span><br><span class="line">    cout&lt;&lt;R&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/12/18/K3TdByV8M9bIJ4k.png" alt="image.png" style="zoom:50%;" /></p>
+<p>有两列Y&gt;=X，其他X&gt;Y</p>
+<h3 id="Testcase-Bonus-🎁"><a href="#Testcase-Bonus-🎁" class="headerlink" title="Testcase Bonus: 🎁"></a>Testcase Bonus: 🎁</h3><p>不知道从谁那里学来的方法(？)测试时去除了输出流的逗号和制表符:)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">string *explore = <span class="keyword">new</span> string[]</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="string">&quot;Th&quot;</span>, <span class="string">&quot;mor&quot;</span>, <span class="string">&quot;earn &quot;</span>, <span class="string">&quot;t C&quot;</span>, <span class="string">&quot;th&quot;</span>, <span class="string">&quot;re ig&quot;</span>, <span class="string">&quot;t I f&quot;</span>,</span><br><span class="line">                <span class="string">&quot;Th&quot;</span>, <span class="string">&quot; you v&quot;</span>, <span class="string">&quot;muc&quot;</span>, <span class="string">&quot;for &quot;</span>, <span class="string">&quot;r dedic&quot;</span>, <span class="string">&quot;eachin&quot;</span>, <span class="string">&quot;is cou&quot;</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">string *perseverance = <span class="keyword">new</span> string[]</span><br><span class="line">        &#123;</span><br><span class="line">                <span class="string">&quot;e &quot;</span>, <span class="string">&quot;e I l&quot;</span>, <span class="string">&quot;abou&quot;</span>, <span class="string">&quot;++, &quot;</span>, <span class="string">&quot;e mo&quot;</span>, <span class="string">&quot;noran&quot;</span>, <span class="string">&quot;eel&quot;</span>,</span><br><span class="line">                <span class="string">&quot;ank&quot;</span>, <span class="string">&quot;ery &quot;</span>, <span class="string">&quot;h &quot;</span>, <span class="string">&quot;you&quot;</span>, <span class="string">&quot;ation in t&quot;</span>, <span class="string">&quot;g th&quot;</span>, <span class="string">&quot;rse&quot;</span></span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> CS_205 (CS + _205)</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">matrix&lt;string&gt; <span class="title">CS</span><span class="params">(<span class="number">2</span>, <span class="number">7</span>, explore)</span></span>;</span><br><span class="line">    matrix&lt;string&gt; _205(<span class="number">2</span>, <span class="number">7</span>, perseverance);</span><br><span class="line">    cout &lt;&lt; CS_205;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://s2.loli.net/2022/12/18/oDMiHWk8xXLcfJG.png" alt="image.png"></p>
+<h2 id="Part-4-Difficulties-amp-Solutions"><a href="#Part-4-Difficulties-amp-Solutions" class="headerlink" title="Part 4 - Difficulties &amp; Solutions"></a>Part 4 - Difficulties &amp; Solutions</h2><h3 id="Difficulty-I-内存管理"><a href="#Difficulty-I-内存管理" class="headerlink" title="Difficulty I 内存管理"></a>Difficulty I 内存管理</h3><p>题目要求避免硬拷贝，而且要做好内存管理，避免内存泄漏和多重删除。</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>本项目根据上课所述，使用了<code>ref_count</code>，<code>Step</code>等措施辅助内存管理，实现了上述目标，但根据实际应用场景，仍然实现了部分常用的硬拷贝函数，以避免对原数据进行修改导致多个矩阵的数据受到牵连。</p>
+<h3 id="Difficulty-II-可拓展性"><a href="#Difficulty-II-可拓展性" class="headerlink" title="Difficulty II 可拓展性"></a>Difficulty II 可拓展性</h3><p>既然用了类模板，那么各种各样的跨类别、重载等问题就会如潮水一样涌来。</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><p>实际上我很清楚要完全做到这个库让人使用舒适，肯定是十分困难的事，因为用户可能的调用方法太多，有些难以用概括性(拓展性强)的写法容纳，所以只能尽可能地为用户提供自由度了，深切感谢<code>decltype</code>这一C++ 11的新特性，简直救人于水火之中。</p>
+<p>比如项目中的跨类别赋值、运算、自定义比较与运算，都是经过反复调试和思考可能的调用方式后打补丁而成的。</p>
+<h3 id="Difficulty-III-OpenCV-mat"><a href="#Difficulty-III-OpenCV-mat" class="headerlink" title="Difficulty III OpenCV::mat?"></a>Difficulty III OpenCV::mat?</h3><p>前人的脚步已经走出太远，光是理解<code>mat.h</code>头文件的一部分就非常消耗时间和精力，而当实现ROI时，那种用户只需要给好参数，库会帮你解决一切的全能和自己写出来的完全是天壤之别。</p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h3><p>这貌似不是一个短期内看上去可以解决的问题，要实现那样的效果，还缺少包括但不限于图论、几何等的前置知识，只能日后慢慢勤以补拙了，这次的可扩展性倒是让自己还算满意，非常自由。</p>
+<p>希望以后也能加入到这样的一个项目里，为高楼大厦做一点微小的工作吧。</p>
+<h2 id="Part-5-Summary"><a href="#Part-5-Summary" class="headerlink" title="Part 5 - Summary"></a>Part 5 - Summary</h2><p>感谢您能读到这里。</p>
+<p>关于本次项目的总结，言简意赅来讲就是把类模板<strong>弄明白了又弄糊涂了</strong>。</p>
+<p>学了一学期C/C++，和上于老师的数据库一样，真的是越学越不会了(悲)，真的很喜欢这种上课风格。</p>
+<p>一学期5个单人Projects，确实比大一感觉要繁忙许多，和朋友调侃的时候也总会提起自己这学期似乎一直“泡在Project里”。查了很多，翻了很多，熬了很多，但其实，学得还不够多。</p>
+<p>在做Project的时候经常性地会把自己的项目和其他人的作比较，再进行完善，有时候会觉得好像没有必要做到这一步，但看到程序正常运行的时候还是会非常欣慰的，希望这样的感觉能稍微浸润到生活的其他方面吧。</p>
+<p>最后的最后，诚挚感谢于老师、廖老师以及助教等为课程开展付出努力的人们！辛苦了！</p>
+<p><img src="https://s2.loli.net/2022/12/18/oDMiHWk8xXLcfJG.png" alt="image.png"></p>
+<h1 id="完结撒花-○´∀-ﾉ🌺"><a href="#完结撒花-○´∀-ﾉ🌺" class="headerlink" title="完结撒花 (○´∀`)ﾉ🌺"></a>完结撒花 (○´∀`)ﾉ🌺</h1>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/27/MA212_Probability_Statistics_Final/" rel="prev" title="MA212 概率论与数理统计 期末复习">
+      <i class="fa fa-chevron-left"></i> MA212 概率论与数理统计 期末复习
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-0-%E5%9B%A2%E9%98%9F%E6%88%90%E5%91%98"><span class="nav-number">1.</span> <span class="nav-text">Part 0. 团队成员</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">项目结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-1-Analysis"><span class="nav-number">2.</span> <span class="nav-text">Part 1 - Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E9%87%8D%E8%BF%B0-amp-%E4%B8%BB%E8%A6%81%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">题目重述&amp;主要思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%81%87%E8%AE%BE"><span class="nav-number">2.2.</span> <span class="nav-text">模型假设</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-2-Code"><span class="nav-number">3.</span> <span class="nav-text">Part 2 - Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E6%95%B0%E6%8D%AE%E7%B1%BB"><span class="nav-number">3.1.</span> <span class="nav-text">矩阵数据类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E7%B1%BB"><span class="nav-number">3.2.</span> <span class="nav-text">矩阵类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#data"><span class="nav-number">3.3.1.</span> <span class="nav-text">data</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#matrix"><span class="nav-number">3.3.2.</span> <span class="nav-text">matrix</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">3.4.</span> <span class="nav-text">内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0"><span class="nav-number">3.5.</span> <span class="nav-text">类型转换函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E8%B5%8B%E5%80%BC%E7%AC%A6"><span class="nav-number">3.6.</span> <span class="nav-text">重载赋值符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROI"><span class="nav-number">3.7.</span> <span class="nav-text">ROI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E5%BD%A2ROI"><span class="nav-number">3.7.1.</span> <span class="nav-text">矩形ROI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8E%A9%E8%86%9CROI"><span class="nav-number">3.7.2.</span> <span class="nav-text">掩膜ROI</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%9A%E9%81%93%E6%8F%90%E5%8F%96"><span class="nav-number">3.7.3.</span> <span class="nav-text">通道提取</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD-%E4%B8%8E%E6%AF%94%E8%BE%83"><span class="nav-number">3.8.</span> <span class="nav-text">重载&#x3D;&#x3D;与比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E5%8A%A0%E5%87%8F%E4%B9%98"><span class="nav-number">3.9.</span> <span class="nav-text">重载加减乘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%83%B3%E8%87%AA%E5%B7%B1%E5%8A%A8%E6%89%8B%EF%BC%9F%E6%B2%A1%E9%97%AE%E9%A2%98%EF%BC%81"><span class="nav-number">3.10.</span> <span class="nav-text">想自己动手？没问题！</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8A%9F%E8%83%BD"><span class="nav-number">3.11.</span> <span class="nav-text">其他功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-3-Result-amp-Verification"><span class="nav-number">4.</span> <span class="nav-text">Part 3 - Result &amp; Verification</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Testcase-1-%E5%88%9B%E5%BB%BA%E7%9F%A9%E9%98%B5%EF%BC%8C%E8%B7%A8%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%B9%98%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">Testcase #1 创建矩阵，跨类型的乘法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testcase-2-%E7%9F%A9%E5%BD%A2ROI%EF%BC%8C%E8%BD%AF%E6%8B%B7%E8%B4%9D%E4%B8%8E%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">4.2.</span> <span class="nav-text">Testcase #2 矩形ROI，软拷贝与内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testcase-3-%E6%8E%A9%E8%86%9CROI"><span class="nav-number">4.3.</span> <span class="nav-text">Testcase #3 掩膜ROI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testcase-4-%E9%80%9A%E9%81%93%E6%8B%86%E5%88%86%E4%B8%8E%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BF%90%E7%AE%97"><span class="nav-number">4.4.</span> <span class="nav-text">Testcase #4 通道拆分与自定义运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testcase-5-%E8%87%AA%E5%AE%9A%E4%B9%89%E4%BA%8C%E5%85%83%E8%BF%90%E7%AE%97%E7%94%9F%E6%88%90%E7%9F%A9%E9%98%B5"><span class="nav-number">4.5.</span> <span class="nav-text">Testcase #5 自定义二元运算生成矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testcase-Bonus-%F0%9F%8E%81"><span class="nav-number">4.6.</span> <span class="nav-text">Testcase Bonus: 🎁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-4-Difficulties-amp-Solutions"><span class="nav-number">5.</span> <span class="nav-text">Part 4 - Difficulties &amp; Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Difficulty-I-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">5.1.</span> <span class="nav-text">Difficulty I 内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">5.2.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Difficulty-II-%E5%8F%AF%E6%8B%93%E5%B1%95%E6%80%A7"><span class="nav-number">5.3.</span> <span class="nav-text">Difficulty II 可拓展性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1"><span class="nav-number">5.4.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Difficulty-III-OpenCV-mat"><span class="nav-number">5.5.</span> <span class="nav-text">Difficulty III OpenCV::mat?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2"><span class="nav-number">5.6.</span> <span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-5-Summary"><span class="nav-number">6.</span> <span class="nav-text">Part 5 - Summary</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%8C%E7%BB%93%E6%92%92%E8%8A%B1-%E2%97%8B%C2%B4%E2%88%80-%EF%BE%89%F0%9F%8C%BA"><span class="nav-number"></span> <span class="nav-text">完结撒花 (○´∀&#96;)ﾉ🌺</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>
