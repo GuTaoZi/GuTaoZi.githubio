@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/12/30/xOTFlhpsguVoaZD.jpg">
 <meta property="article:published_time" content="2022-11-27T14:07:11.860Z">
-<meta property="article:modified_time" content="2022-12-30T03:41:54.076Z">
+<meta property="article:modified_time" content="2022-12-30T07:49:35.890Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Probability &amp; Statistics">
 <meta name="twitter:card" content="summary">
@@ -199,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-30 11:41:54" itemprop="dateModified" datetime="2022-12-30T11:41:54+08:00">2022-12-30</time>
+                <time title="修改时间：2022-12-30 15:49:35" itemprop="dateModified" datetime="2022-12-30T15:49:35+08:00">2022-12-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -325,7 +325,7 @@
 <p><strong>均方误差</strong>：对于线性近似$\hat Y=a+bX$，均方误差$e=E[(Y-\hat Y)^2]$</p>
 <p>$e_{min}=Var(Y)(1-\rho^2_{XY})$，此时$b_0=\frac{Cov(X,Y)}{Var(X)}$，$a_0=E(Y)-b_0E(X)$</p>
 <p><strong>相关</strong>：正相关，负相关，不相关。不相关不一定独立，独立一定不相关。</p>
-<p><strong>协方差矩阵</strong>：对于n维r.v.$\{X_n\}$，记$c_{ij}=Cov(X_i,X_j)\ (i,j=1,2,…,n)$</p>
+<p><strong>协方差矩阵</strong>：对于n维r.v.$\{X_n\}$，记$c_{ij}=Cov(X_i,X_j)\ (i,j=1,2,\cdots,n)$</p>
 <p>将$c_{ij}$写成矩阵的形式$C$，则称其为$\{X_n\}$的协方差矩阵。协方差矩阵为<strong>非负定对称阵</strong>。</p>
 <p><strong>n维正态r.v.</strong>：令</p>
 <script type="math/tex; mode=display">X=\left[\begin{array}{c}
@@ -345,12 +345,12 @@ c_{21} & c_{22} & \cdots & c_{2 n} \\
 c_{n 1} & c_{n 2} & \cdots & c_{n n}
 \end{array}\right]</script><p>其中$C$为n阶正定矩阵，若n维r.v.$\{X_n\}$的密度函数为</p>
 <p>$f\left(x_{1}, x_{2}, \cdots, x_{n}\right)=\frac{1}{(2 \pi)^{n / 2}|C|^{1 / 2}} \exp \left\{-\frac{1}{2}(X-\mu)^{T} C^{-1}(X-\mu)\right\}$</p>
-<p>则称$\{X_n\}$服从参数为$(\mu,C)$的n维正态分布，记为$(X_1,X_2,…,X_n)\sim \mathbf N(\mu,C)$。</p>
+<p>则称$\{X_n\}$服从参数为$(\mu,C)$的n维正态分布，记为$(X_1,X_2,\cdots,X_n)\sim \mathbf N(\mu,C)$。</p>
 <p><strong>n维正态r.v.的重要性质</strong>：</p>
 <ul>
 <li><p>$\mu$称为均值向量，$C$为协方差矩阵，对角线为对应r.v.方差。</p>
 </li>
-<li><p>$X_i\sim\mathbf N(\mu_i,c_{ii}),\ (i=1,2,…,n)$，反之若$\{X_n\}$相互独立且$X_i\sim\mathbf N(\mu_i,\sigma_i^2),\ (i=1,2,…,n)$，则</p>
+<li><p>$X_i\sim\mathbf N(\mu_i,c_{ii}),\ (i=1,2,\cdots,n)$，反之若$\{X_n\}$相互独立且$X_i\sim\mathbf N(\mu_i,\sigma_i^2),\ (i=1,2,\cdots,n)$，则</p>
 <p>$\{X_n\}\sim\mathbf N(\mu,C)$，其中$\mu=[\mu1\ \mu2\ …\ \mu_n]^T$，$C=diag\{\sigma_1^2\ \sigma_2^2\ …\ \sigma_n^2\ \}$</p>
 </li>
 <li><p>若$\{X_n\}\sim\mathbf N(\mu,C)$，则$\{X_n\}$的任一线性组合$\sum\limits_{k=1}^{n}l_iX_i$服从一维正态分布</p>
@@ -363,7 +363,7 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <h2 id="§4-4-条件期望"><a href="#§4-4-条件期望" class="headerlink" title="§4.4 条件期望"></a>§4.4 条件期望</h2><p>不考，不过明明是很重要的内容来着。</p>
 <h2 id="4-x-常用分布的分布及数字特征"><a href="#4-x-常用分布的分布及数字特征" class="headerlink" title="4.x 常用分布的分布及数字特征"></a>4.x 常用分布的分布及数字特征</h2><p><img src="https://s2.loli.net/2022/12/30/xOTFlhpsguVoaZD.jpg" alt="常用分布的分布及数字特征.jpg"  /></p>
 <h1 id="Chapter-5"><a href="#Chapter-5" class="headerlink" title="Chapter 5"></a>Chapter 5</h1><h2 id="§5-1-大数定律"><a href="#§5-1-大数定律" class="headerlink" title="§5.1 大数定律"></a>§5.1 大数定律</h2><p><strong>依概率收敛</strong>：</p>
-<p>设$\xi,\xi_1,\xi_2,…,\xi_n,…$是一系列r.v.，若$\forall\varepsilon&gt;0$，有$\lim\limits_{n→\infty}P\{|\xi_n-\xi|\ge \varepsilon\}=0$，则称$\{\xi_n\}$依概率收敛于$\xi$，记为$\xi_{n} \stackrel{P}{\longrightarrow} \xi $。</p>
+<p>设$\xi,\xi_1,\xi_2,\cdots,\xi_n,…$是一系列r.v.，若$\forall\varepsilon&gt;0$，有$\lim\limits_{n→\infty}P\{|\xi_n-\xi|\ge \varepsilon\}=0$，则称$\{\xi_n\}$依概率收敛于$\xi$，记为$\xi_{n} \stackrel{P}{\longrightarrow} \xi $。</p>
 <ul>
 <li>$\lim\limits_{n→\infty}P\{|\xi_n-\xi|\ge \varepsilon\}=0⇌\lim\limits_{n→\infty}P\{|\xi_n-\xi|&lt; \varepsilon\}=1$</li>
 <li>随着n的增大，绝对误差$|\xi_n-\xi|$较大的可能性越来越小</li>
@@ -391,6 +391,58 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <p>设$\{\eta_n\}$为服从参数为$n,p(0&lt;p&lt;1)$的二项分布r.v.列，则对任意$x$有</p>
 <p>$\lim _{n \rightarrow \infty} P\left\{\frac{\eta_{n}-n p}{\sqrt{n p(1-p)}} \leq x\right\}=\int_{-\infty}^{x} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t=\Phi(x)$</p>
 <p>对于r.v.$\eta_n\sim \mathbf b(n,p)\ (n=1,2,…)$，有$\frac{\eta_{n}-n p}{\sqrt{n p(1-p)}}\overset{近似}\sim\mathbf N(0,1)$，于是当$n$充分大时，可以认为$\eta_n\overset{近似}\sim\mathbf N(np,np(1-p))$</p>
+<h1 id="Chapter-6"><a href="#Chapter-6" class="headerlink" title="Chapter 6"></a>Chapter 6</h1><h2 id="§6-2-数理统计：基本概念"><a href="#§6-2-数理统计：基本概念" class="headerlink" title="§6.2 数理统计：基本概念"></a>§6.2 数理统计：基本概念</h2><p><strong>简单随机抽样</strong>：</p>
+<p>在相同条件下对总体$X$进行$n$次重复、独立观察。要求各次取样结果互不影响，每次取出的样品与总体有相同的分布，满足这两条性质的样本称为简单随机样本。</p>
+<p><strong>样本均值</strong>：$\bar X=\frac{1}{n}\sum\limits_{i=1}^{n}X_i$</p>
+<p><strong>样本方差</strong>：$S^2=\frac{1}{n-1}\sum\limits_{i=1}^{n}(X_i-\bar X)^2$</p>
+<p><strong>样本标准差</strong>：$S=\sqrt{\frac{1}{n-1}\sum\limits_{i=1}^{n}(X_i-\bar X)^2}$</p>
+<p><strong>样本k阶矩</strong>：$A_k=\frac{1}{n}\sum\limits_{i=1}^{n}X_i^k$</p>
+<p><strong>样本k阶中心距</strong>：$B_k=\frac{1}{n}\sum\limits_{i=1}^{n}(X_i-\bar X)^k$</p>
+<p><strong>顺序统计量</strong>：$X_{(1)},X_{(2)},\cdots,X_{(n)}$</p>
+<p><strong>极小值</strong>：$X_{(1)}=min\{X_1,X_2,\cdots,X_n\}$</p>
+<p><strong>极大值</strong>：$X_{(n)}=max\{X_1,X_2,\cdots,X_n\}$</p>
+<p><strong>样本矩的特征</strong>：设$\{X_n\}$为来自总体$X\sim F(x)$的样本，总体k阶矩$\mu_k\overset{\Delta}=E(X^k)$都存在，则</p>
+<ul>
+<li>$X_1^k,X_2^k,\cdots,X_n^k$独立，与$X^k$同分布</li>
+<li>$E(A_k)=\frac{1}{n}\sum\limits_{i=1}^{n}E(X_i^k)=\frac{1}{n}\sum\limits_{i=1}^{n}E(X^k)=\mu_k$</li>
+<li>由辛钦大数定律，$n→\infty$时，$A_k\stackrel{P}{\longrightarrow}\mu_k$，连续函数$g(A_1,A_2,\cdots,A_k)\stackrel{P}{\longrightarrow}g(\mu_1,\mu_2,\cdots,\mu_k)$</li>
+</ul>
+<p><strong>样本均值与样本方差的数字特征</strong>：$E(\bar X)=\mu$，$Var(\bar X)=\frac{\sigma^2}{n}$，$E(S^2)=\sigma^2$</p>
+<h2 id="§6-3-抽样分布"><a href="#§6-3-抽样分布" class="headerlink" title="§6.3 抽样分布"></a>§6.3 抽样分布</h2><p><strong>$\mathcal X^2$-分布</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(0,1)$的样本，令</p>
+<script type="math/tex; mode=display">\mathcal {X}^2=X_1^2+X_2^2+\cdots+X_n^2</script><p>称$\mathcal {X}^2$服从自由度为$n$的$\mathcal X^2$-分布，记为$\mathcal {X}^2\sim\mathcal X^2(n)$。</p>
+<p><strong>$\mathcal X^2$-分布的可加性</strong>：</p>
+<p>设$\mathcal X_1^2\sim\mathcal X^2(n_1)$，$\mathcal X_2^2\sim\mathcal X^2(n_2)$且相互独立，则$\mathcal X_1^2+\mathcal X_2^2\sim\mathcal X^2(n_1+n_2)$</p>
+<p><strong>$\mathcal X^2$-分布的数字特征</strong>：</p>
+<p>设$\mathcal X^2\sim\mathcal X^2(n)$，则$E(\mathcal X^2)=n$，$Var(\mathcal X^2)=2n$</p>
+<p><strong>$t$-分布</strong>：</p>
+<p>设$X\sim\mathbf N(0,1)$，$Y\sim\mathcal X^2(n)$，且$X,Y$相互独立，令</p>
+<script type="math/tex; mode=display">t=\frac{X}{\sqrt{Y/n}}</script><p>称$t$服从自由度为$n$的$t$-分布，记为$t\sim t(n)$。当$n$较大时，可以认为$t(n)=N(0,1)$</p>
+<p><strong>$F$-分布</strong>：</p>
+<p>设$U\sim\mathcal X^2(n_1)$，$V\sim\mathcal X^2(n_2)$，且$U,V$相互独立，令</p>
+<script type="math/tex; mode=display">F=\frac{U/n_1}{V/n_2}</script><p>称$F$服从自由度为$(n_1,n_2)$的$F$-分布，记为$F\sim F(n_1,n_2)$</p>
+<p><strong>$F$-分布的性质</strong>：</p>
+<ul>
+<li>若$F\sim F(n_1,n_2)$，则$\frac{1}{F}\sim F(n_2,n_1)$</li>
+<li>若$T\sim t(n)$，则$T^2\sim F(1,n)$。($t$-分布的平方服从$F$-分布)</li>
+</ul>
+<p><strong>$\alpha$分位点</strong>：</p>
+<p>设$X\sim f(x)$，若$\forall0&lt;\alpha&lt;1$，存在常数$x_\alpha$满足</p>
+<script type="math/tex; mode=display">P\{X\leq x_\alpha\}=\int_{-\infty}^{x_\alpha}f(x)dx=\alpha</script><p>则称$x_\alpha$为分布密度$f(x)$的$\alpha$分位点，也即$F(X_\alpha)=\alpha$</p>
+<ul>
+<li>$\mathbf N(0,1)$的$\alpha$分位点记为$u_\alpha$</li>
+<li>$t(n)$的$\alpha$分位点记为$t_\alpha(n)$</li>
+<li>$\mathcal X^2(n)$的$\alpha$分位点记为$\mathcal X^2_\alpha(n)$</li>
+<li>$F(n_1,n_2)$的$\alpha$分位点记为$F_\alpha(n_1,n_2)$</li>
+<li>三反公式：$F_\alpha(n_1,n_2)=\frac{1}{F_{1-\alpha}(n_2,n_1)}$</li>
+</ul>
+<p><strong>抽样分布定理一</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(\mu,\sigma^2)$的样本，则$\bar X\sim\mathbf N(\mu,\frac{\sigma^2}{n})$</p>
+<p><strong>抽样分布定理二</strong>：</p>
+<ol>
+<li>$\bar X$，$S^2$相互独立</li>
+<li>$\frac{}$</li>
+</ol>
 
     </div>
 
@@ -474,7 +526,7 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3"><span class="nav-number">1.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-6-%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">§3.6 联合分布随机变量函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-7-%E6%9E%81%E5%80%BC%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">§3.7 极值和顺序统计量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#r-v-%E6%9E%81%E5%80%BC%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">r.v.极值的分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4"><span class="nav-number">2.</span> <span class="nav-text">Chapter 4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-1-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.1.</span> <span class="nav-text">§4.1 随机变量的期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-2-%E6%96%B9%E5%B7%AE%E4%B8%8E%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">2.2.</span> <span class="nav-text">§4.2 方差与标准差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-3-%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">§4.3 协方差与相关系数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-4-%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.4.</span> <span class="nav-text">§4.4 条件期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-x-%E5%B8%B8%E7%94%A8%E5%88%86%E5%B8%83%E7%9A%84%E5%88%86%E5%B8%83%E5%8F%8A%E6%95%B0%E5%AD%97%E7%89%B9%E5%BE%81"><span class="nav-number">2.5.</span> <span class="nav-text">4.x 常用分布的分布及数字特征</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-5"><span class="nav-number">3.</span> <span class="nav-text">Chapter 5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-1-%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">§5.1 大数定律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-2-%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">§5.2 中心极限定理</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3"><span class="nav-number">1.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-6-%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">§3.6 联合分布随机变量函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-7-%E6%9E%81%E5%80%BC%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">§3.7 极值和顺序统计量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#r-v-%E6%9E%81%E5%80%BC%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">r.v.极值的分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4"><span class="nav-number">2.</span> <span class="nav-text">Chapter 4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-1-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.1.</span> <span class="nav-text">§4.1 随机变量的期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-2-%E6%96%B9%E5%B7%AE%E4%B8%8E%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">2.2.</span> <span class="nav-text">§4.2 方差与标准差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-3-%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">§4.3 协方差与相关系数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-4-%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.4.</span> <span class="nav-text">§4.4 条件期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-x-%E5%B8%B8%E7%94%A8%E5%88%86%E5%B8%83%E7%9A%84%E5%88%86%E5%B8%83%E5%8F%8A%E6%95%B0%E5%AD%97%E7%89%B9%E5%BE%81"><span class="nav-number">2.5.</span> <span class="nav-text">4.x 常用分布的分布及数字特征</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-5"><span class="nav-number">3.</span> <span class="nav-text">Chapter 5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-1-%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">§5.1 大数定律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-2-%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">§5.2 中心极限定理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-6"><span class="nav-number">4.</span> <span class="nav-text">Chapter 6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A76-2-%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">4.1.</span> <span class="nav-text">§6.2 数理统计：基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A76-3-%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83"><span class="nav-number">4.2.</span> <span class="nav-text">§6.3 抽样分布</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
