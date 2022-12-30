@@ -27,11 +27,13 @@
 <meta property="og:site_name" content="咕桃w！">
 <meta property="og:description" content="概统怎么这么多东西要背啊（绝望">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/12/30/xOTFlhpsguVoaZD.jpg">
 <meta property="article:published_time" content="2022-11-27T14:07:11.860Z">
-<meta property="article:modified_time" content="2022-12-29T14:00:52.273Z">
+<meta property="article:modified_time" content="2022-12-30T03:41:54.076Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Probability &amp; Statistics">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/12/30/xOTFlhpsguVoaZD.jpg">
 
 <link rel="canonical" href="https://gutaozi.github.io/2022/11/27/MA212_Probability_Statistics_Final/">
 
@@ -197,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-29 22:00:52" itemprop="dateModified" datetime="2022-12-29T22:00:52+08:00">2022-12-29</time>
+                <time title="修改时间：2022-12-30 11:41:54" itemprop="dateModified" datetime="2022-12-30T11:41:54+08:00">2022-12-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -284,7 +286,7 @@
 </ul>
 <p><strong>超几何分布等式</strong>：$N$件产品，$M$件次品，摸出次品个数的期望值(前置证明：每次摸中次品概率相同)</p>
 <p>$\sum\limits_{k=0}^{n}k\frac{C^k_MC^{n-k}_{N-M}}{C^n_N}=\frac{nM}{N}$</p>
-<h3 id="§4-2-方差与标准差"><a href="#§4-2-方差与标准差" class="headerlink" title="§4.2 方差与标准差"></a>§4.2 方差与标准差</h3><p><strong>方差</strong>：$Var(X)\overset{\Delta}=E[(X-E(X))^2]$</p>
+<h2 id="§4-2-方差与标准差"><a href="#§4-2-方差与标准差" class="headerlink" title="§4.2 方差与标准差"></a>§4.2 方差与标准差</h2><p><strong>方差</strong>：$Var(X)\overset{\Delta}=E[(X-E(X))^2]$</p>
 <p><strong>标准差</strong>：$\sqrt{Var(X)}$</p>
 <p><strong>方差的计算</strong>：$Var(X)=E(X^2)-[E(X)]^2$</p>
 <p><strong>方差的基本性质</strong>：</p>
@@ -298,10 +300,12 @@
 <p><strong>Chebyshev不等式</strong>：</p>
 <p>期望$\mu$、方差$\sigma^2$均存在，则$\forallε&gt;0$，有$P\{|X-\mu|\ge ε\}\leq\frac{\sigma^2}{ε^2}$</p>
 <p>证明用Markov不等式，$Y=(X-\mu)^2$，$E(Y)=\sigma^2$</p>
-<h3 id="§4-3-协方差与相关系数"><a href="#§4-3-协方差与相关系数" class="headerlink" title="§4.3 协方差与相关系数"></a>§4.3 协方差与相关系数</h3><p><strong>协方差</strong>：$Cov(X,Y)\overset{\Delta}=E[(X-E(X))(Y-E(Y))]=E(XY)-E(X)E(Y)$</p>
+<h2 id="§4-3-协方差与相关系数"><a href="#§4-3-协方差与相关系数" class="headerlink" title="§4.3 协方差与相关系数"></a>§4.3 协方差与相关系数</h2><p><strong>协方差</strong>：$Cov(X,Y)\overset{\Delta}=E[(X-E(X))(Y-E(Y))]=E(XY)-E(X)E(Y)$</p>
 <p><strong>协方差的基本性质</strong></p>
 <ul>
 <li><p>若r.v. $X,Y$相互独立，则$Cov(X,Y)=0$，但协方差为0不一定独立</p>
+</li>
+<li><p>$Cov(X,Y)=Cov(Y,X)$，$Cov(X,X)=Var(X)$</p>
 </li>
 <li><p>$Var(X+Y)=Var(X)+Var(Y)+Cov(X,Y)$</p>
 </li>
@@ -321,6 +325,72 @@
 <p><strong>均方误差</strong>：对于线性近似$\hat Y=a+bX$，均方误差$e=E[(Y-\hat Y)^2]$</p>
 <p>$e_{min}=Var(Y)(1-\rho^2_{XY})$，此时$b_0=\frac{Cov(X,Y)}{Var(X)}$，$a_0=E(Y)-b_0E(X)$</p>
 <p><strong>相关</strong>：正相关，负相关，不相关。不相关不一定独立，独立一定不相关。</p>
+<p><strong>协方差矩阵</strong>：对于n维r.v.$\{X_n\}$，记$c_{ij}=Cov(X_i,X_j)\ (i,j=1,2,…,n)$</p>
+<p>将$c_{ij}$写成矩阵的形式$C$，则称其为$\{X_n\}$的协方差矩阵。协方差矩阵为<strong>非负定对称阵</strong>。</p>
+<p><strong>n维正态r.v.</strong>：令</p>
+<script type="math/tex; mode=display">X=\left[\begin{array}{c}
+x_{1} \\
+x_{2} \\
+\vdots \\
+x_{n}
+\end{array}\right], \quad \mu=\left[\begin{array}{c}
+\mu_{1} \\
+\mu_{2} \\
+\vdots \\
+\mu_{n}
+\end{array}\right], \quad C=\left[\begin{array}{cccc}
+c_{11} & c_{12} & \cdots & c_{1 n} \\
+c_{21} & c_{22} & \cdots & c_{2 n} \\
+\vdots & \vdots & \ddots & \vdots \\
+c_{n 1} & c_{n 2} & \cdots & c_{n n}
+\end{array}\right]</script><p>其中$C$为n阶正定矩阵，若n维r.v.$\{X_n\}$的密度函数为</p>
+<p>$f\left(x_{1}, x_{2}, \cdots, x_{n}\right)=\frac{1}{(2 \pi)^{n / 2}|C|^{1 / 2}} \exp \left\{-\frac{1}{2}(X-\mu)^{T} C^{-1}(X-\mu)\right\}$</p>
+<p>则称$\{X_n\}$服从参数为$(\mu,C)$的n维正态分布，记为$(X_1,X_2,…,X_n)\sim \mathbf N(\mu,C)$。</p>
+<p><strong>n维正态r.v.的重要性质</strong>：</p>
+<ul>
+<li><p>$\mu$称为均值向量，$C$为协方差矩阵，对角线为对应r.v.方差。</p>
+</li>
+<li><p>$X_i\sim\mathbf N(\mu_i,c_{ii}),\ (i=1,2,…,n)$，反之若$\{X_n\}$相互独立且$X_i\sim\mathbf N(\mu_i,\sigma_i^2),\ (i=1,2,…,n)$，则</p>
+<p>$\{X_n\}\sim\mathbf N(\mu,C)$，其中$\mu=[\mu1\ \mu2\ …\ \mu_n]^T$，$C=diag\{\sigma_1^2\ \sigma_2^2\ …\ \sigma_n^2\ \}$</p>
+</li>
+<li><p>若$\{X_n\}\sim\mathbf N(\mu,C)$，则$\{X_n\}$的任一线性组合$\sum\limits_{k=1}^{n}l_iX_i$服从一维正态分布</p>
+</li>
+<li><p>正态r.v.的线性变换不变性：若$\{X_n\}\sim\mathbf N(\mu,C)$</p>
+<p>$\left\{\begin{array}{c}<br>Y_{1}=a_{11} X_{1}+a_{12} X_{2}+\cdots+a_{1 n} X_{n} \\<br>Y_{2}=a_{21} X_{1}+a_{22} X_{2}+\cdots+a_{2 n} X_{n} \\<br>\quad \vdots \\<br>Y_{m}=a_{m 1} X_{1}+a_{m 2} X_{2}+\cdots+a_{m n} X_{n}<br>\end{array}\right.$</p>
+<p>则$\{Y_m\}$仍服从多维正态分布。</p>
+</li>
+</ul>
+<h2 id="§4-4-条件期望"><a href="#§4-4-条件期望" class="headerlink" title="§4.4 条件期望"></a>§4.4 条件期望</h2><p>不考，不过明明是很重要的内容来着。</p>
+<h2 id="4-x-常用分布的分布及数字特征"><a href="#4-x-常用分布的分布及数字特征" class="headerlink" title="4.x 常用分布的分布及数字特征"></a>4.x 常用分布的分布及数字特征</h2><p><img src="https://s2.loli.net/2022/12/30/xOTFlhpsguVoaZD.jpg" alt="常用分布的分布及数字特征.jpg"  /></p>
+<h1 id="Chapter-5"><a href="#Chapter-5" class="headerlink" title="Chapter 5"></a>Chapter 5</h1><h2 id="§5-1-大数定律"><a href="#§5-1-大数定律" class="headerlink" title="§5.1 大数定律"></a>§5.1 大数定律</h2><p><strong>依概率收敛</strong>：</p>
+<p>设$\xi,\xi_1,\xi_2,…,\xi_n,…$是一系列r.v.，若$\forall\varepsilon&gt;0$，有$\lim\limits_{n→\infty}P\{|\xi_n-\xi|\ge \varepsilon\}=0$，则称$\{\xi_n\}$依概率收敛于$\xi$，记为$\xi_{n} \stackrel{P}{\longrightarrow} \xi $。</p>
+<ul>
+<li>$\lim\limits_{n→\infty}P\{|\xi_n-\xi|\ge \varepsilon\}=0⇌\lim\limits_{n→\infty}P\{|\xi_n-\xi|&lt; \varepsilon\}=1$</li>
+<li>随着n的增大，绝对误差$|\xi_n-\xi|$较大的可能性越来越小</li>
+<li>若$\xi_{n} \stackrel{P}{\longrightarrow} \xi$，$g$是连续函数，则$g(\xi_{n}) \stackrel{P}{\longrightarrow} g(\xi) $</li>
+</ul>
+<p><strong>几乎处处收敛(了解)</strong>：</p>
+<p>若r.v.列$\{\xi_n\}$满足$\forall\varepsilon&gt;0$，$P\{\lim\limits_{n→\infty}|\xi_n-\xi|&lt;\varepsilon\}=1$，则称$\{\xi_n\}$几乎处处收敛于$\xi$，记为$\xi_n\stackrel{a.s.}{\longrightarrow}\xi$或$\xi_n→\xi,\ a.s.$</p>
+<p><strong>伯努利大数定律</strong>：</p>
+<p>设$n_A$是n次独立重复实验中事件$A$发生的次数，且$P(A)=p$，则$\forall\varepsilon&gt;0$，有$\lim\limits_{n→\infty}P\{|\frac{n_A}{n}-p|\ge \varepsilon\}=0$</p>
+<p><strong>切比雪夫大数定律</strong>：</p>
+<p>$\{X_n\}$为独立r.v.列，且具有相同的期望$\mu$和方差$\sigma^2$，则$\forall\varepsilon&gt;0$有$\lim\limits_{n→\infty}P\{|\frac{1}{n}\sum\limits_{i=1}^{n}X_i-\mu|\ge\varepsilon\}=0$，即$\bar X_n \stackrel{P}{\longrightarrow} \mu$，可由Chebyshev不等式证明：$P\left(\left|\bar{X}_{n}-\mu\right|&gt;\varepsilon\right) \leq \frac{\operatorname{Var}\left(\bar{X}_{n}\right)}{\varepsilon^{2}}=\frac{\sigma^{2}}{n \varepsilon^{2}} \rightarrow 0,$</p>
+<p><strong>辛钦大数定律(弱大数定律)</strong>：</p>
+<p>$\{X_n\}$是独立同分布r.v.列，期望$\mu$存在，则$\{X_n\}$服从大数定律，$\forall\varepsilon&gt;0$，有$\lim\limits_{n→\infty}P\{|\frac{1}{n}\sum\limits_{i=1}^{n}X_i-\mu|&lt;\varepsilon\}=1$</p>
+<p><strong>强大数定律(了解)</strong>：</p>
+<p>若$\{X_n\}$两两独立且同分布，期望$\mu$存在，则$\bar X_n\stackrel{a.s.}{\longrightarrow}\mu$</p>
+<h2 id="§5-2-中心极限定理"><a href="#§5-2-中心极限定理" class="headerlink" title="§5.2 中心极限定理"></a>§5.2 中心极限定理</h2><p><strong>中心极限定理</strong>：</p>
+<p>若$Z_n=\frac{\sum_{k=1}^{n} X_{k}-\sum_{k=1}^{n} \mu_{k}}{\sqrt{\sum_{k=1}^{n} \sigma_{k}^{2}}}$的分布函数$F_n(x)$对任意$x$满足</p>
+<p>$\begin{aligned}<br>\lim _{n \rightarrow \infty} F_{n}(x) &amp; =\lim _{n \rightarrow \infty} P\left\{\frac{\sum_{k=1}^{n} X_{k}-\sum_{k=1}^{n} \mu_{k}}{\sqrt{\sum_{k=1}^{n} \sigma_{k}^{2}}} \leq x\right\} \\<br>&amp; =\int_{-\infty}^{x} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t=\Phi(x)<br>\end{aligned}$</p>
+<p>则称$\{X_k\}$服从中心极限定理。</p>
+<p><strong>中心极限定理(独立同分布)</strong>：</p>
+<p>$\begin{aligned}<br>\lim _{n \rightarrow \infty} F_{n}(x) &amp; =\lim _{n \rightarrow \infty} P\left\{\frac{\sum_{k=1}^{n} X_{k}-n \mu}{\sqrt{n} \sigma} \leq x\right\} \\<br>&amp; =\int_{-\infty}^{x} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t=\Phi(x)<br>\end{aligned}$</p>
+<p><strong>中心极限定理的实际含义</strong>：</p>
+<p>对于均值为$\mu$，方差$\sigma^2&gt;0$的i.i.d.r.v.列$\{X_n\}$，有$\sum\limits_{k=1}^{n}X_k\overset{近似}\sim\mathbf N(n\mu,n\sigma^2)$，或$\bar X_n\overset{近似}\sim\mathbf N(\mu,\frac{\sigma^2}{n})$</p>
+<p><strong>棣莫弗-拉普拉斯中心极限定理</strong>：</p>
+<p>设$\{\eta_n\}$为服从参数为$n,p(0&lt;p&lt;1)$的二项分布r.v.列，则对任意$x$有</p>
+<p>$\lim _{n \rightarrow \infty} P\left\{\frac{\eta_{n}-n p}{\sqrt{n p(1-p)}} \leq x\right\}=\int_{-\infty}^{x} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t=\Phi(x)$</p>
+<p>对于r.v.$\eta_n\sim \mathbf b(n,p)\ (n=1,2,…)$，有$\frac{\eta_{n}-n p}{\sqrt{n p(1-p)}}\overset{近似}\sim\mathbf N(0,1)$，于是当$n$充分大时，可以认为$\eta_n\overset{近似}\sim\mathbf N(np,np(1-p))$</p>
 
     </div>
 
@@ -404,7 +474,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3"><span class="nav-number">1.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-6-%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">§3.6 联合分布随机变量函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-7-%E6%9E%81%E5%80%BC%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">§3.7 极值和顺序统计量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#r-v-%E6%9E%81%E5%80%BC%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">r.v.极值的分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4"><span class="nav-number">2.</span> <span class="nav-text">Chapter 4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-1-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.1.</span> <span class="nav-text">§4.1 随机变量的期望</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-2-%E6%96%B9%E5%B7%AE%E4%B8%8E%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">2.1.1.</span> <span class="nav-text">§4.2 方差与标准差</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-3-%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">§4.3 协方差与相关系数</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3"><span class="nav-number">1.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-6-%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">§3.6 联合分布随机变量函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-7-%E6%9E%81%E5%80%BC%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">§3.7 极值和顺序统计量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#r-v-%E6%9E%81%E5%80%BC%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">r.v.极值的分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4"><span class="nav-number">2.</span> <span class="nav-text">Chapter 4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-1-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.1.</span> <span class="nav-text">§4.1 随机变量的期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-2-%E6%96%B9%E5%B7%AE%E4%B8%8E%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">2.2.</span> <span class="nav-text">§4.2 方差与标准差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-3-%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">§4.3 协方差与相关系数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-4-%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.4.</span> <span class="nav-text">§4.4 条件期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-x-%E5%B8%B8%E7%94%A8%E5%88%86%E5%B8%83%E7%9A%84%E5%88%86%E5%B8%83%E5%8F%8A%E6%95%B0%E5%AD%97%E7%89%B9%E5%BE%81"><span class="nav-number">2.5.</span> <span class="nav-text">4.x 常用分布的分布及数字特征</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-5"><span class="nav-number">3.</span> <span class="nav-text">Chapter 5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-1-%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">§5.1 大数定律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-2-%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">§5.2 中心极限定理</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
