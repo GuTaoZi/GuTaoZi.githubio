@@ -20,20 +20,20 @@
     var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="我愿称之为，究极缝合课">
+  <meta name="description" content="海纳百川，不如离散">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS215 离散数学 半期复习">
-<meta property="og:url" content="https://gutaozi.github.io/2022/11/05/CS215_Midterm_Review/index.html">
+<meta property="og:title" content="CS215 离散数学 期末复习">
+<meta property="og:url" content="https://gutaozi.github.io/2022/12/31/CS215_Final_Review/index.html">
 <meta property="og:site_name" content="咕桃w！">
-<meta property="og:description" content="我愿称之为，究极缝合课">
+<meta property="og:description" content="海纳百川，不如离散">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-05T05:32:02.411Z">
-<meta property="article:modified_time" content="2022-11-07T11:53:19.940Z">
+<meta property="article:published_time" content="2022-12-31T13:45:39.875Z">
+<meta property="article:modified_time" content="2022-12-31T15:56:13.275Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Discrete Math">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://gutaozi.github.io/2022/11/05/CS215_Midterm_Review/">
+<link rel="canonical" href="https://gutaozi.github.io/2022/12/31/CS215_Final_Review/">
 
 
 <script id="page-configurations">
@@ -46,7 +46,7 @@
   };
 </script>
 
-  <title>CS215 离散数学 半期复习 | 咕桃w！</title>
+  <title>CS215 离散数学 期末复习 | 咕桃w！</title>
   
 
 
@@ -167,7 +167,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2022/11/05/CS215_Midterm_Review/">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2022/12/31/CS215_Final_Review/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
@@ -180,7 +180,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CS215 离散数学 半期复习
+          CS215 离散数学 期末复习
         </h1>
 
         <div class="post-meta">
@@ -189,16 +189,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-11-05 13:32:02" itemprop="dateCreated datePublished" datetime="2022-11-05T13:32:02+08:00">2022-11-05</time>
+              <time title="创建时间：2022-12-31 21:45:39 / 修改时间：23:56:13" itemprop="dateCreated datePublished" datetime="2022-12-31T21:45:39+08:00">2022-12-31</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-07 19:53:19" itemprop="dateModified" datetime="2022-11-07T19:53:19+08:00">2022-11-07</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -210,7 +204,7 @@
             </span>
 
           
-            <div class="post-description">我愿称之为，究极缝合课</div>
+            <div class="post-description">海纳百川，不如离散</div>
 
         </div>
       </header>
@@ -221,107 +215,60 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Part-I-逻辑"><a href="#Part-I-逻辑" class="headerlink" title="Part I. 逻辑"></a>Part I. 逻辑</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
-<p><strong>Logic</strong> is the basis of all mathematical reasoning.</p>
-<p>A <strong>proposition</strong> is a declarative statement that is either true or false, usually condition-based.</p>
-<p>A <strong>bit</strong> is sufficient to represent two possible values: 0 (false) or 1 (true)</p>
-<p>A variable that takes on values 0 and 1 is called a <strong>Boolean variable</strong>.</p>
-<p>A <strong>bit string</strong> is a sequence of zero or more bits. The length of this string is the number of bits in the string.</p>
-<p><strong>bitwise operations</strong>: replace “T” and “F” with 1 and 0.</p>
-<p>A compound proposition that is always true for all possible truth values is called a <strong>tautology</strong>. </p>
-<p>A compound proposition that is always false for all possible truth values is called a <strong>contradiction</strong>. </p>
-<p>A compound proposition that is neither a tautology nor a contradiction is called a <strong>contingency</strong>.</p>
-<p>Two propositions are <strong>equivalent</strong> if they always have the same truth value, denoted by $p ≡ q$ or $p ⇔ q$.</p>
-</blockquote>
-<h3 id="6个逻辑连接词"><a href="#6个逻辑连接词" class="headerlink" title="6个逻辑连接词"></a>6个逻辑连接词</h3><div class="table-container">
-<table>
-<thead>
-<tr>
-<th></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td>与、或、非、异或</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>略。</p>
-<h4 id="蕴含-p-→-q"><a href="#蕴含-p-→-q" class="headerlink" title="蕴含: $p → q$"></a>蕴含: $p → q$</h4><p>a.k.a. conditional statement</p>
-<p>$p$ : hypothesis</p>
-<p>$q$ :  conclusion</p>
-<p>$q$ unless $¬p$</p>
-<p>$p$ only if $q$</p>
+        <h1 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h1><ol>
+<li><p>Propositional Logic</p>
+</li>
+<li><p>Predicate Logic</p>
+</li>
+<li><p>Mathematical Proofs</p>
+</li>
+<li><p>Sets</p>
+</li>
+<li><p>Functions</p>
+</li>
+<li><p>Complexity  of Algorithms</p>
+</li>
+<li><p>Number Theory</p>
+<p>Groups, Rings and Fields</p>
+</li>
+<li><p>Cryptography</p>
+</li>
+<li><p>Mathematical Induction</p>
+</li>
+<li><p>Recursion</p>
+</li>
+<li><p>Counting</p>
+</li>
+<li><p>Relation</p>
+</li>
+<li><p>Graphs</p>
+</li>
+<li><p>Tree</p>
+</li>
+</ol>
+<h1 id="Chapter-1-Propositional-Logic"><a href="#Chapter-1-Propositional-Logic" class="headerlink" title="Chapter 1 - Propositional Logic"></a>Chapter 1 - Propositional Logic</h1><p><strong>Logical connectives</strong>：</p>
+<p>$\neg p$，$p\vee q$，$p\wedge q$，$p\oplus q$，$p→q$，$p\leftrightarrow q$</p>
+<p><strong>Logical equivalence</strong>：</p>
 <div class="table-container">
 <table>
 <thead>
 <tr>
-<th><strong>converse</strong></th>
-<th>contrapositive</th>
-<th><strong>inverse</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>逆命题</td>
-<td>逆否命题</td>
-<td>否命题</td>
-</tr>
-</tbody>
-</table>
-</div>
-<h4 id="双向蕴含-p-↔-q"><a href="#双向蕴含-p-↔-q" class="headerlink" title="双向蕴含: $p ↔ q$"></a>双向蕴含: $p ↔ q$</h4><p>a.k.a. bi-implications</p>
-<p><strong>$p$ if and only if $q$</strong></p>
-<p><strong>$p$ is necessary and sufficient for $q$</strong></p>
-<h3 id="真值表"><a href="#真值表" class="headerlink" title="真值表"></a>真值表</h3><p>$k$个变量，$2^k$行，全都一样则两式等价。</p>
-<h3 id="翻译：自然语言→逻辑式"><a href="#翻译：自然语言→逻辑式" class="headerlink" title="翻译：自然语言→逻辑式"></a>翻译：自然语言→逻辑式</h3><ol>
-<li>提取Atomic (elementary) propositions</li>
-<li>提取逻辑连接词</li>
-<li>构建式子</li>
-</ol>
-<h3 id="Important-Logical-Equivalences"><a href="#Important-Logical-Equivalences" class="headerlink" title="Important Logical Equivalences"></a>Important Logical Equivalences</h3><div class="table-container">
-<table>
-<thead>
-<tr>
 <th>Name</th>
-<th></th>
+<th>Content</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Identity laws</td>
-<td>$p ∧ T ≡ p $，$ p ∨ F ≡ p$</td>
+<td>$p \vee T \equiv p $，$ p \wedge F \equiv p$</td>
 </tr>
 <tr>
 <td>Domination laws</td>
-<td>$p ∨ T ≡ T$，$p ∧ F ≡ F $</td>
+<td>$p \wedge T \equiv T$，$p \vee F \equiv F $</td>
 </tr>
 <tr>
 <td>Idempotent laws</td>
-<td>$p ∨ p ≡ p$ ，$p ∧ p ≡ p$</td>
+<td>$p \wedge p \equiv p$ ，$p \vee p \equiv p$</td>
 </tr>
 <tr>
 <td>Double negation laws</td>
@@ -329,31 +276,217 @@
 </tr>
 <tr>
 <td>Commutative laws</td>
-<td>$p ∨ q ≡ q ∨ p$，$ p ∧ q ≡ q ∧ p$</td>
+<td>$p \wedge q \equiv q \wedge p$，$ p \vee q \equiv q \vee p$</td>
 </tr>
 <tr>
 <td>Associative laws</td>
-<td>$(p ∨ q) ∨ r ≡ p ∨ (q ∨ r) $，$ (p ∧ q) ∧ r ≡ p ∧ (q ∧ r)$</td>
+<td>$(p \wedge q) \wedge r \equiv p \wedge (q \wedge r) $，$ (p \vee q) \vee r \equiv p \vee (q \vee r)$</td>
 </tr>
 <tr>
 <td>Distributive laws</td>
-<td>$(p ∨ q) ∧ r ≡ (p∧r) ∨ (q ∨ r) $，$ (p ∧ q) ∨ r ≡ (p∨r) ∧ (q∨r)$</td>
+<td>$(p \wedge q) \vee r \equiv (p\vee r) \wedge (q \wedge r) $，$ (p \vee q) \wedge r \equiv (p\wedge r) \vee (q\wedge r)$</td>
 </tr>
 <tr>
 <td>De Morgan’s laws</td>
-<td>$\neg(p∧ q) \equiv \neg p ∨ \neg q$，$\neg(p ∨ q)\equiv \neg p ∧ \neg q$</td>
+<td>$\neg(p\vee q) \equiv \neg p \wedge \neg q$，$\neg(p \wedge q)\equiv \neg p \vee \neg q$</td>
 </tr>
 <tr>
 <td>Absorption laws</td>
-<td>$p∨(p∧ q) \equiv p$，$p∧(p∨ q)\equiv p$</td>
+<td>$p\wedge(p\vee q) \equiv p$，$p\vee(p\wedge q)\equiv p$</td>
 </tr>
 <tr>
 <td>Negation laws</td>
-<td>$p∧\neg p \equiv F$，$p∨\neg p \equiv T$</td>
+<td>$p\vee\neg p \equiv F$，$p\wedge\neg p \equiv T$</td>
 </tr>
 <tr>
 <td>Useful law</td>
-<td>$p→q \equiv \neg p ∨ q$</td>
+<td>$p→q \equiv \neg p \wedge q$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>e.g. Show that $p → q ≡ ¬q → ¬p $ .</p>
+<p>$\begin{aligned}<br>\neg q \rightarrow \neg p &amp; \equiv \neg(\neg q) \vee(\neg p) &amp; &amp; \text { Useful } \\<br>&amp; \equiv q \vee(\neg p) &amp; &amp; \text { Double negation } \\<br>&amp; \equiv(\neg p) \vee q &amp; &amp; \text { Communtative } \\<br>&amp; \equiv p \rightarrow q &amp; &amp; \text { Useful }<br>\end{aligned}$</p>
+<p><strong>Rules of Inference</strong>：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">modus ponens</th>
+<th style="text-align:center">modus tollens</th>
+<th style="text-align:center">hypothetical syllogism</th>
+<th style="text-align:center">disjunctive syllogism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$\begin{array}{r}p \rightarrow q \\p \\\hline \therefore q\end{array}$</td>
+<td style="text-align:center">$\begin{array}{r}p \rightarrow q \\\ \neg q\\\hline \therefore \neg p\end{array}$</td>
+<td style="text-align:center">$\begin{array}{r}p \rightarrow q \\q \rightarrow r \\\hline \therefore p \rightarrow r\end{array}$</td>
+<td style="text-align:center">$\begin{array}{r}p \vee q \\\neg p\\\hline \therefore q\end{array}$</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>Addition</strong></td>
+<td style="text-align:center"><strong>Simplification</strong></td>
+<td style="text-align:center"><strong>Conjunction</strong></td>
+<td style="text-align:center"><strong>Resolution</strong></td>
+</tr>
+<tr>
+<td style="text-align:center">$\begin{array}{r}p\\\hline\therefore p\vee q\end{array}$</td>
+<td style="text-align:center">$\begin{array}{r}p\wedge q\\\hline\therefore q\end{array}$</td>
+<td style="text-align:center">$\begin{array}{r}p\\q\\\hline\therefore p\wedge q\end{array}$</td>
+<td style="text-align:center">$\begin{array}{r}\neg p\vee r\\p\vee q\\\hline\therefore q\vee r\end{array}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="Chapter-2-Predicate-Logic"><a href="#Chapter-2-Predicate-Logic" class="headerlink" title="Chapter 2 - Predicate Logic"></a>Chapter 2 - Predicate Logic</h1><p><strong>Truth set</strong>：$\{(x_1,x_2,\cdots,x_n)\in D|P(x_1,x_2,\cdots,x_n)=T\}$</p>
+<p><strong>Quantifier</strong>: $\forall$(Universal)， $\exists$(Existential)</p>
+<p><strong>De Morgan laws for quantifiers</strong>：</p>
+<p>$\neg\exists P(x)\equiv \forall\neg P(x)$，$\neg\forall P(x)\equiv\exists\neg P(x)$</p>
+<p><strong>Order of Quantifiers</strong>：</p>
+<ul>
+<li>matters if quantifiers are of <strong>different type</strong></li>
+<li>does no matter if quantifiers are of the <strong>same type</strong></li>
+</ul>
+<p><strong>Negating Nested Quantifiers</strong>：</p>
+<p>Swap every quantifier, and negation the inner proposition.</p>
+<p><strong>Rules of Inference</strong>：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Universal Instantiation</th>
+<th>Universal Generalization</th>
+<th>Existential Instantiation</th>
+<th>Existential Generalization</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\begin{array}{r}\forall xP(x)\\\hline\therefore P(c)\end{array}$</td>
+<td>$\begin{array}{r}P(c)\text{ for an arbitrary }c\\\hline\therefore \forall x P(x)\end{array}$</td>
+<td>$\begin{array}{r}\exists x P(x)\\\hline\therefore P(c)\text{ for some element }c\end{array}$</td>
+<td>$\begin{array}{r}P(c)\text{ for some element }c\\\hline\therefore \exists x P(x)\end{array}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="Chapter-3-Mathematical-Proofs"><a href="#Chapter-3-Mathematical-Proofs" class="headerlink" title="Chapter 3 - Mathematical Proofs"></a>Chapter 3 - Mathematical Proofs</h1><p><strong>Methods of Proving Theorems</strong>：</p>
+<ul>
+<li>direct proof<ul>
+<li>$p → q$ is proved by showing that if $p$ is true then $q$ follows</li>
+</ul>
+</li>
+<li>proof by contrapositive<ul>
+<li>show the contrapositive $¬q → ¬p$</li>
+</ul>
+</li>
+<li>proof by contradiction<ul>
+<li>show that $(p ∧ ¬q)$ contradicts the assumptions</li>
+</ul>
+</li>
+<li>proof by cases<ul>
+<li>give proofs for all possible cases</li>
+</ul>
+</li>
+<li><p>proof of equivalence</p>
+<ul>
+<li>$p ↔ q$ is replaced with $(p → q) ∧ (q → p)$</li>
+</ul>
+</li>
+<li><p>vacuous proof</p>
+<ul>
+<li>$p→q$ is always true if $p$ (the hypothesis) is always false</li>
+</ul>
+</li>
+<li>trivial proof<ul>
+<li>$p→q$ is always true if $q$ (the conclusion) is always true</li>
+</ul>
+</li>
+</ul>
+<p><strong>Proofs with Quantifiers</strong>：</p>
+<ul>
+<li><p>Universal</p>
+<ul>
+<li><p>prove the property holds for all examples</p>
+<p>– proof by cases to divide the proof into different parts</p>
+</li>
+<li><p>counterexamples</p>
+<p>– disprove universal statement</p>
+</li>
+</ul>
+</li>
+<li><p>Existential</p>
+<ul>
+<li><p>constructive</p>
+<p>– find a specific example to show the statement holds</p>
+</li>
+<li><p>nonconstructive</p>
+<p>– proof by contradiction</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="Chapter-4-Sets"><a href="#Chapter-4-Sets" class="headerlink" title="Chapter 4 - Sets"></a>Chapter 4 - Sets</h1><p><strong>Important sets</strong>：</p>
+<p>$\mathbf {N, Z, Z^+, Q, R, C}$</p>
+<p><strong>Russell’s Paradox</strong>：</p>
+<p>Let $S=\{x|x\notin x\}$, is a set of sets that are not member of themselves. Is $S\in S$ or $S\notin S$?</p>
+<p><strong>Set Operations</strong>：</p>
+<p>$A\times B, A\cup B,A\cap B,\bar{A},A-B$</p>
+<p><strong>Cardinality</strong>：</p>
+<p>The sets $A$ and $B$ have the same cardinality if there is a <strong>bijection</strong> between elements in $A$ and $B$.</p>
+<p>$|A|\le|B|$ if there is an <strong>injection</strong> from $A$ to $B$, if they have different cardinalities then $|A|&lt;|B|$.</p>
+<p><strong>Countable Sets</strong>：</p>
+<p>A set that is either <strong>finite</strong> or <strong>has the same cardinality as the set of</strong> $\mathbf Z^+$ is called countable.</p>
+<p><strong>Cantor diagonalization argument</strong>：</p>
+<p>“Every part is different from some of the previous ones.”</p>
+<p><strong>Schröder-Bernstein Theorem</strong>：</p>
+<p>$|A|\le |B|$, $|B|\le |A|$, then $|A|=|B|$.</p>
+<h1 id="Chapter-5-Functions"><a href="#Chapter-5-Functions" class="headerlink" title="Chapter 5 - Functions"></a>Chapter 5 - Functions</h1><p><strong>Functions</strong>：</p>
+<p> A function from $A$ to $B$, denoted by $f : A → B$, is an assignment of exactly one element of $B$ to each element of $A$. </p>
+<p>domain, codomain, image, preimage, range.</p>
+<p>Injective (One-to-one) Function</p>
+<p>Surjective (Onto) Function</p>
+<p>Bijective (One-to-one Correspondence) Function</p>
+<p>Invert Function (Exists IFF bijection)</p>
+<p>Composition of Functions</p>
+<p><strong>Sequence</strong>：</p>
+<p>A sequence is a function from a subset of the set of integers.</p>
+<p>arithmetic progression, geometric progression</p>
+<p><strong>Some Useful Summation Formulas</strong>：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Sum</th>
+<th style="text-align:center">Closed Form</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$\sum\limits_{k=0}^{n}ar^k(r\ne0,1)$</td>
+<td style="text-align:center">$\frac{ar^{n+1}-a}{r-1}$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\sum\limits_{k=1}^{n}k$</td>
+<td style="text-align:center">$\frac{n(n+1)}{2}$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\sum\limits_{k=1}^{n}k^2$</td>
+<td style="text-align:center">$\frac{n(n+1)(2n+1)}{6}$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\sum\limits_{k=1}^{n}k^3$</td>
+<td style="text-align:center">$\frac{n^2(n+1)^2}{4}$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\sum\limits_{k=0}^{\infty}x^k,-1&lt;x&lt;1$</td>
+<td style="text-align:center">$\frac{1}{1-x}$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\sum\limits_{k=1}^{\infty}kx^{k-1},-1&lt;x&lt;1$</td>
+<td style="text-align:center">$\frac{1}{(1-x)^2}$</td>
 </tr>
 </tbody>
 </table>
@@ -376,13 +509,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/11/05/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix_Library/" rel="prev" title="CS205 C/C++ Project03设计报告 C语言矩阵库">
-      <i class="fa fa-chevron-left"></i> CS205 C/C++ Project03设计报告 C语言矩阵库
+    <a href="/2022/12/29/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix_Class/" rel="prev" title="CS205 C/C++ Project02设计报告 矩阵类">
+      <i class="fa fa-chevron-left"></i> CS205 C/C++ Project02设计报告 矩阵类
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/11/05/MA212_Probability_Statistics_Midterm/" rel="next" title="MA212 概率论与数理统计 半期复习">
-      MA212 概率论与数理统计 半期复习 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -441,7 +571,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-I-%E9%80%BB%E8%BE%91"><span class="nav-number">1.</span> <span class="nav-text">Part I. 逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6%E4%B8%AA%E9%80%BB%E8%BE%91%E8%BF%9E%E6%8E%A5%E8%AF%8D"><span class="nav-number">1.2.</span> <span class="nav-text">6个逻辑连接词</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%95%B4%E5%90%AB-p-%E2%86%92-q"><span class="nav-number">1.2.1.</span> <span class="nav-text">蕴含: $p → q$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E5%90%91%E8%95%B4%E5%90%AB-p-%E2%86%94-q"><span class="nav-number">1.2.2.</span> <span class="nav-text">双向蕴含: $p ↔ q$</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%9F%E5%80%BC%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">真值表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BF%BB%E8%AF%91%EF%BC%9A%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E2%86%92%E9%80%BB%E8%BE%91%E5%BC%8F"><span class="nav-number">1.4.</span> <span class="nav-text">翻译：自然语言→逻辑式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Important-Logical-Equivalences"><span class="nav-number">1.5.</span> <span class="nav-text">Important Logical Equivalences</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Outline"><span class="nav-number">1.</span> <span class="nav-text">Outline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-1-Propositional-Logic"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1 - Propositional Logic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-2-Predicate-Logic"><span class="nav-number">3.</span> <span class="nav-text">Chapter 2 - Predicate Logic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3-Mathematical-Proofs"><span class="nav-number">4.</span> <span class="nav-text">Chapter 3 - Mathematical Proofs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4-Sets"><span class="nav-number">5.</span> <span class="nav-text">Chapter 4 - Sets</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-5-Functions"><span class="nav-number">6.</span> <span class="nav-text">Chapter 5 - Functions</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
