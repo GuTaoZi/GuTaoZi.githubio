@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2022/12/30/xOTFlhpsguVoaZD.jpg">
 <meta property="article:published_time" content="2022-11-27T14:07:11.860Z">
-<meta property="article:modified_time" content="2022-12-30T15:26:48.275Z">
+<meta property="article:modified_time" content="2022-12-31T08:49:09.101Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Probability &amp; Statistics">
 <meta name="twitter:card" content="summary">
@@ -199,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-30 23:26:48" itemprop="dateModified" datetime="2022-12-30T23:26:48+08:00">2022-12-30</time>
+                <time title="修改时间：2022-12-31 16:49:09" itemprop="dateModified" datetime="2022-12-31T16:49:09+08:00">2022-12-31</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -361,7 +361,7 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 </li>
 </ul>
 <h2 id="§4-4-条件期望"><a href="#§4-4-条件期望" class="headerlink" title="§4.4 条件期望"></a>§4.4 条件期望</h2><p>不考，不过明明是很重要的内容来着。</p>
-<h2 id="4-x-常用分布的分布及数字特征"><a href="#4-x-常用分布的分布及数字特征" class="headerlink" title="4.x 常用分布的分布及数字特征"></a>4.x 常用分布的分布及数字特征</h2><p><img src="https://s2.loli.net/2022/12/30/xOTFlhpsguVoaZD.jpg" alt="常用分布的分布及数字特征.jpg"  /></p>
+<h2 id="§4-x-常用分布的分布及数字特征"><a href="#§4-x-常用分布的分布及数字特征" class="headerlink" title="§4.x 常用分布的分布及数字特征"></a>§4.x 常用分布的分布及数字特征</h2><p><img src="https://s2.loli.net/2022/12/30/xOTFlhpsguVoaZD.jpg" alt="常用分布的分布及数字特征.jpg"  /></p>
 <h1 id="Chapter-5"><a href="#Chapter-5" class="headerlink" title="Chapter 5"></a>Chapter 5</h1><h2 id="§5-1-大数定律"><a href="#§5-1-大数定律" class="headerlink" title="§5.1 大数定律"></a>§5.1 大数定律</h2><p><strong>依概率收敛</strong>：</p>
 <p>设$\xi,\xi_1,\xi_2,\cdots,\xi_n,…$是一系列r.v.，若$\forall\varepsilon&gt;0$，有$\lim\limits_{n→\infty}P\{|\xi_n-\xi|\ge \varepsilon\}=0$，则称$\{\xi_n\}$依概率收敛于$\xi$，记为$\xi_{n} \stackrel{P}{\longrightarrow} \xi $。</p>
 <ul>
@@ -408,18 +408,18 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <li>由辛钦大数定律，$n→\infty$时，$A_k\stackrel{P}{\longrightarrow}\mu_k$，连续函数$g(A_1,A_2,\cdots,A_k)\stackrel{P}{\longrightarrow}g(\mu_1,\mu_2,\cdots,\mu_k)$</li>
 </ul>
 <p><strong>样本均值与样本方差的数字特征</strong>：$E(\bar X)=\mu$，$Var(\bar X)=\frac{\sigma^2}{n}$，$E(S^2)=\sigma^2$</p>
-<h2 id="§6-3-抽样分布"><a href="#§6-3-抽样分布" class="headerlink" title="§6.3 抽样分布"></a>§6.3 抽样分布</h2><p><strong>$\mathcal X^2$-分布</strong>：</p>
+<h2 id="§6-3-抽样分布"><a href="#§6-3-抽样分布" class="headerlink" title="§6.3 抽样分布"></a>§6.3 抽样分布</h2><p><strong>$\chi^2$-分布</strong>：</p>
 <p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(0,1)$的样本，令</p>
-<script type="math/tex; mode=display">\mathcal {X}^2=X_1^2+X_2^2+\cdots+X_n^2</script><p>称$\mathcal {X}^2$服从自由度为$n$的$\mathcal X^2$-分布，记为$\mathcal {X}^2\sim\mathcal X^2(n)$。</p>
-<p><strong>$\mathcal X^2$-分布的可加性</strong>：</p>
-<p>设$\mathcal X_1^2\sim\mathcal X^2(n_1)$，$\mathcal X_2^2\sim\mathcal X^2(n_2)$且相互独立，则$\mathcal X_1^2+\mathcal X_2^2\sim\mathcal X^2(n_1+n_2)$</p>
-<p><strong>$\mathcal X^2$-分布的数字特征</strong>：</p>
-<p>设$\mathcal X^2\sim\mathcal X^2(n)$，则$E(\mathcal X^2)=n$，$Var(\mathcal X^2)=2n$</p>
+<script type="math/tex; mode=display">\mathcal {X}^2=X_1^2+X_2^2+\cdots+X_n^2</script><p>称$\mathcal {X}^2$服从自由度为$n$的$\chi^2$-分布，记为$\mathcal {X}^2\sim\chi^2(n)$。</p>
+<p><strong>$\chi^2$-分布的可加性</strong>：</p>
+<p>设$\chi_1^2\sim\chi^2(n_1)$，$\chi_2^2\sim\chi^2(n_2)$且相互独立，则$\chi_1^2+\chi_2^2\sim\chi^2(n_1+n_2)$</p>
+<p><strong>$\chi^2$-分布的数字特征</strong>：</p>
+<p>设$\chi^2\sim\chi^2(n)$，则$E(\chi^2)=n$，$Var(\chi^2)=2n$</p>
 <p><strong>$t$-分布</strong>：</p>
-<p>设$X\sim\mathbf N(0,1)$，$Y\sim\mathcal X^2(n)$，且$X,Y$相互独立，令</p>
+<p>设$X\sim\mathbf N(0,1)$，$Y\sim\chi^2(n)$，且$X,Y$相互独立，令</p>
 <script type="math/tex; mode=display">t=\frac{X}{\sqrt{Y/n}}</script><p>称$t$服从自由度为$n$的$t$-分布，记为$t\sim t(n)$。当$n$较大时，可以认为$t(n)=N(0,1)$</p>
 <p><strong>$F$-分布</strong>：</p>
-<p>设$U\sim\mathcal X^2(n_1)$，$V\sim\mathcal X^2(n_2)$，且$U,V$相互独立，令</p>
+<p>设$U\sim\chi^2(n_1)$，$V\sim\chi^2(n_2)$，且$U,V$相互独立，令</p>
 <script type="math/tex; mode=display">F=\frac{U/n_1}{V/n_2}</script><p>称$F$服从自由度为$(n_1,n_2)$的$F$-分布，记为$F\sim F(n_1,n_2)$</p>
 <p><strong>$F$-分布的性质</strong>：</p>
 <ul>
@@ -432,7 +432,7 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <ul>
 <li>$\mathbf N(0,1)$的$\alpha$分位点记为$u_\alpha$</li>
 <li>$t(n)$的$\alpha$分位点记为$t_\alpha(n)$</li>
-<li>$\mathcal X^2(n)$的$\alpha$分位点记为$\mathcal X^2_\alpha(n)$</li>
+<li>$\chi^2(n)$的$\alpha$分位点记为$\chi^2_\alpha(n)$</li>
 <li>$F(n_1,n_2)$的$\alpha$分位点记为$F_\alpha(n_1,n_2)$</li>
 <li>三反公式：$F_\alpha(n_1,n_2)=\frac{1}{F_{1-\alpha}(n_2,n_1)}$</li>
 </ul>
@@ -441,7 +441,7 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <p><strong>抽样分布定理二</strong>：</p>
 <ol>
 <li>$\bar X$，$S^2$相互独立</li>
-<li>$\frac{(n-1)S^2}{\sigma^2}\sim\mathcal X^2(n-1)$</li>
+<li>$\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)$</li>
 </ol>
 <p><strong>抽样分布定理三</strong>：</p>
 <p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(\mu,\sigma^2)$的样本，则</p>
@@ -450,7 +450,7 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <script type="math/tex; mode=display">\frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2}\sim F(n-1,m-1)</script><p><strong>抽样分布定理五</strong>：</p>
 <p>设$X_1,X_2,\cdots,X_n$是总体$X\sim\mathbf N(\mu_1,\sigma_1^2)$的样本；$Y_1,Y_2,\cdots,Y_m$是总体$Y\sim\mathbf N(\mu_2,\sigma_2^2)$的样本，且两样本相互独立，两样本均值和样本方差分别为$\bar X,\bar Y,S_1^2,S_2^2$，则</p>
 <script type="math/tex; mode=display">\frac{(\bar X-\bar Y)-(\mu_1-\mu_2)}{S_\omega\sqrt{\frac{1}{n}+\frac{1}{m}}}\sim t(n+m-2)</script><p>其中$S_\omega^2=\frac{(n-1)S_1^2+(m-1)S_2^2}{n+m-2}$，$S_\omega=\sqrt{S_\omega^2}$</p>
-<p><strong>指数分布与$\mathcal X^2$-分布</strong>：自由度为2的$\mathcal X^2$-分布就是参数为$\frac 1 2$的指数分布</p>
+<p><strong>指数分布与$\chi^2$-分布</strong>：自由度为2的$\chi^2$-分布就是参数为$\frac 1 2$的指数分布</p>
 <h1 id="Chapter-7"><a href="#Chapter-7" class="headerlink" title="Chapter 7"></a>Chapter 7</h1><h2 id="§7-1-点估计"><a href="#§7-1-点估计" class="headerlink" title="§7.1 点估计"></a>§7.1 点估计</h2><p><strong>矩估计法</strong>：</p>
 <p>设总体$X\sim F(x;\theta_1,\theta_2,\cdots,\theta_m)$，其中$\theta_1,\theta_2,\cdots,\theta_m$为未知参数，$X_1,X_2,\cdots,X_n$为来自总体$X$的样本，设总体矩$\mu_k=E(X^k)\ (k=1,2,\cdots,m)$都存在，则$\mu_k$是$\theta_1,\theta_2,\cdots,\theta_m$的函数。</p>
 <p>由辛钦大数定律，样本k阶矩$A_k\stackrel{P}{\longrightarrow}\mu_k,\ n→\infty\ (k=1,2,\cdots,m)$</p>
@@ -468,6 +468,146 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <p><strong>最大似然估计(MLE)</strong>：</p>
 <p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim f(x;\theta)$的样本，令</p>
 <script type="math/tex; mode=display">L(\theta)=L(\theta;X_1,X_2,\cdots,X_n)=\prod\limits_{i=1}^{n}f(X_i;\theta)</script><p>$L(\theta)$称为<strong>似然函数</strong>，若存在统计量$\widehat\theta=\widehat\theta(X_1,X_2,\cdots,X_n)$使得$L(\widehat\theta)=\max\limits_{\theta\in\Theta}L(\theta;x_1,x_2,\cdots,x_)$，则称其为$\theta$的最大似然估计(MLE)。</p>
+<p><strong>最大似然估计常见求法</strong>：</p>
+<ol>
+<li>求似然函数，构建(对数)似然方程组</li>
+<li>对各未知参数求偏导，使其偏导为0</li>
+<li>求解(对数)似然方程组，得到MLE</li>
+</ol>
+<p>在似然函数不可导时，回到原始定义，即找到让似然函数值最大的$\widehat\theta$即可</p>
+<h2 id="§7-2-估计量的评价标准"><a href="#§7-2-估计量的评价标准" class="headerlink" title="§7.2 估计量的评价标准"></a>§7.2 估计量的评价标准</h2><p><strong>无偏性</strong>：</p>
+<p>若估计量$\widehat\theta=\widehat\theta(X_1,X_2,\cdots,X_n)$的数学期望存在，且$\forall\theta\in\Theta$有$E_\theta(\widehat\theta)=\theta$，则称$\widehat\theta$为$\theta$的无偏估计</p>
+<p>，否则为有偏估计。</p>
+<p>称$b_n(\widehat\theta)=E_\theta(\widehat\theta)-\theta$为估计量$\widehat\theta$的偏差，若$\lim\limits_{n→\infty}b_n(\widehat\theta)=0$，则$\widehat\theta$为$\theta$的渐进无偏估计。</p>
+<p>对任意总体$X$，若期望$\mu$与方差$\sigma^2$存在，则$\widehat\mu=\bar X$，$\widehat\sigma^2=S^2$都是无偏估计，而修正后的样本方差$\widetilde S^2$是$\sigma^2$的渐进无偏估计。</p>
+<p>同一参数的不同无偏估计的线性组合(总比例为1)还是无偏估计。</p>
+<p><strong>估计量的均方误差</strong>：</p>
+<p>设$\widehat\theta(X_1,X_2,\cdots,X_n)$为待估参数$\theta$的估计量，称$E_\theta(\widehat\theta-\theta)^2$为$\widehat\theta$的均方误差。</p>
+<p>$E_\theta(\widehat\theta-\theta)^2=Var(\widehat\theta)+[E(\widehat\theta)-\theta]^2$</p>
+<p><strong>有效性</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是总体$X\sim F(x,\theta);\theta\in\Theta$的样本，</p>
+<script type="math/tex; mode=display">\widehat\theta_1=\widehat\theta_1(X_1,X_2,\cdots,X_n),\widehat\theta_2=\widehat\theta_2(X_1,X_2,\cdots,X_n)</script><p>都是$\theta$的无偏估计，即$E(\widehat\theta_1)=E(\widehat\theta_2)=\theta\ (\forall\theta\in\Theta)$。若$\forall\theta\in\Theta$有$Var(\widehat\theta_1)\leq Var(\widehat\theta_2)$，则称$\widehat\theta_1$较$\widehat\theta_2$有效。</p>
+<p><strong>相合性(一致性)</strong>：</p>
+<p>设$\widehat\theta_n=\widehat\theta(X_1,X_2,\cdots,X_n)$是位置参数$\theta$的点估计，若$\forall\theta\in\Theta$满足：$\forall\varepsilon&gt;0$有</p>
+<script type="math/tex; mode=display">\lim\limits_{n→\infty}P\{|\widehat\theta_n-\theta|\ge \varepsilon\}=0</script><p>即$\widehat\theta_n\stackrel{P}{\longrightarrow}\theta\ (n→\infty)$，则称$\widehat\theta_n$是$\theta$相合估计。</p>
+<p>对任意总体$X$，若期望$\mu$与方差$\sigma^2$存在，则$\widehat\mu=\bar X$，$\widehat\sigma^2=S^2$都是相合估计。</p>
+<p><strong>关于相合估计的一般结论</strong>：</p>
+<ul>
+<li><p>由辛钦大数定律，$\theta$的矩估计$\widehat\theta$是相合估计</p>
+</li>
+<li><p>$\theta$的MLE$\widehat\theta$一般也是相合估计</p>
+</li>
+<li><p>$\theta$的相合估计不一定是无偏估计</p>
+</li>
+<li><p>若$\widehat\theta$是$\theta$的无偏估计，则由Chebyshev不等式有</p>
+<script type="math/tex; mode=display">P\{|\widehat\theta-\theta|\ge \varepsilon\}\leq \frac{Var(\widehat\theta)}{\varepsilon^2}</script><p>故当$\lim\limits_{n→\infty}Var(\widehat\theta)=0$时，$\widehat\theta$是$\theta$的相合估计(充分条件)</p>
+</li>
+</ul>
+<h2 id="§7-3-区间估计"><a href="#§7-3-区间估计" class="headerlink" title="§7.3 区间估计"></a>§7.3 区间估计</h2><p><strong>区间估计</strong>：</p>
+<p>设总体$X\sim F(x;\theta)\ (\theta\in\Theta)$。若对给定的$0&lt;\alpha&lt;1$，存在两个统计量</p>
+<script type="math/tex; mode=display">\underline\theta=\underline\theta(X_1,X_2,\cdots,X_n),\ \overline\theta=\overline\theta(X_1,X_2,\cdots,X_n)\ (\underline\theta\leq \overline\theta)</script><p>使得$\forall\theta\in\Theta$，有</p>
+<script type="math/tex; mode=display">P\{\underline\theta\leq \theta\leq \overline\theta\}\ge 1-\alpha</script><p>则称随机区间$(\underline\theta,\overline\theta)$为$\theta$的置信水平为$1-\alpha$的<strong>置信区间</strong>，$\underline\theta,\overline\theta$分别称为<strong>置信下限</strong>和<strong>置信上限</strong>。</p>
+<p>$1-\alpha$置信区间的含义是随机区间$[\underline\theta,\overline\theta]$至少以$1-\alpha$的概率套住$\theta$的真值。</p>
+<ul>
+<li><p>可靠性：置信度$1-\alpha$应尽量大，即要求估计尽量可信(可靠)。</p>
+</li>
+<li><p>精确性：区间长度应尽量小，即估计的精度要尽可能地高。</p>
+</li>
+<li>上述两个要求是相互矛盾的：先保证可靠性，在此前提下尽可能提高精度。</li>
+</ul>
+<p><strong>求未知参数置信区间的一般过程</strong>：</p>
+<ul>
+<li><p>找出参数$\theta$的一个较好的点估计$\widehat\theta=T(X_1,X_2,\cdots,X_n)$。</p>
+</li>
+<li><p>找出枢轴量函数$W(T,\theta)$，使得$W$的分布不依赖于未知参数</p>
+</li>
+<li><p>对于给定置信水平$1-\alpha$定出两个常数$a,b$使得</p>
+<script type="math/tex; mode=display">P\{a\leq W(T,\theta)\leq b\}=1-\alpha</script></li>
+<li><p>根据等价形式得到$\underline\theta\leq \theta\leq \overline\theta$，则$[\underline\theta,\overline\theta]$就是$\theta$的一个置信水平为$1-\alpha$的置信区间</p>
+</li>
+</ul>
+<p><strong>单正态总体参数的区间估计</strong>：</p>
+<p>单个正态总体$X\sim \mathbf N(\mu,\sigma^2)$，$X_1,X_2,\cdots,X_n$是一个样本。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">待估参数</th>
+<th style="text-align:center">其他参数</th>
+<th style="text-align:center">枢轴量及其分布</th>
+<th style="text-align:center">置信区间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$\mu$</td>
+<td style="text-align:center">$\sigma^2$已知</td>
+<td style="text-align:center">$\frac{\bar X-\mu}{\sigma/\sqrt n}\sim \mathbf N(0,1)$</td>
+<td style="text-align:center">$\left [\bar X-\frac{\sigma}{\sqrt n}u_{1-\frac{\alpha}{2}},\bar X+\frac{\sigma}{\sqrt n}u_{1-\frac{\alpha}{2}}\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\mu$</td>
+<td style="text-align:center">$\sigma^2$未知</td>
+<td style="text-align:center">$\frac{\bar X-\mu}{S/\sqrt n}\sim t(n-1)$</td>
+<td style="text-align:center">$\left[\bar{X}-\frac{S}{\sqrt{n}} t_{1-\frac{\alpha}{2}}(n-1), \bar{X}+\frac{S}{\sqrt{n}} t_{1-\frac{\alpha}{2}}(n-1)\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\sigma^2$</td>
+<td style="text-align:center">$\mu$已知</td>
+<td style="text-align:center">$\sum\limits_{i=1}^{n}(\frac{X_i-\mu}{\sigma})^2\sim \chi^2(n)$</td>
+<td style="text-align:center">$\left[\frac{\sum\limits_{i=1}^n (X_i-\mu)^2}{\chi^2_{1-{\alpha\over 2}}(n)},\frac{\sum\limits_{i=1}^n (X_i-\mu)^2}{\chi^2_{\alpha\over 2}(n)}\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\sigma^2$</td>
+<td style="text-align:center">$\mu$未知</td>
+<td style="text-align:center">$\frac{(n-1)S^2}{\sigma^2}\sim \chi^2(n-1)$</td>
+<td style="text-align:center">$\left[\frac{(n-1) S^{2}}{\chi_{1-{\alpha\over  2} }^{2}(n-1)}, \frac{(n-1) S^{2}}{\chi_{\alpha \over 2}^{2}(n-1)}\right]$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>双正态总体参数的区间估计</strong>：</p>
+<p>正态总体$\mathbf N(\mu_1,\sigma_1^2)$和$\mathbf N(\mu_2,\sigma_2^2)$的两组相互独立的样本$X_1,X_2,\cdots,X_m$和$Y_1,Y_2,\cdots,Y_n$。</p>
+<p>样本均值和样本方差分别是$\bar X,S_1^2$和$\bar Y,S_2^2$，记$S_\omega^2=\frac{\left(m-1\right) S_{1}^{2}+\left(n-1\right) S_{2}^{2}}{\left(m+n-2\right)}$。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">待估参数</th>
+<th style="text-align:center">其他参数</th>
+<th style="text-align:center">枢轴量及其分布</th>
+<th style="text-align:center">置信区间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$\mu_1-\mu_2$</td>
+<td style="text-align:center">$\sigma_1^2,\sigma_2^2$已知</td>
+<td style="text-align:center">$\frac{\bar{X}-\bar{Y}-\left(\mu_{1}-\mu_{2}\right)}{\sqrt{\frac{\sigma_{1}^{2}}{n_{1}}+\frac{\sigma_{2}^{2}}{n_{2}}}} \sim \mathbf N(0,1)$</td>
+<td style="text-align:center">$\left[\bar{X}-\bar{Y}- \sqrt{\frac{\sigma_{1}^{2}}{m}+\frac{\sigma_{2}^{2}}{n}}u_{1-\frac{\alpha}{2}}, \bar{X}-\bar{Y}+\sqrt{\frac{\sigma_{1}^{2}}{m}+\frac{\sigma_{2}^{2}}{n}}u_{1-\frac{\alpha}{2}}\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\mu_1-\mu_2$</td>
+<td style="text-align:center">$\sigma_1^2=\sigma_2^2$未知</td>
+<td style="text-align:center">$\frac{\bar{X}-\bar{Y}-\left(\mu_{1}-\mu_{2}\right)}{S_{\omega} \sqrt{\frac{1}{n_{1}}+\frac{1}{n_{2}}}} \sim t\left(n_{1}+n_{2}-2\right)$</td>
+<td style="text-align:center">$\left[(\bar{X}-\bar{Y}) - S_{\omega} \sqrt{\frac{1}{m}+\frac{1}{n}}t_{1-\frac{\alpha}{2}}(m+n-2),(\bar{X}-\bar{Y}) + S_{\omega} \sqrt{\frac{1}{m}+\frac{1}{n}}t_{1-\frac{\alpha}{2}}(m+n-2)\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">${\sigma_1^2}/{\sigma_2^2}$</td>
+<td style="text-align:center">$\mu_1,\mu_2$未知</td>
+<td style="text-align:center">$\frac{S_{1}^{2}}{S_{2}^{2}} \cdot \frac{\sigma_{2}^{2}}{\sigma_{1}^{2}} \sim F\left(n_{1}-1, n_{2}-1\right)$</td>
+<td style="text-align:center">$\left[\frac{S_{1}^{2}}{S_{2}^{2}} \cdot \frac{1}{F_{1-\frac{\alpha}{2}}\left(m-1, n-1\right)}, \frac{S_{1}^{2}}{S_{2}^{2}} \cdot \frac{1}{F_{\frac{\alpha}{2}}\left(m-1, n-1\right)}\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">${\sigma_1^2}/{\sigma_2^2}$</td>
+<td style="text-align:center">$\mu_1,\mu_2$已知</td>
+<td style="text-align:center">$\frac{\sum_{i=1}^{n_{1}}\left(\frac{X_{i}-\mu_{1}}{\sigma_{1}}\right)^{2} / n_{1}}{\sum_{i=1}^{n_{2}}\left(\frac{Y_{i}-\mu_{2}}{\sigma_{2}}\right)^{2} / n_{2}} \sim F\left(n_{1}, n_{2}\right)$</td>
+<td style="text-align:center">$\left[\frac{\sum\limits_{i=1}^{m}\left(X_{i}-\mu_{1}\right)^{2} / m}{\sum\limits_{i=1}^{n}\left(X_{i}-\mu_{2}\right)^{2} / n} \cdot \frac{1}{F_{1-\frac{\alpha}{2}}(m, n)}, \frac{\sum\limits_{i=1}^{m}\left(X_{i}-\mu_{1}\right)^{2} / m}{\sum\limits_{i=1}^{n}\left(X_{i}-\mu_{2}\right)^{2} / n} \cdot \frac{1}{F_{\frac{\alpha}{2}}(m, n)}\right]$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>这玩意能背下来就有鬼了= =</p>
 
     </div>
 
@@ -551,7 +691,7 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3"><span class="nav-number">1.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-6-%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">§3.6 联合分布随机变量函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-7-%E6%9E%81%E5%80%BC%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">§3.7 极值和顺序统计量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#r-v-%E6%9E%81%E5%80%BC%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">r.v.极值的分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4"><span class="nav-number">2.</span> <span class="nav-text">Chapter 4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-1-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.1.</span> <span class="nav-text">§4.1 随机变量的期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-2-%E6%96%B9%E5%B7%AE%E4%B8%8E%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">2.2.</span> <span class="nav-text">§4.2 方差与标准差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-3-%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">§4.3 协方差与相关系数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-4-%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.4.</span> <span class="nav-text">§4.4 条件期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-x-%E5%B8%B8%E7%94%A8%E5%88%86%E5%B8%83%E7%9A%84%E5%88%86%E5%B8%83%E5%8F%8A%E6%95%B0%E5%AD%97%E7%89%B9%E5%BE%81"><span class="nav-number">2.5.</span> <span class="nav-text">4.x 常用分布的分布及数字特征</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-5"><span class="nav-number">3.</span> <span class="nav-text">Chapter 5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-1-%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">§5.1 大数定律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-2-%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">§5.2 中心极限定理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-6"><span class="nav-number">4.</span> <span class="nav-text">Chapter 6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A76-2-%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">4.1.</span> <span class="nav-text">§6.2 数理统计：基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A76-3-%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83"><span class="nav-number">4.2.</span> <span class="nav-text">§6.3 抽样分布</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-7"><span class="nav-number">5.</span> <span class="nav-text">Chapter 7</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A77-1-%E7%82%B9%E4%BC%B0%E8%AE%A1"><span class="nav-number">5.1.</span> <span class="nav-text">§7.1 点估计</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3"><span class="nav-number">1.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-6-%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">§3.6 联合分布随机变量函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-7-%E6%9E%81%E5%80%BC%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="nav-number">1.2.</span> <span class="nav-text">§3.7 极值和顺序统计量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#r-v-%E6%9E%81%E5%80%BC%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">1.2.1.</span> <span class="nav-text">r.v.极值的分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4"><span class="nav-number">2.</span> <span class="nav-text">Chapter 4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-1-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.1.</span> <span class="nav-text">§4.1 随机变量的期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-2-%E6%96%B9%E5%B7%AE%E4%B8%8E%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">2.2.</span> <span class="nav-text">§4.2 方差与标准差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-3-%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">§4.3 协方差与相关系数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-4-%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B"><span class="nav-number">2.4.</span> <span class="nav-text">§4.4 条件期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-x-%E5%B8%B8%E7%94%A8%E5%88%86%E5%B8%83%E7%9A%84%E5%88%86%E5%B8%83%E5%8F%8A%E6%95%B0%E5%AD%97%E7%89%B9%E5%BE%81"><span class="nav-number">2.5.</span> <span class="nav-text">§4.x 常用分布的分布及数字特征</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-5"><span class="nav-number">3.</span> <span class="nav-text">Chapter 5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-1-%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="nav-number">3.1.</span> <span class="nav-text">§5.1 大数定律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-2-%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">§5.2 中心极限定理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-6"><span class="nav-number">4.</span> <span class="nav-text">Chapter 6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A76-2-%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">4.1.</span> <span class="nav-text">§6.2 数理统计：基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A76-3-%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83"><span class="nav-number">4.2.</span> <span class="nav-text">§6.3 抽样分布</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-7"><span class="nav-number">5.</span> <span class="nav-text">Chapter 7</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A77-1-%E7%82%B9%E4%BC%B0%E8%AE%A1"><span class="nav-number">5.1.</span> <span class="nav-text">§7.1 点估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A77-2-%E4%BC%B0%E8%AE%A1%E9%87%8F%E7%9A%84%E8%AF%84%E4%BB%B7%E6%A0%87%E5%87%86"><span class="nav-number">5.2.</span> <span class="nav-text">§7.2 估计量的评价标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A77-3-%E5%8C%BA%E9%97%B4%E4%BC%B0%E8%AE%A1"><span class="nav-number">5.3.</span> <span class="nav-text">§7.3 区间估计</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
