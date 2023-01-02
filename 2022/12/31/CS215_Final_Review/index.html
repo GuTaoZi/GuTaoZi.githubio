@@ -27,13 +27,18 @@
 <meta property="og:site_name" content="咕桃w！">
 <meta property="og:description" content="海纳百川，不如离散">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/01/02/SmQ43Gcoi9Nlnk8.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/02/FLgD3CjqZrykNEK.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/02/fvPKBXwR3t8JIyo.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/02/FsuZT7cd2tvEbXQ.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/02/LMvoapSku5HEOFB.png">
 <meta property="og:image" content="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png">
 <meta property="article:published_time" content="2022-12-31T13:45:39.875Z">
-<meta property="article:modified_time" content="2023-01-02T11:34:09.172Z">
+<meta property="article:modified_time" content="2023-01-02T16:38:53.377Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Discrete Math">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png">
+<meta name="twitter:image" content="https://s2.loli.net/2023/01/02/SmQ43Gcoi9Nlnk8.png">
 
 <link rel="canonical" href="https://gutaozi.github.io/2022/12/31/CS215_Final_Review/">
 
@@ -199,7 +204,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-01-02 19:34:09" itemprop="dateModified" datetime="2023-01-02T19:34:09+08:00">2023-01-02</time>
+                <time title="修改时间：2023-01-03 00:38:53" itemprop="dateModified" datetime="2023-01-03T00:38:53+08:00">2023-01-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -372,11 +377,120 @@
 <script type="math/tex; mode=display">A=\bigcup \limits_{a\in A}[a]_R</script><p>The equivalence classes form a partition of $A$.</p>
 <p>Let $\{A_1,A_2,\cdots,A_i,\cdots\}$ be a partition of $S$. Then there is an equivalence relation $R$ on $S$, that has the sets $A_i$ as its equivalence classes.</p>
 <p><strong>Partial Ordering</strong>：</p>
-<p>A relation $R$ on a set $S$ is called a partial ordering, if it is <strong>reflexive</strong>, <strong>antisymmetric</strong> and <strong>transitive</strong>. A set $S$ together with a partial ordering $R$ is called a partially ordered set, or poset, denoted by $(S,R)$. Members of $S$ are called elements of the poset.</p>
-<h1 id="Chapter-13-Graph"><a href="#Chapter-13-Graph" class="headerlink" title="Chapter 13 - Graph"></a>Chapter 13 - Graph</h1><p><strong>Paths in Directed Graphs</strong>：</p>
-<p>A path from $a$ to $b$ in the directed graph $G$ is a sequence of edges $(x_0,x_1), (x_1,x_2),\cdots, (x_{n-1},x_n)$ in $G$, where $n$ is nonnegative and $x_0=a$ and $x_n=b$.</p>
-<p><strong>Circuit / Cycle</strong>：</p>
-<p>A path of length $n\ge 1$ that begins and ends at the same vertex is called circuit or cycle.</p>
+<p>A relation $R$ on a set $S$ is called a partial ordering, if it is <strong>reflexive</strong>, <strong>antisymmetric</strong> and <strong>transitive</strong>. A set $S$ together with a partial ordering $R$ is called a poset, denoted by $(S,R)$. Members of $S$ are called elements of the poset.</p>
+<p><strong>Comparability</strong>：</p>
+<p>The elements $a$ and $b$ of a poset $(S,≼)$ are comparable if either $a≼b$ or $b≼a$. Otherwise, $a$ and $b$ are called incomparable.</p>
+<p><strong>Total Ordering</strong>：</p>
+<p>If $(S,≼)$ is a poset and every two elements of $S$ are comparable, $S$ is called a <strong>totally ordered</strong> or <strong>linearly ordered set</strong>, and $≼$ is called a <strong>total order</strong> or a <strong>linear order</strong>. A totally ordered set is also called a <strong>chain</strong>.</p>
+<p><strong>Lexicographic Ordering</strong>：</p>
+<p>Given two posets $(A_1,≼_1)$ and $(A_2,≼_2)$, the lexicographic ordering on $A_1\times A_2$ is defined by specifying that $(a_1,a_2)$ is less than $(b_1,b_2)$, i.e., $(a_1,a_2)≼(b_1,b_2)$, either if $a_1≺_1b_1$ or if $a_1=b_1$ then $a_2≼_2b_2$.</p>
+<p><strong>Hasse Diagram</strong>：</p>
+<p>……</p>
+<p><strong>Maximal and Minimal Elements</strong>：</p>
+<p>$a$ is a maximal (resp. minimal) element in poset $(S, ≼)$ is there is no $b\in S$ such that $a ≺ b$ (resp. $b ≺ a$).</p>
+<p><strong>Greatest and Least Elements</strong>：</p>
+<p>$a$ is the greatest (resp. least) element of the poset $(S, ≼)$ if $b ≼ a$ (resp. $a ≼ b$) for all $b\in S$.</p>
+<p><strong>Upper Bound and Lower Bound</strong>：</p>
+<p>$u\in S$ is called an upper bound (resp. lower bound) of $A$ if $a ≼ u$ (resp. $u ≼ a$) for all $a\in A$.</p>
+<p>$x\in S$ is called the least upper bound (resp. greatest lower bound) of $A$ if $x$ is an upper bound (resp. lower bound) that is less than any other upper bound (resp. greater than any other lower bound) of $A$.</p>
+<p><strong>Well-Ordered Set</strong>：</p>
+<p>$(S, ≼)$ is a well-ordered set if it is a poset such that $≼$ is a total ordering and every non empty subset of $S$ has a least element.</p>
+<p><strong>The Principle of Well-Ordered Induction</strong>：</p>
+<p>Suppose that $S$ is a well-ordered set. Then $P(x)$ is true for all $x\in S$, if</p>
+<p>Inductive Step: For every $y\in S$, if $P(x)$ is true for all $x\in S$ with $x ≺ y$, then $P(y)$ is true.</p>
+<p><strong>The reason for no base step</strong>: For the least element $x_0$, the precedent “P(x) is true for all $x\in S$ with $x ≺ x_0$” is itself false, by <strong>vacuous proof</strong>, $P(x_0)$ is true.</p>
+<p><strong>Lattices</strong>：</p>
+<p>A poset in which every pair of elements has both a least upper bound and a greatest lower bound is called a lattice.</p>
+<p><strong>Topological Sorting</strong>：</p>
+<p>Given a partial ordering $R$, find a total ordering $≼$ such that $a≼b$ whenever $a\ R\ b$. $≼$ is said <strong>compatible</strong>  with $R$.</p>
+<p><img src="https://s2.loli.net/2023/01/02/SmQ43Gcoi9Nlnk8.png" alt="image.png" style="zoom:50%;" /></p>
+<h1 id="Chapter-13-Graph"><a href="#Chapter-13-Graph" class="headerlink" title="Chapter 13 - Graph"></a>Chapter 13 - Graph</h1><p><strong>Definition of a Graph</strong>：</p>
+<p>A graph $G=(V,E)$ consists of a nonempty set $V$ of vertices and a set $R$ of edges. Each edge has either one or two vertices associated with it, called its endpoints. An edge is said to be incident to its endpoints.</p>
+<p><strong>Simple graph</strong>：</p>
+<p>A graph in which at most one edge joins each pair of distinct vertices and no edge joins a vertex to itself.</p>
+<p><strong>multigraph</strong>：</p>
+<p>Graphs that may have multiple edges connecting the same vertices.</p>
+<p><strong>pseudograph</strong>：</p>
+<p>Graphs that may include loops, and possibly multiple edges connecting the same pair of vertices or a vertex to itself.</p>
+<p><strong>Undirected Graphs</strong>：</p>
+<p>adjacent(neighbors), neighborhood, degree…</p>
+<p> Handshaking Theorem: If $G=(V,E)$ is an undirected graph with $m$ edges, then $2m=\sum\limits_{v\in V}deg(v)$.</p>
+<p>An undirected graph has an even number of vertices of odd degree.</p>
+<p><strong>Directed Graphs</strong>：</p>
+<p>adjacent from, adjacent to, in-degree $deg^-(v)$, out-degree $deg^+(v)$</p>
+<p>$|E|=\sum\limits_{v\in V}deg^-(v)=\sum\limits_{v\in V}deg^+(v)$</p>
+<p><strong>Complete Graphs</strong>：</p>
+<p>A complete graph on $n$ vertices, denoted by $K_n$, is the simple graph that contains exactly one edge between each pair of distinct vertices.</p>
+<p><img src="https://s2.loli.net/2023/01/02/FLgD3CjqZrykNEK.png" alt="image.png" style="zoom:50%;" /></p>
+<p><strong>Cycles</strong>：</p>
+<p>A cycle $C_n$ for $n \ge 3$ consists of $n$ vertices $v_1, v_2,\cdots, v_n$, and edges $\{v_1,v_2\},\{v_2,v_3\},\cdots,\{v_{n-1},v_n\},\{v_n,v_1\}$.</p>
+<p><img src="https://s2.loli.net/2023/01/02/fvPKBXwR3t8JIyo.png" alt="image.png" style="zoom:50%;" /></p>
+<p><strong>Wheels</strong>：</p>
+<p>A wheel $W_n$ is obtained by adding an additional vertex to a cycle $C_n$.</p>
+<p><img src="https://s2.loli.net/2023/01/02/FsuZT7cd2tvEbXQ.png" alt="image.png" style="zoom:50%;" /></p>
+<p><strong>N-dimensional Hypercube</strong>：</p>
+<p>An  n-cube $Q_n$ is a graph with $2^n$ vertices representing all bit strings of length $n$, where there is an edge between two vertices that differ in exactly one bit position.</p>
+<p><img src="https://s2.loli.net/2023/01/02/LMvoapSku5HEOFB.png" alt="image.png" style="zoom:50%;" /></p>
+<p><strong>Bipartite Graphs</strong>：</p>
+<p>A simple graph $G$ is bipartite if $V$ can be partitioned into two disjoint subsets $V_1$ and $V_2$ such that every edge connects a vertex in $V_1$ and a vertex in $V_2$.</p>
+<p><strong>Complete Bipartite Graphs</strong>：</p>
+<p>A complete bipartite graph $K_{m,n}$ is a graph that has its vertex set partitioned into two subsets $V_1$ of size $m$ and $V_2$ of size $n$ such that there is an edge from every vertex in $V_1$ to every vertex in $V_2$.</p>
+<p><strong>Bipartite Graphs and Matchings</strong>：</p>
+<p>A matching is a subset of $E$ such that no two edges are incident with the same vertex.</p>
+<p>A maximum matching is a matching with the largest number of edges.</p>
+<p>A matching $M$ in a bipartite graph $G=(V,E)$ wth bipartition $(V_1,V_2)$ is a complete matching from $V_1$ to $V_2$ if every vertex in $V_1$ is the endpoint of an edge in the matching, i.e., $|M|=|V_1|$.</p>
+<p><strong>Hall’s Marriage Theorem</strong>：</p>
+<p>The bipartite graph $G=(V,E)$ with bipartition $(V_1,V_2)$ has a complete matching from $V_1$ to $V_2$ IFF $|N(A)|\ge |A|$ for all subsets $A$ of $V_1$.</p>
+<ul>
+<li><p>“only if”: For every vertex $v\in A$, there is an edge in $M$ connecting $v$ to a vertex in $V_2$. Thus, for all subsets $A$ of $V_1$, there are at least as many vertices in $V_2$ that are neigbors of vertices in $A$ as there are vertices in $A$, $|N(A)|\ge |A|$.</p>
+</li>
+<li><p>“if”: Use strong induction. </p>
+</li>
+<li><p>Base step: $|V_1|=1$</p>
+</li>
+<li><p>Inductive hypothesis: Let $k$ be a positive integer. If $G=(V,E)$  is a bipartite graph ith bipartition $(V_1,V_2)$, and $|V_1|=j\le k$, then there is a complete matching $M$ from $V_1$ to $V_2$ whenever the condition that $|N(A)|\ge |A|$ for all $A\subseteq V_1$ is met.</p>
+</li>
+<li><p>Inductive step: suppose that $H=(W,F)$ is a bipartite graph with bipartition $(W_1,W_2)$ and $|W_1|=k+1$</p>
+</li>
+<li><p>Case (Ⅰ): For all integers $j$ with $1\le j\le k$, the vertices in every set of $j$ elements from $W_1$ are adjacent to at least $j+1$ elements of $W_2$.</p>
+<p>Find a complete matching from $W_1-\{v\}$ to $W_2-\{w\}$, then match $v$ to $w$.</p>
+</li>
+<li><p>Case (Ⅱ): For some integer $j$ with $1\le j\le k$, there is a subset $W_1’$ of $j$ vertices such that there are exactly $j$ neighbors of these vertices in $W_2$.</p>
+<p>Let $W_2’$ be the set of these neighbors. Then by i.h., there is a complete matching from $W_1’$ to $W_2’$. Now consider the graph $K=(W_1-W_1’,W_2-W_2’)$. We will show that the condition $|N(A)|\ge |A|$ is met for all subsets $A$ of $W_1-W_1’$.</p>
+<p>If not, there is a subset $B$ of $t$ vertices with $1\le t\le k+1-j$ such that $|N(B)|&lt;|B|$, contradiction.</p>
+<p>Then there is a complete matching for $K$, and thus a complete matching for $G$.</p>
+</li>
+</ul>
+<p><strong>Subgraphs</strong>：</p>
+<p>A subgraph of a graph $G=(V,E)$ is a graph $(W,F)$, where $W\subseteq V$ and $F\subseteq E$. A subgraph $H$ of $G$ is a proper subgraph of $G$ if $H\ne G$.</p>
+<p><strong>Union of Simple Graphs</strong>：</p>
+<p>Simple graph: $G_1\cup G_2=(V_1\cup V_2, E_1\cup E_2)$</p>
+<p><strong>Representation of Graphs</strong>：</p>
+<p>adjacency lists, adjacency matrices, and incidence matrices.</p>
+<p><strong>Isomorphism of Graphs</strong>：</p>
+<p>The simple graphs $G_1=(V_1,E_1)$ and $G_2=(V_2,E_2)$ are isomorphic if there is a <strong>bijection</strong> from $V_1$ to $V_2$ with the property that $a$ and $b$ are adjacent in $G_1$ IFF $f(a)$ and $f(b)$ are adjacent in $G_2$, for all $a$ and $b$ in $V_1$. Such a function is called an isomorphism.</p>
+<p>Useful graph invariants: the number of vertices, number of edges, degree sequence, etc.</p>
+<p><strong>Path</strong>：</p>
+<p>Let $n$ be a nonnegative integer and $G$ an undirected graph. A path of length $n$ from $u$ to $v$ in $G$ is a sequence of $n$ edges $e_1,e_2,\cdots,e_n$ of $G$ for which there exists a sequence $x_0=u,x_1,\cdots,x_{n-1},x_n=v$ of vertices such that $e_i$ has the endpoints $x_{i-1}$ and $x_i$ for $i=1,\cdots,n$.</p>
+<p>A path is <strong>simple</strong> if it does not contain the same edge more than once.</p>
+<p><strong>Circuit</strong>：</p>
+<p>The path is a circuit if it begins and ends at the same vertex, i.e., if $u=v$ and has the length greater than $0$. </p>
+<p><strong>Simple Path Existence Lemma</strong>：</p>
+<p>If there is a path between two distinct vertices $x$ and $y$ in graph $G$, then there is a simple path between $x$ and $y$ in $G$. (Just delete cycles/loops.)</p>
+<p><strong>Connected Components</strong>：</p>
+<p>A connected component of a graph $G$ is a connected subgraph of $G$ that is not a proper subgraph of another connected subgraph of $G$.</p>
+<p><strong>Connectedness in Directed Graphs</strong>：</p>
+<p>A directed graph is strongly connected if there is a path from $a$ to $b$ and a path from $b$ to $a$ whenever $a$ and $b$ are vertices in the graph.</p>
+<p>A directed graph is weakly connected if there is a path between every two vertices in the underlying undirected graph.</p>
+<p><strong>Cut Vertices and Cut Edges</strong>：</p>
+<p>……</p>
+<p>A set of edges $E’$ is called an edge cut of $G$ if the subgraph $G-E’$ is disconnected. The edge connectivity $\lambda(G)$ is the minimum number of edges in an edge cut of $G$.</p>
+<p><strong>Paths and Isomorphism</strong>：</p>
+<p>The existence of a simple circuit of length $k$ is isomorphic invariant. In addition, paths can be used to construct mappings that may be isomorphisms.</p>
+<p><strong>Counting Paths between Vertices</strong>：</p>
+<p>Let $G$ be a graph with adjacency matrix $A$ with respect to the ordering $v_1, v_2,\cdots, v_n$ of vertices. The number of different paths of length r from $v_i$ to $v_j$ , where $r &gt; 0$ is positive, equals the $(i, j)$-th entry of $A^r$.</p>
+<p>Proof by induction:</p>
+<p>$A^{r+1}=A^rA$, the $(i,j)$-th entry of $A^{r+1}$ equals $b_{i1}a_{1j}+b_{i2}a_{2j}+\cdots+b_{in}a_{nj}$, where $b_{ik}$ is the $(i,k)$-th entry of $A^r$.</p>
 <p><img src="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
 
     </div>
