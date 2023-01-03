@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/01/02/LMvoapSku5HEOFB.png">
 <meta property="og:image" content="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png">
 <meta property="article:published_time" content="2022-12-31T13:45:39.875Z">
-<meta property="article:modified_time" content="2023-01-02T16:38:53.377Z">
+<meta property="article:modified_time" content="2023-01-03T01:27:40.225Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Discrete Math">
 <meta name="twitter:card" content="summary">
@@ -204,7 +204,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-01-03 00:38:53" itemprop="dateModified" datetime="2023-01-03T00:38:53+08:00">2023-01-03</time>
+                <time title="修改时间：2023-01-03 09:27:40" itemprop="dateModified" datetime="2023-01-03T09:27:40+08:00">2023-01-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,6 +233,7 @@
 <li>Relation</li>
 <li>Graphs</li>
 <li>Tree</li>
+<li>P, NP and NPC Problems</li>
 </ol>
 <h1 id="Chapter-11-Counting"><a href="#Chapter-11-Counting" class="headerlink" title="Chapter 11 - Counting"></a>Chapter 11 - Counting</h1><p><strong>Basic Counting Rules</strong>： the Product Rule &amp; the Sum Rule</p>
 <p><strong>Pigeonhole Principle</strong>：</p>
@@ -491,6 +492,160 @@
 <p>Let $G$ be a graph with adjacency matrix $A$ with respect to the ordering $v_1, v_2,\cdots, v_n$ of vertices. The number of different paths of length r from $v_i$ to $v_j$ , where $r &gt; 0$ is positive, equals the $(i, j)$-th entry of $A^r$.</p>
 <p>Proof by induction:</p>
 <p>$A^{r+1}=A^rA$, the $(i,j)$-th entry of $A^{r+1}$ equals $b_{i1}a_{1j}+b_{i2}a_{2j}+\cdots+b_{in}a_{nj}$, where $b_{ik}$ is the $(i,k)$-th entry of $A^r$.</p>
+<p><strong>Euler Paths and Circuits</strong>：</p>
+<p>An Euler circuit in a graph $G$ is a simple circuit containing every edge of $G$.</p>
+<p>A connected multigraph with at least two vertices has an Euler circuit IFF each of its vertices has even degree.</p>
+<p>An Euler path in $G$ is a simple path containing every edge of $G$.</p>
+<p>A connected multigraph has an Euler path but not an Euler circuit IFF it has exactly two vertices of odd degree.</p>
+<p><strong>Hamilton Paths and Circuits</strong>：</p>
+<p>A simple path in a graph $G$ that passes through every vertex exactly once is called a Hamilton path.</p>
+<p>A simple circuit in a graph $G$ that passes through every vertex exactly once is called a Hamilton circuit.</p>
+<p><strong>Sufficient Conditions for Hamilton Circuits</strong>：</p>
+<p><strong>Dirac’s Theorem</strong>： If  $G$ is a simple graph with $n\ge 3$ vertices such that the degree of every vertex in $G$ is $\ge n/2$, then $G$ has a Hamilton circuit.</p>
+<p><strong>Ore’s Theorem</strong>： If $G$ is a simple graph with $n\ge 3$ vertices such that $deg(u)+deg(v)\ge n$ for every pair of nonadjacent vertices, then $G$ has a Hamilton circuit.</p>
+<p><strong>Shortest Path Problems</strong>：</p>
+<p>Dijkstra-$O(v^2)$, Fredman &amp; Tarjan-$O(e+v\log v)$, Bellman-Ford-$O(ev)$…</p>
+<p><strong>Planar Graphs</strong>：</p>
+<p>A graph is called planar if it can be drawn in the plane without any edge crossing. Such a drawing is called a planar representation of the graph.</p>
+<p><strong>Euler’s Formula</strong>：</p>
+<p>Let $G$ be a connected planar simple graph with $e$ edges and $v$ vertices. Let $r$ be the number of regions ina planar representation of $G$. Then $r=e-v+2$.</p>
+<p>Proof by induction.</p>
+<p><strong>The Degree of Regions</strong>：</p>
+<p>The degree of a region is defined to be the number of edges on the boundary of this region. When an edge occurs twice on the boundary, it contributes two to the degree.</p>
+<p><strong>Corollaries of Planar Graphs</strong>：</p>
+<p><strong>Corollary 1</strong>： If $G$ is a connected planar simple graph with $e$ edges and $v$ vertices, where $v\ge3$, then $e\le 3v-6$.</p>
+<ul>
+<li><p>The degree of every region is at least 3.</p>
+</li>
+<li><p>The sum of the degrees of the regions is exactly twice the number of edges in the graph.</p>
+<script type="math/tex; mode=display">2e=\sum\limits_{\text{all regions R}}deg(R)\ge 3r=3e-3v+6</script></li>
+</ul>
+<p><strong>Corollary 2</strong>：If $G$ is a connected planar simple graph, then $G$ has a vertex of degree not exceeding 5.</p>
+<ul>
+<li>Proof by contradiction using Corollary 1 and Handshaking Theorem.</li>
+</ul>
+<p><strong>Corollary 3</strong>：In a connected planar simple graph has $e$ edges and $v$ vertices with $v\ge3$ and no circuits of length 3, then $e\le2v-4$.</p>
+<ul>
+<li>The degree of every region is at least 4. (no circuit of length 3)</li>
+</ul>
+<p><strong>Kuratowski’s Theorem</strong>：</p>
+<p>If a graph is planar, so will be any graph obtained by removing an edge $\{u, v\}$ and adding a new vertex $w$ together with edges $\{u,w\}$ and $\{w, v\}$. Such an operation is called an <strong>elementary subdivision</strong>. </p>
+<p>The graphs $G_1 = (V_1, E_1 )$ and $G_2 = (V_2, E_2 )$ are called <strong>homomorphic</strong> if they can be obtained from the same graph by a sequence of elementary subdivisions.</p>
+<p>A graph is nonplanar IFF it contains a subgraph homomorphic to $K_{3,3}$ or $K_5$.</p>
+<p><strong>Graph Coloring</strong>：</p>
+<p>A coloring of a simple graph is the assignment of a color to each vertex of the graph so that no two adjacent vertices are assigned the same color.</p>
+<p>The chromatic number of a graph is the least number of colors needed for a coloring of this graph, denoted by $\chi(G)$.</p>
+<p><strong>Four-color theorem</strong>： </p>
+<p>The chromatic number of a planar graph is no greater than 4.</p>
+<p><strong>Six Color Theorem</strong>：</p>
+<p>The chromatic number of a planar graph is no greater than 6.</p>
+<p><strong>Proof by induction</strong>. (w.l.o.g., assume that the graph is connected)</p>
+<p><strong>Basic step</strong>: For a single vertex, pick an arbitrary color.</p>
+<p><strong>Inductive hypothesis</strong>: Assume that every planar graph with $k\ge1$ or fewer vertices can be 6-colored.</p>
+<p><strong>Inductive step</strong>: Consider a planar graph with $k+1$ vertices. Using <strong>Corollary 2</strong> (the graph has a vertex of degree 5 or fewer). Remove this vertex, by i.h., we can color the remaining graph with 6 colors. Put the vertex back in. Since there are at most 5 colors adjacent, so we have at least one color left.</p>
+<p><strong>Five Color Theorem</strong>：</p>
+<p>The chromatic number of a planar graph is no greater than 5.</p>
+<p><strong>Proof by induction</strong>. (w.l.o.g., assume that the graph is connected)</p>
+<p><strong>Basic step</strong>: For a single vertex, pick an arbitrary color.</p>
+<p><strong>Inductive hypothesis</strong>: Assume that every planar graph with $k\ge1$ or fewer vertices can be 5-colored.</p>
+<p><strong>Inductive step</strong>: Consider a planar graph with k + 1 vertices. Using <strong>Corollary 2</strong> (the graph has a vertex of degree 5 or fewer). Remove this vertex, by i.h., we can color the remaining graph with 5 colors. Put the vertex back in.</p>
+<p>Case (Ⅰ): If the vertex has degree less than 5, or if it has degree 5 and only $\le 4$ colors are used for vertices connected to it, we can pick an available color for it.</p>
+<p>Case (Ⅱ): We make a subgraph out of all the vertices colored 1 or 3. If the adjacent vertex colored 1 and the adjacent vertex colored 3 are not connected by a path in the subgraph.</p>
+<p>On the other hand, if the vertices colored 1 and 3 are connected via a path in the subgraph, we do the the same for the vertices colored 2 and 4. Note that this will be a disconnected pair of subgraphs, separated by a path connecting the vertices colored 1 and 3.</p>
+<h1 id="Chapter-14-Tree"><a href="#Chapter-14-Tree" class="headerlink" title="Chapter 14 - Tree"></a>Chapter 14 - Tree</h1><p><strong>Tree</strong>：</p>
+<p>A tree is a connected undirected graph with no simple circuits.</p>
+<p>An undirected graph is a tree IFF there is a unique simple path between any two of its vertices.</p>
+<p>A rooted tree is a tree in which one vertex has been designated as the root and every edge is directed away from the root.</p>
+<p>parent, child, sibling, ancestor, descendant, leaf, internal vertex, subtree…</p>
+<p><strong>m-Ary Trees</strong>：</p>
+<p>A rooted tree is called an m-ary tree if every internal vertex has no more than $m$ children.</p>
+<p>The tree is called a <strong>full</strong> m-ary tree if every internal vertex has exactly $m$ children.</p>
+<p>In particular, an m-ary tree with $m = 2$ is called a binary tree.</p>
+<p>A binary tree is an ordered rooted tree where the children of each internal vertex are ordered.</p>
+<p>In a binary tree, the first child is called the left child, and the second child is called the right child.</p>
+<p>left subtree, right subtree</p>
+<p><strong>Counting Vertices in a Full m-Ary Trees</strong>：</p>
+<p>A full m-ary tree with $i$ internal vertices has $n = mi + 1$ vertices. Leaves number $ℓ=n-i$.</p>
+<p><strong>Level and Height</strong>：</p>
+<p>The level of a vertex $v$ in a rooted tree is the length of the unique path from the root to this vertex.</p>
+<p>The height of a rooted tree is the maximum of the levels of the vertices.</p>
+<p>A rooted m-ary tree of height $h$ is balanced if all leaves are at levels $h$ or $h − 1$. (differ no greater than 1)</p>
+<p><strong>The Number of Leaves</strong>：</p>
+<p>There are at most $m^h$ leaves in an m-ary tree of height $h$.</p>
+<p>If an m-ary tree of height $h$ has ℓ leaves, then $h \ge ⌈\log_m ℓ⌉$. If the m-ary tree is full and balanced, then h = $⌈\log_mℓ⌉$.</p>
+<p><strong>Tree Traversal</strong>：</p>
+<p>preorder traversal, inorder traversal, postorder traversal.</p>
+<p>expression trees, prefix notation, infix notation, postfix notation.</p>
+<p><strong>Catalan Numbers</strong>：</p>
+<p>$C_0=C_1=1$</p>
+<p>$C_n=\sum\limits_{i=0}^{n-1}C_iC_{n-i-1}=\frac{1}{n+1}\left(\begin{array}{c}2n \\n\end{array}\right)=\left(\begin{array}{c}2n \\n\end{array}\right)-\left(\begin{array}{c}2n \\n-1\end{array}\right)$</p>
+<p>The number of 01 sequences using $n$ ones and $n$ zeros such that the number of ones is no less than the number of zeros in any prefix subsequence.</p>
+<p>The number of full binary trees with $2n+1$ vertices.</p>
+<p>The number of binary trees with $n$ vertices.</p>
+<p><strong>Spanning Trees</strong>：</p>
+<p>Let $G$ be a simple graph. A spanning tree of $G$ is a subgraph of $G$ that is a tree containing every vertex of $G$.</p>
+<p>A simple graph is connected IFF it has a spanning tree.</p>
+<p><strong>DFS, BFS</strong>：</p>
+<p>……</p>
+<p><strong>Minimum Spanning Trees</strong>：</p>
+<p>Prim’s Algorithm($O(e\log v)$), Kruskal’s Algorithm($O(e\log e)$).</p>
+<h1 id="Chapter-15-P-NP-and-NPC-Problems"><a href="#Chapter-15-P-NP-and-NPC-Problems" class="headerlink" title="Chapter 15 - P, NP and NPC Problems"></a>Chapter 15 - P, NP and NPC Problems</h1><p><strong>Class NP vs. Class P</strong>：</p>
+<p><strong>P</strong>： decision problems solvable in polynomial time</p>
+<p><strong>NP</strong>： decision problems with certificates verifiable in polynomial time (polynomial time verification)</p>
+<p><strong>Satisfiability Problem(NP)</strong>：</p>
+<p>To determine whether a Boolean formula is satisfiable or not.</p>
+<p><strong>2SAT Problem(P)</strong>：</p>
+<p>To determine whether a 2-CNF formula is satisfiable or not.</p>
+<p>Using path searching (polynomial-time decidable), construct edges using “→”.</p>
+<p>A 2-CNF formula is <strong>unsatisfiable</strong> IFF there exists a variable $x$ such that: </p>
+<ul>
+<li>there is a path from $x$ to $\neg x$ in the graph $G$</li>
+<li>there is a path from $\neg x$ to $x$ in the graph $G$</li>
+</ul>
+<p><strong>Polynomial-Time Reduction &amp; The Class NP-Complete</strong>：</p>
+<p>see <a href="https://gutaozi.github.io/2022/11/05/CS215_Midterm_Review/">Chapter 6</a>.</p>
+<p><strong>Cook’s Theorem</strong>：</p>
+<p>SAT $\in$ NPC.</p>
+<p>3SAT $\le_P$ DCLIQUE $\le_P$ DVC</p>
+<p><strong>Clique</strong>：</p>
+<p>A clique is a complete subgraph of $G$.</p>
+<ul>
+<li><p>The Problem CLIQUE</p>
+<p>Find a clique of maximum size in a graph $G$.</p>
+</li>
+<li><p>The Problem DCLIQUE</p>
+<p>Given an undirected graph G and an integer $k$, determine whether $G$ has a clique of size $k$.</p>
+</li>
+</ul>
+<p>DCLIQUE $\in$ NP： certificate $O(|V^2|)$</p>
+<p><strong>3SAT $\le_{P}$ DCLIQUE</strong>：</p>
+<p>For the $k$ clauses input to 3SAT, draw literals as vertices, and all edges between vertices such that:</p>
+<ul>
+<li>across clauses only</li>
+<li>not between $x$ and $\neg x$</li>
+</ul>
+<p>The reduction takes polynomial time: A satisfiable assignment $⇌$ a clique of size $k$</p>
+<p><strong>Vertex Cover</strong>：</p>
+<p>A vertex cover of $G$ is a set of vertices such that every edge in $G$ is incident at at least one of these vertices. </p>
+<ul>
+<li><p>The Vertex Cover Problem (VC) </p>
+<p>Given a graph $G$, find a vertex cover of $G$ of minimum size.</p>
+</li>
+<li><p>The Problem DVC</p>
+<p>Given a graph $G$ and an integer $k$, determine whether $G$ has a vertex cover of with $k$ vertices.</p>
+</li>
+</ul>
+<p>DVC $\in$ NP： certificate $O(ke)=O((n+e)^2)$</p>
+<p><strong>DCLIQUE $\le_{P}$ DVC</strong>：</p>
+<p>Start with the graph $G=(V,E)$ input of the DCLIQUE problem.</p>
+<p>Construct the complement graph $\bar G=(V,\bar E)$ by only considering the missing edges from $E$.</p>
+<p>The reduction takes polynomial time: A clique of size $k$ in $G$ $⇌$ a vertex cover of size $|V|-k$ in $\bar G$</p>
+<p><strong>Approximate Vertex Cover</strong>：</p>
+<p>Approx-Vertex-Cover is a 2-approximation algorithm, i.e., $\frac{|C|}{|C^\star|}\le 2$.</p>
+<p>Proof:</p>
+<p>The set of edges picked by this algorithm is a maximal-maching $M$: no two edges touch each other.</p>
+<p>The potimal vertex cover $C^\star$ must cover every edge in $M$, so $|C^\star|\ge |M|$. The algorithm returns a vertex set of size $2|M|$. Therefore, we have</p>
+<p><script type="math/tex">|C|=2|M|\le 2|C^\star|</script>.</p>
 <p><img src="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
 
     </div>
@@ -572,7 +727,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Outline"><span class="nav-number">1.</span> <span class="nav-text">Outline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-11-Counting"><span class="nav-number">2.</span> <span class="nav-text">Chapter 11 - Counting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-12-Relation"><span class="nav-number">3.</span> <span class="nav-text">Chapter 12 - Relation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-13-Graph"><span class="nav-number">4.</span> <span class="nav-text">Chapter 13 - Graph</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Outline"><span class="nav-number">1.</span> <span class="nav-text">Outline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-11-Counting"><span class="nav-number">2.</span> <span class="nav-text">Chapter 11 - Counting</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-12-Relation"><span class="nav-number">3.</span> <span class="nav-text">Chapter 12 - Relation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-13-Graph"><span class="nav-number">4.</span> <span class="nav-text">Chapter 13 - Graph</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-14-Tree"><span class="nav-number">5.</span> <span class="nav-text">Chapter 14 - Tree</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-15-P-NP-and-NPC-Problems"><span class="nav-number">6.</span> <span class="nav-text">Chapter 15 - P, NP and NPC Problems</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
