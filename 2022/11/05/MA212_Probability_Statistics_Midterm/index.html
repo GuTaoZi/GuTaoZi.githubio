@@ -28,7 +28,7 @@
 <meta property="og:description" content="概统怎么这么多东西要背啊（绝望">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-05T13:19:37.270Z">
-<meta property="article:modified_time" content="2022-11-27T14:46:18.176Z">
+<meta property="article:modified_time" content="2023-01-04T09:46:02.579Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Probability &amp; Statistics">
 <meta name="twitter:card" content="summary">
@@ -197,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-27 22:46:18" itemprop="dateModified" datetime="2022-11-27T22:46:18+08:00">2022-11-27</time>
+                <time title="修改时间：2023-01-04 17:46:02" itemprop="dateModified" datetime="2023-01-04T17:46:02+08:00">2023-01-04</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -273,9 +273,9 @@
 <li><p>$f_\mathbf N(𝛀)=1$</p>
 </li>
 <li><p>若$A_1,A_2,…A_m$两两不相容，则</p>
-<script type="math/tex; mode=display">f_\mathbf N(\bigcup_{i=1}^{m} A_i)=\sum_{i=1}^{m} f_\mathbf N(A_i)</script></li>
+<script type="math/tex; mode=display">f_\mathbf N(\bigcup_\limits{i=1}^{m} A_i)=\sum_\limits{i=1}^{m} f_\mathbf N(A_i)</script></li>
 </ul>
-<h3 id="概率"><a href="#概率" class="headerlink" title="概率"></a>概率</h3><p><strong>概率</strong>：事件$A$发生的可能性大小$P(A)=\lim_{n \to +\infty} f_\mathbf N(A)$</p>
+<h3 id="概率"><a href="#概率" class="headerlink" title="概率"></a>概率</h3><p><strong>概率</strong>：事件$A$发生的可能性大小$P(A)=\lim\limits_{n \to +\infty} f_\mathbf N(A)$</p>
 <p><strong>概率空间</strong>：样本空间+事件域+概率，$\{𝛀，\mathcal{A} ，P\}$</p>
 <p><strong>概率的公理化定义</strong>：</p>
 <ul>
@@ -284,14 +284,14 @@
 <li><p><strong>规范性</strong>：$P(𝛀)=1$</p>
 </li>
 <li><p><strong>可列可加性</strong>：对于两两不相容的事件列$\{A_k\}^\infty_{k=1}$有</p>
-<script type="math/tex; mode=display">P(\bigcup_{i=1}^{\infty} A_i)=\sum_{i=1}^{\infty} P(A_i)</script></li>
+<script type="math/tex; mode=display">P(\bigcup_\limits{i=1}^{\infty} A_i)=\sum_\limits{i=1}^{\infty} P(A_i)</script></li>
 </ul>
 <p><strong>概率的基本性质</strong>：</p>
 <ul>
-<li><p>$P(\phi)=0$</p>
+<li><p>$P(\emptyset)=0$</p>
 </li>
 <li><p><strong>有限可加性</strong>：对于两两不相容的事件列$\{A_k\}^n_{k=1}$有</p>
-<script type="math/tex; mode=display">P(\bigcup_{i=1}^{n} A_i)=\sum_{i=1}^{n} P(A_i)</script></li>
+<script type="math/tex; mode=display">P(\bigcup_\limits{i=1}^{n} A_i)=\sum_\limits{i=1}^{n} P(A_i)</script></li>
 <li><p>若$A \subset B$，则$P(B-A)=P(B)-P(A)$，$P(B)\ge P(A)$</p>
 </li>
 <li><p>$0\leq P(A) \leq 1$</p>
@@ -321,7 +321,7 @@
 <li><p><strong>可列可加性</strong>：对于两两不相容的事件列$\{A_k\}$有</p>
 <script type="math/tex; mode=display">P(\bigcup_{i=1}^{\infty} A_i|B)=\sum_{i=1}^{\infty} P(A_i|B)</script></li>
 </ul>
-<p>样本空间$\tilde𝛀=B\cap𝛀$，事件域$\tilde{\mathcal{A}}=\{B\cap A|A\in\mathcal{A}\}$，概率$P_B(A)=P(A|B)$</p>
+<p>样本空间$\widetilde𝛀=B\cap𝛀$，事件域$\widetilde{\mathcal{A}}=\{B\cap A|A\in\mathcal{A}\}$，概率$P_B(A)=P(A|B)$</p>
 <h3 id="条件概率相关公式"><a href="#条件概率相关公式" class="headerlink" title="条件概率相关公式"></a>条件概率相关公式</h3><p><strong>乘法定律(公式)</strong>：$P(AB)=P(A|B)\cdot P(B)$</p>
 <p><strong>分划</strong>：事件列$\{B_k\}$两两不相容，且$\bigcup_{i=1}^{n}B_i=𝛀$</p>
 <p><strong>全概率公式</strong>：${B_k}$是$𝛀$的一个分划，对任意事件$A$有</p>
