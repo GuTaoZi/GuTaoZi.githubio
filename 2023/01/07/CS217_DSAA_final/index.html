@@ -51,8 +51,13 @@
 <meta property="og:image" content="https://s2.loli.net/2023/01/07/zetLS1yVfwFIPqs.png">
 <meta property="og:image" content="https://s2.loli.net/2023/01/07/kxRLO5YAUwJXFj2.png">
 <meta property="og:image" content="https://s2.loli.net/2023/01/07/8lW4O3DwILt5iad.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/08/183xdOHumtvXn2P.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/08/LICKz3nltBhc8Tx.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/08/k48ZqQhlP23gJnj.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/08/QCciM1UtHqRp3LT.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/08/kARudvoBUrhEZac.png">
 <meta property="article:published_time" content="2023-01-07T05:34:36.389Z">
-<meta property="article:modified_time" content="2023-01-07T16:09:14.482Z">
+<meta property="article:modified_time" content="2023-01-08T08:29:00.798Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
@@ -222,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-01-08 00:09:14" itemprop="dateModified" datetime="2023-01-08T00:09:14+08:00">2023-01-08</time>
+                <time title="修改时间：2023-01-08 16:29:00" itemprop="dateModified" datetime="2023-01-08T16:29:00+08:00">2023-01-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -246,7 +251,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Incremental technique, Recursive technique</p>
+        <p><a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">Algorithm visualization</a></p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Incremental technique, Recursive technique</p>
 <p>Divide-and-conquer Strategy</p>
 <p>Iteration, Recursion</p>
 <h2 id="Algorithm-Analysis"><a href="#Algorithm-Analysis" class="headerlink" title="Algorithm Analysis"></a>Algorithm Analysis</h2><p><img src="https://s2.loli.net/2023/01/07/guLBibrv59NMZxQ.png" alt="image.png" style="zoom:50%;" /></p>
@@ -446,6 +452,74 @@
 <li>$(1-2^{h-1})/(1-2) = n-x → 2^{h-1} &lt; n $</li>
 <li>Thus, $h = O(\log n)$</li>
 </ul>
+<h2 id="Advanced-Binary-Trees"><a href="#Advanced-Binary-Trees" class="headerlink" title="Advanced Binary Trees"></a>Advanced Binary Trees</h2><h3 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h3><ul>
+<li>Complete binary tree</li>
+<li>$O(n)$ space consumption </li>
+<li>$O(\log n)$ insertion time </li>
+<li>$O(\log n)$ delete-min time</li>
+</ul>
+<p>Suppose that node $u$ of $T$ is stored at $A[i]$. Then, the left child of $u$ is stored at $A[2i]$, and the right child at $A[2i+1]$.</p>
+<p>Suppose that node $u$ of $T$ is stored at $A[i]$. Then, the parent of $u$ is stored at $A[ \left \lfloor i/2 \right \rfloor ]$.</p>
+<p>Root-fix operation: Build a heap with $O(n)$ time.</p>
+<p>$O(\sum\limits_{i=0}^{h-1}(h-i)\times2^i)=O(2^h)=O(n)$</p>
+<h3 id="Binary-Search-Tree"><a href="#Binary-Search-Tree" class="headerlink" title="Binary Search Tree"></a>Binary Search Tree</h3><p>predecessor($\max\{a[i]\le q\}$), successor($\min\{a[i]\ge q\}$): $O(h)$</p>
+<p>↙↘↘↘↘↘，↘↙↙↙↙↙</p>
+<p>Insert: $O(h)$</p>
+<p><img src="https://s2.loli.net/2023/01/08/183xdOHumtvXn2P.png" alt="image.png" style="zoom: 40%;" /></p>
+<p>Delete: $O(h)$</p>
+<p><img src="https://s2.loli.net/2023/01/08/LICKz3nltBhc8Tx.png" alt="image.png" style="zoom:50%;" /></p>
+<h3 id="BBST"><a href="#BBST" class="headerlink" title="BBST"></a>BBST</h3><p>For every internal node $u$ of $T$, the height of the left subtree of $u$ differs from that the right subtree of $u$ by at most 1.</p>
+<p>Proof: A balanced binary tree with $n$ nodes has height $O(\log n)$.</p>
+<p>To construct a BBST with greatest height using $n$ nodes, each internal node should has subtrees that differ 1 in height. Denote $f(h)$ as the least number of nodes of a BBST with height $h$, then </p>
+<p>$f(1)=1, f(2)=2$</p>
+<p>$f(h)=f(h-1)+f(h-2)+1$</p>
+<p>$f(h)+1=f(h-1)+1+f(h-2)+1$</p>
+<p>$f(h)=\frac{1}{\sqrt 5}[(\frac{1+\sqrt 5}{2})^{h+1}-(\frac{1-\sqrt 5}{2})^{h+1}]-1$</p>
+<p>$n\ge \frac{1}{\sqrt 5}[(\frac{1+\sqrt 5}{2})^{h+1}-(\frac{1-\sqrt 5}{2})^{h+1}]-1$</p>
+<p>$h\le c\log n, h=O(\log n)$</p>
+<p>Insertion time analysis?</p>
+<p>Deletion time analysis?</p>
+<h2 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h2><p>BFS</p>
+<p>BFS tree, SSSP</p>
+<p>DFS</p>
+<p>DFS tree, Cycle detection, topological sort</p>
+<p><strong>Parenthesis Theorem</strong>: all the following are true: </p>
+<ul>
+<li>If $u$ is a proper ancestor of $v$ in DFS-tree of $T$, then $I(u)$ contains $I(v)$. </li>
+<li>If $u$ is a proper descendant of $v$ in DFS-tree of T, then $I(u)$ is contained in $I(v)$ .</li>
+<li>Otherwise, $I(u)$ and $I(v)$ are disjoint.</li>
+</ul>
+<p><strong>White Path Theorem</strong>: let $u$ be a vertex in $G$. Consider the moment when $u$ is pushed into the stack in the DFS algorithm. Then a vertex $v$ becomes a proper descendant of $u$ in the DFS-forest IFF we can go from $u$ to $v$ by travelling only on white vertices.</p>
+<p><strong>Cycle Theorem</strong>: let $T$ be an arbitrary DFS-forest. $G$ contains a cycle if and only if there is a backward edge with respect to $T$.</p>
+<ul>
+<li>If: trivial</li>
+<li>only if: Suppose the cycle is $v_1 → 𝑣_2 → ⋯ → 𝑣_𝑘 → 𝑣_1$, let $𝑣_𝑖$ be the first to enter the stack. Then by white path theorem, all the other vertices in the cycle must be proper descendants of $𝑣_𝑖$ in the DFS-forest. This means the edge pointing to $𝑣_𝑖$ in the cycle is a backward edge.</li>
+</ul>
+<p>Dijkstra: $O((|V|+|E|)\log |V|)$</p>
+<p><img src="https://s2.loli.net/2023/01/08/k48ZqQhlP23gJnj.png" alt="image.png" style="zoom:40%;" /></p>
+<p>Correctness proof: </p>
+<p><img src="https://s2.loli.net/2023/01/08/QCciM1UtHqRp3LT.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Minimum Spanning Tree (Prim): $O(|V|\log |V|+|E|)$</p>
+<p><img src="https://s2.loli.net/2023/01/08/kARudvoBUrhEZac.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Strongly Connected Components $O(|V|+|E|)$</p>
+<ol>
+<li><p>obtain $G^R$</p>
+</li>
+<li><p>DFS on $G^R$, obtain $L^R$</p>
+</li>
+<li>obtain $L$ by reversing $L^R$</li>
+<li>DFS on $G$ according to $L$</li>
+<li>obtain SCC from DFS-forest</li>
+</ol>
+<p>Correctness proof:</p>
+<ol>
+<li><p>Obtain $G^{SCC}$ by shrinking nodes</p>
+</li>
+<li><p>sink SCC: SCC without in-degree</p>
+</li>
+<li>DFS on $G$ starting from vertices of sink SCC.</li>
+</ol>
+<p>Let $S_1$ , $S_2$ be SCCs such that there is a path from $S_1$ to $S_2$ in $G^SCC$. In the ordering of $L$, the earliest vertex in $S_2$ must come before the earliest vertex in $S_1$</p>
 
     </div>
 
@@ -467,7 +541,10 @@
     <a href="/2022/12/31/CS215_Final_Review/" rel="prev" title="CS215 离散数学 期末复习">
       <i class="fa fa-chevron-left"></i> CS215 离散数学 期末复习
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/01/08/CS205_C&CPP_quiz/" rel="next" title="CS205 C/C++ Quiz题解析">
+      CS205 C/C++ Quiz题解析 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -526,7 +603,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm-Analysis"><span class="nav-number">2.</span> <span class="nav-text">Algorithm Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sorting"><span class="nav-number">3.</span> <span class="nav-text">Sorting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linked-List"><span class="nav-number">4.</span> <span class="nav-text">Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack-amp-Queue"><span class="nav-number">5.</span> <span class="nav-text">Stack &amp; Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">5.1.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">5.2.</span> <span class="nav-text">Queue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">6.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-matching"><span class="nav-number">6.1.</span> <span class="nav-text">String matching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FSA"><span class="nav-number">6.2.</span> <span class="nav-text">FSA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree"><span class="nav-number">7.</span> <span class="nav-text">Tree</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm-Analysis"><span class="nav-number">2.</span> <span class="nav-text">Algorithm Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sorting"><span class="nav-number">3.</span> <span class="nav-text">Sorting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linked-List"><span class="nav-number">4.</span> <span class="nav-text">Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack-amp-Queue"><span class="nav-number">5.</span> <span class="nav-text">Stack &amp; Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">5.1.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">5.2.</span> <span class="nav-text">Queue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">6.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-matching"><span class="nav-number">6.1.</span> <span class="nav-text">String matching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FSA"><span class="nav-number">6.2.</span> <span class="nav-text">FSA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree"><span class="nav-number">7.</span> <span class="nav-text">Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-Binary-Trees"><span class="nav-number">8.</span> <span class="nav-text">Advanced Binary Trees</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Heap"><span class="nav-number">8.1.</span> <span class="nav-text">Heap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Search-Tree"><span class="nav-number">8.2.</span> <span class="nav-text">Binary Search Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BBST"><span class="nav-number">8.3.</span> <span class="nav-text">BBST</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graph"><span class="nav-number">9.</span> <span class="nav-text">Graph</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -542,7 +619,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
