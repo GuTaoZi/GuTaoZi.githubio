@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/01/09/dOaAPIQuVFe1sKi.png">
 <meta property="og:image" content="https://s2.loli.net/2023/01/09/GaWTF7jNyBOclK6.png">
 <meta property="article:published_time" content="2023-01-09T12:57:02.038Z">
-<meta property="article:modified_time" content="2023-01-09T16:10:45.228Z">
+<meta property="article:modified_time" content="2023-01-09T23:29:34.700Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary">
@@ -203,7 +203,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-01-10 00:10:45" itemprop="dateModified" datetime="2023-01-10T00:10:45+08:00">2023-01-10</time>
+                <time title="修改时间：2023-01-10 07:29:34" itemprop="dateModified" datetime="2023-01-10T07:29:34+08:00">2023-01-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -447,6 +447,61 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::unique_ptr&lt;MyTime&gt; <span class="title">mt1</span><span class="params">(<span class="keyword">new</span> MyTime(<span class="number">10</span>))</span></span>;</span><br><span class="line">std::unique_ptr&lt;MyTime&gt; mt2 = std::<span class="built_in">make_unique</span>&lt;MyTime&gt;(<span class="number">80</span>); <span class="comment">//c++17</span></span><br><span class="line">std::unique_ptr&lt;MyTime&gt; mt3 = std::<span class="built_in">move</span>(mt1);</span><br></pre></td></tr></table></figure>
 <p>一个独有指针能阻止其他指针指向它的对象，但可以通过move转移给别的指针</p>
 <h3 id="Class-Inheritance"><a href="#Class-Inheritance" class="headerlink" title="Class Inheritance"></a>Class Inheritance</h3><p><strong>基类 vs. 派生类</strong></p>
+<p>派生类从基类继承属性与函数，C++支持多基类继承和多层继承</p>
+<p><strong>派生类的构造函数</strong></p>
+<p>实例化一个派生类对象时，分配内存，派生类构造器被调用，必须首先调用基类构造器(会默认调用无参构造器，一般通过初始化列表将基类信息传给基类构造器)，然后再执行派生类构造器的其他内容，初始化派生类独占成员。</p>
+<p><strong>派生类的析构函数</strong></p>
+<p>与构造函数相反，首先调用派生类的析构函数，然后调用基类的析构函数</p>
+<p><strong>访问控制</strong></p>
+<p>protected：类似private，成员、友元和派生类可以访问</p>
+<p>protected inheritance：基类中的public和protected成员在派生类中成为protected，只能被各级派生类访问</p>
+<p>private inheritance：基类中的public和protected成员在派生类中成为private，只能被一级派生类访问</p>
+<p><strong>虚函数</strong></p>
+<p>如果使用语句<code>base *p=derived_object</code>，且派生类和基类拥有相同函数头的函数，则会绑定基类函数。</p>
+<p>但如果基类函数设置为virtual，则会使这个函数在基类和所有派生类中均虚拟，动态绑定到派生类函数</p>
+<p><strong>虚析构器</strong></p>
+<p>如果基类构造器未设置为virtual，则上述例子<code>delete p</code>时只会调用基类析构函数，不会调用派生类析构函数！</p>
+<p><strong>动态内存分配</strong></p>
+<p>如果基类使用了动态内存分配，并且重载了复制操作符和赋值操作符：</p>
+<ol>
+<li>如果派生类没有动态内存分配，就无所谓</li>
+<li>如果派生类有动态内存分配，则应该重定义复制操作符和赋值操作符</li>
+</ol>
+<h3 id="Class-Templates-and-std-Library"><a href="#Class-Templates-and-std-Library" class="headerlink" title="Class Templates and std Library"></a>Class Templates and std Library</h3><p><strong>类模板</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">class_name</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//members and friends</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Explicitly instantiate </span></span><br><span class="line"><span class="keyword">template</span> <span class="keyword">class</span> <span class="title class_">class_name</span>&lt;<span class="type">int</span>&gt;;</span><br></pre></td></tr></table></figure>
+<p><strong>非类型参数</strong></p>
+<p>参数可以有：类型模板参数，模板模板参数，非类型模板参数(整数、浮点、指针、左值引用…)</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> rows, <span class="type">size_t</span> cols&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Mat</span></span><br><span class="line">&#123;</span><br><span class="line">    T data[rows][cols];</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Mat</span>()&#123;&#125;</span><br><span class="line">    <span class="function">T <span class="title">getElement</span><span class="params">(<span class="type">size_t</span> r, <span class="type">size_t</span> c)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">setElement</span><span class="params">(<span class="type">size_t</span> r, <span class="type">size_t</span> c, T value)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>特例化</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">class_name</span>&lt;<span class="type">int</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//members and friends</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>std类</strong></p>
+<p>一些基于模板类的，封装好的容器</p>
+<h3 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h3><p>stdin,stdout,stderr</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">fprintf</span>(stdout,<span class="string">&quot;info&quot;</span>,...);<span class="comment">//C</span></span><br><span class="line">std::cerr&lt;&lt;<span class="string">&quot;info&quot;</span>;<span class="comment">//C++</span></span><br></pre></td></tr></table></figure>
+<p><strong>重定向</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./a.out &lt;1.in  &gt;1.out 2&gt;1.err</span><br><span class="line">2&gt;&amp;1相当于将错误输出流重定向到标准输出流</span><br></pre></td></tr></table></figure>
+<p><strong>assert</strong></p>
+<p>如果条件句为true则不做处理，否则输出诊断信息并调用abort()中止程序。</p>
+<p><strong>异常</strong></p>
+<p>throw了可以不catch，只不过抛到main里还不捉就会中止运行。</p>
+<p>一个try可以被多个catch跟着，但不能没有，如果没有被catch就会继续抛到调用函数的函数</p>
+<p>catch(…)可以捉住所有异常</p>
+<p>catch(const Base &amp;base)可以捉住子类异常</p>
+<p>noexcept关键字保证函数不会抛任何异常</p>
+<p>nothrow在new的时候会使用一个不抛异常的申请函数</p>
+<h3 id="Nested-Classes-and-RTTI"><a href="#Nested-Classes-and-RTTI" class="headerlink" title="Nested Classes and RTTI"></a>Nested Classes and RTTI</h3><p><strong>友元类</strong></p>
+<p>友元类可以在任何权限域声明，可以访问所有成员</p>
+<p>一个类成员函数可以声明为他类友元函数，不过要注意声明顺序问题</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Sniper</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> bullets;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Sniper</span>(<span class="type">int</span> bullets = <span class="number">0</span>): <span class="built_in">bullets</span>(bullets)&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">friend</span> <span class="type">bool</span> <span class="title">Supplier::provide</span><span class="params">(Sniper &amp;)</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>嵌套类</strong></p>
+<p>也有三个scope，private， protected， public</p>
+<p><strong>RTTI</strong></p>
+<p>dynamic_cast：多态类型间转换</p>
+<p>typeid：鉴别两个类是否相同</p>
+<p>type_info：typeid操作符返回一个该类型引用，可以用重载比较符比较是否为同类</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">derived_object=<span class="built_in">dynamic_cast</span>&lt;Base&gt;(&amp;base_object);</span><br></pre></td></tr></table></figure>
+<p>const_cast：常数转换</p>
+<p>static_cast：只有能隐式转换的时候才有效，不然返回错误</p>
 
     </div>
 
@@ -527,7 +582,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Getting-Started"><span class="nav-number">1.</span> <span class="nav-text">Getting Started</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Types-and-Arithmetic-Operators"><span class="nav-number">2.</span> <span class="nav-text">Data Types and Arithmetic Operators</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Branching-and-Looping-Statements"><span class="nav-number">3.</span> <span class="nav-text">Branching and Looping Statements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Structures"><span class="nav-number">4.</span> <span class="nav-text">Data Structures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pointers-and-Dynamic-Memory-Management"><span class="nav-number">5.</span> <span class="nav-text">Pointers and Dynamic Memory Management</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basics-of-Functions"><span class="nav-number">6.</span> <span class="nav-text">Basics of Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advances-in-Functions"><span class="nav-number">7.</span> <span class="nav-text">Advances in Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Speedup-Your-Program"><span class="nav-number">8.</span> <span class="nav-text">Speedup Your Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basics-of-Classes"><span class="nav-number">9.</span> <span class="nav-text">Basics of Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advances-in-Classes"><span class="nav-number">10.</span> <span class="nav-text">Advances in Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamic-Memory-Management-in-Classes"><span class="nav-number">11.</span> <span class="nav-text">Dynamic Memory Management in Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-Inheritance"><span class="nav-number">12.</span> <span class="nav-text">Class Inheritance</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Getting-Started"><span class="nav-number">1.</span> <span class="nav-text">Getting Started</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Types-and-Arithmetic-Operators"><span class="nav-number">2.</span> <span class="nav-text">Data Types and Arithmetic Operators</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Branching-and-Looping-Statements"><span class="nav-number">3.</span> <span class="nav-text">Branching and Looping Statements</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Structures"><span class="nav-number">4.</span> <span class="nav-text">Data Structures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pointers-and-Dynamic-Memory-Management"><span class="nav-number">5.</span> <span class="nav-text">Pointers and Dynamic Memory Management</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basics-of-Functions"><span class="nav-number">6.</span> <span class="nav-text">Basics of Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advances-in-Functions"><span class="nav-number">7.</span> <span class="nav-text">Advances in Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Speedup-Your-Program"><span class="nav-number">8.</span> <span class="nav-text">Speedup Your Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basics-of-Classes"><span class="nav-number">9.</span> <span class="nav-text">Basics of Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advances-in-Classes"><span class="nav-number">10.</span> <span class="nav-text">Advances in Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamic-Memory-Management-in-Classes"><span class="nav-number">11.</span> <span class="nav-text">Dynamic Memory Management in Classes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-Inheritance"><span class="nav-number">12.</span> <span class="nav-text">Class Inheritance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-Templates-and-std-Library"><span class="nav-number">13.</span> <span class="nav-text">Class Templates and std Library</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Handling"><span class="nav-number">14.</span> <span class="nav-text">Error Handling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nested-Classes-and-RTTI"><span class="nav-number">15.</span> <span class="nav-text">Nested Classes and RTTI</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
