@@ -20,17 +20,20 @@
     var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Just Do It, But Not Just Do It.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="咕桃w！">
-<meta property="og:url" content="https://gutaozi.github.io/categories/Math/index.html">
+  <meta name="description" content="离散数学题库的类型整理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS215 离散数学 题目整理">
+<meta property="og:url" content="https://gutaozi.github.io/2023/01/10/CS215_ProblemSet_Review/index.html">
 <meta property="og:site_name" content="咕桃w！">
-<meta property="og:description" content="Just Do It, But Not Just Do It.">
+<meta property="og:description" content="离散数学题库的类型整理">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-01-10T04:59:58.544Z">
+<meta property="article:modified_time" content="2023-01-10T05:57:13.595Z">
 <meta property="article:author" content="咕桃">
+<meta property="article:tag" content="Discrete Math">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="https://gutaozi.github.io/categories/Math/">
+<link rel="canonical" href="https://gutaozi.github.io/2023/01/10/CS215_ProblemSet_Review/">
 
 
 <script id="page-configurations">
@@ -38,12 +41,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>分类: Math | 咕桃w！</title>
+  <title>CS215 离散数学 题目整理 | 咕桃w！</title>
   
 
 
@@ -157,71 +160,179 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">Math
-          <small>分类</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/01/10/CS215_ProblemSet_Review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS215 离散数学 题目整理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-01-10 12:59:58 / 修改时间：13:57:13" itemprop="dateCreated datePublished" datetime="2023-01-10T12:59:58+08:00">2023-01-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">离散数学题库的类型整理</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+        <h3 id="Assignment-1"><a href="#Assignment-1" class="headerlink" title="Assignment #1"></a>Assignment #1</h3><p><strong>翻译题(命题+逻辑连接词)</strong></p>
+<p>给定若干原子命题所代表的命题，要求用这些命题和逻辑连接词将自然语言翻译成逻辑式</p>
+<p><strong>列真值表</strong></p>
+<p>对于给定的逻辑式，按各个原子命题讨论，列真值表</p>
+<p><strong>列真值表判断逻辑等价</strong></p>
+<p>如果两个逻辑式的真值表一致，则逻辑等价，比较无脑的证明等价的方法</p>
+<p><strong>逻辑等价证明真值/等价关系</strong></p>
+<p>能用的有十一个逻辑等价：Identity，Domination，Idempotent，Double negation，Commutative，Associative，Distributive，De Morgan’s，Absorption，Negation，Useful laws</p>
+<p>过程一般长这样：</p>
+<blockquote>
+<p>We have</p>
+<script type="math/tex; mode=display">\begin{array}{l}
+&\neg(p \rightarrow q) \rightarrow p \\
+& \equiv \neg \neg(p \rightarrow q) \vee p \quad&\text { Useful } \\
+& \equiv(p \rightarrow q) \vee p \quad&\text { Double negation } \\
+& \equiv(\neg p \vee q) \vee p \quad&\text { Useful } \\
+& \equiv(\neg p \vee p) \vee q \quad&\text { Commutative } \\
+& \equiv T \quad&\text { Domination }
+\end{array}</script><p>Therefore, it is a tautology.</p>
+</blockquote>
+<p><strong>判断重言式/矛盾式</strong></p>
+<p>可以用等价和真值表来严格证明，也可以根据具体式子进行讨论，文字描述即可</p>
+<p>过程一般长这样：</p>
+<blockquote>
+<p>$¬(p ↔ q) ↔ (p ↔ ¬q)$</p>
+<p>Tautology. For the left side to hold, exactly one of $p$ and $q$ is true and the other false. The same for the right side. Thus, both sides of $↔$ always have the same truth value.</p>
+</blockquote>
+<p><strong>根据前提证明结论</strong></p>
+<p>给定若干个零散的逻辑式作为前提，用推理规则和逻辑等价推导至结论</p>
+<p>过程一般长这样：</p>
+<blockquote>
+<p>Proof: </p>
+<script type="math/tex; mode=display">\begin{array}{l}
+(1)  p \wedge q   &\text {Premise} \\
+(2)  p   &\text {Simplication of (1)} \\
+(3)  p \rightarrow \neg(q \wedge r)  &\text {Premise} \\
+(4)  \neg(q \wedge r)  &\text {Modens ponens (2) (3)} \\
+(5)  \neg q \vee \neg r  &\text {De Morgan} \\
+(6)  q  &\text {Simplication of (1)} \\
+(7)  \neg r  &\text {Disjunctive syllogism (6) (7)}\\
+(8)  s \rightarrow r  &\text {Premise}\\
+(9)  \neg s  &\text {Modus tollens (7) (8)}\\
+\end{array}</script></blockquote>
+<p><strong>用推理规则和逻辑等价证明蕴含关系</strong></p>
+<p>给定一个逻辑式，用推理规则和逻辑等价证明蕴含关系，和上题相似</p>
+<p>过程一般长这样：</p>
+<blockquote>
+<script type="math/tex; mode=display">\begin{array}{l}
+&(q \rightarrow(r \vee p)) \rightarrow((\neg r \vee s) \wedge \neg s) \\
+& \equiv \neg(q \rightarrow(r \vee p)) \vee((\neg r \vee s) \wedge \neg s) \quad &\text { Useful } \\
+& \equiv \neg(q \rightarrow(r \vee p)) \vee(\neg r \wedge \neg s) \vee(s \wedge \neg s) \quad &\text { Distributive } \\
+& \equiv \neg(q \rightarrow(r \vee p)) \vee(\neg r \wedge \neg s) \vee F \quad &\text { Negation } \\
+& \equiv \neg(q \rightarrow(r \vee p)) \vee(\neg r \wedge \neg s) \quad &\text { Identity } \\
+& \equiv \neg(\neg q \vee(r \vee p)) \vee(\neg r \wedge \neg s) \quad &\text { Useful } \\
+& \equiv(\neg \neg q \wedge \neg(r \vee p)) \vee(\neg r \wedge \neg s) \quad &\text { De Morgan } \\
+& \equiv(q \wedge(\neg r \wedge \neg p)) \vee(\neg r \wedge \neg s) \quad &\text { Double negation } \\
+& \equiv((q \wedge \neg p) \wedge \neg r) \vee(\neg s \wedge \neg r) \quad &\text { Commutative, Associative } \\
+& \equiv(((q \wedge \neg p) \vee \neg s) \wedge \neg r) &\text { Distributive } \\
+& \rightarrow \neg r \quad &\text { Simplication }
+\end{array}</script></blockquote>
+<p><strong>翻译题(谓词逻辑+量词)</strong></p>
+<p>给定谓词的含义，要求使用谓词、逻辑连接词和量词将自然语言翻译成逻辑式</p>
+<p><strong>嵌套量词的否定</strong></p>
+<p>$\neg$在穿过一层量词后会将$\exists$和$\forall$互换，并且仍然保持$\neg$</p>
+<p><strong>谓词+量词逻辑式的真值</strong></p>
+<p>交换量词顺序，真值可能改变</p>
+<p><strong>翻译题(推理规则)</strong></p>
+<p>给一段话，要求自行定义谓词、命题，并通过逻辑等价、推理规则复现自然语言中的推理过程。</p>
+<p>过程一般长这样：</p>
+<blockquote>
+<p>Let $s(x)$ be “$x$ is a movie produced by sayles,” let $c(x)$ be “$x$ is a movie about coal miners”, and let $w(x)$ be “movie $x$ is wonderful”. we are given premises $∀x(s(x) → w(x))$ and $∃x(s(x) ∧ c(x))$, and we want to conclude $∃x(c(x) ∧ w(x))$.</p>
+<script type="math/tex; mode=display">\begin{array}{l}
+\textbf{step}  \quad  &\textbf{reason}\\
+(1)  \exists x(s(x) \wedge c(x)) \quad  &\text{hypothesis}\\
+(2)  s(y) \wedge c(y) \quad  &\text{existential instantiation using 1 .}\\
+(3)  s(y) \quad  &\text{simplification using 2 .}\\
+(4)  \forall x(s(x) \rightarrow w(x)) \quad  &\text{hypothesis}\\
+(5)  s(y) \rightarrow w(y) \quad  &\text{universal instantiation using 4 .}\\
+(6)  w(y) \quad  &\text{modus ponens using 3 . and 5 .}\\
+(7)  c(y) \quad  &\text{simplification using 2 .}\\
+(8)  w(y) \wedge c(y) \quad  &\text{conjunction using 6 and 7 .}\\
+(9)  \exists x(c(x) \wedge w(x)) \quad  &\text{existential generalization using 8 .}\\
+\end{array}</script></blockquote>
+<p><strong>各种证明方式</strong></p>
+<p>直接证明，逆否命题证明，反证法，分情况证明(绝对值相关)，等价证明，虚无证明，显然证明</p>
+<p>任意量词证明：所有情况证实，反例证伪</p>
+<p>存在量词证明：找到实例证实，反证证伪</p>
+<p>类型很多，不胜穷举</p>
+<p><strong>有理数与无理数的证明</strong></p>
+<p>这个考法就多了，不胜穷举</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-11-27T22:07:11+08:00"
-              content="2022-11-27">
-          11-27
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Discrete-Math/" rel="tag"># Discrete Math</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/11/27/MA212_Probability_Statistics_Final/" itemprop="url">
-            <span itemprop="name">MA212 概率论与数理统计 期末复习</span>
-          </a>
-      </div>
+        
 
-    </header>
-  </article>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-11-05T21:19:37+08:00"
-              content="2022-11-05">
-          11-05
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/11/05/MA212_Probability_Statistics_Midterm/" itemprop="url">
-            <span itemprop="name">MA212 概率论与数理统计 期末复习</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/01/09/CS205_C&CPP_final/" rel="prev" title="CS205 C/C++ 期末复习">
+      <i class="fa fa-chevron-left"></i> CS205 C/C++ 期末复习
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-  </div>
+      </footer>
+    
+  </article>
   
   
-  
-
   
 
 
@@ -274,6 +385,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Assignment-1"><span class="nav-number">1.</span> <span class="nav-text">Assignment #1</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
