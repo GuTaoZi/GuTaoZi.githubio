@@ -28,7 +28,7 @@
 <meta property="og:description" content="离散数学题库的类型整理">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-01-10T04:59:58.544Z">
-<meta property="article:modified_time" content="2023-01-10T05:57:13.595Z">
+<meta property="article:modified_time" content="2023-01-10T12:06:00.275Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Discrete Math">
 <meta name="twitter:card" content="summary">
@@ -191,7 +191,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-01-10 12:59:58 / 修改时间：13:57:13" itemprop="dateCreated datePublished" datetime="2023-01-10T12:59:58+08:00">2023-01-10</time>
+              <time title="创建时间：2023-01-10 12:59:58 / 修改时间：20:06:00" itemprop="dateCreated datePublished" datetime="2023-01-10T12:59:58+08:00">2023-01-10</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -235,6 +235,10 @@
 & \equiv T \quad&\text { Domination }
 \end{array}</script><p>Therefore, it is a tautology.</p>
 </blockquote>
+<p>放一道比较有意思的题：</p>
+<p><strong>Q1</strong> 假设$P$是一个由$p,q$两个原子命题和逻辑连接词$\neg,\vee,\wedge,→,\leftrightarrow$构成的任意长度的命题。证明$P$等价于一个形如$A\square B$的命题，其中$A,B\in\{p,\neg p,q,\neg q\}$，$\square \in \{\vee, \wedge, \leftrightarrow\}$。</p>
+<p>考虑构成$P$的原子命题$p,q$的真值有4种组合，根据逻辑等价，$P$的真值表只会有至多$2^4$种不同形式，因此证明形如$A\square B$的命题也有$2^4$种不同形式，对于原证明是充分的。</p>
+<p>假如$A\in\{p,\neg p\},\ B\in\{q,\neg q\},\ \square\in \{\vee,\wedge\}$，那么$A\square B$有$2\times2\times2=8$种不同形式；假如$A\in\{p,\neg p\},\ B\in\{q,\neg q\},\ \square=\leftrightarrow$，则有$p\leftrightarrow q,\ p\leftrightarrow \neg q$共2种形式；此外还有$p\vee p\equiv p$, $\neg p\vee \neg p\equiv \neg p$, $q\vee q\equiv q$, $\neg q\vee \neg q\equiv \neg q$, $p\vee \neg p\equiv T$, $q\wedge \neg q\equiv F$共6种形式，即通过$A\square B$构建了总计16种不同形式的真值表，命题得证。</p>
 <p><strong>判断重言式/矛盾式</strong></p>
 <p>可以用等价和真值表来严格证明，也可以根据具体式子进行讨论，文字描述即可</p>
 <p>过程一般长这样：</p>
@@ -304,7 +308,36 @@
 <p>存在量词证明：找到实例证实，反证证伪</p>
 <p>类型很多，不胜穷举</p>
 <p><strong>有理数与无理数的证明</strong></p>
-<p>这个考法就多了，不胜穷举</p>
+<p>这个考法就多了，不胜穷举，复习几个题吧：</p>
+<p><strong>Q1</strong> 证明：$\exists x\in \mathbf Q, y\notin \mathbf Q,\ x^y\notin \mathbf Q$ </p>
+<p>令$x=2,\ y=\sqrt2$，若$x^y=2^\sqrt 2$是无理数，那么我们就找到了一个例子。</p>
+<p>否则令$x=2^\sqrt 2,\ y=\frac{\sqrt 2}{4}$，得到$(2^\sqrt 2)^{\frac {\sqrt {2}} {4}}=2^{\sqrt2\cdot \sqrt2/4}=\sqrt2$，也找到了一个例子。</p>
+<p><strong>Q2</strong> 证伪：无理数的无理数幂一定是无理数</p>
+<p>考虑$\sqrt2^\sqrt2$，如果它是有理数，那么我们就找到了一个反例。</p>
+<p>否则考虑$(\sqrt2^\sqrt2)^\sqrt2=(\sqrt2)^2=2$，也找到了一个反例。</p>
+<p><strong>Q3</strong> 证明：无理数的平方根也是无理数</p>
+<p>假设$\exists x\notin \mathbf Q$，$\sqrt x\in \mathbf Q$，即$\exists a,b\in \mathbf Z,\ \sqrt x=\frac{a}{b}$。</p>
+<p>平方得$x=\frac{a^2}{b^2}$，说明$x\in \mathbf Q$，导出矛盾。</p>
+<p>因此无理数的平方根也是无理数。</p>
+<p><strong>Q4</strong> 证明$\sqrt[3]{2}$是无理数</p>
+<p>假设$\sqrt[3]2\in \mathbf Q$，即$\exists p,q,\ \sqrt[3]{2}=\frac{p}{q}$，其中$p,q$为互质正整数。</p>
+<p>立方得$2=\frac{p^3}{q^3}$，即$p^3=2q^3$，因此$p^3$是偶数。由于奇数的立方还是奇数，所以$p$是偶数。</p>
+<p>不妨设$p=2k$，其中$k$是正整数，代回得$q^3=4k^3$，同理可得$q$也是偶数。</p>
+<p>$p,q$同时为偶数，说明不互质，导出矛盾。</p>
+<p>因此$\sqrt[3]{2}$是无理数。</p>
+<p><strong>Q5</strong> 给定定理：“对于非完全平方数的正整数$n$，其平方根$\sqrt n$为无理数”。基于这个定理证明$\sqrt2+\sqrt3$是无理数。</p>
+<p>假设$\sqrt2+\sqrt3\in \mathbf Q$，则$(\sqrt2+\sqrt3)^2=5+2\sqrt6\in \mathbf Q$。</p>
+<p>将$5+2\sqrt6$减5再除以2，得到$\sqrt6\in \mathbf Q$。</p>
+<p>根据定理，6不是完全平方数，所以$\sqrt6\notin \mathbf Q$，导出矛盾。</p>
+<p>因此$\sqrt2+\sqrt3$是无理数。</p>
+<p><strong>Q6</strong> 多项式$f(x)=a_0+a_1x+a_2x^2+\cdots+a_{n-1}x^{n-1}+x^n$的系数均为整数。给定事实：“如果质数$p$是某个整数的次幂的因子，则$p$也是该整数的因子”。证明：$f(x)=0$的所有实根都是整数或无理数。</p>
+<p>假设$\exists r\in\mathbf Q/\mathbf Z,\ f(r)=0$，即$\exists s,t,\ r=\frac{s}{t}$，其中$s,t$是互质整数且$t&gt;1$。</p>
+<p>代回原式有$f(\frac{s}{t})=a_0+a_1\frac{s}{t}+a_2(\frac{s}{t})^2+\cdots+a_{n-1}(\frac{s}{t})^{n-1}+(\frac{s}{t})^n=0$，整理得$a_0t^n+a_1st^{n-1}+\cdots+a_{n-1}s^{n-1}t=-s^n$</p>
+<p>由于$t&gt;1$，$t$一定有一个质因数$p$，由此这个质因数$p$一定能整除左式，所以也能整除右式，则$p|s^n$。</p>
+<p>根据给定事实，$p$也是$s$的质因数，所以$s,t$有公共质因数$p$，导出矛盾。</p>
+<p>因此$f(x)=0$的实根不是非整数的有理数，只能是整数或者无理数。</p>
+<h3 id="Assignment-2"><a href="#Assignment-2" class="headerlink" title="Assignment #2"></a>Assignment #2</h3><p><strong>集合与逻辑运算的证明</strong></p>
+<p>集合运算的等式</p>
 
     </div>
 
@@ -385,7 +418,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Assignment-1"><span class="nav-number">1.</span> <span class="nav-text">Assignment #1</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Assignment-1"><span class="nav-number">1.</span> <span class="nav-text">Assignment #1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Assignment-2"><span class="nav-number">2.</span> <span class="nav-text">Assignment #2</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
