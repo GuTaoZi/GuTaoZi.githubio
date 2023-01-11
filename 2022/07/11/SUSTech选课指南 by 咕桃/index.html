@@ -45,6 +45,14 @@
     lang   : 'zh-CN'
   };
 </script>
+<script>
+  ((w, d) => {
+    'use strict';
+      const userScheme = localStorage.getItem('Scheme');
+      if (!userScheme) return;
+    d.documentElement.className += ' darkScheme';
+  })(window, document);
+</script>
 
   <title>SUSTech 选课指南 by 咕桃 | 咕桃w！</title>
   
@@ -358,6 +366,12 @@
   </div>
 
 
+<div class="night-mode motion-element">
+  <a role="button" class="night-btn">
+    <i class="fa fa-lightbulb-o"></i>
+    Night Mode
+  </a>
+</div>
 
       </div>
 
@@ -492,6 +506,25 @@
     
 
   
+<script>
+  ((w, d) => {
+    'use strict';
+      let userScheme = localStorage.getItem('Scheme');
+      if (userScheme) d.documentElement.className += ' darkScheme';
+      const btn = d.querySelector('.night-btn');
+      w.addEventListener('keydown', e => {
+        if (e.altKey && e.code === 'KeyX') btn.click();
+      });
+      btn.addEventListener('click', () => {
+        d.documentElement.classList.toggle('darkScheme');
+        if ( d.documentElement.classList.contains('darkScheme') ) {
+          localStorage.setItem('Scheme', 'Dark');
+          return;
+        }
+        localStorage.removeItem('Scheme');
+      });
+  })(window, document);
+</script>
 
 
 </body>
