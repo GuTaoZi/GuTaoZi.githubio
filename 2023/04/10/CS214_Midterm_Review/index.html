@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Outline Computer Abstractions and Technology  Lecture 1 - Computer Abstractions and Technology§1.1 IntroductionClasses of Computers:  Personal computers Server computers Supercomputers Embedded comput">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS214 计算机组成原理 半期复习">
+<meta property="og:url" content="https://gutaozi.github.io/2023/04/10/CS214_Midterm_Review/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="Outline Computer Abstractions and Technology  Lecture 1 - Computer Abstractions and Technology§1.1 IntroductionClasses of Computers:  Personal computers Server computers Supercomputers Embedded comput">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/04/10/7jNgTnyGV5WS9iJ.png">
+<meta property="article:published_time" content="2023-04-10T01:10:16.595Z">
+<meta property="article:modified_time" content="2023-04-10T03:44:16.857Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="Computer Organization">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/04/10/7jNgTnyGV5WS9iJ.png">
+
+<link rel="canonical" href="https://gutaozi.github.io/2023/04/10/CS214_Midterm_Review/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CS214 计算机组成原理 半期复习 | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/04/10/CS214_Midterm_Review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS214 计算机组成原理 半期复习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-10 09:10:16 / 修改时间：11:44:16" itemprop="dateCreated datePublished" datetime="2023-04-10T09:10:16+08:00">2023-04-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h1><ol>
+<li>Computer Abstractions and Technology</li>
+</ol>
+<h1 id="Lecture-1-Computer-Abstractions-and-Technology"><a href="#Lecture-1-Computer-Abstractions-and-Technology" class="headerlink" title="Lecture 1 - Computer Abstractions and Technology"></a>Lecture 1 - Computer Abstractions and Technology</h1><h2 id="§1-1-Introduction"><a href="#§1-1-Introduction" class="headerlink" title="§1.1 Introduction"></a>§1.1 Introduction</h2><p><strong>Classes of Computers</strong>:</p>
+<ul>
+<li>Personal computers</li>
+<li>Server computers</li>
+<li>Supercomputers</li>
+<li>Embedded computers</li>
+</ul>
+<p><strong>The Post-PC Era</strong>:</p>
+<ul>
+<li>Cloud computing<ul>
+<li>Warehouse Scale Computers (WSC)</li>
+<li>Software as a Service (SaaS)</li>
+</ul>
+</li>
+<li>Data centers</li>
+<li>Personal Mobile Device(PMD)</li>
+</ul>
+<h2 id="§1-2-Eight-Great-Ideas-in-Computer-Architecture"><a href="#§1-2-Eight-Great-Ideas-in-Computer-Architecture" class="headerlink" title="§1.2 Eight Great Ideas in Computer Architecture"></a>§1.2 Eight Great Ideas in Computer Architecture</h2><ol>
+<li><p>Design for <strong>Moore’s Law</strong></p>
+<blockquote>
+<p>The number of transistors that can be integrated on a die would double every 18 to 24 months.</p>
+<p>Gordon Moore, 1965</p>
+</blockquote>
+</li>
+<li><p>Use <strong>Abstraction</strong> to Simplify Design</p>
+<p>High Level Language → (Compiler) → Assembly Code → (Assembler) → Machine Language → (Machine Interpretation) → Hardware Architecture Description → (Architecture Implementation) → Logic Circuit Description</p>
+</li>
+<li><p>Make the <strong>Common Case Fast</strong></p>
+</li>
+<li><p>Performance via <strong>Parallelism</strong></p>
+</li>
+<li><p>Performance via <strong>Pipelining</strong></p>
+</li>
+<li><p>Performance via <strong>Prediction</strong></p>
+</li>
+<li><p><strong>Hierarchy</strong> of Memories</p>
+<p><img src="https://s2.loli.net/2023/04/10/7jNgTnyGV5WS9iJ.png" alt="image.png"></p>
+</li>
+<li><p><strong>Dependability</strong> via Redundancy</p>
+<p>Redundancy so that a failing piece doesn’t make the whole system fail.</p>
+</li>
+</ol>
+<h2 id="§1-3-Below-Your-Program"><a href="#§1-3-Below-Your-Program" class="headerlink" title="§1.3 Below Your Program"></a>§1.3 Below Your Program</h2><p><strong>Between Your Program and Hardware</strong>:</p>
+<ul>
+<li>Application software<ul>
+<li>Written in high-level language (HLL)</li>
+</ul>
+</li>
+<li>System software<ul>
+<li>Compiler: translates HLL code to machine code</li>
+<li>Operating System: service code<ul>
+<li>Handling input/output</li>
+<li>Managing memory and storage</li>
+<li>Scheduling tasks &amp; sharing resources</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Hardware<ul>
+<li>Processor, memory, I/O controllers</li>
+</ul>
+</li>
+</ul>
+<p><strong>Levels of Program Code</strong>:</p>
+<ul>
+<li>High-level language<ul>
+<li>Level of abstraction closer to problem domain</li>
+<li>Provides for productivity and portability</li>
+</ul>
+</li>
+<li>Assembly language<ul>
+<li>Textual representation of instructions</li>
+</ul>
+</li>
+<li>Hardware representation<ul>
+<li>Binary digits (bits)</li>
+<li>Encoded instructions and data</li>
+</ul>
+</li>
+</ul>
+<h2 id="§1-4-Under-the-Covers"><a href="#§1-4-Under-the-Covers" class="headerlink" title="§1.4 Under the Covers"></a>§1.4 Under the Covers</h2><p><strong>Same components for all kinds of computer</strong>:</p>
+<ul>
+<li>I/O device</li>
+<li>Memory</li>
+<li>Processor</li>
+</ul>
+<p><strong>Inside the Processor</strong>:</p>
+<ul>
+<li>Datapath: performs operations on data</li>
+<li>Control: control the sequence of Datapath, memory, I/O</li>
+<li>Cache memory: Small fast SRAM memory for immediate access to data</li>
+</ul>
+<h2 id="§1-5-Technologies-for-Building-Processors-and-Memory"><a href="#§1-5-Technologies-for-Building-Processors-and-Memory" class="headerlink" title="§1.5 Technologies for Building Processors and Memory"></a>§1.5 Technologies for Building Processors and Memory</h2><p>(Different from textbook)</p>
+<p><strong>Processor Technology Trends</strong>:</p>
+<ul>
+<li>Shrinking of transistor sizes</li>
+<li>Transistor density increases by 35% per year and die size increases by 10-20% per year</li>
+<li>Transistor speed improves linearly with size</li>
+<li>Wire delays do not scale down at the same rate as transistor delays</li>
+</ul>
+<p><strong>Storage</strong>:</p>
+<ul>
+<li>Volatile main memory<ul>
+<li>Loses instructions and data when power off</li>
+</ul>
+</li>
+<li>Non-volatile secondary memory<ul>
+<li>Magnetic disk</li>
+<li>Flash memory</li>
+<li>Optical disk (CDROM, DVD)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Memory and I/O Technology Trends</strong>:</p>
+<ul>
+<li>DRAM density increases by 40-60% per year, latency has reduced by 33% in 10 years (the memory wall!), bandwidth improves twice as fast as latency decreases.</li>
+<li>Disk density improves by 100% every year, latency improvement similar to DRAM.</li>
+<li>Networks: primary focus on bandwidth; 10Mb → 100Mb in 10 years; 100Mb → 1Gb in 5 years.</li>
+</ul>
+<p><strong>Power Consumption Trends</strong>:</p>
+<ul>
+<li><p>$\text{Dyn Power} \propto \text{activity} \times \text{capacitance}\times \text{voltage}^2\times \text{frequency}$</p>
+</li>
+<li><p>Voltage &amp; frequency are constant now. Capacitance per transistor is decreasing, number of transistors (activity) is increasing.</p>
+</li>
+<li>Power leakage rising.</li>
+</ul>
+<h2 id="§1-6-Performance"><a href="#§1-6-Performance" class="headerlink" title="§1.6 Performance"></a>§1.6 Performance</h2><p>$\text{*}$Focus on response time for now.</p>
+<p><strong>Execution Time</strong>: </p>
+<ul>
+<li>Elapsed time<ul>
+<li>Total response time, including all aspects.<ul>
+<li>Processing, I/O, OS overhead, idle time</li>
+</ul>
+</li>
+<li>Determines system performance.</li>
+</ul>
+</li>
+<li>CPU time<ul>
+<li>Time spent processing a given job<ul>
+<li>Discounts I/O time, other jobs’ shares</li>
+</ul>
+</li>
+<li>Comprises user CPU time and system CPU time</li>
+<li>Different programs are affected differently by CPU and system performance</li>
+</ul>
+</li>
+</ul>
+<p>$\text{Performance}=1/\text{Execution time}$</p>
+<p><strong>Clock level</strong>: </p>
+<p>$\text{CPU Time} = \text{Clock Cycles}\times\text{Clock Period}=\frac{\text{Clock Cycles}}{\text{Clock Rate}}$</p>
+<p>Performance improved by: </p>
+<ul>
+<li>Clock cycles ↓</li>
+<li>Clock rate ↑</li>
+</ul>
+<p>Trade off: rate vs. count</p>
+<p><strong>Instruction level</strong>:</p>
+<p>$\text{Clock Cycles} = \sum\limits_{i=1}^n(\text{IC}_i\times \text{CPI}_i)$</p>
+<p>$\text{CPU Time} = \text{IC} \times \text{CPI}\times \text{Clock Period}$</p>
+<ul>
+<li>Instruction Count for a program<ul>
+<li>Determined by program, ISA and compiler</li>
+</ul>
+</li>
+<li>Average cycles per instruction (CPI)<ul>
+<li>Determined by CPU hardware</li>
+<li>If different instructions have different CPI<ul>
+<li>Average CPI affected by instruction mix</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>The big picture</strong>: </p>
+<p>$\text{CPU Time} = \frac{\text{Instructions}}{\text{Program}}\times \frac{\text{Clock Cycles}}{\text{Instruction}}\times \frac{\text{Seconds}}{\text{Clock Cycle}}=\text{IC}\times \text{CPI}\times \text{Tc}$</p>
+<ul>
+<li>Algorithm: affects IC, possibly CPI</li>
+<li>Programming language: affects IC, CPI</li>
+<li>Compiler: affects IC, CPI</li>
+<li>Instruction set architecture: affects IC, CPI, Tc</li>
+</ul>
+<h2 id="§1-7-The-Power-Wall"><a href="#§1-7-The-Power-Wall" class="headerlink" title="§1.7 The Power Wall"></a>§1.7 The Power Wall</h2><p><strong>Energy Consumption of a chip</strong>:</p>
+<ul>
+<li>Energy consumption = dynamic energy + static energy</li>
+<li><p>Energy for a single transistor switch: $E\propto \frac 1 2\times \text{Capacity load}\times \text{Voltage}^2$</p>
+</li>
+<li><p>Energy per second (Power): $\text{Power}\propto E\times \text{Frequency switched}$</p>
+</li>
+</ul>
+<p><strong>The power wall</strong>: </p>
+<ul>
+<li>We can’t reduce voltage further: too leaky.</li>
+<li>We can’t remove more heat: too expensive.</li>
+</ul>
+<h2 id="§1-8-The-Sea-Change-The-Switch-from-Uniprocessors-to-Multiprocessors"><a href="#§1-8-The-Sea-Change-The-Switch-from-Uniprocessors-to-Multiprocessors" class="headerlink" title="§1.8 The Sea Change: The Switch from Uniprocessors to Multiprocessors"></a>§1.8 The Sea Change: The Switch from Uniprocessors to Multiprocessors</h2><p><strong>Uniprocessor Performance</strong>: </p>
+<p>Constrained by power, instruction -level parallelism, memory latency</p>
+<p><strong>Multiprocessors</strong>:</p>
+<ul>
+<li>Multicore microprocessors<ul>
+<li>More than one processor per chip</li>
+</ul>
+</li>
+<li>Requires explicitly parallel programming<ul>
+<li>Compare with instruction level parallelism<ul>
+<li>Hardware executes multiple instructions at once</li>
+<li>Hidden from the programmer</li>
+</ul>
+</li>
+<li>Hard to do<ul>
+<li>Programming for performance</li>
+<li>Load balancing</li>
+<li>Optimizing communication and synchronization</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="§1-9-Real-Stuff-Benchmarking-the-Intel-Core-i7"><a href="#§1-9-Real-Stuff-Benchmarking-the-Intel-Core-i7" class="headerlink" title="§1.9 Real Stuff: Benchmarking the Intel Core i7"></a>§1.9 Real Stuff: Benchmarking the Intel Core i7</h2><p><strong>Standard Performance Evaluation Cooperative(SPEC) CPU Benchmark</strong>: </p>
+<p>Develops benchmarks for CPU, I/O, Web, …</p>
+<p><strong>SPEC CPU2006</strong>: </p>
+<ul>
+<li><p>Elapsed time to execute a selection of programs</p>
+<ul>
+<li>Negligible I/O, so focuses on CPU performance</li>
+</ul>
+</li>
+<li><p>Normalized relative to reference machine</p>
+</li>
+<li><p>Summarize as geometric mean of performance ratios</p>
+<ul>
+<li>CINT2006 (integer) and CFP2006 (floating-point)</li>
+</ul>
+<p>$\sqrt[n]{\prod\limits_{i=1}^n \text{Execution time ratio}_i}$</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Instruction Count</th>
+<th>CPI</th>
+<th>Clock Cycle Time</th>
+<th>Execution Time</th>
+<th>Reference Time</th>
+<th>SPEC ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\text{IC}$</td>
+<td>$\text{CPI}$</td>
+<td>$\text{Tc}$</td>
+<td>$\text{T}_\text{Exe}$</td>
+<td>$\text{T}_\text{Ref}$</td>
+<td>$\frac{\text{T}_\text{Ref}}{\text{T}_\text{Exe}}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>SPEC Power Benchmark</strong>:</p>
+<p>Power consumption of the server at different workload levels.</p>
+<ul>
+<li>Performance: ssj_ops (server side Java operations per second)</li>
+<li>Power: Watts</li>
+</ul>
+<p>$\text{Overall ssj_ops per Watt} = (\sum\limits_{i=0}^{10}\text{ssj_ops}_i)/(\sum\limits_{i=0}^{10}\text{power}_i)$</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Computer-Organization/" rel="tag"># Computer Organization</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/03/30/%E5%AD%A6%E9%95%BF%E5%9B%A2%E5%B7%A5%E4%BD%9C%E6%89%8B%E5%86%8C-%E7%BA%BF%E4%B8%8A%E6%8B%9B%E6%96%B0/" rel="prev" title="学长团工作手册 线上招新迎新">
+      <i class="fa fa-chevron-left"></i> 学长团工作手册 线上招新迎新
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script>
+  const gitalk = new Gitalk({
+    clientID: '79118b0b29b4170f24af',
+    clientSecret: '48ee47026d13b8a3a954b2b089ea320510282527',
+    repo: 'GuTaoZi.github.io',      // The repository of store comments,
+    owner: 'GuTaoZi',
+    admin: ['GuTaoZi'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+  </script>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Outline"><span class="nav-number">1.</span> <span class="nav-text">Outline</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Lecture-1-Computer-Abstractions-and-Technology"><span class="nav-number">2.</span> <span class="nav-text">Lecture 1 - Computer Abstractions and Technology</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-1-Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">§1.1 Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-2-Eight-Great-Ideas-in-Computer-Architecture"><span class="nav-number">2.2.</span> <span class="nav-text">§1.2 Eight Great Ideas in Computer Architecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-3-Below-Your-Program"><span class="nav-number">2.3.</span> <span class="nav-text">§1.3 Below Your Program</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-4-Under-the-Covers"><span class="nav-number">2.4.</span> <span class="nav-text">§1.4 Under the Covers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-5-Technologies-for-Building-Processors-and-Memory"><span class="nav-number">2.5.</span> <span class="nav-text">§1.5 Technologies for Building Processors and Memory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-6-Performance"><span class="nav-number">2.6.</span> <span class="nav-text">§1.6 Performance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-7-The-Power-Wall"><span class="nav-number">2.7.</span> <span class="nav-text">§1.7 The Power Wall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-8-The-Sea-Change-The-Switch-from-Uniprocessors-to-Multiprocessors"><span class="nav-number">2.8.</span> <span class="nav-text">§1.8 The Sea Change: The Switch from Uniprocessors to Multiprocessors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A71-9-Real-Stuff-Benchmarking-the-Intel-Core-i7"><span class="nav-number">2.9.</span> <span class="nav-text">§1.9 Real Stuff: Benchmarking the Intel Core i7</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>
