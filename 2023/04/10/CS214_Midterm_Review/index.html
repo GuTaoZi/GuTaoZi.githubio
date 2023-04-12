@@ -28,10 +28,15 @@
 <meta property="og:description" content="喜欢我汇编么？">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/04/10/7jNgTnyGV5WS9iJ.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/73bqCv5AmxMslwz.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/mRP9EeWzLYSHJwq.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/Og1dI2isJ5Mq7Ao.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/5A3ytqQFM42BUNr.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/mU6LCchI438Orvo.png">
 <meta property="og:image" content="https://s2.loli.net/2023/04/12/ohiHcDIxywB4Y3k.png">
 <meta property="og:image" content="https://s2.loli.net/2023/04/12/RB23qK1zE5mJtTa.png">
 <meta property="article:published_time" content="2023-04-10T01:10:16.595Z">
-<meta property="article:modified_time" content="2023-04-12T01:08:19.315Z">
+<meta property="article:modified_time" content="2023-04-12T10:07:10.878Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Computer Organization">
 <meta name="twitter:card" content="summary">
@@ -201,7 +206,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-12 09:08:19" itemprop="dateModified" datetime="2023-04-12T09:08:19+08:00">2023-04-12</time>
+                <time title="修改时间：2023-04-12 18:07:10" itemprop="dateModified" datetime="2023-04-12T18:07:10+08:00">2023-04-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -543,8 +548,13 @@
 <li>Immediate operand avoids a load instruction</li>
 </ul>
 </li>
+<li>Good design demands good compromises<ul>
+<li>Different formats complicate decoding, but allow 32-bit instructions uniformly</li>
+<li>Keep formats as similar as possible</li>
 </ul>
-<h3 id="§2-2-Memory-amp-Operands"><a href="#§2-2-Memory-amp-Operands" class="headerlink" title="§2.2 Memory &amp; Operands"></a>§2.2 Memory &amp; Operands</h3><p><strong>Registers</strong>: </p>
+</li>
+</ul>
+<h3 id="§2-2-Operands"><a href="#§2-2-Operands" class="headerlink" title="§2.2 Operands"></a>§2.2 Operands</h3><p><strong>Registers</strong>: </p>
 <ul>
 <li>MIPS ISA: 32 registers.<ul>
 <li>Reason for the limit of 32 registers: Smaller is faster</li>
@@ -585,6 +595,368 @@
 <p><strong>Signed Negation</strong>:</p>
 <p>2’s complement = 1’s complement + 1</p>
 <p><strong>Sign Extension</strong>:</p>
+<p>Representing a number using more bits, and preserve the numeric value.</p>
+<p>Replicate the sign bit to the left.</p>
+<p><code>addi</code>, <code>lb</code>, <code>lh</code>, <code>beq</code>, <code>bne</code></p>
+<p>Instruction Formats</p>
+<h3 id="§2-4-Instructions"><a href="#§2-4-Instructions" class="headerlink" title="§2.4 Instructions"></a>§2.4 Instructions</h3><p><strong>Arithmetic instruction</strong>: add, sub, …</p>
+<p><strong>Data transfer instruction</strong>: lw, sw, lh, sh, …</p>
+<p><strong>Logical instruction</strong>: and, or, …</p>
+<p><strong>Conditional branch</strong>: beq, bne, slt, …</p>
+<h3 id="§2-5-Instruction-Formats"><a href="#§2-5-Instruction-Formats" class="headerlink" title="§2.5 Instruction Formats"></a>§2.5 Instruction Formats</h3><p><strong>Registers</strong>: </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">Number</th>
+<th style="text-align:left">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$zero</td>
+<td style="text-align:center">0</td>
+<td style="text-align:left">Constant value 0</td>
+</tr>
+<tr>
+<td style="text-align:center">$at</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">Assembler Temporary</td>
+</tr>
+<tr>
+<td style="text-align:center">$v0-$v1</td>
+<td style="text-align:center">2-3</td>
+<td style="text-align:left">Values for Function Results and Expression Evaluation</td>
+</tr>
+<tr>
+<td style="text-align:center">$a0-$a3</td>
+<td style="text-align:center">4-7</td>
+<td style="text-align:left">Arguments</td>
+</tr>
+<tr>
+<td style="text-align:center">$t0-$t7</td>
+<td style="text-align:center">8-15</td>
+<td style="text-align:left">Temporaries</td>
+</tr>
+<tr>
+<td style="text-align:center">$s0-$s7</td>
+<td style="text-align:center">16-23</td>
+<td style="text-align:left">Saved Temporaries</td>
+</tr>
+<tr>
+<td style="text-align:center">$t8-$t9</td>
+<td style="text-align:center">24-25</td>
+<td style="text-align:left">Tempoaries</td>
+</tr>
+<tr>
+<td style="text-align:center">$gp</td>
+<td style="text-align:center">28</td>
+<td style="text-align:left">Global Pointer</td>
+</tr>
+<tr>
+<td style="text-align:center">$sp</td>
+<td style="text-align:center">29</td>
+<td style="text-align:left">Stack Pointer</td>
+</tr>
+<tr>
+<td style="text-align:center">$fp</td>
+<td style="text-align:center">30</td>
+<td style="text-align:left">Frame Pointer</td>
+</tr>
+<tr>
+<td style="text-align:center">$ra</td>
+<td style="text-align:center">31</td>
+<td style="text-align:left">Return Address</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>R-type instruction</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">opcode</th>
+<th style="text-align:center">source 1</th>
+<th style="text-align:center">source 2</th>
+<th style="text-align:center">dest</th>
+<th style="text-align:center">shift amt</th>
+<th style="text-align:center">function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">op</td>
+<td style="text-align:center">rs</td>
+<td style="text-align:center">rt</td>
+<td style="text-align:center">rd</td>
+<td style="text-align:center">shamt</td>
+<td style="text-align:center">funct</td>
+</tr>
+<tr>
+<td style="text-align:center">6 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">6 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>I-type instruction</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">opcode</th>
+<th style="text-align:center">source</th>
+<th style="text-align:center">dest</th>
+<th style="text-align:center">constant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">op</td>
+<td style="text-align:center">rs</td>
+<td style="text-align:center">rt</td>
+<td style="text-align:center">const</td>
+</tr>
+<tr>
+<td style="text-align:center">6 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">16 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>J-type instruction</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>opcode</th>
+<th>target address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6 bits</td>
+<td>26 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="§2-6-Procedures"><a href="#§2-6-Procedures" class="headerlink" title="§2.6 Procedures"></a>§2.6 Procedures</h3><p><strong>Procedure lifespan</strong>:</p>
+<ul>
+<li>acquires resources</li>
+<li>performs task</li>
+<li>covers its tracks</li>
+<li>returns back with desired result</li>
+</ul>
+<p><strong>Steps of procedure execution (caller calls the callee)</strong>:</p>
+<ul>
+<li>parameters (arguments) are placed where the callee can see them</li>
+<li>control is transferred to the callee</li>
+<li>acquire storage resources for callee</li>
+<li>execute the procedure</li>
+<li>place result value where caller can access it</li>
+<li>return control to caller</li>
+</ul>
+<p><strong>Registers Used during Procedure Calling</strong>:</p>
+<ul>
+<li>The registers are used to hold data between the caller and the callee:</li>
+<li>$a0 - $a3: four argument registers to pass parameters</li>
+<li>$v0 - $v1: two value registers to return the values</li>
+<li>$ra: one return address register to return to the point of origin in the caller</li>
+</ul>
+<p><strong>Storage Management on a Call/Return</strong>:</p>
+<ul>
+<li>A new procedure must create space for all its variables on the stack</li>
+<li>Before executing the jal, the caller must save relevant values in $s0-$s7, $a0-$a3, $ra, temps into its own stack space</li>
+<li>Arguments are copied into $a0-$a3; the jal is executed</li>
+<li>After the callee creates stack space, it updates the value of $sp</li>
+<li>Once the callee finishes, it copies the return value into $v0, frees up stack space, and $sp is incremented</li>
+<li>On return, the caller may bring in its stack values, $ra, temps into registers</li>
+</ul>
+<p><strong>Saving Conventions</strong>:</p>
+<ul>
+<li>Caller saved: $t0-$t9, $ra, $a0-$a3</li>
+<li>Callee saved: $s0-$s7</li>
+</ul>
+<p><strong>Memory Layout</strong>:</p>
+<ul>
+<li>Text: program code</li>
+<li>Static data: global variables<ul>
+<li>static variables in C, constant arrays and strings</li>
+<li>$gp initialized to address allowing ±offsets into this segment</li>
+</ul>
+</li>
+<li>Dynamic data: heap<ul>
+<li>malloc in C, new in Java</li>
+</ul>
+</li>
+<li>Stack: automatic storage</li>
+</ul>
+<p><strong>Local Data on the Stack</strong>:</p>
+<ul>
+<li>Local data allocated by callee<ul>
+<li>C automatic variables</li>
+</ul>
+</li>
+<li>Procedure frame (activation record)<ul>
+<li>Used by some compilers to manage stack storage</li>
+</ul>
+</li>
+</ul>
+<h3 id="§2-7-Addressing"><a href="#§2-7-Addressing" class="headerlink" title="§2.7 Addressing"></a>§2.7 Addressing</h3><p><img src="https://s2.loli.net/2023/04/12/73bqCv5AmxMslwz.png" alt="image.png" style="zoom:67%;" /></p>
+<p><strong>Immediate Addressing</strong>:</p>
+<p><code>addi, subi, andi, ori...</code></p>
+<p>$\text{hi = x&gt;&gt;16}$, $\text{lo=x-(hi&lt;&lt;16)}$</p>
+<p><code>lui</code> + <code>ori</code> = 32-bit constant</p>
+<p><strong>Register Addressing</strong>:</p>
+<p><code>and, andi, sub, subi, lw...</code></p>
+<p>Using register as the operand.</p>
+<p><img src="https://s2.loli.net/2023/04/12/mRP9EeWzLYSHJwq.png" alt="image.png" style="zoom:50%;" /></p>
+<p><strong>Base/displacement Addressing</strong>:</p>
+<p>​    <code>lw, sw, lh, sh, lb, sb...</code></p>
+<p>​    The address is the sum of a register and a constant.</p>
+<p><strong>Branch Addressing (PC-relative addressing)</strong>:</p>
+<p><code>beq, bne</code></p>
+<p>$\text{Target address = PC + 4 + constant × 4}$</p>
+<p><strong>Jump Addressing (Pseudo-direct addressing)</strong>:</p>
+<p><code>j, jal</code></p>
+<p>$\text{Target address = PC[31:28]:(address×4)}$</p>
+<p>Address times 4 because it is the “word address”.</p>
+<p>If branch target is too far to encode with 16-bit offset, assembler rewrites the code to “double jump”.</p>
+<h3 id="§2-8-Translating-and-Starting-a-Program"><a href="#§2-8-Translating-and-Starting-a-Program" class="headerlink" title="§2.8 Translating and Starting a Program"></a>§2.8 Translating and Starting a Program</h3><p><strong>A translation hierarchy for C</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/12/Og1dI2isJ5Mq7Ao.png" alt="image.png" style="zoom:67%;" /></p>
+<p><strong>Role of Assembler</strong>:</p>
+<ul>
+<li>pseudo-instructions → actual hardware instructions</li>
+<li>assembly instructions → machine instructions</li>
+</ul>
+<p><strong>Role of Linker</strong>: </p>
+<ul>
+<li>Stitches different object files into a single executable<ul>
+<li>patch internal and external references</li>
+<li>determine addresses of data and instruction labels</li>
+<li>organize code and data modules in memory</li>
+</ul>
+</li>
+<li>Dynamically linked libraries – the executable points to dummy routines – these dummy routines call the dynamic linker-loader so they can update the executable to jump to the correct routine.</li>
+</ul>
+<p><strong>Linker Simulation</strong>:</p>
+<ul>
+<li>Combine the <code>Text size</code> and <code>Data size</code>.</li>
+<li>Determine the order of objects.</li>
+<li>Combine the text segment, conventionally start from $0040\ 0000_\text{HEX}$.</li>
+<li>Modify the jump address according to new text addresses.</li>
+<li>Combine the data segment, conventionally start from $1000\ 0000_\text{HEX}$.</li>
+<li>Modify the memory operations according to new data addresses. Be careful about the sign extension!</li>
+</ul>
+<p><strong>A translation hierarchy for Java</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/12/5A3ytqQFM42BUNr.png" alt="image.png" style="zoom: 67%;" /></p>
+<h3 id="§2-9-RISC-V"><a href="#§2-9-RISC-V" class="headerlink" title="§2.9 RISC-V"></a>§2.9 RISC-V</h3><p><strong>Differences between MIPS32 and RISC-V32</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>MIPS32</th>
+<th>RISC-V32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>License</td>
+<td>Proprietary</td>
+<td>Open-Source</td>
+</tr>
+<tr>
+<td>Endianness</td>
+<td>Big-endian</td>
+<td>Little-endian</td>
+</tr>
+<tr>
+<td>Addressing modes</td>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Conditional branches</td>
+<td>slt, sltu + beq, bnq</td>
+<td>+blt,bge,bltu,bgeu</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>RISC-V Registers</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x0</td>
+<td>the constant value 0</td>
+</tr>
+<tr>
+<td>x1</td>
+<td>return address</td>
+</tr>
+<tr>
+<td>x2</td>
+<td>stack pointer</td>
+</tr>
+<tr>
+<td>x3</td>
+<td>global pointer</td>
+</tr>
+<tr>
+<td>x4</td>
+<td>thread pointer</td>
+</tr>
+<tr>
+<td>x5-x7</td>
+<td>temporaries</td>
+</tr>
+<tr>
+<td>x8</td>
+<td>frame pointer</td>
+</tr>
+<tr>
+<td>x9</td>
+<td>saved registers</td>
+</tr>
+<tr>
+<td>x10-x11</td>
+<td>function arguments/results</td>
+</tr>
+<tr>
+<td>x12-x17</td>
+<td>function arguments</td>
+</tr>
+<tr>
+<td>x18-x27</td>
+<td>saved registers</td>
+</tr>
+<tr>
+<td>x28-x31</td>
+<td>temporaries</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>RISC-V: 6 instruction formats</strong></p>
+<p><strong>MIPS &amp; RISC-V Instruction Formats</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/12/mU6LCchI438Orvo.png" alt="image.png"></p>
 <h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><h3 id="MIPS-Core-Architecture"><a href="#MIPS-Core-Architecture" class="headerlink" title="MIPS Core Architecture"></a>MIPS Core Architecture</h3><p><img src="https://s2.loli.net/2023/04/12/ohiHcDIxywB4Y3k.png" alt="image.png"></p>
 <h3 id="MIPS-instruction-encoding"><a href="#MIPS-instruction-encoding" class="headerlink" title="MIPS instruction encoding"></a>MIPS instruction encoding</h3><p><img src="https://s2.loli.net/2023/04/12/RB23qK1zE5mJtTa.png" alt="image.png"></p>
 
@@ -681,7 +1053,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline"><span class="nav-number">1.</span> <span class="nav-text">Outline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-Computer-Abstractions-and-Technology"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1 - Computer Abstractions and Technology</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-1-Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">§1.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-2-Eight-Great-Ideas-in-Computer-Architecture"><span class="nav-number">2.2.</span> <span class="nav-text">§1.2 Eight Great Ideas in Computer Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-3-Below-Your-Program"><span class="nav-number">2.3.</span> <span class="nav-text">§1.3 Below Your Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-4-Under-the-Covers"><span class="nav-number">2.4.</span> <span class="nav-text">§1.4 Under the Covers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-5-Technologies-for-Building-Processors-and-Memory"><span class="nav-number">2.5.</span> <span class="nav-text">§1.5 Technologies for Building Processors and Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-6-Performance"><span class="nav-number">2.6.</span> <span class="nav-text">§1.6 Performance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-7-The-Power-Wall"><span class="nav-number">2.7.</span> <span class="nav-text">§1.7 The Power Wall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-8-The-Sea-Change-The-Switch-from-Uniprocessors-to-Multiprocessors"><span class="nav-number">2.8.</span> <span class="nav-text">§1.8 The Sea Change: The Switch from Uniprocessors to Multiprocessors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-9-Real-Stuff-Benchmarking-the-Intel-Core-i7"><span class="nav-number">2.9.</span> <span class="nav-text">§1.9 Real Stuff: Benchmarking the Intel Core i7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-10-Fallacies-and-Pitfalls"><span class="nav-number">2.10.</span> <span class="nav-text">§1.10 Fallacies and Pitfalls</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-Instructions-Language-of-the-Computer"><span class="nav-number">3.</span> <span class="nav-text">Chapter 2 - Instructions: Language of the Computer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-1-Introduction"><span class="nav-number">3.1.</span> <span class="nav-text">§2.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-2-Memory-amp-Operands"><span class="nav-number">3.2.</span> <span class="nav-text">§2.2 Memory &amp; Operands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-3-Numeric-Representations"><span class="nav-number">3.3.</span> <span class="nav-text">§2.3 Numeric Representations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">4.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS-Core-Architecture"><span class="nav-number">4.1.</span> <span class="nav-text">MIPS Core Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS-instruction-encoding"><span class="nav-number">4.2.</span> <span class="nav-text">MIPS instruction encoding</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline"><span class="nav-number">1.</span> <span class="nav-text">Outline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-Computer-Abstractions-and-Technology"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1 - Computer Abstractions and Technology</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-1-Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">§1.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-2-Eight-Great-Ideas-in-Computer-Architecture"><span class="nav-number">2.2.</span> <span class="nav-text">§1.2 Eight Great Ideas in Computer Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-3-Below-Your-Program"><span class="nav-number">2.3.</span> <span class="nav-text">§1.3 Below Your Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-4-Under-the-Covers"><span class="nav-number">2.4.</span> <span class="nav-text">§1.4 Under the Covers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-5-Technologies-for-Building-Processors-and-Memory"><span class="nav-number">2.5.</span> <span class="nav-text">§1.5 Technologies for Building Processors and Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-6-Performance"><span class="nav-number">2.6.</span> <span class="nav-text">§1.6 Performance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-7-The-Power-Wall"><span class="nav-number">2.7.</span> <span class="nav-text">§1.7 The Power Wall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-8-The-Sea-Change-The-Switch-from-Uniprocessors-to-Multiprocessors"><span class="nav-number">2.8.</span> <span class="nav-text">§1.8 The Sea Change: The Switch from Uniprocessors to Multiprocessors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-9-Real-Stuff-Benchmarking-the-Intel-Core-i7"><span class="nav-number">2.9.</span> <span class="nav-text">§1.9 Real Stuff: Benchmarking the Intel Core i7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-10-Fallacies-and-Pitfalls"><span class="nav-number">2.10.</span> <span class="nav-text">§1.10 Fallacies and Pitfalls</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-Instructions-Language-of-the-Computer"><span class="nav-number">3.</span> <span class="nav-text">Chapter 2 - Instructions: Language of the Computer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-1-Introduction"><span class="nav-number">3.1.</span> <span class="nav-text">§2.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-2-Operands"><span class="nav-number">3.2.</span> <span class="nav-text">§2.2 Operands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-3-Numeric-Representations"><span class="nav-number">3.3.</span> <span class="nav-text">§2.3 Numeric Representations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-4-Instructions"><span class="nav-number">3.4.</span> <span class="nav-text">§2.4 Instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-5-Instruction-Formats"><span class="nav-number">3.5.</span> <span class="nav-text">§2.5 Instruction Formats</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-6-Procedures"><span class="nav-number">3.6.</span> <span class="nav-text">§2.6 Procedures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-7-Addressing"><span class="nav-number">3.7.</span> <span class="nav-text">§2.7 Addressing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-8-Translating-and-Starting-a-Program"><span class="nav-number">3.8.</span> <span class="nav-text">§2.8 Translating and Starting a Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-9-RISC-V"><span class="nav-number">3.9.</span> <span class="nav-text">§2.9 RISC-V</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">4.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS-Core-Architecture"><span class="nav-number">4.1.</span> <span class="nav-text">MIPS Core Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS-instruction-encoding"><span class="nav-number">4.2.</span> <span class="nav-text">MIPS instruction encoding</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
