@@ -33,10 +33,13 @@
 <meta property="og:image" content="https://s2.loli.net/2023/04/12/Og1dI2isJ5Mq7Ao.png">
 <meta property="og:image" content="https://s2.loli.net/2023/04/12/5A3ytqQFM42BUNr.png">
 <meta property="og:image" content="https://s2.loli.net/2023/04/12/mU6LCchI438Orvo.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/13/ZDsigL6rwNOdK5z.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/13/sdiNn6Oh9qX5BaW.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/13/45pRS9xjfK8ocCH.png">
 <meta property="og:image" content="https://s2.loli.net/2023/04/12/ohiHcDIxywB4Y3k.png">
 <meta property="og:image" content="https://s2.loli.net/2023/04/12/RB23qK1zE5mJtTa.png">
 <meta property="article:published_time" content="2023-04-10T01:10:16.595Z">
-<meta property="article:modified_time" content="2023-04-12T10:07:10.878Z">
+<meta property="article:modified_time" content="2023-04-13T12:33:10.657Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Computer Organization">
 <meta name="twitter:card" content="summary">
@@ -206,7 +209,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-12 18:07:10" itemprop="dateModified" datetime="2023-04-12T18:07:10+08:00">2023-04-12</time>
+                <time title="修改时间：2023-04-13 20:33:10" itemprop="dateModified" datetime="2023-04-13T20:33:10+08:00">2023-04-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -230,8 +233,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ol>
+        <p>$\huge\text{Outline}$</p>
+<ol>
 <li>Computer Abstractions and Technology</li>
+<li>Instructions: Language of the Computer</li>
+<li>Arithmetic for Computers</li>
 </ol>
 <h2 id="Chapter-1-Computer-Abstractions-and-Technology"><a href="#Chapter-1-Computer-Abstractions-and-Technology" class="headerlink" title="Chapter 1 - Computer Abstractions and Technology"></a>Chapter 1 - Computer Abstractions and Technology</h2><h3 id="§1-1-Introduction"><a href="#§1-1-Introduction" class="headerlink" title="§1.1 Introduction"></a>§1.1 Introduction</h3><p><strong>Classes of Computers</strong>:</p>
 <ul>
@@ -954,9 +960,196 @@
 </tbody>
 </table>
 </div>
-<p><strong>RISC-V: 6 instruction formats</strong></p>
+<p><strong>R-type instruction</strong>:</p>
+<p>Arithmetic instruction format.<code>add, xor</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>funct7</th>
+<th>rs2</th>
+<th>rs1</th>
+<th>funct3</th>
+<th>rd</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>I-type instruction</strong>:</p>
+<p>Loads &amp; immediate arithmetic.<code>addi, lw</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>immediate[11:0]</th>
+<th>rs1</th>
+<th>funct3</th>
+<th>rd</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12 bits</td>
+<td>5 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>S-type instruction</strong>:</p>
+<p>Stores.<code>sw, sb</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>immed[11:5]</th>
+<th>rs2</th>
+<th>rs1</th>
+<th>funct3</th>
+<th>imme[4:0]</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>SB-type instruction</strong>:</p>
+<p>Conditional branch format.<code>beq, bge</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>immed[12,10:5]</th>
+<th>rs2</th>
+<th>rs1</th>
+<th>funct3</th>
+<th>imme[4:1,11]</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>UJ-type instruction</strong>:</p>
+<p>Unconditional jump format.<code>jal</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>immediate[20,10:1,11,19:12]</th>
+<th></th>
+<th>rd</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>17 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>U-type instruction</strong>:</p>
+<p>Upper immediate format.<code>lui</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>immediate[31:12]</th>
+<th></th>
+<th>rd</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>17 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
 <p><strong>MIPS &amp; RISC-V Instruction Formats</strong>:</p>
 <p><img src="https://s2.loli.net/2023/04/12/mU6LCchI438Orvo.png" alt="image.png"></p>
+<h3 id="§2-10-More-ISAs"><a href="#§2-10-More-ISAs" class="headerlink" title="§2.10 More ISAs"></a>§2.10 More ISAs</h3><p>ARM v8, Intel x86</p>
+<hr>
+<h2 id="Chapter-3-Arithmetic-for-Computers"><a href="#Chapter-3-Arithmetic-for-Computers" class="headerlink" title="Chapter 3 - Arithmetic for Computers"></a>Chapter 3 - Arithmetic for Computers</h2><h3 id="§3-1-Addition-and-Subtraction"><a href="#§3-1-Addition-and-Subtraction" class="headerlink" title="§3.1 Addition and Subtraction"></a>§3.1 Addition and Subtraction</h3><p><strong>Integer Overflow</strong>:</p>
+<ul>
+<li><code>add( + , + ) = -</code></li>
+<li><code>add( - , - ) = +</code></li>
+<li><code>sub( + , - ) = -</code></li>
+<li><code>sub( - , + ) = +</code></li>
+</ul>
+<p><strong>1-bit Adder</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/13/ZDsigL6rwNOdK5z.png" alt="image.png" style="zoom:33%;" /></p>
+<p><strong>1-bit ALU and 32-bit ALU</strong>:</p>
+<ul>
+<li>If op = 0, o = a &amp; b (and) </li>
+<li>If op = 1, o = a | b (or) </li>
+<li>If op = 2, o = a + b (add)</li>
+</ul>
+<p>To obtain 32-bit ALU, sequentially connect the 1-bit ALU via <code>Carry</code>, bind <code>op</code>  to the same operation.</p>
+<p><strong>Dealing with Overflow</strong>:</p>
+<ol>
+<li>Use unsigned operations.</li>
+<li>On overflow, raise exceptions:<ul>
+<li>Save <code>pc</code> in exception program counter <code>epc</code>.</li>
+<li>Jump to predefined handler address.</li>
+<li><code>mfc0</code> (move from coprocessor reg) instruction can retrieve EPC value, to return after corrective action.</li>
+</ul>
+</li>
+<li>Saturating operations:<ul>
+<li>On overflow, result is largest representable value.</li>
+</ul>
+</li>
+</ol>
+<p><strong>SIMD</strong>: Single-instruction, multiple-data. See <a target="_blank" rel="noopener" href="https://github.com/ShiqiYu/CPP/blob/main/week08/Lecture08.pdf">CS205 C/C++ Lecture 8: Speedup Your Program</a> (^^ ;</p>
+<h3 id="§3-2-Multiplication"><a href="#§3-2-Multiplication" class="headerlink" title="§3.2 Multiplication"></a>§3.2 Multiplication</h3><p><strong>Naive version</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/13/sdiNn6Oh9qX5BaW.png" alt="image.png" style="zoom: 33%;" /></p>
+<p>If the least significant bit of the multiplier is 1, add the multiplicand to the product. If not, go to the next step. Shift the multiplicand left and the multiplier right in the next two steps. These three steps are repeated 32 times.</p>
+<p><strong>Refined version</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/13/45pRS9xjfK8ocCH.png" alt="image.png" style="zoom: 33%;" /></p>
+<p>The Multiplicand register, ALU, and Multiplier register are all 32 bits wide, with only the Product register left at 64 bits.</p>
+<p>Now the product is shifted right. The separate Multiplier register also disappeared. The multiplier is placed instead in the right half of the Product register.</p>
+<p><strong>Signed Multiplication</strong>:</p>
+<p><strong>Faster Multiplication</strong>:</p>
 <h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><h3 id="MIPS-Core-Architecture"><a href="#MIPS-Core-Architecture" class="headerlink" title="MIPS Core Architecture"></a>MIPS Core Architecture</h3><p><img src="https://s2.loli.net/2023/04/12/ohiHcDIxywB4Y3k.png" alt="image.png"></p>
 <h3 id="MIPS-instruction-encoding"><a href="#MIPS-instruction-encoding" class="headerlink" title="MIPS instruction encoding"></a>MIPS instruction encoding</h3><p><img src="https://s2.loli.net/2023/04/12/RB23qK1zE5mJtTa.png" alt="image.png"></p>
 
@@ -1053,7 +1246,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline"><span class="nav-number">1.</span> <span class="nav-text">Outline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-Computer-Abstractions-and-Technology"><span class="nav-number">2.</span> <span class="nav-text">Chapter 1 - Computer Abstractions and Technology</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-1-Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">§1.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-2-Eight-Great-Ideas-in-Computer-Architecture"><span class="nav-number">2.2.</span> <span class="nav-text">§1.2 Eight Great Ideas in Computer Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-3-Below-Your-Program"><span class="nav-number">2.3.</span> <span class="nav-text">§1.3 Below Your Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-4-Under-the-Covers"><span class="nav-number">2.4.</span> <span class="nav-text">§1.4 Under the Covers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-5-Technologies-for-Building-Processors-and-Memory"><span class="nav-number">2.5.</span> <span class="nav-text">§1.5 Technologies for Building Processors and Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-6-Performance"><span class="nav-number">2.6.</span> <span class="nav-text">§1.6 Performance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-7-The-Power-Wall"><span class="nav-number">2.7.</span> <span class="nav-text">§1.7 The Power Wall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-8-The-Sea-Change-The-Switch-from-Uniprocessors-to-Multiprocessors"><span class="nav-number">2.8.</span> <span class="nav-text">§1.8 The Sea Change: The Switch from Uniprocessors to Multiprocessors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-9-Real-Stuff-Benchmarking-the-Intel-Core-i7"><span class="nav-number">2.9.</span> <span class="nav-text">§1.9 Real Stuff: Benchmarking the Intel Core i7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-10-Fallacies-and-Pitfalls"><span class="nav-number">2.10.</span> <span class="nav-text">§1.10 Fallacies and Pitfalls</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-Instructions-Language-of-the-Computer"><span class="nav-number">3.</span> <span class="nav-text">Chapter 2 - Instructions: Language of the Computer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-1-Introduction"><span class="nav-number">3.1.</span> <span class="nav-text">§2.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-2-Operands"><span class="nav-number">3.2.</span> <span class="nav-text">§2.2 Operands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-3-Numeric-Representations"><span class="nav-number">3.3.</span> <span class="nav-text">§2.3 Numeric Representations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-4-Instructions"><span class="nav-number">3.4.</span> <span class="nav-text">§2.4 Instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-5-Instruction-Formats"><span class="nav-number">3.5.</span> <span class="nav-text">§2.5 Instruction Formats</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-6-Procedures"><span class="nav-number">3.6.</span> <span class="nav-text">§2.6 Procedures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-7-Addressing"><span class="nav-number">3.7.</span> <span class="nav-text">§2.7 Addressing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-8-Translating-and-Starting-a-Program"><span class="nav-number">3.8.</span> <span class="nav-text">§2.8 Translating and Starting a Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-9-RISC-V"><span class="nav-number">3.9.</span> <span class="nav-text">§2.9 RISC-V</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">4.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS-Core-Architecture"><span class="nav-number">4.1.</span> <span class="nav-text">MIPS Core Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS-instruction-encoding"><span class="nav-number">4.2.</span> <span class="nav-text">MIPS instruction encoding</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-Computer-Abstractions-and-Technology"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - Computer Abstractions and Technology</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-1-Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">§1.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-2-Eight-Great-Ideas-in-Computer-Architecture"><span class="nav-number">1.2.</span> <span class="nav-text">§1.2 Eight Great Ideas in Computer Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-3-Below-Your-Program"><span class="nav-number">1.3.</span> <span class="nav-text">§1.3 Below Your Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-4-Under-the-Covers"><span class="nav-number">1.4.</span> <span class="nav-text">§1.4 Under the Covers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-5-Technologies-for-Building-Processors-and-Memory"><span class="nav-number">1.5.</span> <span class="nav-text">§1.5 Technologies for Building Processors and Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-6-Performance"><span class="nav-number">1.6.</span> <span class="nav-text">§1.6 Performance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-7-The-Power-Wall"><span class="nav-number">1.7.</span> <span class="nav-text">§1.7 The Power Wall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-8-The-Sea-Change-The-Switch-from-Uniprocessors-to-Multiprocessors"><span class="nav-number">1.8.</span> <span class="nav-text">§1.8 The Sea Change: The Switch from Uniprocessors to Multiprocessors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-9-Real-Stuff-Benchmarking-the-Intel-Core-i7"><span class="nav-number">1.9.</span> <span class="nav-text">§1.9 Real Stuff: Benchmarking the Intel Core i7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-10-Fallacies-and-Pitfalls"><span class="nav-number">1.10.</span> <span class="nav-text">§1.10 Fallacies and Pitfalls</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-Instructions-Language-of-the-Computer"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2 - Instructions: Language of the Computer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-1-Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">§2.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-2-Operands"><span class="nav-number">2.2.</span> <span class="nav-text">§2.2 Operands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-3-Numeric-Representations"><span class="nav-number">2.3.</span> <span class="nav-text">§2.3 Numeric Representations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-4-Instructions"><span class="nav-number">2.4.</span> <span class="nav-text">§2.4 Instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-5-Instruction-Formats"><span class="nav-number">2.5.</span> <span class="nav-text">§2.5 Instruction Formats</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-6-Procedures"><span class="nav-number">2.6.</span> <span class="nav-text">§2.6 Procedures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-7-Addressing"><span class="nav-number">2.7.</span> <span class="nav-text">§2.7 Addressing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-8-Translating-and-Starting-a-Program"><span class="nav-number">2.8.</span> <span class="nav-text">§2.8 Translating and Starting a Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-9-RISC-V"><span class="nav-number">2.9.</span> <span class="nav-text">§2.9 RISC-V</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-10-More-ISAs"><span class="nav-number">2.10.</span> <span class="nav-text">§2.10 More ISAs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-3-Arithmetic-for-Computers"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3 - Arithmetic for Computers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A73-1-Addition-and-Subtraction"><span class="nav-number">3.1.</span> <span class="nav-text">§3.1 Addition and Subtraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A73-2-Multiplication"><span class="nav-number">3.2.</span> <span class="nav-text">§3.2 Multiplication</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">4.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS-Core-Architecture"><span class="nav-number">4.1.</span> <span class="nav-text">MIPS Core Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS-instruction-encoding"><span class="nav-number">4.2.</span> <span class="nav-text">MIPS instruction encoding</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
