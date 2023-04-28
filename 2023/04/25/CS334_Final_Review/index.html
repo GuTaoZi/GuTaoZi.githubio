@@ -27,13 +27,13 @@
 <meta property="og:site_name" content="咕桃w！">
 <meta property="og:description" content="如果你觉得可笑就笑吧，很快就轮到操作系统嘲笑你了。——Three Easy Pieces">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png">
+<meta property="og:image" content="https://s2.lo li.net/2023/01/01/8pS9IbAPfWXDOgt.png">
 <meta property="article:published_time" content="2023-04-25T02:24:13.017Z">
-<meta property="article:modified_time" content="2023-04-28T07:50:34.951Z">
+<meta property="article:modified_time" content="2023-04-28T10:13:48.489Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Operating System">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png">
+<meta name="twitter:image" content="https://s2.lo li.net/2023/01/01/8pS9IbAPfWXDOgt.png">
 
 <link rel="canonical" href="https://gutaozi.github.io/2023/04/25/CS334_Final_Review/">
 
@@ -199,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-28 15:50:34" itemprop="dateModified" datetime="2023-04-28T15:50:34+08:00">2023-04-28</time>
+                <time title="修改时间：2023-04-28 18:13:48" itemprop="dateModified" datetime="2023-04-28T18:13:48+08:00">2023-04-28</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -225,9 +225,9 @@
       
         <p>$\huge\text{Outline}$</p>
 <ol>
-<li>Intro to OS</li>
-<li>OS Basics</li>
-<li>Processes</li>
+<li>操作系统导论</li>
+<li>操作系统基础</li>
+<li>进程</li>
 <li>CPU Scheduling</li>
 <li>Synchronization</li>
 <li>Address Translation</li>
@@ -236,7 +236,7 @@
 <li>Linux Memory Management</li>
 <li>IO</li>
 </ol>
-<h2 id="Chapter-1-Intro-to-OS"><a href="#Chapter-1-Intro-to-OS" class="headerlink" title="Chapter 1 - Intro to OS"></a>Chapter 1 - Intro to OS</h2><p><strong>计算机系统的结构</strong>:</p>
+<h2 id="Chapter-1-操作系统导论"><a href="#Chapter-1-操作系统导论" class="headerlink" title="Chapter 1 - 操作系统导论"></a>Chapter 1 - 操作系统导论</h2><p><strong>计算机系统的结构</strong>:</p>
 <ul>
 <li>硬件<ul>
 <li>提供基础计算资源</li>
@@ -329,7 +329,224 @@
 <li>执行的指令都在内存里</li>
 </ul>
 <p>操作系统管理内核和进程的主存，哪个进程用哪块内存</p>
-<p><img src="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
+<p><strong>内存管理</strong>:</p>
+<p>内存管理决定，当优化CPU利用率、回应用户时内存中存储什么</p>
+<p>内存管理活动</p>
+<ul>
+<li>记录哪些内存正在被哪些进程使用</li>
+<li>决定哪些进程和数据要移入/移出内粗</li>
+<li>按需申请/释放内存空间</li>
+</ul>
+<p><strong>存储管理</strong>:</p>
+<p>操作系统提供信息存储的统一、逻辑的情况</p>
+<ul>
+<li><p>将物理属性抽象为逻辑存储单元：文件</p>
+</li>
+<li><p>每个介质都由设备控制</p>
+<p>可变的性质包括访存速度、容量、数据传输率、访问方法(顺序/随机访问)</p>
+</li>
+</ul>
+<p>文件系统管理</p>
+<ul>
+<li>文件通常分目录管理</li>
+<li>访问控制：决定谁能访问什么</li>
+<li>操作系统活动，包括：<ul>
+<li>创建/删除文件和目录</li>
+<li>操作文件和目录的原语(primitives)</li>
+<li>将文件映射到二级存储</li>
+<li>将文件备份到稳定存储介质</li>
+</ul>
+</li>
+</ul>
+<p><strong>I/O 子系统</strong>:</p>
+<p>操作系统的一个目的是向用户隐藏硬件设备的特殊性</p>
+<ul>
+<li>包含I/O的内存管理<ul>
+<li>缓存(buffering)，传输时临时存储数据</li>
+<li>缓存(caching)，将部分数据放入高速缓存以提高性能</li>
+</ul>
+</li>
+<li>通用的设备-驱动接口</li>
+<li>特殊硬件设备的驱动</li>
+</ul>
+<p><strong>保护与安全</strong>:</p>
+<p>保护：由操作系统定义，控制进程或用户对资源的访问的机制</p>
+<p>安全：抵御内外对系统的攻击</p>
+<p>操作系统决定哪个用户能做什么</p>
+<ul>
+<li>用户标识符：用户名，ID</li>
+<li>将用户ID与该用户的所有文件、进程联系起来，以控制访问</li>
+<li>组标识符(group ID)允许定义一组用户并管理控制权，与进程、文件相联系</li>
+<li>特权升级允许用户改变ID以获得更多权利</li>
+</ul>
+<h2 id="Chapter-2-操作系统基础"><a href="#Chapter-2-操作系统基础" class="headerlink" title="Chapter 2 - 操作系统基础"></a>Chapter 2 - 操作系统基础</h2><p><strong>双模式操作(Dual-mode Operations)</strong>:</p>
+<p>硬件支持至少两种模式</p>
+<ul>
+<li>内核模式：运行内核代码</li>
+<li>用户模式：运行常规程序</li>
+</ul>
+<p>为实现双模式操作，硬件提供：</p>
+<ul>
+<li><p>一个<code>state</code>比特位</p>
+</li>
+<li><p>一些只能在内核模式执行的操作/行为</p>
+</li>
+<li><p>用户态→内核态，设置系统模式，并保存用户PC</p>
+<p>操作系统将用户资源谨慎搁置，执行必要操作</p>
+</li>
+<li><p>内核态→用户态，清除系统模式，并恢复用户PC</p>
+</li>
+</ul>
+<p>一些例子：</p>
+<ul>
+<li>x86 Ring 0 对应内核态，Ring 3对应应用态</li>
+<li>RISC-V User/Supervisor/Machine 三种模式，应用态-内核态-固件态</li>
+</ul>
+<p><strong>三种模式转换的情形</strong>:</p>
+<ol>
+<li>系统调用(system call)</li>
+</ol>
+<ul>
+<li><p>进程请求系统服务</p>
+</li>
+<li><p>类似函数调用，但在进程外</p>
+</li>
+<li>系统函数没有地址可供调用</li>
+<li>向寄存器写入系统调用ID和参数，执行系统调用</li>
+</ul>
+<ol>
+<li>中断(interrupt)</li>
+</ol>
+<ul>
+<li>外部异步事件触发上下文切换(context switch)，如时钟、I/O设备</li>
+<li>与用户进程独立</li>
+</ul>
+<ol>
+<li>陷阱(trap)或异常(exception)</li>
+</ol>
+<ul>
+<li>进程的内部同步事件触发上下文切换，如段错误、除以0…</li>
+</ul>
+<p><strong>系统调用</strong>:</p>
+<p>由操作系统提供的服务的程序接口，以高级语言编写</p>
+<p>每个系统调用都会有一个ID，映射关系表由系统调用接口维护</p>
+<p>系统调用接口 调用 操作系统内核中对应的系统调用，返回系统调用的状态及返回值</p>
+<p>调用者无需了解具体实现，只需要遵守调用规则，理解调用功能即可</p>
+<p>大多数操作系统接口的细节通过library API隐藏，对使用者不可见</p>
+<p>由运行时支持库（run-time support library, 包含在编译器中的库中的一组功能）管理</p>
+<p><strong>系统调用类型</strong>:</p>
+<ul>
+<li>进程控制: fork, exit, wait</li>
+<li>文件管理: open, read, write, close</li>
+<li>设备管理: ioctl, read, write</li>
+<li>信息维护: getpid, alarm, sleep</li>
+<li>通信: pipe, shmget, mmap</li>
+<li>保护: chmod, umask, chown</li>
+</ul>
+<p><strong>异常和中断</strong>:</p>
+<p>异常(同步)应对非正常状况</p>
+<ul>
+<li>将swapped-out页映射回memory内</li>
+<li>非法内存访问</li>
+<li>除以0……</li>
+</ul>
+<p>中断(异步)抢占正常执行</p>
+<ul>
+<li>外部设备的通知</li>
+<li>抢占式调度</li>
+<li>另一个CPU的通知</li>
+</ul>
+<p>处理异常和中断</p>
+<ul>
+<li>停止执行当前程序</li>
+<li>执行handler程序</li>
+<li>处理器通过中断描述符表(Interrupt Descriptor Table, IDT)访问handler</li>
+<li>每种中断对应一个数字</li>
+</ul>
+<p><strong>内核结构</strong>:</p>
+<p><strong>宏内核</strong>:</p>
+<p>宏内核(Monolithic Kernel)是一个操作系统软件框架，拥有访问所有I/O设备、内存、硬件中断、CPU栈的权限</p>
+<p>宏内核包含很多组件，例如内存子系统、I/O子系统等，通常很大</p>
+<p>宏内核是Linux, Unix, MS-DOS的基础</p>
+<p><strong>微内核</strong>:</p>
+<p>微内核(Micro Kernel)将操作系统功能外包给用户进程，灵活性、安全性、容错性增强</p>
+<p>用户级服务器收到内核信任(通常以root身份运行)</p>
+<p>保护机制保留在内核，资源管理转移到用户级服务器</p>
+<p>代表性微内核操作系统：Mach, seL4</p>
+<p>优点：</p>
+<ul>
+<li>内核响应速度更快：内核功能在可抢占的用户级进程种</li>
+<li>稳定性和安全性提高：操作系统中代码更少</li>
+<li>更好地支持并发性和分布式操作系统</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>需要更多进程间通信(IPC)，带来更多上下文切换，更慢</li>
+</ul>
+<p><strong>杂交内核</strong>:</p>
+<p>杂交内核(Hybrid Kernel)是宏内核和微内核的结合，例：Windows</p>
+<p><strong>外内核</strong>:</p>
+<p>外内核(Exokernel)将抽象与安全分开</p>
+<ul>
+<li>内核相当小：安全复用(security multiplexing)</li>
+<li>Library OS作为进程运行：操作系统抽象化</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>直接管理资源，高效</li>
+<li>易于进行新内核设计的实验</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>通常只是个概念</li>
+</ul>
+<p>变种：nanokernel, picokernel</p>
+<p><strong>虚拟化和管理程序</strong>:</p>
+<p>管理程序(Hypervisor, virtual machine manager/monitor, VMM)强调<u>虚拟化</u>和<u>隔离</u></p>
+<ul>
+<li>操作系统可以在管理程序上几乎不做修改地运行</li>
+<li>不同虚拟机之间资源隔离</li>
+<li>微内核和外内核可用于实现管理程序</li>
+</ul>
+<p><strong>操作系统设计原则</strong>:</p>
+<p>不同操作系统内部结构五花八门</p>
+<ul>
+<li>从设置目标和规格开始</li>
+<li>收到硬件选择和系统类型的影响</li>
+</ul>
+<p>用户目标和系统目标</p>
+<ul>
+<li>用户目标：易于使用，易于上手，可靠安全高效</li>
+<li>系统目标：易于设计、实现、维护，灵活可靠无错，高效</li>
+</ul>
+<p>操作系统区分开政策和机制</p>
+<ul>
+<li>政策(Policy)：哪个软件可以在什么时候访问什么资源</li>
+<li>机制(Mechanism)：政策是如何实现的</li>
+<li>分离政策和机制提供了灵活性，更换政策后选择对应机制即可</li>
+</ul>
+<p><strong>操作系统服务</strong>:</p>
+<p>用户接口(UI)：几乎所有操作系统都有UI，CLI vs. GUI</p>
+<p>程序执行：将程序载入内存并运行，结束执行，无论正常或异常</p>
+<p>I/O操作：运行程序可能需要I/O，可能涉及文件操作或I/O设备</p>
+<p>文件系统控制：创删读写查文件目录，权限管理</p>
+<p>通信：进程间通信，网络通信</p>
+<p>错误检测：时刻关注可能的错误，硬件/外设/用户程序…，恰当处理，调试功能</p>
+<p>资源分配：多用户/多任务并行，各自分配各类资源(CPU，主存，文件存储)</p>
+<p>账户管理：哪些用户使用了哪些计算机资源</p>
+<p>保护与安全：多用户/网络计算机系统的权限需要管理，并行进程应互不干扰</p>
+<p><strong>系统程序</strong>:</p>
+<p>为程序开发和执行提供方便的环境，被分为：</p>
+<ul>
+<li>文件操作：创建、删除、复制、重命名、打印、转存、列表，操纵文件和目录</li>
+<li>状态信息：日期、可用内存、性能、用户数量、调试信息…(注册表)</li>
+<li>文件修改：文本编辑器，对文本进行修改</li>
+<li>编程语言支持：编译器、汇编器、调试器、翻译器</li>
+<li>程序加载与运行</li>
+<li>通讯：提供虚拟连接的机制，供进程间、用户间、计算机系统间通信。</li>
+<li>应用程序</li>
+</ul>
+<h2 id="Chapter-3-进程"><a href="#Chapter-3-进程" class="headerlink" title="Chapter 3 - 进程"></a>Chapter 3 - 进程</h2><p><img src="https://s2.lo li.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
 
     </div>
 
@@ -424,7 +641,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-Intro-to-OS"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - Intro to OS</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AF%BC%E8%AE%BA"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - 操作系统导论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2 - 操作系统基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-3-%E8%BF%9B%E7%A8%8B"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3 - 进程</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
