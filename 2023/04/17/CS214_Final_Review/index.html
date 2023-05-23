@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/05/15/YKdln9urkxowtA8.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/15/9fdke2HDvT6SEBz.png">
 <meta property="article:published_time" content="2023-04-17T03:05:45.158Z">
-<meta property="article:modified_time" content="2023-05-15T04:09:04.108Z">
+<meta property="article:modified_time" content="2023-05-22T03:22:46.356Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Computer Organization">
 <meta name="twitter:card" content="summary">
@@ -206,7 +206,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-15 12:09:04" itemprop="dateModified" datetime="2023-05-15T12:09:04+08:00">2023-05-15</time>
+                <time title="修改时间：2023-05-22 11:22:46" itemprop="dateModified" datetime="2023-05-22T11:22:46+08:00">2023-05-22</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -693,6 +693,63 @@
 <p>TLB as “cache” of Page Table</p>
 <p>TLB: |V|D|R|Tag|Payload|, Payload(PTE): |V|D|R|PPN|</p>
 <p><img src="https://s2.loli.net/2023/05/15/9fdke2HDvT6SEBz.png" alt="image.png" style="zoom:50%;" /></p>
+<p><strong>Sources of misses</strong>:</p>
+<ul>
+<li>Compulsory misses (cold start misses)<ul>
+<li>Increase block size to reduce</li>
+</ul>
+</li>
+<li>Capacity misses<ul>
+<li>Due to finite cache size</li>
+<li>e.g., try to put a block into a full cache</li>
+</ul>
+</li>
+<li>Conflict misses (collision misses)<ul>
+<li>In a non-fully associative entries in a set</li>
+<li>e.g., try to put a block into an already full set, but the cache is not full.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Cache Design Trade-offs</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Design change</th>
+<th>Effect on miss rate</th>
+<th>Negative performance effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Increase cache size</td>
+<td>Reduce capacity misses</td>
+<td>Increase access time</td>
+</tr>
+<tr>
+<td>Increase associativity</td>
+<td>Reduce confit misses</td>
+<td>Complex hardware, increase access time</td>
+</tr>
+<tr>
+<td>Increase block size</td>
+<td>Reduce compulsory misses</td>
+<td>Increase conflict misses and miss penalty</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="§5-5-Dependable-memory"><a href="#§5-5-Dependable-memory" class="headerlink" title="§5.5 Dependable memory"></a>§5.5 Dependable memory</h3><p><strong>Dependability measures</strong>:</p>
+<p>Reliability: mean time to failure (MTTF)</p>
+<p>Service interruption: mean time to repair (MTTR)</p>
+<p>Mean time between failures: MTBF = MTTF + MTTR</p>
+<p>Improving availability</p>
+<ul>
+<li>Increase MTTF: fault avoidance, fault tolerance, fault forecasting</li>
+<li>Reduce MTTR: fault detection, fault diagnosis, fault repair</li>
+</ul>
+<p><strong>Hamming SEC Code</strong>:</p>
+<p>Hamming distance: minimum number of bits that are different between two valid bit patterns</p>
 
     </div>
 
@@ -790,7 +847,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Piplining"><span class="nav-number">1.</span> <span class="nav-text">Piplining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-1-Pipeline-Overview"><span class="nav-number">1.1.</span> <span class="nav-text">§4.1 Pipeline Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-2-Hazards"><span class="nav-number">1.2.</span> <span class="nav-text">§4.2 Hazards</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-3-Instruction-level-Parallelism"><span class="nav-number">1.3.</span> <span class="nav-text">§4.3 Instruction-level Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Static-multiple-issue"><span class="nav-number">1.3.1.</span> <span class="nav-text">Static multiple issue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-multiple-issue-Superscalar"><span class="nav-number">1.3.2.</span> <span class="nav-text">Dynamic multiple issue(Superscalar)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Speculation"><span class="nav-number">1.3.3.</span> <span class="nav-text">Speculation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-4-Fallacies-Pitfalls-and-Summary"><span class="nav-number">1.4.</span> <span class="nav-text">§4.4 Fallacies, Pitfalls and Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Fallacies-amp-Pitfalls"><span class="nav-number">1.4.1.</span> <span class="nav-text">Fallacies &amp; Pitfalls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Summary"><span class="nav-number">1.4.2.</span> <span class="nav-text">Summary</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Hierarchy"><span class="nav-number">2.</span> <span class="nav-text">Memory Hierarchy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A75-1-Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">§5.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A75-2-Memory-Technologies"><span class="nav-number">2.2.</span> <span class="nav-text">§5.2 Memory Technologies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A75-3-Measuring-amp-Improving-Cache-Performance"><span class="nav-number">2.3.</span> <span class="nav-text">§5.3 Measuring &amp; Improving Cache Performance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A75-4-Virtual-Memory"><span class="nav-number">2.4.</span> <span class="nav-text">§5.4 Virtual Memory</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Piplining"><span class="nav-number">1.</span> <span class="nav-text">Piplining</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-1-Pipeline-Overview"><span class="nav-number">1.1.</span> <span class="nav-text">§4.1 Pipeline Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-2-Hazards"><span class="nav-number">1.2.</span> <span class="nav-text">§4.2 Hazards</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-3-Instruction-level-Parallelism"><span class="nav-number">1.3.</span> <span class="nav-text">§4.3 Instruction-level Parallelism</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Static-multiple-issue"><span class="nav-number">1.3.1.</span> <span class="nav-text">Static multiple issue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-multiple-issue-Superscalar"><span class="nav-number">1.3.2.</span> <span class="nav-text">Dynamic multiple issue(Superscalar)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Speculation"><span class="nav-number">1.3.3.</span> <span class="nav-text">Speculation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A74-4-Fallacies-Pitfalls-and-Summary"><span class="nav-number">1.4.</span> <span class="nav-text">§4.4 Fallacies, Pitfalls and Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Fallacies-amp-Pitfalls"><span class="nav-number">1.4.1.</span> <span class="nav-text">Fallacies &amp; Pitfalls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Summary"><span class="nav-number">1.4.2.</span> <span class="nav-text">Summary</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Memory-Hierarchy"><span class="nav-number">2.</span> <span class="nav-text">Memory Hierarchy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A75-1-Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">§5.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A75-2-Memory-Technologies"><span class="nav-number">2.2.</span> <span class="nav-text">§5.2 Memory Technologies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A75-3-Measuring-amp-Improving-Cache-Performance"><span class="nav-number">2.3.</span> <span class="nav-text">§5.3 Measuring &amp; Improving Cache Performance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A75-4-Virtual-Memory"><span class="nav-number">2.4.</span> <span class="nav-text">§5.4 Virtual Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A75-5-Dependable-memory"><span class="nav-number">2.5.</span> <span class="nav-text">§5.5 Dependable memory</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -806,7 +863,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
