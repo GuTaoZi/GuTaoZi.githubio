@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/05/29/ytTjZ41MOds2nbk.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/29/rYd6ktQLbiv8l9x.png">
 <meta property="article:published_time" content="2023-06-04T09:40:02.803Z">
-<meta property="article:modified_time" content="2023-05-29T03:41:53.363Z">
+<meta property="article:modified_time" content="2023-06-04T13:38:54.312Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Computer Organization">
 <meta name="twitter:card" content="summary">
@@ -200,16 +200,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2023-06-04 17:40:02" itemprop="dateCreated datePublished" datetime="2023-06-04T17:40:02+08:00">2023-06-04</time>
+              <time title="创建时间：2023-06-04 17:40:02 / 修改时间：21:38:54" itemprop="dateCreated datePublished" datetime="2023-06-04T17:40:02+08:00">2023-06-04</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-29 11:41:53" itemprop="dateModified" datetime="2023-05-29T11:41:53+08:00">2023-05-29</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -596,7 +590,7 @@
 <p>$\text{Offset} = \log(\text{Block size})$</p>
 <p>$\text{Index} = \log(\text{Number of Blocks})$</p>
 <p>Tag = Bin addr length - Offset - Index</p>
-<p>Block number = Memaddr &gt;&gt; Offset % (1 &lt;&lt; Index)</p>
+<p>Block number = ( Memaddr &gt;&gt; Offset ) % (1 &lt;&lt; Index)</p>
 <p><strong>Block Size Consideration</strong></p>
 <p>Larger block size means:</p>
 <ul>
@@ -801,7 +795,6 @@
 <p>Simultaneous Multithreading(SMT)</p>
 <ul>
 <li>In multiple-issue dynamically scheduled processor</li>
-<li></li>
 </ul>
 <p><strong>Shared Memory Multiprocessors</strong></p>
 <ul>
