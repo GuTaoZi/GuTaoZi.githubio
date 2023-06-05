@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="支持输入算式的计算器，高精度，自定义变量，用户友好">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS205 C&#x2F;C++ Project02设计报告 简易计算器">
+<meta property="og:url" content="https://gutaozi.github.io/2023/06/04/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Simple_Calculator/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="支持输入算式的计算器，高精度，自定义变量，用户友好">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/10/16/hgA8YTn1KLy6lrw.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/16/Xh5PFVf3Z24WDtx.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/16/3V6ZWpIDQM7z8m4.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/16/zMZekKmqWVUT8Qv.png">
+<meta property="og:image" content="https://s2.loli.net/2022/10/16/lR7HhZjQI2sozcf.png">
+<meta property="article:published_time" content="2023-06-04T09:40:02.800Z">
+<meta property="article:modified_time" content="2022-11-05T05:27:42.706Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/10/16/hgA8YTn1KLy6lrw.png">
+
+<link rel="canonical" href="https://gutaozi.github.io/2023/06/04/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Simple_Calculator/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CS205 C/C++ Project02设计报告 简易计算器 | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/06/04/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Simple_Calculator/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS205 C/C++ Project02设计报告 简易计算器
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-04 17:40:02" itemprop="dateCreated datePublished" datetime="2023-06-04T17:40:02+08:00">2023-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-05 13:27:42" itemprop="dateModified" datetime="2022-11-05T13:27:42+08:00">2022-11-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">支持输入算式的计算器，高精度，自定义变量，用户友好</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Part-0-团队成员"><a href="#Part-0-团队成员" class="headerlink" title="Part 0. 团队成员"></a>Part 0. <del>团队</del>成员</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>姓名</th>
+<th>学号</th>
+<th><del>贡献率</del></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>咕桃</td>
+<td>-</td>
+<td><del>100%</del></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Part-1-Analysis"><a href="#Part-1-Analysis" class="headerlink" title="Part 1 - Analysis"></a>Part 1 - Analysis</h2><h3 id="题目重述-amp-主要思路"><a href="#题目重述-amp-主要思路" class="headerlink" title="题目重述&amp;主要思路"></a>题目重述&amp;主要思路</h3><p>本题目要求实现一个带有变量存储功能，支持基本运算和部分函数的计算器。</p>
+<p>根据题目描述，本题的主要要求为：</p>
+<ol>
+<li>带括号的复合算式的计算</li>
+<li>可以设置并代入用户自定义变量</li>
+<li>部分数学常用函数</li>
+<li>高精度</li>
+<li>使用Cmake管理项目</li>
+</ol>
+<p>本项目使用了Project1中实现的<code>BigNum</code>高精度浮点数结构体进行数据的存储和运算，除完成上述全部基础要求外，本项目支持以下内容：</p>
+<ol>
+<li>交互式输入输出</li>
+<li>sqrt(), exp(), ln(), sin(), cos() 五种常用函数（可轻易扩展更多）</li>
+<li>支持多种形式的输入数据</li>
+<li>INF/NaN结果反馈</li>
+<li>设定运算结果精度</li>
+<li>查看/编辑变量列表</li>
+<li>用户友好的帮助菜单</li>
+</ol>
+<h3 id="模型假设"><a href="#模型假设" class="headerlink" title="模型假设"></a>模型假设</h3><p>由于题目所给信息较少，笔者对输入的数据范围等进行了假设，并根据假设设计程序。</p>
+<p>以下是本程序适配的数据范围：</p>
+<p>对于一个科学计数法浮点数，格式记为$A.BeC$</p>
+<p>整数部分$A$与小数部分$B$位数之和记为$len$，$1\leq n \leq 10^{4}$，即存储一万位有效数字</p>
+<p>10的幂指数$C$记为$exp$，$-10^{18}\leq exp \leq 10^{18}$，即存储上限为$10^{10^{18}}$量级</p>
+<h3 id="二元运算"><a href="#二元运算" class="headerlink" title="二元运算"></a>二元运算</h3><p>本项目沿用了用高精度浮点数的存储方式，为了良好的扩展性采用了重载运算符的写法，较函数写法更为简洁，且基本运算的实现也和传统方式有所不同。</p>
+<p><strong>加法/减法</strong></p>
+<p>此种存储数据的好处在于可以将末尾0全部存储在$exp$变量中而非占用数组长度，但在进行加减法时需要进行对齐，对齐的思路为：</p>
+<p>结果沿用两数中较小的$exp$，通过<strong>补0</strong>的方式对齐两数，避免了展开全部末尾0再运算带来的不必要时间和空间浪费，并在加减法完成后即时回收末尾0至$exp$中，最大地减少了空间开销。</p>
+<p>加减法的具体逻辑较为常见，仅作简述：</p>
+<ol>
+<li>较短数补0对齐</li>
+<li>从低位起逐位加/减，并用carry/borrow标签模拟进位/借位</li>
+<li>回收末尾0，规范化结果</li>
+</ol>
+<p><strong>乘法</strong></p>
+<p>沿用此前实现的$O(n^2)$高精度乘法，不作赘述。</p>
+<p><strong>除法</strong></p>
+<p>由于除法在绝大多数情况下会出现“除不尽”的无限循环小数的情况，本项目对输出结果进行了精度预设，当结果总长度达到200时停止运算（该参数可以通过<code>big_num.h</code>中的<code>DIVIDE_PRECISION</code>常量进行更改）。</p>
+<p>以下是除法的具体逻辑，对于除法运算$A/B=C$：</p>
+<ol>
+<li>将$A$和$B$调整至$B\leq A&lt;10*B$</li>
+</ol>
+<p>​        由于特殊的数据存储方式，10的次方间的除法可以直接通过$exp$降次为<code>long long</code>类型的加减法，作差后存储于结果。</p>
+<ol>
+<li>迭代计算后续位数</li>
+</ol>
+<p>​        重复执行以下操作：从$A$中减去若干次$B$并计数，直到$A&lt;B$，得到$floor(A/B)$，将其存入结果中，将$A$扩增10倍，再次从中减去若干次$B$…理论而言，如此循环可以得到任意多位数的结果。</p>
+<ol>
+<li>将结果倒序</li>
+</ol>
+<p>​        由于除法计算时，是从高位到低位产生结果，因此在结束运算后需要根据位数进行结果的倒序。</p>
+<p><strong>整数幂</strong></p>
+<p>实现了乘法和除法，就少不了快速幂。</p>
+<p>快速幂的思路如下，对于乘方运算$A^B$：</p>
+<p>将$B$用二进制表示，从低到高第i位为1代表$B$做拆解为2的次幂和之后有$2^{i-1}$的一项，该项在总运算中是一个因子：$A^{2^{i-1}}$，因此可以通过不断将底数$A$做平方，在$B$的二进制对应位为1时将此时的$A^{2^{i-1}}$乘进结果中，将乘法由$n$级别降为$logn$级别。</p>
+<p>然而本项目中高精度数据十进制下就有$1e4$位，转成二进制将会更加痛苦，且丧失了原有的空间复杂度优势。考虑到我们每次计算时，暂时并<strong>不关心除了最低位以外的数</strong>，此处采用了将<strong>个位数和1做按位与</strong>的操作：若一个大整数$exp=0$且最低位为奇数，说明其<strong>二进制表达下最低位为1</strong>，单次判断操作时空复杂度都是<strong>O(1)</strong>。</p>
+<p><strong>小数幂</strong></p>
+<p>经过若干次不同的尝试，小数幂最终使用Math库中的<code>pow</code>，以下是大致的尝试过程：</p>
+<ul>
+<li><p><strong>思路一</strong>：完全手动重构</p>
+<ol>
+<li><p>先实现$e^x$和$ln(x)$！</p>
+<p>在不使用小数幂的前提下，实现这两个函数听上去有点天方夜谭，但<strong>只能用整数幂</strong>意味着可以使用泰勒级数近似计算这两个函数，所需要的运算恰好是目前已经是实现的加、减、乘、除、整数幂。</p>
+<p>以下是两个函数的展开结果：</p>
+<p>$e^x=\sum_{i=0}^{\infty} \frac{x^i}{i!}=1+\frac{x}{1!}+\frac{x^2}{2!}+ \frac{x^3}{3!}+…$</p>
+<p>$ln(x+1)=\sum_{i=1}^{\infty}(-1)^{i-1}\frac{x^i}{i}=x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+…$</p>
+<p>上机跑了一下，发现计算<code>ln(1.5)</code>还算快速和精确，但计算<code>ln(2)</code>时非常慢，并且计算出的<code>ln(3)</code>大出天际，经验证发现，使用麦克劳林级数计算，越远离0结果越不精确，且在<code>ln(2)</code>之后增量不收敛，因此会得出错误的结果。</p>
+</li>
+<li><p>调整收敛式</p>
+<p>$t=\frac{x-1}{x+1},ln(x)=ln(1+t)-ln(1-t)=2\sum_{i=0}^{\infty}\frac{t^{2i+1}}{2i+1}$</p>
+<p>通过引入$t$间接计算，将ln中的数字控制在了0~2之间，一定程度上提高了精确度，但此时程序为了计算函数，运行的时间已经不可忽略：乘法是$O(n^2)$，整数幂和除法都要多次调用乘法，为了结果的精度，级数的项数也需要设置在较高的水平。</p>
+</li>
+<li><p>曲折地实现小数幂</p>
+<p>既然不能直接算小数幂，我们可以将问题归纳为现有运算可以解决的形式：$A^B=e^{B*ln(A)}$</p>
+<p>即先对底数$A$求对数，与指数$B$相乘后再求自然指数。理论而言，由此可以只通过级数运算得到任意小数幂。</p>
+</li>
+<li><p>实际情况</p>
+<p>太慢，牺牲精度了还是太慢。在实现运算后，我尝试着运行了<code>2^0.5</code>，并经过多番痛截精度后，程序很忠诚地在15s左右给出了答案，经比对，精确到小数点后10位。</p>
+<p>原来的算法对于越大的数，计算起来的耗时是高次幂多项式增长的，因此程序<strong>几乎无法</strong>对大数进行小数幂运算。</p>
+<p>经过慎重考虑，我认为对于题设所需的计算器而言，具有一定精度而<strong>非常高效</strong>的Math库内置<code>pow</code>应该更加适合，因此有了以下的思路二。</p>
+</li>
+</ol>
+</li>
+<li><p><strong>思路二</strong>：使用Math库内置<code>pow</code></p>
+<ol>
+<li><p>double？</p>
+<p>库函数预设的参数类型为<code>double</code>类，虽然不是无限精度，但$[-1.7E308,1.7E308]$和小数点后15位的精度对于题设的绝大多数情况而言还是较为充足的，均衡时间和空间成本不失为一个优解。</p>
+<p>然而使用库函数需要将<code>BigNum</code>类转化为<code>double</code>类，利用库函数得出<code>double</code>类结果后仍要转化回<code>BigNum</code>以便后续的高精度计算。此处就涉及到两种类型的转换：</p>
+<ol>
+<li><p>BigNum→double</p>
+<p>这种情况，对于超出double范围的大数而言并不可行，但$[-1.7E308,1.7E308]$范围内，将BigNum中逐位存储的数取出，再根据exp改变double的小数点位置即可，此时小数点后的精度会有一定损失。</p>
+</li>
+<li><p>double→BigNum</p>
+<p>本项目由于先前实现了良好的string转BigNum构造器，此处利用stringstream将double直接转为string型，再利用构造器即可无精度损失地将double转换为BigNum类。</p>
+</li>
+</ol>
+</li>
+<li><p>效果？</p>
+<p>经验证，调用Math库函数进行运算后，运算时间又回到了肉眼可以忽略的量级，精度达到小数点后15位，说明优于原先完全重构的实现方法。</p>
+</li>
+<li><p>后续</p>
+<p>由此，吸取了上述颠沛流离过程的经验，本项目在后续引入函数的过程中，涉及到手动实现函数的时间/空间不可接受的情况时，采用了Math库的内置函数，更加简洁高效，也避免了使用自己造出来的方轮子带来的不便。</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="后缀表达式"><a href="#后缀表达式" class="headerlink" title="后缀表达式"></a>后缀表达式</h3><p>又称逆波兰表达式，通过引入栈和队列改变操作数和操作符的顺序，得到后缀表达式辅助运算，常用于多种优先级的运算符同时存在的算式的求值，由于该算法普及性较好，<del>老师想必也看了几十篇类似的讲解了</del>，此处仅作简单的阐述：</p>
+<ol>
+<li><p>确定符号优先级</p>
+<p>此处，参与运算需要区分先后顺序的有：括号，5种二元算符，函数。</p>
+<p>运算优先级如下：括号&gt;函数&gt;乘方&gt;乘除&gt;加减</p>
+</li>
+<li><p>中缀表达式→后缀表达式</p>
+<p>根据符号，将一整行字符串split成若干子串，从左到右读入中缀表达式：</p>
+<ul>
+<li>读入数字，直接加入队列</li>
+<li>读入操作符<ul>
+<li>当前操作符为<code>(</code>，直接入栈</li>
+<li>当前操作符为<code>)</code>，持续出栈至队列中，直到将一个<code>(</code>出栈后停止</li>
+<li>当前操作符优先级高于栈顶，直接入栈</li>
+<li>当前操作符优先级不高于栈顶，持续出栈至队列中，直到当前操作符优先级高于栈顶后再入栈</li>
+</ul>
+</li>
+</ul>
+<p>中缀表达式读入完毕后，若栈非空，则依次出栈加入队列中。</p>
+</li>
+<li><p>计算后缀表达式</p>
+<p>从后缀表达式队列中依次取出元素：</p>
+<ul>
+<li>读入数字，直接入栈</li>
+<li>读入操作符，取出栈顶两个元素进行二元运算(两个元素需要倒序)，运算结果再次入栈</li>
+<li>读入函数，取出栈顶单个元素代入运算，结果再次入栈</li>
+</ul>
+<p>后缀表达式运算完毕后，将栈中唯一元素出栈，即所求结果</p>
+</li>
+</ol>
+<h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>本项目使用STL::map简洁地实现了变量功能，读入命令后利用正则表达式匹配等式格式，检查合法后将左式作为变量名以字符串形式存储，右式依然是支持多种输入格式的高精度数字。</p>
+<p>对于有一定精度要求的$\pi$和$e$，程序也预先将其内置在变量表中。</p>
+<p>查看当前变量列表时，活用<code>auto</code>型迭代器遍历map；编辑变量时，对map删除再建立映射即可。</p>
+<p>参与运算时，变量在中缀转后缀的过程中会被自动替换为其<code>BigNum</code>类键值参与运算，对于变量名相互包含的情况，本项目会取匹配的最长的变量名进行运算。</p>
+<h2 id="Part-2-Code"><a href="#Part-2-Code" class="headerlink" title="Part 2 - Code"></a>Part 2 - Code</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">CPP\PROJ02</span><br><span class="line">│  better_calc</span><br><span class="line">│  CMakeLists.txt</span><br><span class="line">│  report.pdf</span><br><span class="line">│</span><br><span class="line">├─inc</span><br><span class="line">│      big_num.h</span><br><span class="line">│      functions.h</span><br><span class="line">│      varia.h</span><br><span class="line">│</span><br><span class="line">└─src</span><br><span class="line">        func.cpp</span><br><span class="line">        main.cpp</span><br><span class="line">        operators.cpp</span><br><span class="line">        RPN.cpp</span><br><span class="line">        utils.cpp</span><br><span class="line">        variables.cpp</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/main.cpp"><code>main.cpp</code></a>为运行主函数，可执行文件为：<code>./better_calc</code>，为实现交互式输入输出，本项目未使用命令行输入。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/big_num.h"><code>big_num.h</code></a>为高精度浮点数头文件，其操作符重载实现位于<a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/operators.cpp"><code>operators.cpp</code></a>，过程中使用的函数实现位于<a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/utils.cpp"><code>utils.cpp</code></a>，逆波兰表达式的处理和求值位于<a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/RPN.cpp"><code>RPN.cpp</code></a>。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/functions.h"><code>functions.h</code></a>为数学函数头文件，其实现位于<a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/func.cpp"><code>func.cpp</code></a>。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/varia.h"><code>varia.h</code></a>为变量头文件，其实现和常用函数位于<a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/variables.cpp"><code>variables.cpp</code></a>。</p>
+<h3 id="二元运算的重载"><a href="#二元运算的重载" class="headerlink" title="二元运算的重载"></a>二元运算的重载</h3><p>本节实现于<a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/operators.cpp">operators.cpp</a>，实现了加减乘除乘方五种二元运算的重载。</p>
+<h4 id="减法"><a href="#减法" class="headerlink" title="减法"></a>减法</h4><p>加法与之类似，因此只放减法。</p>
+<p>Step1. 通过讨论a,b的符号，将问题简化为a&gt;b&gt;0时的情况。</p>
+<p>Step2. 排除其一为INF/NaN的情况，防止其影响计算</p>
+<p>Step3. 对位数较少者进行补0</p>
+<p>Step4. 逐位相减，模拟借位</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line">BigNum <span class="keyword">operator</span>-(BigNum a, BigNum b)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (a.type == NaN || b.type == NaN)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> a.type == NaN ? a : b;</span><br><span class="line">    &#125;</span><br><span class="line">    a = <span class="built_in">standardize_exp</span>(a);</span><br><span class="line">    b = <span class="built_in">standardize_exp</span>(b);</span><br><span class="line">    BigNum c = <span class="built_in">BigNum</span>();</span><br><span class="line">    <span class="keyword">if</span> (a.sign)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (b.sign)</span><br><span class="line">        &#123;</span><br><span class="line">            c.sign = b &lt; a;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            b.sign = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">return</span> a + b;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (b.sign)</span><br><span class="line">        &#123;</span><br><span class="line">            b.sign = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">return</span> a + b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            a.sign = <span class="literal">true</span>;</span><br><span class="line">            b.sign = <span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">return</span> b - a;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> -(b - a);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (a == b)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a.type == INF || b.type == INF)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> a.type == INF ? a : b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">BigNum</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a.type == INF)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> a;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (b.type == INF)</span><br><span class="line">        &#123;</span><br><span class="line">            b.sign = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">return</span> b;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (a.exp &gt;= b.exp)<span class="comment">//a后补0</span></span><br><span class="line">        &#123;</span><br><span class="line">            c.sign = <span class="literal">true</span>;</span><br><span class="line">            c.exp = b.exp;</span><br><span class="line">            c.len = a.len + a.exp - b.exp;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= a.len; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                c.val[i + a.exp - b.exp] = a.val[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> borrow = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= c.len; i++)<span class="comment">//给a补0</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (c.val[i] &lt; borrow + b.val[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    c.val[i] = c.val[i] + <span class="number">10</span> - borrow - b.val[i];</span><br><span class="line">                    borrow = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    c.val[i] -= borrow + b.val[i];</span><br><span class="line">                    borrow = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            c = <span class="built_in">standardize_exp</span>(c);</span><br><span class="line">            <span class="keyword">return</span> c;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span><span class="comment">//b后补0</span></span><br><span class="line">        &#123;</span><br><span class="line">            c.sign = <span class="literal">true</span>;</span><br><span class="line">            c.exp = a.exp;</span><br><span class="line">            c.len = a.len+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= c.len; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                c.val[i] = a.val[i];</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="type">int</span> borrow = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= b.len+<span class="number">1</span>; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (c.val[i + b.exp - a.exp] &lt; borrow + b.val[i])</span><br><span class="line">                &#123;</span><br><span class="line">                    c.val[i + b.exp - a.exp] = c.val[i + b.exp - a.exp] + <span class="number">10</span> - borrow - b.val[i];</span><br><span class="line">                    borrow = <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    c.val[i + b.exp - a.exp] -= borrow + b.val[i];</span><br><span class="line">                    borrow = <span class="number">0</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            c = <span class="built_in">standardize_exp</span>(c);</span><br><span class="line">            <span class="keyword">return</span> c;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="除法"><a href="#除法" class="headerlink" title="除法"></a>除法</h4><p>Step1. 预处理INF/NaN的情况</p>
+<p>Step2. exp作差，调整至b&lt;a&lt;10b</p>
+<p>Step3. 在达到预设精度前不断扩增a得到更低位</p>
+<p>Step4. 翻转数组，得到结果</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line">BigNum <span class="keyword">operator</span>/(BigNum a, BigNum b)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">is_zero</span>(b))</span><br><span class="line">    &#123;</span><br><span class="line">        BigNum err = <span class="built_in">BigNum</span>();</span><br><span class="line">        err.sign = !(a.sign <span class="keyword">xor</span> b.sign);</span><br><span class="line">        err.type = <span class="built_in">is_zero</span>(a) ? NaN : INF;</span><br><span class="line">        <span class="keyword">return</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    BigNum c = <span class="built_in">BigNum</span>();</span><br><span class="line">    c.sign = !(a.sign <span class="keyword">xor</span> b.sign);</span><br><span class="line">    a.sign = b.sign = <span class="literal">true</span>;</span><br><span class="line">    c.exp = a.exp - b.exp;</span><br><span class="line">    c.len = <span class="number">0</span>;</span><br><span class="line">    a.exp = <span class="number">0</span>;</span><br><span class="line">    b.exp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; b)<span class="comment">//扩大a直到a&gt;b</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> (a &lt; b)</span><br><span class="line">        &#123;</span><br><span class="line">            a.exp++;</span><br><span class="line">            c.exp--;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        b.exp++;</span><br><span class="line">        <span class="keyword">if</span> (b &lt; a)<span class="comment">//缩小a直到a&lt;10b;</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (b &lt; a)</span><br><span class="line">            &#123;</span><br><span class="line">                a.exp--;</span><br><span class="line">                c.exp++;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        b.exp--;</span><br><span class="line">    &#125;<span class="comment">//现在是10b&gt;a&gt;b的情况</span></span><br><span class="line">    <span class="keyword">while</span> (c.len &lt; DIVIDE_PRECISION)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">int</span> q = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (!(a &lt; b))</span><br><span class="line">        &#123;</span><br><span class="line">            a = a - b;</span><br><span class="line">            q++;</span><br><span class="line">            a = <span class="built_in">standardize_exp</span>(a);</span><br><span class="line">        &#125;</span><br><span class="line">        c.val[++c.len] = q;</span><br><span class="line">        a.exp++;</span><br><span class="line">        a = <span class="built_in">standardize_exp</span>(a);</span><br><span class="line">        c.exp--;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">is_zero</span>(a))</span><br><span class="line">        &#123; <span class="keyword">break</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    c.exp++;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= (c.len &gt;&gt; <span class="number">1</span>); i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">swap</span>(c.val[i], c.val[c.len - i + <span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="乘方"><a href="#乘方" class="headerlink" title="乘方"></a>乘方</h4><p>Step1. 预处理</p>
+<p>Step2. 若为整数幂，使用高精度快速幂</p>
+<p>Step3. 若为小数幂，使用<code>pow()</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">BigNum <span class="keyword">operator</span>^(BigNum a, BigNum b)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">bool</span> nega_pow = b.sign;</span><br><span class="line">    b.sign=<span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">is_zero</span>(a))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">BigNum</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">is_zero</span>(b))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">BigNum</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a.type == INF)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    a = <span class="built_in">standardize_exp</span>(a);</span><br><span class="line">    b= <span class="built_in">standardize_exp</span>(b);</span><br><span class="line">    <span class="keyword">if</span>(b.exp&gt;=<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        BigNum res = <span class="built_in">BigNum</span>(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">while</span>(!<span class="built_in">is_zero</span>(b))</span><br><span class="line">        &#123;</span><br><span class="line">            res=<span class="built_in">shorten</span>(res,<span class="number">1000</span>);</span><br><span class="line">            <span class="keyword">if</span>((b.val[<span class="number">1</span>]&amp;<span class="number">1</span>)&amp;&amp;(!b.exp))</span><br><span class="line">            &#123;</span><br><span class="line">                res=res*a;</span><br><span class="line">            &#125;</span><br><span class="line">            a=a*a;</span><br><span class="line">            a=<span class="built_in">shorten</span>(a,<span class="number">1000</span>);</span><br><span class="line">            b=b/<span class="built_in">BigNum</span>(<span class="number">2</span>);</span><br><span class="line">            b= <span class="built_in">shorten</span>(b,b.len+b.exp);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> nega_pow?res:(<span class="built_in">BigNum</span>(<span class="number">1</span>)/res);</span><br><span class="line">    &#125;<span class="comment">//整数，使用快速幂</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//cout&lt;&lt;&quot;float power&quot;&lt;&lt;endl;</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">to_BigNum</span>(<span class="built_in">exp</span>(<span class="built_in">to_double</span>(b)* <span class="built_in">log</span>(<span class="built_in">to_double</span>(a))));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="后缀表达式的转化和计算"><a href="#后缀表达式的转化和计算" class="headerlink" title="后缀表达式的转化和计算"></a>后缀表达式的转化和计算</h3><p>本节实现于<a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/RPN.cpp">RPN.cpp</a>，主要实现了两个功能，具体原理上文已述：</p>
+<ol>
+<li>将中缀表达式转化为后缀表达式</li>
+<li>计算后缀表达式</li>
+</ol>
+<p>由于队列和栈中元素可能是操作符/函数/数字，因此开玩笑式的建立了aUtO结构体，作为栈和队列的类型，以实现不同类型的数据可以用同一个数据结构存储的效果。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">aUtO</span><span class="comment">//just kidding :)</span></span><br><span class="line">&#123;</span><br><span class="line">    BigNum v;</span><br><span class="line">    string s;</span><br><span class="line">    <span class="type">bool</span> is_num;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">aUtO</span>(BigNum v)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;v = v;</span><br><span class="line">        is_num = <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">aUtO</span>(string s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;s = s;</span><br><span class="line">        is_num = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">aUtO</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>-&gt;s = <span class="string">&quot;&quot;</span>;</span><br><span class="line">        is_num = <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">BigNum <span class="title">calculate</span><span class="params">(string s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">trim</span>(s);</span><br><span class="line">    vector&lt;string&gt; sub;</span><br><span class="line">    string it = <span class="string">&quot;&quot;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">char</span> i: s)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">is_operator</span>(i)&amp;&amp;!(it[it.<span class="built_in">length</span>()<span class="number">-1</span>]==<span class="string">&#x27;e&#x27;</span>&amp;&amp;i==<span class="string">&#x27;-&#x27;</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (it != <span class="string">&quot;&quot;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                sub.<span class="built_in">push_back</span>(it);</span><br><span class="line">                it=<span class="string">&quot;&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            sub.<span class="built_in">push_back</span>(<span class="built_in">string</span>(<span class="number">1</span>,i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            it += <span class="built_in">string</span>(<span class="number">1</span>,i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(it!=<span class="string">&quot;&quot;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        sub.<span class="built_in">push_back</span>(it);</span><br><span class="line">        it=<span class="string">&quot;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    queue&lt;aUtO&gt; q;</span><br><span class="line">    stack&lt;aUtO&gt; stk;</span><br><span class="line">    <span class="keyword">for</span> (string i: sub)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (i.<span class="built_in">length</span>() == <span class="number">1</span> &amp;&amp; <span class="built_in">is_operator</span>(i[<span class="number">0</span>]))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (i == <span class="string">&quot;(&quot;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                stk.<span class="built_in">push</span>(<span class="built_in">aUtO</span>(i));</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (i == <span class="string">&quot;)&quot;</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">while</span> (stk.<span class="built_in">top</span>().s != <span class="string">&quot;(&quot;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    q.<span class="built_in">push</span>(stk.<span class="built_in">top</span>());</span><br><span class="line">                    stk.<span class="built_in">pop</span>();</span><br><span class="line">                &#125;</span><br><span class="line">                stk.<span class="built_in">pop</span>();</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">while</span> (!stk.<span class="built_in">empty</span>() &amp;&amp; <span class="built_in">priority</span>(i) &lt;= <span class="built_in">priority</span>(stk.<span class="built_in">top</span>().s))</span><br><span class="line">                &#123;</span><br><span class="line">                    q.<span class="built_in">push</span>(stk.<span class="built_in">top</span>());</span><br><span class="line">                    stk.<span class="built_in">pop</span>();</span><br><span class="line">                &#125;</span><br><span class="line">                stk.<span class="built_in">push</span>(<span class="built_in">aUtO</span>(i));</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">is_func</span>(i))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">while</span> (!stk.<span class="built_in">empty</span>() &amp;&amp; <span class="built_in">priority</span>(i) &lt;= <span class="built_in">priority</span>(stk.<span class="built_in">top</span>().s))</span><br><span class="line">            &#123;</span><br><span class="line">                q.<span class="built_in">push</span>(stk.<span class="built_in">top</span>());</span><br><span class="line">                stk.<span class="built_in">pop</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            stk.<span class="built_in">push</span>(<span class="built_in">aUtO</span>(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">classifier</span>(i) != NaN)</span><br><span class="line">        &#123;</span><br><span class="line">            q.<span class="built_in">push</span>(<span class="built_in">aUtO</span>(<span class="built_in">BigNum</span>(i)));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">contains</span>(i))</span><br><span class="line">        &#123;</span><br><span class="line">            q.<span class="built_in">push</span>(<span class="built_in">aUtO</span>(<span class="built_in">value_of</span>(i)));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            BigNum err = <span class="built_in">BigNum</span>();</span><br><span class="line">            err.type = NaN;</span><br><span class="line">            <span class="keyword">return</span> err;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span> (!stk.<span class="built_in">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        q.<span class="built_in">push</span>(stk.<span class="built_in">top</span>());</span><br><span class="line">        stk.<span class="built_in">pop</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    BigNum x, y;</span><br><span class="line">    aUtO cur, tmp;</span><br><span class="line">    <span class="keyword">while</span> (!q.<span class="built_in">empty</span>())</span><br><span class="line">    &#123;</span><br><span class="line">        cur = q.<span class="built_in">front</span>();</span><br><span class="line">        q.<span class="built_in">pop</span>();</span><br><span class="line">        <span class="keyword">if</span> (cur.is_num)</span><br><span class="line">        &#123;</span><br><span class="line">            stk.<span class="built_in">push</span>(cur);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            x = stk.<span class="built_in">top</span>().v;</span><br><span class="line">            stk.<span class="built_in">pop</span>();</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">is_operator</span>(cur.s[<span class="number">0</span>]))</span><br><span class="line">            &#123;</span><br><span class="line">                y = stk.<span class="built_in">top</span>().v;</span><br><span class="line">                stk.<span class="built_in">pop</span>();</span><br><span class="line">                stk.<span class="built_in">push</span>(<span class="built_in">calc</span>(y, x, cur.s[<span class="number">0</span>]));</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">is_func</span>(cur.s))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(cur.s==<span class="string">&quot;exp&quot;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    stk.<span class="built_in">push</span>(<span class="built_in">aUtO</span>(<span class="built_in">to_BigNum</span>(<span class="built_in">exp</span>(<span class="built_in">to_double</span>(x)))));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(cur.s==<span class="string">&quot;ln&quot;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    stk.<span class="built_in">push</span>(<span class="built_in">aUtO</span>(<span class="built_in">to_BigNum</span>(<span class="built_in">log</span>(<span class="built_in">to_double</span>(x)))));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(cur.s==<span class="string">&quot;cos&quot;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    stk.<span class="built_in">push</span>(<span class="built_in">aUtO</span>(<span class="built_in">to_BigNum</span>(<span class="built_in">cos</span>(<span class="built_in">to_double</span>(x)))));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(cur.s==<span class="string">&quot;sin&quot;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    stk.<span class="built_in">push</span>(<span class="built_in">aUtO</span>(<span class="built_in">to_BigNum</span>(<span class="built_in">sin</span>(<span class="built_in">to_double</span>(x)))));</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(cur.s==<span class="string">&quot;sqrt&quot;</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    stk.<span class="built_in">push</span>(<span class="built_in">aUtO</span>(<span class="built_in">to_BigNum</span>(<span class="built_in">sqrt</span>(<span class="built_in">to_double</span>(x)))));</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> stk.<span class="built_in">top</span>().v;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="级数近似计算函数"><a href="#级数近似计算函数" class="headerlink" title="级数近似计算函数"></a>级数近似计算函数</h3><p>本节代码位于<a target="_blank" rel="noopener" href="https://github.com/GuTaoZi/CS205_Project02/blob/master/src/func.cpp">func.cpp</a>，由于中途易辙，此处实现了自然指数和自然对数两个函数。</p>
+<p>虽然最后决定弃用，但此处仍展示其思路。</p>
+<p>大致流程为：预处理→计算级数求和→得到结果。</p>
+<p>从运算复杂度而言，这两个函数的实现对于时间的耗费过大，并不适用于题设环境。</p>
+<h4 id="e-x"><a href="#e-x" class="headerlink" title="$e^x$"></a>$e^x$</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BigNum <span class="title">exp</span><span class="params">(BigNum a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">is_zero</span>(a))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">BigNum</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (a.type == INF || a.type == NaN)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    BigNum res = <span class="built_in">BigNum</span>(<span class="number">1</span>);</span><br><span class="line">    BigNum fac = <span class="built_in">BigNum</span>(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= PRECISION; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        BigNum it = <span class="built_in">BigNum</span>(i);</span><br><span class="line">        fac = fac * it;</span><br><span class="line">        res = res + ((a ^ it) / fac);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="ln-x"><a href="#ln-x" class="headerlink" title="$ln(x)$"></a>$ln(x)$</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BigNum <span class="title">ln</span><span class="params">(BigNum a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a == <span class="built_in">BigNum</span>(<span class="number">1</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">BigNum</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!a.sign || <span class="built_in">is_zero</span>(a))</span><br><span class="line">    &#123;</span><br><span class="line">        BigNum err = <span class="built_in">BigNum</span>();</span><br><span class="line">        err.type = NaN;</span><br><span class="line">        <span class="keyword">return</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    BigNum res = <span class="built_in">BigNum</span>();</span><br><span class="line">    BigNum t = (a - <span class="built_in">BigNum</span>(<span class="number">1</span>)) / (a + <span class="built_in">BigNum</span>(<span class="number">1</span>));</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">2</span> * PRECISION; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (i &amp; <span class="number">1</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            BigNum it = <span class="built_in">BigNum</span>(i);</span><br><span class="line">            res = res + <span class="built_in">BigNum</span>(<span class="number">2</span>) / it * t ^ it;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因此，本项目的五个函数均取自Math库。</p>
+<h3 id="变量-1"><a href="#变量-1" class="headerlink" title="变量"></a>变量</h3><p>以下是在<code>varia.h</code>头文件中的函数，基于<code>STL::map</code>实现，因此功能简洁明了，实现位于<code>variables.cpp</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">trim</span><span class="params">(string &amp;s)</span></span>;<span class="comment">//去除空格</span></span><br><span class="line"></span><br><span class="line"><span class="function">BigNum <span class="title">value_of</span><span class="params">(string name)</span></span>;<span class="comment">//取值</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(string name, string val)</span></span>;<span class="comment">//插入(输入参数为字符串)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(string name, BigNum val)</span></span>;<span class="comment">//插入(输入参数为BigNum)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">remove</span><span class="params">(string name)</span></span>;<span class="comment">//删除</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">modify</span><span class="params">(string name, BigNum val)</span></span>;<span class="comment">//修改</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">contains</span><span class="params">(string name)</span></span>;<span class="comment">//查询是否存在</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">add</span><span class="params">(string s)</span></span>;<span class="comment">//添加/编辑映射</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">value_list</span><span class="params">(<span class="type">int</span> precision)</span></span>;<span class="comment">//打印变量列表</span></span><br></pre></td></tr></table></figure>
+<h3 id="用户友好设计"><a href="#用户友好设计" class="headerlink" title="用户友好设计"></a>用户友好设计</h3><p>本程序设计了用户友好的交互命令，命令列表如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#h help</span><br><span class="line">#p [num] set precision(-1 for as accurate as possible)</span><br><span class="line">#n number format</span><br><span class="line">#f function list</span><br><span class="line">#v variable list</span><br><span class="line">[variable_name]=[num] set/modify variable</span><br><span class="line">#q quit</span><br></pre></td></tr></table></figure>
+<p>分别实现了：帮助菜单、设置输出精度、显示支持的输入格式列表、显示支持的函数列表、当前变量列表、创建/编辑变量、退出功能，本项目使用交互式输入输出，在收到#q指令前可持续输入，并会对不同错误进行报错提示，<del>并且使用了&gt;&gt;&gt;来让计算器看起来比较像某种语言的交互式界面。</del></p>
+<h2 id="Part-3-Result-amp-Verification"><a href="#Part-3-Result-amp-Verification" class="headerlink" title="Part 3 - Result &amp; Verification"></a>Part 3 - Result &amp; Verification</h2><p>经与计算器对照确认，下列结果均正确</p>
+<p>Bunched Test case #1: 基础五则运算</p>
+<p><img src="https://s2.loli.net/2022/10/16/hgA8YTn1KLy6lrw.png" alt="image-20221016015749671.png" style="zoom:50%;" /></p>
+<p>Bunched Test case #2: 高精度五则运算</p>
+<p><img src="https://s2.loli.net/2022/10/16/Xh5PFVf3Z24WDtx.png" alt="image-20221016020050214.png"></p>
+<p>Bunched Test case #3: 变量赋值与运算</p>
+<p><img src="https://s2.loli.net/2022/10/16/3V6ZWpIDQM7z8m4.png" alt="image-20221016020446449.png"></p>
+<p>Bunched Test case #4: 小数幂与函数</p>
+<p><img src="https://s2.loli.net/2022/10/16/zMZekKmqWVUT8Qv.png" alt="image-20221016021351071.png" style="zoom:50%;" /></p>
+<p>Bunched Test case #5: 用户友好设计</p>
+<p><img src="https://s2.loli.net/2022/10/16/lR7HhZjQI2sozcf.png" alt="image-20221016021628241.png" style="zoom:50%;" /></p>
+<h2 id="Part-4-Difficulties-amp-Solutions"><a href="#Part-4-Difficulties-amp-Solutions" class="headerlink" title="Part 4 - Difficulties &amp; Solutions"></a>Part 4 - Difficulties &amp; Solutions</h2><h3 id="重载运算符"><a href="#重载运算符" class="headerlink" title="重载运算符"></a>重载运算符</h3><p><strong>Difficulty: </strong>新形式存储在对齐小数点时需要新的方法，和传统写法有一定差异</p>
+<p><strong>Solution:</strong> 充分利用存了exp的优势，将按位运算简化为对exp的运算，补零对齐即可按常规思路模拟计算。</p>
+<h3 id="运算顺序"><a href="#运算顺序" class="headerlink" title="运算顺序"></a>运算顺序</h3><p><strong>Difficulty:</strong> 含有括号、函数、五种二元运算的中缀表达式运算顺序难以用计算机模拟计算</p>
+<p><strong>Solution:</strong> 确定优先级，利用栈和队列辅助，转换成后缀表达式再使用固定流程循环计算。</p>
+<h3 id="变量-2"><a href="#变量-2" class="headerlink" title="变量"></a>变量</h3><p><strong>Difficulty1:</strong> 如何防止用户起奇怪的变量名？</p>
+<p><strong>Solution1:</strong> 用正则表达式进行诸如“第一位不能是数字”这样的限制，若不符条件报错即可。</p>
+<p><strong>Difficulty2:</strong> 在变量名相互包含的情况下如何代入？</p>
+<p><strong>Solution2:</strong> 根据运算符进行split，若算式合法，则分出来的一定是完整变量名，选整个完整变量名带入计算即可，若不存在该变量则说明变量列表没有。</p>
+<h3 id="小数次幂-amp-函数"><a href="#小数次幂-amp-函数" class="headerlink" title="小数次幂&amp;函数"></a>小数次幂&amp;函数</h3><p><strong>Difficulty:</strong> 对于以$O(n^2)$实现的模拟乘法作为基础编写的整数幂和除法时间复杂度只会比$O(n^2)$高出更多，如遇计算级数这样高频调用乘法的情景，这样的时间复杂度将显得过高。</p>
+<p><strong>Solution:</strong> 本项目选择引用Math库内置的函数进行计算，高效简洁，避免重复造轮子<del>(其实还是造了，只是技不如人，甘拜下风)</del>。</p>
+<p><strong>Possible Solution:</strong> 其实后来有考虑过一个解决方案，就是将小数次幂的整数部分剥离，只计算小数部分，这样直观感觉上会极大降低计算耗时，但对自己的乘法没什么信心，于是没有再造方轮子。</p>
+<h2 id="Part-5-Difficulties-amp-Solutions"><a href="#Part-5-Difficulties-amp-Solutions" class="headerlink" title="Part 5 - Difficulties &amp; Solutions"></a>Part 5 - Difficulties &amp; Solutions</h2><p>本次项目让我深刻的认识到了自己能力的有限：当可以做的事远大于自己所能做的事的时候。</p>
+<p>重载完加减乘除的时候感觉还非常良好，写整数次幂的时候就开始纠结小数次幂该怎么写，想到级数展开的解法后怀着对时间复杂度的忐忑实现了，也非常不让人失望地耗时过长了。</p>
+<p>回过头一想：double的精度其实挺够用的(如果把整数部分也用来存小数)，才发现自己走远了。</p>
+<p>虽然完成了项目要求，但我认为仅仅是高精度这一个算法就还有无数值得我去了解的内容，何况是C++这一整门课呢？</p>
+<p><del>个人很喜欢这种能够用10~20小时左右做一个小项目的形式，耐心、心性和debug能力都有了显著的磨练和提升。</del></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/04/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Multiplication_Calculator/" rel="prev" title="CS205 C/C++ Project01设计报告 乘法计算器">
+      <i class="fa fa-chevron-left"></i> CS205 C/C++ Project01设计报告 乘法计算器
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/04/CS211_Project_Report_Flappy_Bird/" rel="next" title="CS211 Digital Logic (H) Project Design Report Flappy Bird">
+      CS211 Digital Logic (H) Project Design Report Flappy Bird <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script>
+  const gitalk = new Gitalk({
+    clientID: '79118b0b29b4170f24af',
+    clientSecret: '48ee47026d13b8a3a954b2b089ea320510282527',
+    repo: 'GuTaoZi.github.io',      // The repository of store comments,
+    owner: 'GuTaoZi',
+    admin: ['GuTaoZi'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+  </script>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-0-%E5%9B%A2%E9%98%9F%E6%88%90%E5%91%98"><span class="nav-number">1.</span> <span class="nav-text">Part 0. 团队成员</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-1-Analysis"><span class="nav-number">2.</span> <span class="nav-text">Part 1 - Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E9%87%8D%E8%BF%B0-amp-%E4%B8%BB%E8%A6%81%E6%80%9D%E8%B7%AF"><span class="nav-number">2.1.</span> <span class="nav-text">题目重述&amp;主要思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E5%81%87%E8%AE%BE"><span class="nav-number">2.2.</span> <span class="nav-text">模型假设</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%85%83%E8%BF%90%E7%AE%97"><span class="nav-number">2.3.</span> <span class="nav-text">二元运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.4.</span> <span class="nav-text">后缀表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F"><span class="nav-number">2.5.</span> <span class="nav-text">变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-2-Code"><span class="nav-number">3.</span> <span class="nav-text">Part 2 - Code</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">3.1.</span> <span class="nav-text">项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%85%83%E8%BF%90%E7%AE%97%E7%9A%84%E9%87%8D%E8%BD%BD"><span class="nav-number">3.2.</span> <span class="nav-text">二元运算的重载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%8F%E6%B3%95"><span class="nav-number">3.2.1.</span> <span class="nav-text">减法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%99%A4%E6%B3%95"><span class="nav-number">3.2.2.</span> <span class="nav-text">除法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B9%98%E6%96%B9"><span class="nav-number">3.2.3.</span> <span class="nav-text">乘方</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%8E%E7%BC%80%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E8%BD%AC%E5%8C%96%E5%92%8C%E8%AE%A1%E7%AE%97"><span class="nav-number">3.3.</span> <span class="nav-text">后缀表达式的转化和计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%A7%E6%95%B0%E8%BF%91%E4%BC%BC%E8%AE%A1%E7%AE%97%E5%87%BD%E6%95%B0"><span class="nav-number">3.4.</span> <span class="nav-text">级数近似计算函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#e-x"><span class="nav-number">3.4.1.</span> <span class="nav-text">$e^x$</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ln-x"><span class="nav-number">3.4.2.</span> <span class="nav-text">$ln(x)$</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F-1"><span class="nav-number">3.5.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E5%8F%8B%E5%A5%BD%E8%AE%BE%E8%AE%A1"><span class="nav-number">3.6.</span> <span class="nav-text">用户友好设计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-3-Result-amp-Verification"><span class="nav-number">4.</span> <span class="nav-text">Part 3 - Result &amp; Verification</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-4-Difficulties-amp-Solutions"><span class="nav-number">5.</span> <span class="nav-text">Part 4 - Difficulties &amp; Solutions</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E8%BD%BD%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">5.1.</span> <span class="nav-text">重载运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E7%AE%97%E9%A1%BA%E5%BA%8F"><span class="nav-number">5.2.</span> <span class="nav-text">运算顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E9%87%8F-2"><span class="nav-number">5.3.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%95%B0%E6%AC%A1%E5%B9%82-amp-%E5%87%BD%E6%95%B0"><span class="nav-number">5.4.</span> <span class="nav-text">小数次幂&amp;函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Part-5-Difficulties-amp-Solutions"><span class="nav-number">6.</span> <span class="nav-text">Part 5 - Difficulties &amp; Solutions</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>

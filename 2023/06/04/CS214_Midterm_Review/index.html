@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="计算机组成原理知识点 Chapter 1 ~ 3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS214 计算机组成原理 半期复习">
+<meta property="og:url" content="https://gutaozi.github.io/2023/06/04/CS214_Midterm_Review/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="计算机组成原理知识点 Chapter 1 ~ 3">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/04/10/7jNgTnyGV5WS9iJ.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/73bqCv5AmxMslwz.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/mRP9EeWzLYSHJwq.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/Og1dI2isJ5Mq7Ao.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/5A3ytqQFM42BUNr.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/mU6LCchI438Orvo.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/13/ZDsigL6rwNOdK5z.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/13/sdiNn6Oh9qX5BaW.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/13/45pRS9xjfK8ocCH.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/ohiHcDIxywB4Y3k.png">
+<meta property="og:image" content="https://s2.loli.net/2023/04/12/RB23qK1zE5mJtTa.png">
+<meta property="article:published_time" content="2023-06-04T09:40:02.805Z">
+<meta property="article:modified_time" content="2023-04-17T03:06:56.028Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="Computer Organization">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/04/10/7jNgTnyGV5WS9iJ.png">
+
+<link rel="canonical" href="https://gutaozi.github.io/2023/06/04/CS214_Midterm_Review/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CS214 计算机组成原理 半期复习 | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/06/04/CS214_Midterm_Review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS214 计算机组成原理 半期复习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-06-04 17:40:02" itemprop="dateCreated datePublished" datetime="2023-06-04T17:40:02+08:00">2023-06-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-17 11:06:56" itemprop="dateModified" datetime="2023-04-17T11:06:56+08:00">2023-04-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">计算机组成原理知识点 Chapter 1 ~ 3</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>$\huge\text{Outline}$</p>
+<ol>
+<li>Computer Abstractions and Technology</li>
+<li>Instructions: Language of the Computer</li>
+<li>Arithmetic for Computers</li>
+</ol>
+<h2 id="Chapter-1-Computer-Abstractions-and-Technology"><a href="#Chapter-1-Computer-Abstractions-and-Technology" class="headerlink" title="Chapter 1 - Computer Abstractions and Technology"></a>Chapter 1 - Computer Abstractions and Technology</h2><h3 id="§1-1-Introduction"><a href="#§1-1-Introduction" class="headerlink" title="§1.1 Introduction"></a>§1.1 Introduction</h3><p><strong>Classes of Computers</strong>:</p>
+<ul>
+<li>Personal computers</li>
+<li>Server computers</li>
+<li>Supercomputers</li>
+<li>Embedded computers</li>
+</ul>
+<p><strong>The Post-PC Era</strong>:</p>
+<ul>
+<li>Cloud computing<ul>
+<li>Warehouse Scale Computers (WSC)</li>
+<li>Software as a Service (SaaS)</li>
+</ul>
+</li>
+<li>Data centers</li>
+<li>Personal Mobile Device(PMD)</li>
+</ul>
+<h3 id="§1-2-Eight-Great-Ideas-in-Computer-Architecture"><a href="#§1-2-Eight-Great-Ideas-in-Computer-Architecture" class="headerlink" title="§1.2 Eight Great Ideas in Computer Architecture"></a>§1.2 Eight Great Ideas in Computer Architecture</h3><ol>
+<li><p>Design for <strong>Moore’s Law</strong></p>
+<blockquote>
+<p>The number of transistors that can be integrated on a die would double every 18 to 24 months.</p>
+<p>Gordon Moore, 1965</p>
+</blockquote>
+</li>
+<li><p>Use <strong>Abstraction</strong> to Simplify Design</p>
+<p>High Level Language → (Compiler) → Assembly Code → (Assembler) → Machine Language → (Machine Interpretation) → Hardware Architecture Description → (Architecture Implementation) → Logic Circuit Description</p>
+</li>
+<li><p>Make the <strong>Common Case Fast</strong></p>
+</li>
+<li><p>Performance via <strong>Parallelism</strong></p>
+</li>
+<li><p>Performance via <strong>Pipelining</strong></p>
+</li>
+<li><p>Performance via <strong>Prediction</strong></p>
+</li>
+<li><p><strong>Hierarchy</strong> of Memories</p>
+<p><img src="https://s2.loli.net/2023/04/10/7jNgTnyGV5WS9iJ.png" alt="image.png"></p>
+</li>
+<li><p><strong>Dependability</strong> via Redundancy</p>
+<p>Redundancy so that a failing piece doesn’t make the whole system fail.</p>
+</li>
+</ol>
+<h3 id="§1-3-Below-Your-Program"><a href="#§1-3-Below-Your-Program" class="headerlink" title="§1.3 Below Your Program"></a>§1.3 Below Your Program</h3><p><strong>Between Your Program and Hardware</strong>:</p>
+<ul>
+<li>Application software<ul>
+<li>Written in high-level language (HLL)</li>
+</ul>
+</li>
+<li>System software<ul>
+<li>Compiler: translates HLL code to machine code</li>
+<li>Operating System: service code<ul>
+<li>Handling input/output</li>
+<li>Managing memory and storage</li>
+<li>Scheduling tasks &amp; sharing resources</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Hardware<ul>
+<li>Processor, memory, I/O controllers</li>
+</ul>
+</li>
+</ul>
+<p><strong>Levels of Program Code</strong>:</p>
+<ul>
+<li>High-level language<ul>
+<li>Level of abstraction closer to problem domain</li>
+<li>Provides for productivity and portability</li>
+</ul>
+</li>
+<li>Assembly language<ul>
+<li>Textual representation of instructions</li>
+</ul>
+</li>
+<li>Hardware representation<ul>
+<li>Binary digits (bits)</li>
+<li>Encoded instructions and data</li>
+</ul>
+</li>
+</ul>
+<h3 id="§1-4-Under-the-Covers"><a href="#§1-4-Under-the-Covers" class="headerlink" title="§1.4 Under the Covers"></a>§1.4 Under the Covers</h3><p><strong>Same components for all kinds of computer</strong>:</p>
+<ul>
+<li>I/O device</li>
+<li>Memory</li>
+<li>Processor</li>
+</ul>
+<p><strong>Inside the Processor</strong>:</p>
+<ul>
+<li>Datapath: performs operations on data</li>
+<li>Control: control the sequence of Datapath, memory, I/O</li>
+<li>Cache memory: Small fast SRAM memory for immediate access to data</li>
+</ul>
+<h3 id="§1-5-Technologies-for-Building-Processors-and-Memory"><a href="#§1-5-Technologies-for-Building-Processors-and-Memory" class="headerlink" title="§1.5 Technologies for Building Processors and Memory"></a>§1.5 Technologies for Building Processors and Memory</h3><p>(Different from textbook)</p>
+<p><strong>Processor Technology Trends</strong>:</p>
+<ul>
+<li>Shrinking of transistor sizes</li>
+<li>Transistor density increases by 35% per year and die size increases by 10-20% per year</li>
+<li>Transistor speed improves linearly with size</li>
+<li>Wire delays do not scale down at the same rate as transistor delays</li>
+</ul>
+<p><strong>Storage</strong>:</p>
+<ul>
+<li>Volatile main memory<ul>
+<li>Loses instructions and data when power off</li>
+</ul>
+</li>
+<li>Non-volatile secondary memory<ul>
+<li>Magnetic disk</li>
+<li>Flash memory</li>
+<li>Optical disk (CDROM, DVD)</li>
+</ul>
+</li>
+</ul>
+<p><strong>Memory and I/O Technology Trends</strong>:</p>
+<ul>
+<li>DRAM density increases by 40-60% per year, latency has reduced by 33% in 10 years (the memory wall!), bandwidth improves twice as fast as latency decreases.</li>
+<li>Disk density improves by 100% every year, latency improvement similar to DRAM.</li>
+<li>Networks: primary focus on bandwidth; 10Mb → 100Mb in 10 years; 100Mb → 1Gb in 5 years.</li>
+</ul>
+<p><strong>Power Consumption Trends</strong>:</p>
+<ul>
+<li><p>$\text{Dyn Power} \propto \text{activity} \times \text{capacitance}\times \text{voltage}^2\times \text{frequency}$</p>
+</li>
+<li><p>Voltage &amp; frequency are constant now. Capacitance per transistor is decreasing, number of transistors (activity) is increasing.</p>
+</li>
+<li>Power leakage rising.</li>
+</ul>
+<h3 id="§1-6-Performance"><a href="#§1-6-Performance" class="headerlink" title="§1.6 Performance"></a>§1.6 Performance</h3><p>$\text{*}$Focus on response time for now.</p>
+<p><strong>Execution Time</strong>: </p>
+<ul>
+<li>Elapsed time<ul>
+<li>Total response time, including all aspects.<ul>
+<li>Processing, I/O, OS overhead, idle time</li>
+</ul>
+</li>
+<li>Determines system performance.</li>
+</ul>
+</li>
+<li>CPU time<ul>
+<li>Time spent processing a given job<ul>
+<li>Discounts I/O time, other jobs’ shares</li>
+</ul>
+</li>
+<li>Comprises user CPU time and system CPU time</li>
+<li>Different programs are affected differently by CPU and system performance</li>
+</ul>
+</li>
+</ul>
+<p>$\text{Performance}=1/\text{Execution time}$</p>
+<p><strong>Clock level</strong>: </p>
+<p>$\text{CPU Time} = \text{Clock Cycles}\times\text{Clock Period}=\frac{\text{Clock Cycles}}{\text{Clock Rate}}$</p>
+<p>Performance improved by: </p>
+<ul>
+<li>Clock cycles ↓</li>
+<li>Clock rate ↑</li>
+</ul>
+<p>Trade off: rate vs. count</p>
+<p><strong>Instruction level</strong>:</p>
+<p>$\text{Clock Cycles} = \sum\limits_{i=1}^n(\text{IC}_i\times \text{CPI}_i)$</p>
+<p>$\text{CPU Time} = \text{IC} \times \text{CPI}\times \text{Clock Period}$</p>
+<ul>
+<li>Instruction Count for a program<ul>
+<li>Determined by program, ISA and compiler</li>
+</ul>
+</li>
+<li>Average cycles per instruction (CPI)<ul>
+<li>Determined by CPU hardware</li>
+<li>If different instructions have different CPI<ul>
+<li>Average CPI affected by instruction mix</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>The big picture</strong>: </p>
+<p>$\text{CPU Time} = \frac{\text{Instructions}}{\text{Program}}\times \frac{\text{Clock Cycles}}{\text{Instruction}}\times \frac{\text{Seconds}}{\text{Clock Cycle}}=\text{IC}\times \text{CPI}\times \text{Tc}$</p>
+<ul>
+<li>Algorithm: affects IC, possibly CPI</li>
+<li>Programming language: affects IC, CPI</li>
+<li>Compiler: affects IC, CPI</li>
+<li>Instruction set architecture: affects IC, CPI, Tc</li>
+</ul>
+<h3 id="§1-7-The-Power-Wall"><a href="#§1-7-The-Power-Wall" class="headerlink" title="§1.7 The Power Wall"></a>§1.7 The Power Wall</h3><p><strong>Energy Consumption of a chip</strong>:</p>
+<ul>
+<li>Energy consumption = dynamic energy + static energy</li>
+<li><p>Energy for a single transistor switch: $E\propto \frac 1 2\times \text{Capacity load}\times \text{Voltage}^2$</p>
+</li>
+<li><p>Energy per second (Power): $\text{Power}\propto E\times \text{Frequency switched}$</p>
+</li>
+</ul>
+<p><strong>The power wall</strong>: </p>
+<ul>
+<li>We can’t reduce voltage further: too leaky.</li>
+<li>We can’t remove more heat: too expensive.</li>
+</ul>
+<h3 id="§1-8-The-Sea-Change-The-Switch-from-Uniprocessors-to-Multiprocessors"><a href="#§1-8-The-Sea-Change-The-Switch-from-Uniprocessors-to-Multiprocessors" class="headerlink" title="§1.8 The Sea Change: The Switch from Uniprocessors to Multiprocessors"></a>§1.8 The Sea Change: The Switch from Uniprocessors to Multiprocessors</h3><p><strong>Uniprocessor Performance</strong>: </p>
+<p>Constrained by power, instruction -level parallelism, memory latency</p>
+<p><strong>Multiprocessors</strong>:</p>
+<ul>
+<li>Multicore microprocessors<ul>
+<li>More than one processor per chip</li>
+</ul>
+</li>
+<li>Requires explicitly parallel programming<ul>
+<li>Compare with instruction level parallelism<ul>
+<li>Hardware executes multiple instructions at once</li>
+<li>Hidden from the programmer</li>
+</ul>
+</li>
+<li>Hard to do<ul>
+<li>Programming for performance</li>
+<li>Load balancing</li>
+<li>Optimizing communication and synchronization</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="§1-9-Real-Stuff-Benchmarking-the-Intel-Core-i7"><a href="#§1-9-Real-Stuff-Benchmarking-the-Intel-Core-i7" class="headerlink" title="§1.9 Real Stuff: Benchmarking the Intel Core i7"></a>§1.9 Real Stuff: Benchmarking the Intel Core i7</h3><p><strong>Standard Performance Evaluation Cooperative(SPEC) CPU Benchmark</strong>: </p>
+<p>Develops benchmarks for CPU, I/O, Web, …</p>
+<p><strong>SPEC CPU2006</strong>: </p>
+<ul>
+<li><p>Elapsed time to execute a selection of programs</p>
+<ul>
+<li>Negligible I/O, so focuses on CPU performance</li>
+</ul>
+</li>
+<li><p>Normalized relative to reference machine</p>
+</li>
+<li><p>Summarize as geometric mean of performance ratios</p>
+<ul>
+<li>CINT2006 (integer) and CFP2006 (floating-point)</li>
+</ul>
+<p>$\sqrt[n]{\prod\limits_{i=1}^n \text{Execution time ratio}_i}$</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Instruction Count</th>
+<th>CPI</th>
+<th>Clock Cycle Time</th>
+<th>Execution Time</th>
+<th>Reference Time</th>
+<th>SPEC ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\text{IC}$</td>
+<td>$\text{CPI}$</td>
+<td>$\text{Tc}$</td>
+<td>$\text{T}_\text{Exe}$</td>
+<td>$\text{T}_\text{Ref}$</td>
+<td>$\frac{\text{T}_\text{Ref}}{\text{T}_\text{Exe}}$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>SPEC Power Benchmark</strong>:</p>
+<p>Power consumption of the server at different workload levels.</p>
+<ul>
+<li>Performance: ssj_ops (server side Java operations per second)</li>
+<li>Power: Watts</li>
+</ul>
+<p>$\text{Overall ssj_ops per Watt} = (\sum\limits_{i=0}^{10}\text{ssj_ops}_i)/(\sum\limits_{i=0}^{10}\text{power}_i)$</p>
+<h3 id="§1-10-Fallacies-and-Pitfalls"><a href="#§1-10-Fallacies-and-Pitfalls" class="headerlink" title="§1.10 Fallacies and Pitfalls"></a>§1.10 Fallacies and Pitfalls</h3><p><strong>Amdahl’s Law</strong>: performance improvements through an enhancement is limited by the fraction of time the enhancement comes into play.</p>
+<script type="math/tex; mode=display">\text{Execution time after improvement}=\\{\text{Execution time affected by improvement}\over\text{Amount of improvement}}+\text{Execution time unaffected}</script><ul>
+<li>Corollary: make the common case fast</li>
+</ul>
+<p><strong>Fallacy: Computers at low utilization use little power (X)</strong></p>
+<hr>
+<h2 id="Chapter-2-Instructions-Language-of-the-Computer"><a href="#Chapter-2-Instructions-Language-of-the-Computer" class="headerlink" title="Chapter 2 - Instructions: Language of the Computer"></a>Chapter 2 - Instructions: Language of the Computer</h2><h3 id="§2-1-Introduction"><a href="#§2-1-Introduction" class="headerlink" title="§2.1 Introduction"></a>§2.1 Introduction</h3><p><strong>Concepts</strong>: </p>
+<ul>
+<li>Instructions, Instruction set</li>
+<li>Assembly language, Machine language</li>
+<li>Von Neumann Architecture</li>
+<li>Harvard Architecture</li>
+<li>reduced instruction set computer (RISC)</li>
+<li>complex instruction set computer (CISC)</li>
+</ul>
+<p><strong>Similarity of instruction set</strong>: </p>
+<ul>
+<li>base on similar design principles</li>
+<li>several basic operations provided</li>
+<li>designed for common goal</li>
+</ul>
+<p><strong>Design target</strong>:</p>
+<ul>
+<li>easy to build</li>
+<li>maximizing performance and minimizing cost and energy</li>
+</ul>
+<p><strong>Important design principles</strong>: </p>
+<ul>
+<li>keep the hardware simple</li>
+<li>keep the instructions regular</li>
+</ul>
+<p><strong>Design Principles</strong></p>
+<ul>
+<li>Simplicity favors regularity<ul>
+<li>Regularity makes implementation simpler</li>
+<li>Simplicity enables higher performance at lower cost</li>
+</ul>
+</li>
+<li>Smaller is faster<ul>
+<li>Register vs. memory</li>
+<li>Number of registers is small</li>
+</ul>
+</li>
+<li>Make the common case fast<ul>
+<li>Small constants are common</li>
+<li>Immediate operand avoids a load instruction</li>
+</ul>
+</li>
+<li>Good design demands good compromises<ul>
+<li>Different formats complicate decoding, but allow 32-bit instructions uniformly</li>
+<li>Keep formats as similar as possible</li>
+</ul>
+</li>
+</ul>
+<h3 id="§2-2-Operands"><a href="#§2-2-Operands" class="headerlink" title="§2.2 Operands"></a>§2.2 Operands</h3><p><strong>Registers</strong>: </p>
+<ul>
+<li>MIPS ISA: 32 registers.<ul>
+<li>Reason for the limit of 32 registers: Smaller is faster</li>
+</ul>
+</li>
+<li>MIPS: Each register is 32-bit wide, a word.</li>
+</ul>
+<p><strong>Memory Operands</strong>:</p>
+<ul>
+<li>Values must be fetched from memory</li>
+<li>load word: <code>lw \$t0, memory-address</code></li>
+<li>store word: <code>sw \$t0, memory-address</code></li>
+</ul>
+<p><strong>Memory Address</strong>: </p>
+<blockquote>
+<p>The compiler organizes data in memory… it knows the location of every variable (saved in a table)… it can fill in the appropriate mem-address for load-store instructions.</p>
+</blockquote>
+<p><strong>Immediate Operands</strong>: </p>
+<p>An immediate instruction uses a constant number as one of the inputs (instead of a register operand).</p>
+<p><strong>Registers vs. Memory</strong>:</p>
+<ul>
+<li>Registers are faster to access than memory</li>
+<li>Operating on memory data requires loads and stores<ul>
+<li>More instructions to be executed</li>
+</ul>
+</li>
+<li>Compiler must use registers for variables as much as possible<ul>
+<li>Only spill to memory for less frequently used variables</li>
+<li>Register optimization is important!</li>
+</ul>
+</li>
+</ul>
+<h3 id="§2-3-Numeric-Representations"><a href="#§2-3-Numeric-Representations" class="headerlink" title="§2.3 Numeric Representations"></a>§2.3 Numeric Representations</h3><p>Decimal, Binary, Hexadecimal</p>
+<p><strong>Unsigned Binary Integers</strong>: </p>
+<p>$x=x_{n-1}2^{n-1}+x_{n-2}2^{n-2}+\cdots + x_12^1+x_02^0, x\in[0,2^n-1]$</p>
+<p><strong>2s-Complement Signed Integers</strong>: </p>
+<p>$x=-x_{n-1}2^{n-1}+x_{n-2}2^{n-2}+\cdots + x_12^1+x_02^0, x\in[-2^{n-1},2^{n-1}-1]$</p>
+<p><strong>Signed Negation</strong>:</p>
+<p>2’s complement = 1’s complement + 1</p>
+<p><strong>Sign Extension</strong>:</p>
+<p>Representing a number using more bits, and preserve the numeric value.</p>
+<p>Replicate the sign bit to the left.</p>
+<p><code>addi</code>, <code>lb</code>, <code>lh</code>, <code>beq</code>, <code>bne</code></p>
+<p>Instruction Formats</p>
+<h3 id="§2-4-Instructions"><a href="#§2-4-Instructions" class="headerlink" title="§2.4 Instructions"></a>§2.4 Instructions</h3><p><strong>Arithmetic instruction</strong>: add, sub, …</p>
+<p><strong>Data transfer instruction</strong>: lw, sw, lh, sh, …</p>
+<p><strong>Logical instruction</strong>: and, or, …</p>
+<p><strong>Conditional branch</strong>: beq, bne, slt, …</p>
+<h3 id="§2-5-Instruction-Formats"><a href="#§2-5-Instruction-Formats" class="headerlink" title="§2.5 Instruction Formats"></a>§2.5 Instruction Formats</h3><p><strong>Registers</strong>: </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Name</th>
+<th style="text-align:center">Number</th>
+<th style="text-align:left">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$zero</td>
+<td style="text-align:center">0</td>
+<td style="text-align:left">Constant value 0</td>
+</tr>
+<tr>
+<td style="text-align:center">$at</td>
+<td style="text-align:center">1</td>
+<td style="text-align:left">Assembler Temporary</td>
+</tr>
+<tr>
+<td style="text-align:center">$v0-$v1</td>
+<td style="text-align:center">2-3</td>
+<td style="text-align:left">Values for Function Results and Expression Evaluation</td>
+</tr>
+<tr>
+<td style="text-align:center">$a0-$a3</td>
+<td style="text-align:center">4-7</td>
+<td style="text-align:left">Arguments</td>
+</tr>
+<tr>
+<td style="text-align:center">$t0-$t7</td>
+<td style="text-align:center">8-15</td>
+<td style="text-align:left">Temporaries</td>
+</tr>
+<tr>
+<td style="text-align:center">$s0-$s7</td>
+<td style="text-align:center">16-23</td>
+<td style="text-align:left">Saved Temporaries</td>
+</tr>
+<tr>
+<td style="text-align:center">$t8-$t9</td>
+<td style="text-align:center">24-25</td>
+<td style="text-align:left">Tempoaries</td>
+</tr>
+<tr>
+<td style="text-align:center">$gp</td>
+<td style="text-align:center">28</td>
+<td style="text-align:left">Global Pointer</td>
+</tr>
+<tr>
+<td style="text-align:center">$sp</td>
+<td style="text-align:center">29</td>
+<td style="text-align:left">Stack Pointer</td>
+</tr>
+<tr>
+<td style="text-align:center">$fp</td>
+<td style="text-align:center">30</td>
+<td style="text-align:left">Frame Pointer</td>
+</tr>
+<tr>
+<td style="text-align:center">$ra</td>
+<td style="text-align:center">31</td>
+<td style="text-align:left">Return Address</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>R-type instruction</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">opcode</th>
+<th style="text-align:center">source 1</th>
+<th style="text-align:center">source 2</th>
+<th style="text-align:center">dest</th>
+<th style="text-align:center">shift amt</th>
+<th style="text-align:center">function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">op</td>
+<td style="text-align:center">rs</td>
+<td style="text-align:center">rt</td>
+<td style="text-align:center">rd</td>
+<td style="text-align:center">shamt</td>
+<td style="text-align:center">funct</td>
+</tr>
+<tr>
+<td style="text-align:center">6 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">6 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>I-type instruction</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">opcode</th>
+<th style="text-align:center">source</th>
+<th style="text-align:center">dest</th>
+<th style="text-align:center">constant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">op</td>
+<td style="text-align:center">rs</td>
+<td style="text-align:center">rt</td>
+<td style="text-align:center">const</td>
+</tr>
+<tr>
+<td style="text-align:center">6 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">5 bits</td>
+<td style="text-align:center">16 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>J-type instruction</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>opcode</th>
+<th>target address</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6 bits</td>
+<td>26 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="§2-6-Procedures"><a href="#§2-6-Procedures" class="headerlink" title="§2.6 Procedures"></a>§2.6 Procedures</h3><p><strong>Procedure lifespan</strong>:</p>
+<ul>
+<li>acquires resources</li>
+<li>performs task</li>
+<li>covers its tracks</li>
+<li>returns back with desired result</li>
+</ul>
+<p><strong>Steps of procedure execution (caller calls the callee)</strong>:</p>
+<ul>
+<li>parameters (arguments) are placed where the callee can see them</li>
+<li>control is transferred to the callee</li>
+<li>acquire storage resources for callee</li>
+<li>execute the procedure</li>
+<li>place result value where caller can access it</li>
+<li>return control to caller</li>
+</ul>
+<p><strong>Registers Used during Procedure Calling</strong>:</p>
+<ul>
+<li>The registers are used to hold data between the caller and the callee:</li>
+<li>$a0 - $a3: four argument registers to pass parameters</li>
+<li>$v0 - $v1: two value registers to return the values</li>
+<li>$ra: one return address register to return to the point of origin in the caller</li>
+</ul>
+<p><strong>Storage Management on a Call/Return</strong>:</p>
+<ul>
+<li>A new procedure must create space for all its variables on the stack</li>
+<li>Before executing the jal, the caller must save relevant values in $s0-$s7, $a0-$a3, $ra, temps into its own stack space</li>
+<li>Arguments are copied into $a0-$a3; the jal is executed</li>
+<li>After the callee creates stack space, it updates the value of $sp</li>
+<li>Once the callee finishes, it copies the return value into $v0, frees up stack space, and $sp is incremented</li>
+<li>On return, the caller may bring in its stack values, $ra, temps into registers</li>
+</ul>
+<blockquote>
+<p>Updating $sp <strong>can</strong> be ahead of save caller-saved registers, e.g. MIPS clang 16.0.0. It is reasonable in the sense that the stack space should be allocated before being used. (Supplement from <a target="_blank" rel="noopener" href="https://github.com/NeumoNeumo">NeumoNeumo</a>)</p>
+</blockquote>
+<p><strong>Saving Conventions</strong>:</p>
+<ul>
+<li>Caller saved: $t0-$t9, $ra, $a0-$a3</li>
+<li>Callee saved: $s0-$s7</li>
+</ul>
+<p><strong>Memory Layout</strong>:</p>
+<ul>
+<li>Text: program code</li>
+<li>Static data: global variables<ul>
+<li>static variables in C, constant arrays and strings</li>
+<li>$gp initialized to address allowing ±offsets into this segment</li>
+</ul>
+</li>
+<li>Dynamic data: heap<ul>
+<li>malloc in C, new in Java</li>
+</ul>
+</li>
+<li>Stack: automatic storage</li>
+</ul>
+<p><strong>Local Data on the Stack</strong>:</p>
+<ul>
+<li><p>Local data allocated by callee</p>
+<ul>
+<li>C automatic variables</li>
+</ul>
+</li>
+<li><p>Procedure frame (activation record)</p>
+<ul>
+<li>Used by some compilers to manage stack storage</li>
+</ul>
+<blockquote>
+<p>In <code>cpython</code>(commit 95ee7c), the function runtime is stored in <code>PyFrameObject</code> which is allocated on the heap. (Acceleration of function calls in python 1.11 is due in large part to the optimization of memory allocation for PyFrameObject)</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="§2-7-Addressing"><a href="#§2-7-Addressing" class="headerlink" title="§2.7 Addressing"></a>§2.7 Addressing</h3><p><img src="https://s2.loli.net/2023/04/12/73bqCv5AmxMslwz.png" alt="image.png" style="zoom:67%;" /></p>
+<p><strong>Immediate Addressing</strong>:</p>
+<p><code>addi, subi, andi, ori...</code></p>
+<p>$\text{hi = x&gt;&gt;16}$, $\text{lo=x-(hi&lt;&lt;16)}$</p>
+<p><code>lui</code> + <code>ori</code> = 32-bit constant</p>
+<p><strong>Register Addressing</strong>:</p>
+<p><code>and, andi, sub, subi, lw...</code></p>
+<p>Using register as the operand.</p>
+<p><img src="https://s2.loli.net/2023/04/12/mRP9EeWzLYSHJwq.png" alt="image.png" style="zoom:50%;" /></p>
+<p><strong>Base/displacement Addressing</strong>:</p>
+<p>​    <code>lw, sw, lh, sh, lb, sb...</code></p>
+<p>​    The address is the sum of a register and a constant.</p>
+<p><strong>Branch Addressing (PC-relative addressing)</strong>:</p>
+<p><code>beq, bne</code></p>
+<p>$\text{Target address = PC + 4 + constant × 4}$</p>
+<p><strong>Jump Addressing (Pseudo-direct addressing)</strong>:</p>
+<p><code>j, jal</code></p>
+<p>$\text{Target address = PC[31:28]:(address×4)}$</p>
+<p>Address times 4 because it is the “word address”.</p>
+<p>If branch target is too far to encode with 16-bit offset, assembler rewrites the code to “double jump”.</p>
+<h3 id="§2-8-Translating-and-Starting-a-Program"><a href="#§2-8-Translating-and-Starting-a-Program" class="headerlink" title="§2.8 Translating and Starting a Program"></a>§2.8 Translating and Starting a Program</h3><p><strong>A translation hierarchy for C</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/12/Og1dI2isJ5Mq7Ao.png" alt="image.png" style="zoom:67%;" /></p>
+<p><strong>Role of Assembler</strong>:</p>
+<ul>
+<li>pseudo-instructions → actual hardware instructions</li>
+<li>assembly instructions → machine instructions</li>
+</ul>
+<p><strong>Role of Linker</strong>: </p>
+<ul>
+<li>Stitches different object files into a single executable<ul>
+<li>patch internal and external references</li>
+<li>determine addresses of data and instruction labels</li>
+<li>organize code and data modules in memory</li>
+</ul>
+</li>
+<li>Dynamically linked libraries – the executable points to dummy routines – these dummy routines call the dynamic linker-loader so they can update the executable to jump to the correct routine.</li>
+</ul>
+<p><strong>Linker Simulation</strong>:</p>
+<ul>
+<li>Combine the <code>Text size</code> and <code>Data size</code>.</li>
+<li>Determine the order of objects.</li>
+<li>Combine the text segment, conventionally start from $0040\ 0000_\text{HEX}$.</li>
+<li>Modify the jump address according to new text addresses.</li>
+<li>Combine the data segment, conventionally start from $1000\ 0000_\text{HEX}$.</li>
+<li>Modify the memory operations according to new data addresses. Be careful about the sign extension!</li>
+</ul>
+<p><strong>A translation hierarchy for Java</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/12/5A3ytqQFM42BUNr.png" alt="image.png" style="zoom: 67%;" /></p>
+<h3 id="§2-9-RISC-V"><a href="#§2-9-RISC-V" class="headerlink" title="§2.9 RISC-V"></a>§2.9 RISC-V</h3><p><strong>Differences between MIPS32 and RISC-V32</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>MIPS32</th>
+<th>RISC-V32</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>License</td>
+<td>Proprietary</td>
+<td>Open-Source</td>
+</tr>
+<tr>
+<td>Endianness</td>
+<td>Big-endian</td>
+<td>Little-endian</td>
+</tr>
+<tr>
+<td>Addressing modes</td>
+<td>5</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Conditional branches</td>
+<td>slt, sltu + beq, bnq</td>
+<td>+blt,bge,bltu,bgeu</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>RISC-V Registers</strong>:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x0</td>
+<td>the constant value 0</td>
+</tr>
+<tr>
+<td>x1</td>
+<td>return address</td>
+</tr>
+<tr>
+<td>x2</td>
+<td>stack pointer</td>
+</tr>
+<tr>
+<td>x3</td>
+<td>global pointer</td>
+</tr>
+<tr>
+<td>x4</td>
+<td>thread pointer</td>
+</tr>
+<tr>
+<td>x5-x7</td>
+<td>temporaries</td>
+</tr>
+<tr>
+<td>x8</td>
+<td>frame pointer</td>
+</tr>
+<tr>
+<td>x9</td>
+<td>saved registers</td>
+</tr>
+<tr>
+<td>x10-x11</td>
+<td>function arguments/results</td>
+</tr>
+<tr>
+<td>x12-x17</td>
+<td>function arguments</td>
+</tr>
+<tr>
+<td>x18-x27</td>
+<td>saved registers</td>
+</tr>
+<tr>
+<td>x28-x31</td>
+<td>temporaries</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>R-type instruction</strong>:</p>
+<p>Arithmetic instruction format.<code>add, xor</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>funct7</th>
+<th>rs2</th>
+<th>rs1</th>
+<th>funct3</th>
+<th>rd</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>I-type instruction</strong>:</p>
+<p>Loads &amp; immediate arithmetic.<code>addi, lw</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>immediate[11:0]</th>
+<th>rs1</th>
+<th>funct3</th>
+<th>rd</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12 bits</td>
+<td>5 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>S-type instruction</strong>:</p>
+<p>Stores.<code>sw, sb</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>immed[11:5]</th>
+<th>rs2</th>
+<th>rs1</th>
+<th>funct3</th>
+<th>imme[4:0]</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>SB-type instruction</strong>:</p>
+<p>Conditional branch format.<code>beq, bge</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>immed[12,10:5]</th>
+<th>rs2</th>
+<th>rs1</th>
+<th>funct3</th>
+<th>imme[4:1,11]</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>7 bits</td>
+<td>5 bits</td>
+<td>5 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>UJ-type instruction</strong>:</p>
+<p>Unconditional jump format.<code>jal</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>immediate[20,10:1,11,19:12]</th>
+<th></th>
+<th>rd</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>17 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>U-type instruction</strong>:</p>
+<p>Upper immediate format.<code>lui</code></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>immediate[31:12]</th>
+<th></th>
+<th>rd</th>
+<th>op</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>17 bits</td>
+<td>3 bits</td>
+<td>5 bits</td>
+<td>7 bits</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>MIPS &amp; RISC-V Instruction Formats</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/12/mU6LCchI438Orvo.png" alt="image.png"></p>
+<h3 id="§2-10-More-ISAs"><a href="#§2-10-More-ISAs" class="headerlink" title="§2.10 More ISAs"></a>§2.10 More ISAs</h3><p>ARM v8, Intel x86</p>
+<hr>
+<h2 id="Chapter-3-Arithmetic-for-Computers"><a href="#Chapter-3-Arithmetic-for-Computers" class="headerlink" title="Chapter 3 - Arithmetic for Computers"></a>Chapter 3 - Arithmetic for Computers</h2><h3 id="§3-1-Addition-and-Subtraction"><a href="#§3-1-Addition-and-Subtraction" class="headerlink" title="§3.1 Addition and Subtraction"></a>§3.1 Addition and Subtraction</h3><p><strong>Integer Overflow</strong>:</p>
+<ul>
+<li><code>add( + , + ) = -</code></li>
+<li><code>add( - , - ) = +</code></li>
+<li><code>sub( + , - ) = -</code></li>
+<li><code>sub( - , + ) = +</code></li>
+</ul>
+<p><strong>1-bit Adder</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/13/ZDsigL6rwNOdK5z.png" alt="image.png" style="zoom:33%;" /></p>
+<p><strong>1-bit ALU and 32-bit ALU</strong>:</p>
+<ul>
+<li>If op = 0, o = a &amp; b (and) </li>
+<li>If op = 1, o = a | b (or) </li>
+<li>If op = 2, o = a + b (add)</li>
+</ul>
+<p>To obtain 32-bit ALU, sequentially connect the 1-bit ALU via <code>Carry</code>, bind <code>op</code>  to the same operation.</p>
+<p><strong>Dealing with Overflow</strong>:</p>
+<ol>
+<li>Use unsigned operations.</li>
+<li>On overflow, raise exceptions:<ul>
+<li>Save <code>pc</code> in exception program counter <code>epc</code>.</li>
+<li>Jump to predefined handler address.</li>
+<li><code>mfc0</code> (move from coprocessor reg) instruction can retrieve EPC value, to return after corrective action.</li>
+</ul>
+</li>
+<li>Saturating operations:<ul>
+<li>On overflow, result is largest representable value.</li>
+</ul>
+</li>
+</ol>
+<p><strong>SIMD</strong>: Single-instruction, multiple-data. See <a target="_blank" rel="noopener" href="https://github.com/ShiqiYu/CPP/blob/main/week08/Lecture08.pdf">CS205 C/C++ Lecture 8: Speedup Your Program</a> (^^ ;</p>
+<h3 id="§3-2-Multiplication"><a href="#§3-2-Multiplication" class="headerlink" title="§3.2 Multiplication"></a>§3.2 Multiplication</h3><p><strong>Naive version</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/13/sdiNn6Oh9qX5BaW.png" alt="image.png" style="zoom: 33%;" /></p>
+<p>If the least significant bit of the multiplier is 1, add the multiplicand to the product. If not, go to the next step. Shift the multiplicand left and the multiplier right in the next two steps. These three steps are repeated 32 times.</p>
+<p><strong>Refined version</strong>:</p>
+<p><img src="https://s2.loli.net/2023/04/13/45pRS9xjfK8ocCH.png" alt="image.png" style="zoom: 33%;" /></p>
+<p>The Multiplicand register, ALU, and Multiplier register are all 32 bits wide, with only the Product register left at 64 bits.</p>
+<p>Now the product is shifted right. The separate Multiplier register also disappeared. The multiplier is placed instead in the right half of the Product register.</p>
+<p><strong>Signed Multiplication</strong>:</p>
+<p><strong>Faster Multiplication</strong>:</p>
+<p><img src="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><h3 id="MIPS-Core-Architecture"><a href="#MIPS-Core-Architecture" class="headerlink" title="MIPS Core Architecture"></a>MIPS Core Architecture</h3><p><img src="https://s2.loli.net/2023/04/12/ohiHcDIxywB4Y3k.png" alt="image.png"></p>
+<h3 id="MIPS-instruction-encoding"><a href="#MIPS-instruction-encoding" class="headerlink" title="MIPS instruction encoding"></a>MIPS instruction encoding</h3><p><img src="https://s2.loli.net/2023/04/12/RB23qK1zE5mJtTa.png" alt="image.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Computer-Organization/" rel="tag"># Computer Organization</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/04/CS215_Final_Review/" rel="prev" title="CS215 离散数学 期末复习">
+      <i class="fa fa-chevron-left"></i> CS215 离散数学 期末复习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/04/CS215_Midterm_Review/" rel="next" title="CS215 离散数学 半期复习">
+      CS215 离散数学 半期复习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script>
+  const gitalk = new Gitalk({
+    clientID: '79118b0b29b4170f24af',
+    clientSecret: '48ee47026d13b8a3a954b2b089ea320510282527',
+    repo: 'GuTaoZi.github.io',      // The repository of store comments,
+    owner: 'GuTaoZi',
+    admin: ['GuTaoZi'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+  </script>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-Computer-Abstractions-and-Technology"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - Computer Abstractions and Technology</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-1-Introduction"><span class="nav-number">1.1.</span> <span class="nav-text">§1.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-2-Eight-Great-Ideas-in-Computer-Architecture"><span class="nav-number">1.2.</span> <span class="nav-text">§1.2 Eight Great Ideas in Computer Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-3-Below-Your-Program"><span class="nav-number">1.3.</span> <span class="nav-text">§1.3 Below Your Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-4-Under-the-Covers"><span class="nav-number">1.4.</span> <span class="nav-text">§1.4 Under the Covers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-5-Technologies-for-Building-Processors-and-Memory"><span class="nav-number">1.5.</span> <span class="nav-text">§1.5 Technologies for Building Processors and Memory</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-6-Performance"><span class="nav-number">1.6.</span> <span class="nav-text">§1.6 Performance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-7-The-Power-Wall"><span class="nav-number">1.7.</span> <span class="nav-text">§1.7 The Power Wall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-8-The-Sea-Change-The-Switch-from-Uniprocessors-to-Multiprocessors"><span class="nav-number">1.8.</span> <span class="nav-text">§1.8 The Sea Change: The Switch from Uniprocessors to Multiprocessors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-9-Real-Stuff-Benchmarking-the-Intel-Core-i7"><span class="nav-number">1.9.</span> <span class="nav-text">§1.9 Real Stuff: Benchmarking the Intel Core i7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A71-10-Fallacies-and-Pitfalls"><span class="nav-number">1.10.</span> <span class="nav-text">§1.10 Fallacies and Pitfalls</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-Instructions-Language-of-the-Computer"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2 - Instructions: Language of the Computer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-1-Introduction"><span class="nav-number">2.1.</span> <span class="nav-text">§2.1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-2-Operands"><span class="nav-number">2.2.</span> <span class="nav-text">§2.2 Operands</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-3-Numeric-Representations"><span class="nav-number">2.3.</span> <span class="nav-text">§2.3 Numeric Representations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-4-Instructions"><span class="nav-number">2.4.</span> <span class="nav-text">§2.4 Instructions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-5-Instruction-Formats"><span class="nav-number">2.5.</span> <span class="nav-text">§2.5 Instruction Formats</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-6-Procedures"><span class="nav-number">2.6.</span> <span class="nav-text">§2.6 Procedures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-7-Addressing"><span class="nav-number">2.7.</span> <span class="nav-text">§2.7 Addressing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-8-Translating-and-Starting-a-Program"><span class="nav-number">2.8.</span> <span class="nav-text">§2.8 Translating and Starting a Program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-9-RISC-V"><span class="nav-number">2.9.</span> <span class="nav-text">§2.9 RISC-V</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A72-10-More-ISAs"><span class="nav-number">2.10.</span> <span class="nav-text">§2.10 More ISAs</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-3-Arithmetic-for-Computers"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3 - Arithmetic for Computers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A73-1-Addition-and-Subtraction"><span class="nav-number">3.1.</span> <span class="nav-text">§3.1 Addition and Subtraction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%C2%A73-2-Multiplication"><span class="nav-number">3.2.</span> <span class="nav-text">§3.2 Multiplication</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Appendix"><span class="nav-number">4.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS-Core-Architecture"><span class="nav-number">4.1.</span> <span class="nav-text">MIPS Core Architecture</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MIPS-instruction-encoding"><span class="nav-number">4.2.</span> <span class="nav-text">MIPS instruction encoding</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>

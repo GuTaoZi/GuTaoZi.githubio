@@ -28,7 +28,7 @@
 <meta property="og:description" content="原来算法学了这么多吗(＃°Д°)!">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-05T05:29:55.288Z">
-<meta property="article:modified_time" content="2023-06-05T06:16:32.778Z">
+<meta property="article:modified_time" content="2023-06-05T09:34:08.761Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
@@ -191,7 +191,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-06-05 13:29:55 / 修改时间：14:16:32" itemprop="dateCreated datePublished" datetime="2023-06-05T13:29:55+08:00">2023-06-05</time>
+              <time title="创建时间：2023-06-05 13:29:55 / 修改时间：17:34:08" itemprop="dateCreated datePublished" datetime="2023-06-05T13:29:55+08:00">2023-06-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,17 +272,134 @@
 </li>
 </ol>
 <hr>
-<h2 id="Chapter-1-稳定匹配"><a href="#Chapter-1-稳定匹配" class="headerlink" title="Chapter 1 - 稳定匹配"></a>Chapter 1 - 稳定匹配</h2><h3 id="定义-一对一匹配"><a href="#定义-一对一匹配" class="headerlink" title="定义(一对一匹配)"></a>定义(一对一匹配)</h3><p>输入：两个集合 $A={a_1,\cdots,a_n}, B={b_1,\cdots,b_n}$，以及每个元素对另一集合所有元素的偏好表。</p>
+<h2 id="Chapter-1-稳定匹配"><a href="#Chapter-1-稳定匹配" class="headerlink" title="Chapter 1 - 稳定匹配"></a>Chapter 1 - 稳定匹配</h2><h3 id="定义-一对一匹配"><a href="#定义-一对一匹配" class="headerlink" title="定义(一对一匹配)"></a>定义(一对一匹配)</h3><p>输入：两个集合 $A=\{a_1,\cdots,a_n\}, B=\{b_1,\cdots,b_n\}$，以及每个元素对另一集合所有元素的偏好表。</p>
 <p>完美匹配：$f:A\rightarrow B$是双射</p>
 <p>不稳定对：未出现在匹配中，且双方对对方的偏好程度均高于当前匹配的偏好程度。例如匹配中存在$(a_1,b_1),(a_2,b_2)$，但$a_1$相比$b_1$更偏好$b_2$，且$b_2$相比$a_2$更偏好$a_1$，那么$(a_1,b_2)$被称为不稳定对。</p>
 <p>稳定匹配：不存在不稳定对的完美匹配</p>
 <h3 id="Gale-Shapley-算法"><a href="#Gale-Shapley-算法" class="headerlink" title="Gale-Shapley 算法"></a>Gale-Shapley 算法</h3><p>保证可以找到一个稳定匹配的算法，此处以婚配为例。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Initialize each person to be free.</span><br><span class="line">while (some man is free and hasn&#x27;t proposed to every woman)</span><br><span class="line">&#123;</span><br><span class="line">	Choose such a man m</span><br><span class="line">    w = 1st woman on m&#x27;s list to whom m has not yet proposed</span><br><span class="line">    if (w is free)</span><br><span class="line">    	assign m and w to be engaged</span><br><span class="line">    else if (w prefers m to her fiancé m&#x27;)</span><br><span class="line">    	assign m and w to be engaged, and m&#x27; to be free</span><br><span class="line">    else</span><br><span class="line">    	w rejects m</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="GS算法-正确性证明"><a href="#GS算法-正确性证明" class="headerlink" title="GS算法 - 正确性证明"></a>GS算法 - 正确性证明</h3><h4 id="算法一定终止"><a href="#算法一定终止" class="headerlink" title="算法一定终止"></a>算法一定终止</h4><ol>
+<h3 id="GS算法-正确性证明"><a href="#GS算法-正确性证明" class="headerlink" title="GS算法 - 正确性证明"></a>GS算法 - 正确性证明</h3><p><strong>Observation.</strong></p>
+<ol>
 <li>主动方按照偏好表降序提出匹配请求</li>
 <li>被动方一旦匹配，就不会回到未匹配状态，只会更换到更偏好的匹配</li>
 </ol>
-<p>Claim. 算法在至多$n^2$轮while循环后终止</p>
+<h4 id="算法一定终止"><a href="#算法一定终止" class="headerlink" title="算法一定终止"></a>算法一定终止</h4><p><strong>Claim</strong>. 算法在至多$n^2$轮while循环后终止</p>
+<p><strong>Proof.</strong> 每次while循环，主动方会向一个新的被动方提出匹配请求，两个大小为$n$的集合至多有$n^2$种匹配，因此算法复杂度$O(n^2)$。</p>
+<h4 id="匹配的完美性"><a href="#匹配的完美性" class="headerlink" title="匹配的完美性"></a>匹配的完美性</h4><p><strong>Claim.</strong> 所有元素在算法终止后都有匹配</p>
+<p><strong>Proof.</strong> 反证法：假如某个主动方未被匹配，那么一定存在一个未被匹配的被动方。由Observation 2，该被动方一定从未收到匹配请求。但算法终止时主动方已对所有被动方进行了请求且仍未被匹配，引出矛盾。</p>
+<h4 id="匹配的稳定性"><a href="#匹配的稳定性" class="headerlink" title="匹配的稳定性"></a>匹配的稳定性</h4><p><strong>Claim.</strong> 结果中不存在不稳定对</p>
+<p><strong>Proof.</strong> 反证法：</p>
+<p>记结果匹配为$S^\star$，其中存在配对$(a,y), (x,b)$。</p>
+<p>假设存在不稳定对$(a,b)$，即$a$相比$y$更偏好$b$，而$b$相比$x$更偏好$a$</p>
+<ol>
+<li><p>$a$未向$b$发起匹配请求</p>
+<p>说明$a$相比$b$更偏好$y$，引出矛盾</p>
+</li>
+<li><p>$a$向$b$发起过匹配请求</p>
+<p>$b$拒绝了$a$，当即 或是 过了一会儿</p>
+<p>说明$b$相比$a$更偏好$x$，引出矛盾</p>
+</li>
+</ol>
+<p>两种情形均矛盾，因此不存在不稳定对。</p>
+<h3 id="算法实现"><a href="#算法实现" class="headerlink" title="算法实现"></a>算法实现</h3><p>全局维护一个未匹配的主动方集合，每次选取其中的主动方进行匹配。</p>
+<p>对于主动方，维护一个偏好值降序的队列，依次进行匹配请求。</p>
+<p>对于被动方，维护一个从主动方到偏好值的映射，用于比对当前匹配是否更优，如有替换则将前任放回全局未匹配主动方集合。</p>
+<h3 id="主被动方利益分析"><a href="#主被动方利益分析" class="headerlink" title="主被动方利益分析"></a>主被动方利益分析</h3><p>有效对象：如果某个稳定匹配中存在$(a,b)$，那么$a,b$互为有效对象。</p>
+<h4 id="主动方最优性"><a href="#主动方最优性" class="headerlink" title="主动方最优性"></a>主动方最优性</h4><p><strong>Claim.</strong> GS算法得到的解$S^\star$对于主动方是最优的(每个主动方得到最优有效对象)</p>
+<p><strong>Proof.</strong> 反证法：</p>
+<p>假如不是主动方最优的，那么一定有某个主动方未与其最优有效对象匹配。</p>
+<p>由于主动方是降序请求的，因此一定是被其最优有效对象拒绝了。</p>
+<p>令首个这样的主动方为$a$，其最优有效对象为$b$。在$b$拒绝$a$时，一定更偏好于某个主动方$x$。由于$a$是首个被最优有效对象拒绝的主动方，所以$x$此时没有被任何有效对象拒绝过，即$b$是$x$的最优有效对象。</p>
+<p>随后，由于$a$的最优有效对象是$b$，我们找到包含$(a,b)$的稳定匹配$S$，$S$包含$(x,y)$。根据上述分析，$b$相比$a$更偏好$x$，而$x$相比任何其他有效对象更偏好$b$，因此$(x,b)$是匹配$S$的不稳定对，引出矛盾。</p>
+<h4 id="被动方最劣性"><a href="#被动方最劣性" class="headerlink" title="被动方最劣性"></a>被动方最劣性</h4><p><strong>Claim.</strong> GS算法得到的解$S^\star$对于被动方是最劣的(每个主动方得到最劣有效对象)</p>
+<p><strong>Proof.</strong> 反证法：</p>
+<p>假如不是被动方最劣的，那么一定有某个被动方未与其最劣有效对象匹配。</p>
+<p>假如$S^\star$包含$(a,b)$，但$a$并不是$b$的最劣有效对象，假设其最劣有效对象为$x$。</p>
+<p>我们找到包含$(x,b)$的稳定匹配$S$，$S$包含$(a,y)$。$b$相比$x$更偏好$a$，由主动方最优性，$b$一定是$a$的最优有效对象，即$a$相比$y$更偏好$b$，因此$(a,b)$是匹配$S$的不稳定对，引出矛盾。</p>
+<h3 id="一对多匹配"><a href="#一对多匹配" class="headerlink" title="一对多匹配"></a>一对多匹配</h3><p>一对多匹配中，集合$A$中的一个元素可以与集合$B$中的多个元素匹配，此处将$A$中元素作为主动方进行讨论。</p>
+<p>不稳定对$(a,b)$满足以下所有条件：</p>
+<ul>
+<li>$a,b$ 相互是可接受的</li>
+<li>主动方$a$仍然有匹配容量，或者$a$相比其已经匹配的所有被动方元素更偏好$b$</li>
+<li>被动方$b$未被匹配，或者$b$相比其已经匹配的主动方更偏好$a$</li>
+</ul>
+<h3 id="扩展GS算法"><a href="#扩展GS算法" class="headerlink" title="扩展GS算法"></a>扩展GS算法</h3><p>将具有容量的一方作为被动方，全局维护未匹配主动方的集合。</p>
+<p>对于每个主动方，维护一个偏好值降序列表，依次进行匹配请求。</p>
+<p>对于每个被动方，维护一个长度为容量的优先队列，存放当前被匹配的所有被动方。如果有更偏好的主动方请求匹配，将队首(偏好值最低)的主动方放回未匹配集合。</p>
+<p>扩展GS算法的正确性和利益分析与上文所述类似，证明可参考Assignment 1。</p>
+<h2 id="Chapter-2-算法分析"><a href="#Chapter-2-算法分析" class="headerlink" title="Chapter 2 - 算法分析"></a>Chapter 2 - 算法分析</h2><h3 id="运行时间分析"><a href="#运行时间分析" class="headerlink" title="运行时间分析"></a>运行时间分析</h3><p>最坏运行时间：给定输入数据规模，在所有不同的输入中，算法最大运行时间</p>
+<p>平均运行时间：给定输入数据规模，对于随机的一个输入，算法的运行时间</p>
+<p>最坏运行时间为多项式复杂度的算法被认为是高效的</p>
+<h3 id="Asymptotic-Order-of-Growth"><a href="#Asymptotic-Order-of-Growth" class="headerlink" title="Asymptotic Order of Growth"></a>Asymptotic Order of Growth</h3><p><del>这玩意咋翻译来着，渐进时间复杂度吗</del></p>
+<p>$O(n),\Omega(n),\Theta(n)$都是老朋友了</p>
+<p>传递性，可加性，可乘性</p>
+<h3 id="常见算法时间复杂度"><a href="#常见算法时间复杂度" class="headerlink" title="常见算法时间复杂度"></a>常见算法时间复杂度</h3><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>时间复杂度</th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>常数(Constant)</td>
+<td>$O(1)$</td>
+<td>打表</td>
+</tr>
+<tr>
+<td>对数(Logarithmic)</td>
+<td>$O(\log n)$</td>
+<td>二分查找</td>
+</tr>
+<tr>
+<td>线性(Linear)</td>
+<td>$O(n)$</td>
+<td>求极值</td>
+</tr>
+<tr>
+<td>算术线性(?)(Linearithmic)</td>
+<td>$O(n\log n)$</td>
+<td>归并排序，堆排</td>
+</tr>
+<tr>
+<td>平方(Quadratic)</td>
+<td>$O(n^2)$</td>
+<td>暴力最近点对</td>
+</tr>
+<tr>
+<td>立方(Cubic)</td>
+<td>$O(n^3)$</td>
+<td>集合不相容</td>
+</tr>
+<tr>
+<td>指数(Exponential)</td>
+<td>$O(c^n)$</td>
+<td>暴力最大独立集</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="独立集问题"><a href="#独立集问题" class="headerlink" title="独立集问题"></a>独立集问题</h3><p>区间调度：$O(n\log n)$贪心</p>
+<p>带权区间调度：$O(n\log n)$动态规划</p>
+<p>二分图匹配：$O(n^k)$基于最大流算法</p>
+<p>最大独立集：NP-complete</p>
+<p>竞争便利店选址问题：PSPACE-complete</p>
+<h3 id="均摊分析"><a href="#均摊分析" class="headerlink" title="均摊分析"></a>均摊分析</h3><p>这是赵老师的Lab课件内容，不过内容还挺重要的，之后再补吧。</p>
+<h2 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h2><h3 id="区间调度"><a href="#区间调度" class="headerlink" title="区间调度"></a>区间调度</h3><p>问题：工作用一系列区间表示，工作不可并行，每个工作等权，最大化截止时间前完成的工作数。</p>
+<p>贪心算法：按照DDL升序排序，贪心地选择当前尚未错过开始时间且DDL最近的一个完成。</p>
+<p><strong>Theorem.</strong> 贪心算法是最优的</p>
+<p><strong>Proof.</strong> 反证法：假如贪心算法结果不是最优，令贪心结果为$\{i_n\}$，最优结果为$\{j_m\}$，且两种方案的前$r$项相同。我们在所有最优解中，找到一个$\{j_m\}$使得其和贪心方案的重叠部分最多，即$r$最大。</p>
+<p>由贪心策略，$i_{r+1}$的结束时间一定不会晚于$j_{r+1}$，那么我们将$i_{r+1}$替换$\{j_m\}$方案中的$j_{r+1}$，依然会得到一个最优的可行解，但是此时的重叠部分长度为$r+1$，引出矛盾。</p>
+<h3 id="区间划分"><a href="#区间划分" class="headerlink" title="区间划分"></a>区间划分</h3><p>问题：课程用一系列区间表示，课程不可在同一教室并行，求安排下所有课程所需的最小教室数量。</p>
+<p>贪心算法：按照开课时间升序排列，申请的所有教室按照最后一堂课的结束时间</p>
+<p>放进优先队列，对于每节课，看上节下课最早的教室能不能放下，能的话就放，如果放不下那就新开一个教室加入队列。</p>
+<p><strong>Theorem.</strong> 贪心算法是最优的</p>
+<p>记贪心算法申请的教室数为$d$</p>
+<p>第$d$个教室是因为贪心算法在规划第$j$节课时，前$d-1$个教室都放不下了，即该$d-1$个教室的最后一堂课的下课时间都比$j$的上课时间晚。</p>
+<p>由于贪心按上课时间升序排列课程，所以这$d-1$个教室中的课程开始时间都比$j$的开始时间要晚，因此在第$j$节课开课后有$d$节课在同时上课。</p>
+<p>根据题意，要能支持$d$节课同时进行至少需要$d$个教室，即不存在比贪心解更优的解。</p>
 
     </div>
 
@@ -301,8 +418,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/06/04/CS305_Final_Review/" rel="prev" title="CS305 计算机网络 期末复习">
-      <i class="fa fa-chevron-left"></i> CS305 计算机网络 期末复习
+    <a href="/2023/06/04/%E5%AD%A6%E9%95%BF%E5%9B%A2%E8%AE%B0%E5%BD%95/" rel="prev" title="学长团记录">
+      <i class="fa fa-chevron-left"></i> 学长团记录
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -377,7 +494,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-%E7%A8%B3%E5%AE%9A%E5%8C%B9%E9%85%8D"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - 稳定匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8D"><span class="nav-number">1.1.</span> <span class="nav-text">定义(一对一匹配)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gale-Shapley-%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">Gale-Shapley 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GS%E7%AE%97%E6%B3%95-%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">1.3.</span> <span class="nav-text">GS算法 - 正确性证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E4%B8%80%E5%AE%9A%E7%BB%88%E6%AD%A2"><span class="nav-number">1.3.1.</span> <span class="nav-text">算法一定终止</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-%E7%A8%B3%E5%AE%9A%E5%8C%B9%E9%85%8D"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - 稳定匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8D"><span class="nav-number">1.1.</span> <span class="nav-text">定义(一对一匹配)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gale-Shapley-%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">Gale-Shapley 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GS%E7%AE%97%E6%B3%95-%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">1.3.</span> <span class="nav-text">GS算法 - 正确性证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E4%B8%80%E5%AE%9A%E7%BB%88%E6%AD%A2"><span class="nav-number">1.3.1.</span> <span class="nav-text">算法一定终止</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E7%9A%84%E5%AE%8C%E7%BE%8E%E6%80%A7"><span class="nav-number">1.3.2.</span> <span class="nav-text">匹配的完美性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">1.3.3.</span> <span class="nav-text">匹配的稳定性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A2%AB%E5%8A%A8%E6%96%B9%E5%88%A9%E7%9B%8A%E5%88%86%E6%9E%90"><span class="nav-number">1.5.</span> <span class="nav-text">主被动方利益分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E5%8A%A8%E6%96%B9%E6%9C%80%E4%BC%98%E6%80%A7"><span class="nav-number">1.5.1.</span> <span class="nav-text">主动方最优性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A2%AB%E5%8A%A8%E6%96%B9%E6%9C%80%E5%8A%A3%E6%80%A7"><span class="nav-number">1.5.2.</span> <span class="nav-text">被动方最劣性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%8C%B9%E9%85%8D"><span class="nav-number">1.6.</span> <span class="nav-text">一对多匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95GS%E7%AE%97%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">扩展GS算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2 - 算法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E5%88%86%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">运行时间分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Asymptotic-Order-of-Growth"><span class="nav-number">2.2.</span> <span class="nav-text">Asymptotic Order of Growth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.3.</span> <span class="nav-text">常见算法时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E9%9B%86%E9%97%AE%E9%A2%98"><span class="nav-number">2.4.</span> <span class="nav-text">独立集问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%87%E6%91%8A%E5%88%86%E6%9E%90"><span class="nav-number">2.5.</span> <span class="nav-text">均摊分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83"><span class="nav-number">3.</span> <span class="nav-text">贪心</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E8%B0%83%E5%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">区间调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86"><span class="nav-number">3.2.</span> <span class="nav-text">区间划分</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
