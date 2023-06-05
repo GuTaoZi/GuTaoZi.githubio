@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="概率论与数理统计的知识点整理：§3.6~§8.2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MA212 概率论与数理统计 期末复习">
+<meta property="og:url" content="https://gutaozi.github.io/2023/01/10/MA212_Probability_Statistics_Final/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="概率论与数理统计的知识点整理：§3.6~§8.2">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/01/10/P7CdEvfXxBheuwi.png">
+<meta property="og:image" content="https://s2.loli.net/2022/12/30/xOTFlhpsguVoaZD.jpg">
+<meta property="og:image" content="https://s2.loli.net/2022/12/31/LhebI7dEgq9fz3N.png">
+<meta property="article:published_time" content="2023-01-10T09:29:30.000Z">
+<meta property="article:modified_time" content="2023-01-10T09:29:30.000Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="Probability &amp; Statistics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/01/10/P7CdEvfXxBheuwi.png">
+
+<link rel="canonical" href="https://gutaozi.github.io/2023/01/10/MA212_Probability_Statistics_Final/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>MA212 概率论与数理统计 期末复习 | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/01/10/MA212_Probability_Statistics_Final/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MA212 概率论与数理统计 期末复习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-01-10 17:29:30" itemprop="dateCreated datePublished" datetime="2023-01-10T17:29:30+08:00">2023-01-10</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Math/" itemprop="url" rel="index"><span itemprop="name">Math</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">概率论与数理统计的知识点整理：§3.6~§8.2</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><blockquote>
+<p>本文为南方科技大学MA212概率论与数理统计课程2022秋季学期后半学期的知识点整理，大部分内容摘选自MA212-03班的课件，编者仅进行了一定转述和搬运工作。由于复习材料的目的性强，本文对考点有一定的强调和浓缩，忽略了一些非考点，但也并不能视为与考纲完全相符，同时可能存在一定错误。阅读本文并不能让你两三天速通概统，本文的定位在于用一篇文章看完课件内容，因此建议读者在学完该部分内容后借本文复习概念，并结合题目练习。</p>
+<p>祝你在这门课程取得优秀成绩！</p>
+<p>咕桃</p>
+<p>2023.1</p>
+</blockquote>
+<p>本文使用<strong>CC BY-NC-SA</strong>协议，即您可以对本文在注明作者的情况下进行非商业目的的重新编排、节选，或以本文为基础进行创作，依此创作的成果亦须使用该协议。</p>
+<p>由于编者能力有限，恳请各位读者在阅读过程中勘误，如果您对其中内容有疑问或发现错误，抑或是希望联系编者，欢迎通过该QQ联系：<a href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=3425811925&amp;website=www.oicqzone.com">3425811925</a>，非常感谢！</p>
+<p><img src="https://s2.loli.net/2023/01/10/P7CdEvfXxBheuwi.png" alt="image.png" style="zoom:25%;" /></p>
+<h1 id="Chapter-3"><a href="#Chapter-3" class="headerlink" title="Chapter 3"></a>Chapter 3</h1><h2 id="§3-6-联合分布随机变量函数"><a href="#§3-6-联合分布随机变量函数" class="headerlink" title="§3.6 联合分布随机变量函数"></a>§3.6 联合分布随机变量函数</h2><p><strong>r.v. 函数的分布</strong></p>
+<p>设$(X, Y)$是二维连续型随机向量，其联合概率密度函数为$f(x,y)$。 则$Z=g(X,Y)$的累积分布函数为</p>
+<script type="math/tex; mode=display">F_Z(z)=P\{Z\leq z\}=P\{g(X,Y)\leq z\}=\iint\limits_{g(x,y)\leq z}f(x,y)dxdy=\int_{-\infty}^{z}f_Z(u)du</script><p>求导可得其概率密度函数$Z\sim f_Z(z)$</p>
+<p><strong>连续卷积公式</strong>：r.v. $(X,Y)\sim f(x,y)$，$Z=X+Y$</p>
+<p>$F_Z(z)=\int_{-\infty}^{\infty}\int_{-\infty}^{z-y}f(x,y)dxdy=\int_{-\infty}^{\infty}\int_{-\infty}^{z}f(u-y,y)dudy=\int_{-\infty}^{z}\int_{-\infty}^{\infty}f(u-y,y)dydu$</p>
+<p>求导得：$f_Z(z)=\int_{-\infty}^{\infty}f(z-y,y)dy=\int_{-\infty}^{\infty}f(x,z-x)dx$</p>
+<p>若$X,Y$独立，$f(x,y)=f_X(x)\cdot f_Y(y)$，则</p>
+<p>$f_Z(z)=\int_{-\infty}^{\infty}f_X(z-y)f_Y(y)dy=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)dx$</p>
+<p><strong>独立正态r.v.之和</strong>：独立r.v. 集$\{X_n\}$，$X_i\sim N(\mu_i,\sigma_i^2)$</p>
+<p>则其非零线性组合$\overset{n}\sum\limits_{i=1}a_iX_i\sim N(\overset{n}\sum\limits_{i=1}a_i\mu_i,\overset{n}\sum\limits_{i=1}a_i^2\sigma_i^2)$</p>
+<p>即：独立正态r.v.的非零线性组合仍服从正态分布</p>
+<p><strong>非独立正态r.v.之和</strong>：</p>
+<p>若$(X,Y)\sim\mathbf N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$，则$(C_1X+C_2Y)\sim \mathbf N(C_1\mu_1+C_2\mu_2,C_1^2\sigma_1^2+C_2^2\sigma_2^2+2C_1C_2\sigma_1\sigma_2\rho)$</p>
+<p><strong>离散卷积公式</strong>：$P\{Z=k\}=\sum\limits_{i}P\{X=i\}P\{Y=k-i\}=\sum\limits_{i}P\{X=k-i\}P\{Y=i\}$</p>
+<p><strong>离散r.v.函数的分布</strong>：对于$Z=g(X,Y)$，$P\{Z=z_k\}=\sum\limits_{g(x_i,y_j)=z_k}p(x_i,y_i)$</p>
+<p><strong>r.v.商的分布</strong>：$(X,Y)\sim f(x,y)$，$Z=\frac{X}{Y}$，$F_Z(z)=P\{\frac{x}{y}\leq z\}=\iint\limits_{\frac{x}{y}\leq z}f(x,y)dxdy$</p>
+<p>$F_Z(z)=\int_{0}^{\infty}\int_{-\infty}^{yz}f(x,y)dxdy+\int_{-\infty}^{0}\int_{yz}^{\infty}f(x,y)dxdy$</p>
+<p>设$u=x/y$，$dx=ydu$</p>
+<p>$F_Z(z)=\int_{0}^{\infty}\int_{-\infty}^{z}f(uy,y)ydudy+\int_{-\infty}^{0}\int_{z}^{-\infty}f(uy,y)ydudy$</p>
+<p>$F_Z(z)=\int_{-\infty}^{z}\int_{0}^{\infty}f(uy,y)ydydu+\int_{z}^{-\infty}\int_{-\infty}^{0}f(uy,y)ydydu=\int_{-\infty}^{z}\int_{-\infty}^{\infty}f(uy,y)|y|dydu$</p>
+<p>求导得$f_Z(z)=\int_{-\infty}^{\infty}f(zy,y)|y|dy$</p>
+<p><strong>Jacobi行列式</strong>：$J(u, v)=\frac{\partial(x, y)}{\partial(u, v)}=\det\left[ \begin{array}{ll}<br>\frac{\partial x}{\partial u} &amp; \frac{\partial x}{\partial v} \\<br>\frac{\partial y}{\partial u} &amp; \frac{\partial y}{\partial v}<br>\end{array}\right]$</p>
+<p>若连续可微变换$T(u,v)=(x(u,v),y(u,v))$为双射，且$J(u,v)≠0$，则</p>
+<p>$\iint_\Omega f(x,y)dxdy=\iint_{\Omega^{\prime}}f(x(u,v),y(u,v))|J(u,v)|dudv$</p>
+<p>则逆变换$U=g_1(X,Y),V=g_2(X,Y)$的联合密度为：</p>
+<p>$f_{UV}(u,v)=f_{XY}(x(u,v),y(u,v))|J(u,v)|$</p>
+<p><strong>正态分布与线性变换</strong>：</p>
+<p>两个独立标准正态r.v.的线性变换服从二元正态分布。</p>
+<p>更一般地，若两个r.v.的联合分布为二元正态分布，则其非奇异线性变换还是二元正态分布。</p>
+<p><strong>构造生成标准正态分布r.v.</strong>：构造独立r.v. $U_1\sim U[0,1]$，$U_2\sim U[0,1]$</p>
+<p>则$X=\sqrt{-2logU_1}\cos(2\pi U_2)，Y=\sqrt{-2logU_1}\sin(2\pi U_2)$是独立标准正态r.v.</p>
+<h2 id="§3-7-极值和顺序统计量"><a href="#§3-7-极值和顺序统计量" class="headerlink" title="§3.7 极值和顺序统计量"></a>§3.7 极值和顺序统计量</h2><h3 id="r-v-极值的分布"><a href="#r-v-极值的分布" class="headerlink" title="r.v.极值的分布"></a>r.v.极值的分布</h3><p><strong>max分布</strong>：$\{X_n\}$为独立r.v.集，$F_{max}(z)=P\{\bigcap\limits_{i=1}^{n} (X_i\leq z)\}=\prod\limits_{i=1}^{n}F_{X_i}(z)$</p>
+<p><strong>min分布</strong>：$\{X_n\}$为独立r.v.集，$F_{max}(z)=P\{\bigcup\limits_{i=1}^{n} (X_i\leq z)\}=1-\prod\limits_{i=1}^{n}(1-F_{X_i}(z))$</p>
+<p><strong>n个独立同分布r.v.的极值的密度</strong>：$f_{max}(z)=nf(z)[F(z)]^{n-1},\ f_{min}(z)=nf(z)[1-F(z)]^{n-1}$</p>
+<p>指数分布的<strong>串联系统</strong>仍服从指数分布，失效率为各部件失效率之和。</p>
+<p><strong>顺序统计量$X_{(k)}$的密度</strong>：$f_k(x)=\frac{n!}{(k-1)!(n-k)!}f(x)F^{k-1}(x)[1-F(x)]^{n-k}$</p>
+<p>若$X_i\sim \mathbf U[0,1]$且相互独立，则$X_{(k)}\sim \mathbf{Beta}(k,n-k+1)$</p>
+<h1 id="Chapter-4"><a href="#Chapter-4" class="headerlink" title="Chapter 4"></a>Chapter 4</h1><h2 id="§4-1-随机变量的期望"><a href="#§4-1-随机变量的期望" class="headerlink" title="§4.1 随机变量的期望"></a>§4.1 随机变量的期望</h2><p><strong>数学期望(离散型)</strong>：</p>
+<p>若级数$\sum\limits_{k=1}^{\infty}|x_k|p_k&lt;+\infty$，则数学期望$E(x)\overset{\Delta}=\sum\limits_{k=1}^{\infty}x_kp_k=\sum\limits_{k=1}^{\infty}x_kP\{X=x_k\}$</p>
+<p>否则无法说明级数$\sum\limits_{k=1}^{\infty}x_kp_k$收敛，期望不存在</p>
+<p><strong>数学期望(连续型)</strong>：</p>
+<p>r.v.$X$的cdf为$f(x)$，若$\int_{-\infty}^{\infty}|x|f(x)dx&lt;+\infty$，则数学期望$E(x)=\int_{-\infty}^{\infty}xf(x)dx$</p>
+<p>否则$\int_{-\infty}^{\infty}|x|f(x)dx=+\infty$，期望不存在(标准柯西分布：$f(x)=\frac{1}{\pi(1+x^2)}$)</p>
+<p><strong>Markov不等式</strong>：</p>
+<p>r.v.$X$非负，且$E(X)$存在，则$P\{X\ge t\}\leq\frac{E(X)}{t}$</p>
+<p><strong>函数的期望</strong>：</p>
+<p>对于普通函数$y=g(x)$，其期望$E(Y)=E(g(X))=\sum\limits_{k=1}^{\infty}g(x_k)p_k$ 或 $\int_{-\infty}^{\infty}g(x)f(x)dx$</p>
+<p>对于二元函数$z=g(x,y)$，其期望$E(Z)=E(g(X,Y))=\sum\limits_{i=1}^{\infty}\sum\limits_{j=1}^{\infty}g(x_i,y_j)p_{ij}$或$\int_{-\infty}^{\infty}\int_{-\infty}^{\infty}g(x,y)f(x,y)dxdy$</p>
+<p><strong>数学期望的基本性质</strong>：</p>
+<ul>
+<li>设$a\leq X\leq b\ (a.e)$，则$a\leq E(X)\leq b$</li>
+<li>对于常数$c$，$E(cX)=cE(X)$</li>
+<li>对于r.v. $X,Y$，$E(X+Y)=E(X)+E(Y)$</li>
+<li>对于<strong>独立</strong>r.v. $X,Y$，$E(XY)=E(X)E(Y)$</li>
+</ul>
+<p><strong>数学期望的几个推论</strong>：</p>
+<ul>
+<li>若$X=c\ (a.e)$，则$E(X)=c$</li>
+<li>线性组合的期望等于期望的线性组合</li>
+<li>$\{X_n\}$相互独立，则$E(\prod\limits_{k=1}^{n}X_k)=\prod\limits_{k=1}^{n}E(X_k)$</li>
+</ul>
+<p><strong>超几何分布等式</strong>：$N$件产品，$M$件次品，摸出次品个数的期望值(前置证明：每次摸中次品概率相同)</p>
+<p>$\sum\limits_{k=0}^{n}k\frac{C^k_MC^{n-k}_{N-M}}{C^n_N}=\frac{nM}{N}$</p>
+<h2 id="§4-2-方差与标准差"><a href="#§4-2-方差与标准差" class="headerlink" title="§4.2 方差与标准差"></a>§4.2 方差与标准差</h2><p><strong>方差</strong>：$Var(X)\overset{\Delta}=E[(X-E(X))^2]$</p>
+<p><strong>标准差</strong>：$\sqrt{Var(X)}$</p>
+<p><strong>方差的计算</strong>：$Var(X)=E(X^2)-[E(X)]^2$</p>
+<p><strong>方差的基本性质</strong>：</p>
+<ul>
+<li>$X=c\ (a.e)⇌Var(X)=0$</li>
+<li>对于常数$a,b$，$Var(aX±b)=a^2Var(X)$</li>
+<li>对于r.v. $X,Y$，$Var(X±Y)=Var(X)+Var(Y)±2E[(X-E(x))(Y-E(Y)]$</li>
+<li>对于相互独立的$\{X_n\}$，$Var(\sum\limits_{k=1}^{n}X_i)=\sum\limits_{k=1}^{n}Var(X_i)$</li>
+</ul>
+<p><strong>正态r.v.的标准化</strong>：$X\sim \mathbf N(\mu,\sigma^2)$，$X^\star=\frac{X-\mu}{\sigma}$，$X^\star\sim \mathbf N(0,1)$</p>
+<p><strong>Chebyshev不等式</strong>：</p>
+<p>期望$\mu$、方差$\sigma^2$均存在，则$\forallε&gt;0$，有$P\{|X-\mu|\ge ε\}\leq\frac{\sigma^2}{ε^2}$</p>
+<p>证明用Markov不等式，$Y=(X-\mu)^2$，$E(Y)=\sigma^2$</p>
+<h2 id="§4-3-协方差与相关系数"><a href="#§4-3-协方差与相关系数" class="headerlink" title="§4.3 协方差与相关系数"></a>§4.3 协方差与相关系数</h2><p><strong>协方差</strong>：$Cov(X,Y)\overset{\Delta}=E[(X-E(X))(Y-E(Y))]=E(XY)-E(X)E(Y)$</p>
+<p><strong>协方差的基本性质</strong></p>
+<ul>
+<li><p>若r.v. $X,Y$相互独立，则$Cov(X,Y)=0$，但协方差为0不一定独立</p>
+</li>
+<li><p>$Cov(X,Y)=Cov(Y,X)$，$Cov(X,X)=Var(X)$</p>
+</li>
+<li><p>$Var(X±Y)=Var(X)+Var(Y)±2Cov(X,Y)$</p>
+</li>
+<li><p>双线性性：</p>
+<ul>
+<li><p>$Cov(aX,bY)=abCov(X,Y)$</p>
+</li>
+<li><p>$Cov(X_1+X_2,Y)=Cov(X_1,Y)+Cov(X_2,Y)$</p>
+</li>
+<li><p>$U=a+\sum\limits_{i=1}^{n}b_iX_i$，$V=c+\sum\limits_{j=1}^{m}d_jY_j$，则</p>
+<p>$Cov(U,V)=\sum\limits_{i=1}^{n}\sum\limits_{j=1}^{m}b_id_jCov(X_i,Y_j)$</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>相关系数</strong>：$\rho_{XY}\overset{\Delta}=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$，$|\rho_{XY}|\leq1$，取等当且仅当$Y\overset{a.e}=a+bX$</p>
+<p><strong>均方误差</strong>：对于线性近似$\widehat Y=a+bX$，均方误差$e=E[(Y-\widehat Y)^2]$</p>
+<p>$e_{min}=Var(Y)(1-\rho^2_{XY})$，此时$b_0=\frac{Cov(X,Y)}{Var(X)}$，$a_0=E(Y)-b_0E(X)$</p>
+<p><strong>相关</strong>：正相关，负相关，不相关。不相关不一定独立，独立一定不相关。</p>
+<p><strong>协方差矩阵</strong>：对于n维r.v.$\{X_n\}$，记$c_{ij}=Cov(X_i,X_j)\ (i,j=1,2,\cdots,n)$</p>
+<p>将$c_{ij}$写成矩阵的形式$C$，则称其为$\{X_n\}$的协方差矩阵。协方差矩阵为<strong>非负定对称阵</strong>。</p>
+<p><strong>n维正态r.v.</strong>：令</p>
+<script type="math/tex; mode=display">X=\left[\begin{array}{c}
+x_{1} \\
+x_{2} \\
+\vdots \\
+x_{n}
+\end{array}\right], \quad \mu=\left[\begin{array}{c}
+\mu_{1} \\
+\mu_{2} \\
+\vdots \\
+\mu_{n}
+\end{array}\right], \quad C=\left[\begin{array}{cccc}
+c_{11} & c_{12} & \cdots & c_{1 n} \\
+c_{21} & c_{22} & \cdots & c_{2 n} \\
+\vdots & \vdots & \ddots & \vdots \\
+c_{n 1} & c_{n 2} & \cdots & c_{n n}
+\end{array}\right]</script><p>其中$C$为n阶正定矩阵，若n维r.v.$\{X_n\}$的密度函数为</p>
+<p>$f\left(x_{1}, x_{2}, \cdots, x_{n}\right)=\frac{1}{(2 \pi)^{n / 2}|C|^{1 / 2}} \exp \left\{-\frac{1}{2}(X-\mu)^{T} C^{-1}(X-\mu)\right\}$</p>
+<p>则称$\{X_n\}$服从参数为$(\mu,C)$的n维正态分布，记为$(X_1,X_2,\cdots,X_n)\sim \mathbf N(\mu,C)$。</p>
+<p><strong>n维正态r.v.的重要性质</strong>：</p>
+<ul>
+<li><p>$\mu$称为均值向量，$C$为协方差矩阵，对角线为对应r.v.方差。</p>
+</li>
+<li><p>$X_i\sim\mathbf N(\mu_i,c_{ii}),\ (i=1,2,\cdots,n)$，反之若$\{X_n\}$相互独立且$X_i\sim\mathbf N(\mu_i,\sigma_i^2),\ (i=1,2,\cdots,n)$，则</p>
+<p>$\{X_n\}\sim\mathbf N(\mu,C)$，其中$\mu=[\mu1\ \mu2\ …\ \mu_n]^T$，$C=diag\{\sigma_1^2\ \sigma_2^2\ …\ \sigma_n^2\ \}$</p>
+</li>
+<li><p>若$\{X_n\}\sim\mathbf N(\mu,C)$，则$\{X_n\}$的任一线性组合$\sum\limits_{k=1}^{n}l_iX_i$服从一维正态分布</p>
+</li>
+<li><p>正态r.v.的线性变换不变性：若$\{X_n\}\sim\mathbf N(\mu,C)$</p>
+<p>$\left\{\begin{array}{c}<br>Y_{1}=a_{11} X_{1}+a_{12} X_{2}+\cdots+a_{1 n} X_{n} \\<br>Y_{2}=a_{21} X_{1}+a_{22} X_{2}+\cdots+a_{2 n} X_{n} \\<br>\quad \vdots \\<br>Y_{m}=a_{m 1} X_{1}+a_{m 2} X_{2}+\cdots+a_{m n} X_{n}<br>\end{array}\right.$</p>
+<p>则$\{Y_m\}$仍服从多维正态分布。</p>
+</li>
+</ul>
+<h2 id="§4-4-条件期望"><a href="#§4-4-条件期望" class="headerlink" title="§4.4 条件期望"></a>§4.4 条件期望</h2><p>不考，不过明明是很重要的内容来着。</p>
+<h2 id="§4-x-常用分布的分布及数字特征"><a href="#§4-x-常用分布的分布及数字特征" class="headerlink" title="§4.x 常用分布的分布及数字特征"></a>§4.x 常用分布的分布及数字特征</h2><p><img src="https://s2.loli.net/2022/12/30/xOTFlhpsguVoaZD.jpg" alt="常用分布的分布及数字特征.jpg"  /></p>
+<h1 id="Chapter-5"><a href="#Chapter-5" class="headerlink" title="Chapter 5"></a>Chapter 5</h1><h2 id="§5-1-大数定律"><a href="#§5-1-大数定律" class="headerlink" title="§5.1 大数定律"></a>§5.1 大数定律</h2><p><strong>依概率收敛</strong>：</p>
+<p>设$\xi,\xi_1,\xi_2,\cdots,\xi_n,…$是一系列r.v.，若$\forall\varepsilon&gt;0$，有$\lim\limits_{n→\infty}P\{|\xi_n-\xi|\ge \varepsilon\}=0$，则称$\{\xi_n\}$依概率收敛于$\xi$，记为$\xi_{n} \stackrel{P}{\longrightarrow} \xi $。</p>
+<ul>
+<li>$\lim\limits_{n→\infty}P\{|\xi_n-\xi|\ge \varepsilon\}=0⇌\lim\limits_{n→\infty}P\{|\xi_n-\xi|&lt; \varepsilon\}=1$</li>
+<li>随着n的增大，绝对误差$|\xi_n-\xi|$较大的可能性越来越小</li>
+<li>若$\xi_{n} \stackrel{P}{\longrightarrow} \xi$，$g$是连续函数，则$g(\xi_{n}) \stackrel{P}{\longrightarrow} g(\xi) $</li>
+</ul>
+<p><strong>几乎处处收敛(了解)</strong>：</p>
+<p>若r.v.列$\{\xi_n\}$满足$\forall\varepsilon&gt;0$，$P\{\lim\limits_{n→\infty}|\xi_n-\xi|&lt;\varepsilon\}=1$，则称$\{\xi_n\}$几乎处处收敛于$\xi$，记为$\xi_n\stackrel{a.s.}{\longrightarrow}\xi$或$\xi_n→\xi,\ a.s.$</p>
+<p><strong>伯努利大数定律</strong>：</p>
+<p>设$n_A$是n次独立重复实验中事件$A$发生的次数，且$P(A)=p$，则$\forall\varepsilon&gt;0$，有$\lim\limits_{n→\infty}P\{|\frac{n_A}{n}-p|\ge \varepsilon\}=0$</p>
+<p><strong>切比雪夫大数定律</strong>：</p>
+<p>$\{X_n\}$为独立r.v.列，且具有相同的期望$\mu$和方差$\sigma^2$，则$\forall\varepsilon&gt;0$有$\lim\limits_{n→\infty}P\{|\frac{1}{n}\sum\limits_{i=1}^{n}X_i-\mu|\ge\varepsilon\}=0$，即$\bar X_n \stackrel{P}{\longrightarrow} \mu$，可由Chebyshev不等式证明：$P\left(\left|\bar{X}_{n}-\mu\right|&gt;\varepsilon\right) \leq \frac{\operatorname{Var}\left(\bar{X}_{n}\right)}{\varepsilon^{2}}=\frac{\sigma^{2}}{n \varepsilon^{2}} \rightarrow 0,$</p>
+<p><strong>辛钦大数定律(弱大数定律)</strong>：</p>
+<p>$\{X_n\}$是独立同分布r.v.列，期望$\mu$存在，则$\{X_n\}$服从大数定律，$\forall\varepsilon&gt;0$，有$\lim\limits_{n→\infty}P\{|\frac{1}{n}\sum\limits_{i=1}^{n}X_i-\mu|&lt;\varepsilon\}=1$</p>
+<p><strong>强大数定律(了解)</strong>：</p>
+<p>若$\{X_n\}$两两独立且同分布，期望$\mu$存在，则$\bar X_n\stackrel{a.s.}{\longrightarrow}\mu$</p>
+<h2 id="§5-2-中心极限定理"><a href="#§5-2-中心极限定理" class="headerlink" title="§5.2 中心极限定理"></a>§5.2 中心极限定理</h2><p><strong>中心极限定理</strong>：</p>
+<p>若$Z_n=\frac{\sum_{k=1}^{n} X_{k}-\sum_{k=1}^{n} \mu_{k}}{\sqrt{\sum_{k=1}^{n} \sigma_{k}^{2}}}$的分布函数$F_n(x)$对任意$x$满足</p>
+<p>$\begin{aligned}<br>\lim _{n \rightarrow \infty} F_{n}(x) &amp; =\lim _{n \rightarrow \infty} P\left\{\frac{\sum_{k=1}^{n} X_{k}-\sum_{k=1}^{n} \mu_{k}}{\sqrt{\sum_{k=1}^{n} \sigma_{k}^{2}}} \leq x\right\} \\<br>&amp; =\int_{-\infty}^{x} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t=\Phi(x)<br>\end{aligned}$</p>
+<p>则称$\{X_k\}$服从中心极限定理。</p>
+<p><strong>中心极限定理(独立同分布)</strong>：</p>
+<p>$\begin{aligned}<br>\lim _{n \rightarrow \infty} F_{n}(x) &amp; =\lim _{n \rightarrow \infty} P\left\{\frac{\sum_{k=1}^{n} X_{k}-n \mu}{\sqrt{n} \sigma} \leq x\right\} \\<br>&amp; =\int_{-\infty}^{x} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t=\Phi(x)<br>\end{aligned}$</p>
+<p><strong>中心极限定理的实际含义</strong>：</p>
+<p>对于均值为$\mu$，方差$\sigma^2&gt;0$的i.i.d.r.v.列$\{X_n\}$，有$\sum\limits_{k=1}^{n}X_k\overset{近似}\sim\mathbf N(n\mu,n\sigma^2)$，或$\bar X_n\overset{近似}\sim\mathbf N(\mu,\frac{\sigma^2}{n})$</p>
+<p><strong>棣莫弗-拉普拉斯中心极限定理</strong>：</p>
+<p>设$\{\eta_n\}$为服从参数为$n,p(0&lt;p&lt;1)$的二项分布r.v.列，则对任意$x$有</p>
+<p>$\lim _{n \rightarrow \infty} P\left\{\frac{\eta_{n}-n p}{\sqrt{n p(1-p)}} \leq x\right\}=\int_{-\infty}^{x} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t=\Phi(x)$</p>
+<p>对于r.v.$\eta_n\sim \mathbf b(n,p)\ (n=1,2,…)$，有$\frac{\eta_{n}-n p}{\sqrt{n p(1-p)}}\overset{近似}\sim\mathbf N(0,1)$，于是当$n$充分大时，可以认为$\eta_n\overset{近似}\sim\mathbf N(np,np(1-p))$</p>
+<h1 id="Chapter-6"><a href="#Chapter-6" class="headerlink" title="Chapter 6"></a>Chapter 6</h1><h2 id="§6-2-数理统计：基本概念"><a href="#§6-2-数理统计：基本概念" class="headerlink" title="§6.2 数理统计：基本概念"></a>§6.2 数理统计：基本概念</h2><p><strong>简单随机抽样</strong>：</p>
+<p>在相同条件下对总体$X$进行$n$次重复、独立观察。要求各次取样结果互不影响，每次取出的样品与总体有相同的分布，满足这两条性质的样本称为简单随机样本。</p>
+<p><strong>样本均值</strong>：$\bar X=\frac{1}{n}\sum\limits_{i=1}^{n}X_i$</p>
+<p><strong>样本方差</strong>：$S^2=\frac{1}{n-1}\sum\limits_{i=1}^{n}(X_i-\bar X)^2$</p>
+<p><strong>样本标准差</strong>：$S=\sqrt{\frac{1}{n-1}\sum\limits_{i=1}^{n}(X_i-\bar X)^2}$</p>
+<p><strong>样本k阶矩</strong>：$A_k=\frac{1}{n}\sum\limits_{i=1}^{n}X_i^k$</p>
+<p><strong>样本k阶中心距</strong>：$B_k=\frac{1}{n}\sum\limits_{i=1}^{n}(X_i-\bar X)^k$</p>
+<p><strong>顺序统计量</strong>：$X_{(1)},X_{(2)},\cdots,X_{(n)}$</p>
+<p><strong>极小值</strong>：$X_{(1)}=min\{X_1,X_2,\cdots,X_n\}$</p>
+<p><strong>极大值</strong>：$X_{(n)}=max\{X_1,X_2,\cdots,X_n\}$</p>
+<p><strong>样本矩的特征</strong>：设$\{X_n\}$为来自总体$X\sim F(x)$的样本，总体k阶矩$\mu_k\overset{\Delta}=E(X^k)$都存在，则</p>
+<ul>
+<li>$X_1^k,X_2^k,\cdots,X_n^k$独立，与$X^k$同分布</li>
+<li>$E(A_k)=\frac{1}{n}\sum\limits_{i=1}^{n}E(X_i^k)=\frac{1}{n}\sum\limits_{i=1}^{n}E(X^k)=\mu_k$</li>
+<li>由辛钦大数定律，$n→\infty$时，$A_k\stackrel{P}{\longrightarrow}\mu_k$，连续函数$g(A_1,A_2,\cdots,A_k)\stackrel{P}{\longrightarrow}g(\mu_1,\mu_2,\cdots,\mu_k)$</li>
+</ul>
+<p><strong>样本均值与样本方差的数字特征</strong>：$E(\bar X)=\mu$，$Var(\bar X)=\frac{\sigma^2}{n}$，$E(S^2)=\sigma^2$</p>
+<h2 id="§6-3-抽样分布"><a href="#§6-3-抽样分布" class="headerlink" title="§6.3 抽样分布"></a>§6.3 抽样分布</h2><p><strong>$\chi^2$-分布</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(0,1)$的样本，令</p>
+<script type="math/tex; mode=display">\mathcal {X}^2=X_1^2+X_2^2+\cdots+X_n^2</script><p>称$\mathcal {X}^2$服从自由度为$n$的$\chi^2$-分布，记为$\mathcal {X}^2\sim\chi^2(n)$。</p>
+<p><strong>$\chi^2$-分布的可加性</strong>：</p>
+<p>设$\chi_1^2\sim\chi^2(n_1)$，$\chi_2^2\sim\chi^2(n_2)$且相互独立，则$\chi_1^2+\chi_2^2\sim\chi^2(n_1+n_2)$</p>
+<p><strong>$\chi^2$-分布的数字特征</strong>：</p>
+<p>设$\chi^2\sim\chi^2(n)$，则$E(\chi^2)=n$，$Var(\chi^2)=2n$</p>
+<p><strong>$t$-分布</strong>：</p>
+<p>设$X\sim\mathbf N(0,1)$，$Y\sim\chi^2(n)$，且$X,Y$相互独立，令</p>
+<script type="math/tex; mode=display">t=\frac{X}{\sqrt{Y/n}}</script><p>称$t$服从自由度为$n$的$t$-分布，记为$t\sim t(n)$。当$n$较大时，可以认为$t(n)=N(0,1)$</p>
+<p><strong>$F$-分布</strong>：</p>
+<p>设$U\sim\chi^2(n_1)$，$V\sim\chi^2(n_2)$，且$U,V$相互独立，令</p>
+<script type="math/tex; mode=display">F=\frac{U/n_1}{V/n_2}</script><p>称$F$服从自由度为$(n_1,n_2)$的$F$-分布，记为$F\sim F(n_1,n_2)$</p>
+<p><strong>$F$-分布的性质</strong>：</p>
+<ul>
+<li>若$F\sim F(n_1,n_2)$，则$\frac{1}{F}\sim F(n_2,n_1)$</li>
+<li>若$T\sim t(n)$，则$T^2\sim F(1,n)$。($t$-分布的平方服从$F$-分布)</li>
+</ul>
+<p><strong>$\alpha$分位点</strong>：</p>
+<p>设$X\sim f(x)$，若$\forall0&lt;\alpha&lt;1$，存在常数$x_\alpha$满足</p>
+<script type="math/tex; mode=display">P\{X\leq x_\alpha\}=\int_{-\infty}^{x_\alpha}f(x)dx=\alpha</script><p>则称$x_\alpha$为分布密度$f(x)$的$\alpha$分位点，也即$F(X_\alpha)=\alpha$</p>
+<ul>
+<li>$\mathbf N(0,1)$的$\alpha$分位点记为$u_\alpha$</li>
+<li>$t(n)$的$\alpha$分位点记为$t_\alpha(n)$</li>
+<li>$\chi^2(n)$的$\alpha$分位点记为$\chi^2_\alpha(n)$</li>
+<li>$F(n_1,n_2)$的$\alpha$分位点记为$F_\alpha(n_1,n_2)$</li>
+<li>三反公式：$F_\alpha(n_1,n_2)=\frac{1}{F_{1-\alpha}(n_2,n_1)}$</li>
+</ul>
+<p><strong>抽样分布定理一</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(\mu,\sigma^2)$的样本，则$\bar X\sim\mathbf N(\mu,\frac{\sigma^2}{n})$</p>
+<p><strong>抽样分布定理二</strong>：</p>
+<ol>
+<li>$\bar X$，$S^2$相互独立</li>
+<li>$\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)$</li>
+</ol>
+<p><strong>抽样分布定理三</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(\mu,\sigma^2)$的样本，则</p>
+<script type="math/tex; mode=display">\frac{\bar X-\mu}{S/\sqrt{n}}\sim t(n-1)</script><p><strong>抽样分布定理四</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是总体$X\sim\mathbf N(\mu_1,\sigma_1^2)$的样本；$Y_1,Y_2,\cdots,Y_m$是总体$Y\sim\mathbf N(\mu_2,\sigma_2^2)$的样本，且两样本相互独立，两样本均值和样本方差分别为$\bar X,\bar Y,S_1^2,S_2^2$，则</p>
+<script type="math/tex; mode=display">\frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2}\sim F(n-1,m-1)</script><p><strong>抽样分布定理五</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是总体$X\sim\mathbf N(\mu_1,\sigma_1^2)$的样本；$Y_1,Y_2,\cdots,Y_m$是总体$Y\sim\mathbf N(\mu_2,\sigma_2^2)$的样本，且两样本相互独立，两样本均值和样本方差分别为$\bar X,\bar Y,S_1^2,S_2^2$，则</p>
+<script type="math/tex; mode=display">\frac{(\bar X-\bar Y)-(\mu_1-\mu_2)}{S_\omega\sqrt{\frac{1}{n}+\frac{1}{m}}}\sim t(n+m-2)</script><p>其中$S_\omega^2=\frac{(n-1)S_1^2+(m-1)S_2^2}{n+m-2}$，$S_\omega=\sqrt{S_\omega^2}$</p>
+<p><strong>指数分布与$\chi^2$-分布</strong>：自由度为2的$\chi^2$-分布就是参数为$\frac 1 2$的指数分布</p>
+<h1 id="Chapter-7"><a href="#Chapter-7" class="headerlink" title="Chapter 7"></a>Chapter 7</h1><h2 id="§7-1-点估计"><a href="#§7-1-点估计" class="headerlink" title="§7.1 点估计"></a>§7.1 点估计</h2><p><strong>矩估计法</strong>：</p>
+<p>设总体$X\sim F(x;\theta_1,\theta_2,\cdots,\theta_m)$，其中$\theta_1,\theta_2,\cdots,\theta_m$为未知参数，$X_1,X_2,\cdots,X_n$为来自总体$X$的样本，设总体矩$\mu_k=E(X^k)\ (k=1,2,\cdots,m)$都存在，则$\mu_k$是$\theta_1,\theta_2,\cdots,\theta_m$的函数。</p>
+<p>由辛钦大数定律，样本k阶矩$A_k\stackrel{P}{\longrightarrow}\mu_k,\ n→\infty\ (k=1,2,\cdots,m)$</p>
+<p>从而可以使用$A_k$估计$\mu_k$，进而得到$\theta$的估计。</p>
+<ol>
+<li>设$\mu_i=\mu_i(\theta_1,\theta_2,\cdots,\theta_m),\ i=1,2,\cdots,m$</li>
+<li>反解方程组得$\theta_i=\theta_i(\mu_1,\mu_2,\cdots,\mu_m),\ i=1,2,\cdots,m$</li>
+<li>用样本矩代替总体矩，得到矩估计$\widehat \theta_i=\widehat\theta_i(A_1,A_2,\cdots,A_m),\ i=1,2,\cdots,m$</li>
+<li>若$\widehat\theta$是位置参数$\theta$的据估计，则$g(\theta)$的矩估计为$g(\widehat\theta)$。</li>
+</ol>
+<p><strong>二阶矩估计的结论</strong>：</p>
+<p>用$A_1,A_2$代替$\mu_1,\mu_2$，得到$\mu$和$\sigma^2$的矩估计量分别为：</p>
+<p>$\widehat \mu=A_1=\bar X$</p>
+<p>$\widehat \sigma^2=A_2-A_1^2=\frac{n-1}{n}S^2\overset{\Delta}=\widetilde S^2$，称为修正的样本方差。</p>
+<p><strong>最大似然估计(MLE)</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim f(x;\theta)$的样本，令</p>
+<script type="math/tex; mode=display">L(\theta)=L(\theta;X_1,X_2,\cdots,X_n)=\prod\limits_{i=1}^{n}f(X_i;\theta)</script><p>$L(\theta)$称为<strong>似然函数</strong>，若存在统计量$\widehat\theta=\widehat\theta(X_1,X_2,\cdots,X_n)$使得$L(\widehat\theta)=\max\limits_{\theta\in\Theta}L(\theta;x_1,x_2,\cdots,x_)$，则称其为$\theta$的最大似然估计(MLE)。</p>
+<p><strong>最大似然估计常见求法</strong>：</p>
+<ol>
+<li>求似然函数，构建(对数)似然方程组</li>
+<li>对各未知参数求偏导，使其偏导为0</li>
+<li>求解(对数)似然方程组，得到MLE</li>
+</ol>
+<p>在似然函数不可导时，回到原始定义，即找到让似然函数值最大的$\widehat\theta$即可</p>
+<h2 id="§7-2-估计量的评价标准"><a href="#§7-2-估计量的评价标准" class="headerlink" title="§7.2 估计量的评价标准"></a>§7.2 估计量的评价标准</h2><p><strong>无偏性</strong>：</p>
+<p>若估计量$\widehat\theta=\widehat\theta(X_1,X_2,\cdots,X_n)$的数学期望存在，且$\forall\theta\in\Theta$有$E_\theta(\widehat\theta)=\theta$，则称$\widehat\theta$为$\theta$的无偏估计</p>
+<p>，否则为有偏估计。</p>
+<p>称$b_n(\widehat\theta)=E_\theta(\widehat\theta)-\theta$为估计量$\widehat\theta$的偏差，若$\lim\limits_{n→\infty}b_n(\widehat\theta)=0$，则$\widehat\theta$为$\theta$的渐进无偏估计。</p>
+<p>对任意总体$X$，若期望$\mu$与方差$\sigma^2$存在，则$\widehat\mu=\bar X$，$\widehat\sigma^2=S^2$都是无偏估计，而修正后的样本方差$\widetilde S^2$是$\sigma^2$的渐进无偏估计。</p>
+<p>同一参数的不同无偏估计的线性组合(总比例为1)还是无偏估计。</p>
+<p><strong>估计量的均方误差</strong>：</p>
+<p>设$\widehat\theta(X_1,X_2,\cdots,X_n)$为待估参数$\theta$的估计量，称$E_\theta(\widehat\theta-\theta)^2$为$\widehat\theta$的均方误差。</p>
+<p>$E_\theta(\widehat\theta-\theta)^2=Var(\widehat\theta)+[E(\widehat\theta)-\theta]^2$</p>
+<p><strong>有效性</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是总体$X\sim F(x,\theta);\theta\in\Theta$的样本，</p>
+<script type="math/tex; mode=display">\widehat\theta_1=\widehat\theta_1(X_1,X_2,\cdots,X_n),\widehat\theta_2=\widehat\theta_2(X_1,X_2,\cdots,X_n)</script><p>都是$\theta$的无偏估计，即$E(\widehat\theta_1)=E(\widehat\theta_2)=\theta\ (\forall\theta\in\Theta)$。若$\forall\theta\in\Theta$有$Var(\widehat\theta_1)\leq Var(\widehat\theta_2)$，则称$\widehat\theta_1$较$\widehat\theta_2$有效。</p>
+<p><strong>相合性(一致性)</strong>：</p>
+<p>设$\widehat\theta_n=\widehat\theta(X_1,X_2,\cdots,X_n)$是位置参数$\theta$的点估计，若$\forall\theta\in\Theta$满足：$\forall\varepsilon&gt;0$有</p>
+<script type="math/tex; mode=display">\lim\limits_{n→\infty}P\{|\widehat\theta_n-\theta|\ge \varepsilon\}=0</script><p>即$\widehat\theta_n\stackrel{P}{\longrightarrow}\theta\ (n→\infty)$，则称$\widehat\theta_n$是$\theta$相合估计。</p>
+<p>对任意总体$X$，若期望$\mu$与方差$\sigma^2$存在，则$\widehat\mu=\bar X$，$\widehat\sigma^2=S^2$都是相合估计。</p>
+<p><strong>关于相合估计的一般结论</strong>：</p>
+<ul>
+<li><p>由辛钦大数定律，$\theta$的矩估计$\widehat\theta$是相合估计</p>
+</li>
+<li><p>$\theta$的MLE$\widehat\theta$一般也是相合估计</p>
+</li>
+<li><p>$\theta$的相合估计不一定是无偏估计</p>
+</li>
+<li><p>若$\widehat\theta$是$\theta$的无偏估计，则由Chebyshev不等式有</p>
+<script type="math/tex; mode=display">P\{|\widehat\theta-\theta|\ge \varepsilon\}\leq \frac{Var(\widehat\theta)}{\varepsilon^2}</script><p>故当$\lim\limits_{n→\infty}Var(\widehat\theta)=0$时，$\widehat\theta$是$\theta$的相合估计(充分条件)</p>
+</li>
+</ul>
+<h2 id="§7-3-区间估计"><a href="#§7-3-区间估计" class="headerlink" title="§7.3 区间估计"></a>§7.3 区间估计</h2><p><strong>区间估计</strong>：</p>
+<p>设总体$X\sim F(x;\theta)\ (\theta\in\Theta)$。若对给定的$0&lt;\alpha&lt;1$，存在两个统计量</p>
+<script type="math/tex; mode=display">\underline\theta=\underline\theta(X_1,X_2,\cdots,X_n),\ \overline\theta=\overline\theta(X_1,X_2,\cdots,X_n)\ (\underline\theta\leq \overline\theta)</script><p>使得$\forall\theta\in\Theta$，有</p>
+<script type="math/tex; mode=display">P\{\underline\theta\leq \theta\leq \overline\theta\}\ge 1-\alpha</script><p>则称随机区间$(\underline\theta,\overline\theta)$为$\theta$的置信水平为$1-\alpha$的<strong>置信区间</strong>，$\underline\theta,\overline\theta$分别称为<strong>置信下限</strong>和<strong>置信上限</strong>。</p>
+<p>$1-\alpha$置信区间的含义是随机区间$[\underline\theta,\overline\theta]$至少以$1-\alpha$的概率套住$\theta$的真值。</p>
+<ul>
+<li><p>可靠性：置信度$1-\alpha$应尽量大，即要求估计尽量可信(可靠)。</p>
+</li>
+<li><p>精确性：区间长度应尽量小，即估计的精度要尽可能地高。</p>
+</li>
+<li>上述两个要求是相互矛盾的：先保证可靠性，在此前提下尽可能提高精度。</li>
+</ul>
+<p><strong>求未知参数置信区间的一般过程</strong>：</p>
+<ul>
+<li><p>找出参数$\theta$的一个较好的点估计$\widehat\theta=T(X_1,X_2,\cdots,X_n)$。</p>
+</li>
+<li><p>找出枢轴量函数$W(T,\theta)$，使得$W$的分布不依赖于未知参数</p>
+</li>
+<li><p>对于给定置信水平$1-\alpha$定出两个常数$a,b$使得</p>
+<script type="math/tex; mode=display">P\{a\leq W(T,\theta)\leq b\}=1-\alpha</script></li>
+<li><p>根据等价形式得到$\underline\theta\leq \theta\leq \overline\theta$，则$[\underline\theta,\overline\theta]$就是$\theta$的一个置信水平为$1-\alpha$的置信区间</p>
+</li>
+</ul>
+<p><strong>单正态总体参数的区间估计</strong>：</p>
+<p>单个正态总体$X\sim \mathbf N(\mu,\sigma^2)$，$X_1,X_2,\cdots,X_n$是一个样本。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">待估参数</th>
+<th style="text-align:center">其他参数</th>
+<th style="text-align:center">枢轴量及其分布</th>
+<th style="text-align:center">置信区间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$\mu$</td>
+<td style="text-align:center">$\sigma^2$已知</td>
+<td style="text-align:center">$\frac{\bar X-\mu}{\sigma/\sqrt n}\sim \mathbf N(0,1)$</td>
+<td style="text-align:center">$\left [\bar X-\frac{\sigma}{\sqrt n}u_{1-\frac{\alpha}{2}},\bar X+\frac{\sigma}{\sqrt n}u_{1-\frac{\alpha}{2}}\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\mu$</td>
+<td style="text-align:center">$\sigma^2$未知</td>
+<td style="text-align:center">$\frac{\bar X-\mu}{S/\sqrt n}\sim t(n-1)$</td>
+<td style="text-align:center">$\left[\bar{X}-\frac{S}{\sqrt{n}} t_{1-\frac{\alpha}{2}}(n-1), \bar{X}+\frac{S}{\sqrt{n}} t_{1-\frac{\alpha}{2}}(n-1)\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\sigma^2$</td>
+<td style="text-align:center">$\mu$已知</td>
+<td style="text-align:center">$\sum\limits_{i=1}^{n}(\frac{X_i-\mu}{\sigma})^2\sim \chi^2(n)$</td>
+<td style="text-align:center">$\left[\frac{\sum\limits_{i=1}^n (X_i-\mu)^2}{\chi^2_{1-{\alpha\over 2}}(n)},\frac{\sum\limits_{i=1}^n (X_i-\mu)^2}{\chi^2_{\alpha\over 2}(n)}\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\sigma^2$</td>
+<td style="text-align:center">$\mu$未知</td>
+<td style="text-align:center">$\frac{(n-1)S^2}{\sigma^2}\sim \chi^2(n-1)$</td>
+<td style="text-align:center">$\left[\frac{(n-1) S^{2}}{\chi_{1-{\alpha\over  2} }^{2}(n-1)}, \frac{(n-1) S^{2}}{\chi_{\alpha \over 2}^{2}(n-1)}\right]$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>双正态总体参数的区间估计</strong>：</p>
+<p>正态总体$\mathbf N(\mu_1,\sigma_1^2)$和$\mathbf N(\mu_2,\sigma_2^2)$的两组相互独立的样本$X_1,X_2,\cdots,X_m$和$Y_1,Y_2,\cdots,Y_n$。</p>
+<p>样本均值和样本方差分别是$\bar X,S_1^2$和$\bar Y,S_2^2$，记$S_\omega^2=\frac{\left(m-1\right) S_{1}^{2}+\left(n-1\right) S_{2}^{2}}{\left(m+n-2\right)}$。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">待估参数</th>
+<th style="text-align:center">其他参数</th>
+<th style="text-align:center">枢轴量及其分布</th>
+<th style="text-align:center">置信区间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$\mu_1-\mu_2$</td>
+<td style="text-align:center">$\sigma_1^2,\sigma_2^2$已知</td>
+<td style="text-align:center">$\frac{\bar{X}-\bar{Y}-\left(\mu_{1}-\mu_{2}\right)}{\sqrt{\frac{\sigma_{1}^{2}}{n_{1}}+\frac{\sigma_{2}^{2}}{n_{2}}}} \sim \mathbf N(0,1)$</td>
+<td style="text-align:center">$\left[\bar{X}-\bar{Y}- \sqrt{\frac{\sigma_{1}^{2}}{m}+\frac{\sigma_{2}^{2}}{n}}u_{1-\frac{\alpha}{2}}, \bar{X}-\bar{Y}+\sqrt{\frac{\sigma_{1}^{2}}{m}+\frac{\sigma_{2}^{2}}{n}}u_{1-\frac{\alpha}{2}}\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\mu_1-\mu_2$</td>
+<td style="text-align:center">$\sigma_1^2=\sigma_2^2$未知</td>
+<td style="text-align:center">$\frac{\bar{X}-\bar{Y}-\left(\mu_{1}-\mu_{2}\right)}{S_{\omega} \sqrt{\frac{1}{n_{1}}+\frac{1}{n_{2}}}} \sim t\left(n_{1}+n_{2}-2\right)$</td>
+<td style="text-align:center">$\left[(\bar{X}-\bar{Y}) - S_{\omega} \sqrt{\frac{1}{m}+\frac{1}{n}}t_{1-\frac{\alpha}{2}}(m+n-2),(\bar{X}-\bar{Y}) + S_{\omega} \sqrt{\frac{1}{m}+\frac{1}{n}}t_{1-\frac{\alpha}{2}}(m+n-2)\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">${\sigma_1^2}/{\sigma_2^2}$</td>
+<td style="text-align:center">$\mu_1,\mu_2$未知</td>
+<td style="text-align:center">$\frac{S_{1}^{2}}{S_{2}^{2}} \cdot \frac{\sigma_{2}^{2}}{\sigma_{1}^{2}} \sim F\left(n_{1}-1, n_{2}-1\right)$</td>
+<td style="text-align:center">$\left[\frac{S_{1}^{2}}{S_{2}^{2}} \cdot \frac{1}{F_{1-\frac{\alpha}{2}}\left(m-1, n-1\right)}, \frac{S_{1}^{2}}{S_{2}^{2}} \cdot \frac{1}{F_{\frac{\alpha}{2}}\left(m-1, n-1\right)}\right]$</td>
+</tr>
+<tr>
+<td style="text-align:center">${\sigma_1^2}/{\sigma_2^2}$</td>
+<td style="text-align:center">$\mu_1,\mu_2$已知</td>
+<td style="text-align:center">$\frac{\sum_{i=1}^{n_{1}}\left(\frac{X_{i}-\mu_{1}}{\sigma_{1}}\right)^{2} / n_{1}}{\sum_{i=1}^{n_{2}}\left(\frac{Y_{i}-\mu_{2}}{\sigma_{2}}\right)^{2} / n_{2}} \sim F\left(n_{1}, n_{2}\right)$</td>
+<td style="text-align:center">$\left[\frac{\sum\limits_{i=1}^{m}\left(X_{i}-\mu_{1}\right)^{2} / m}{\sum\limits_{i=1}^{n}\left(X_{i}-\mu_{2}\right)^{2} / n} \cdot \frac{1}{F_{1-\frac{\alpha}{2}}(m, n)}, \frac{\sum\limits_{i=1}^{m}\left(X_{i}-\mu_{1}\right)^{2} / m}{\sum\limits_{i=1}^{n}\left(X_{i}-\mu_{2}\right)^{2} / n} \cdot \frac{1}{F_{\frac{\alpha}{2}}(m, n)}\right]$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><del>这玩意能背下来就有鬼了= =</del></p>
+<p><strong>单侧置信区间</strong>：</p>
+<p>将上表中的区间两端值取出，将$\frac{\alpha}{2}$全部更换为$\alpha$，即可得到置信水平为$1-\alpha$的单侧置信限。</p>
+<p><strong>大样本下非正态总体参数的区间估计</strong>：</p>
+<p>根据中心极限定理，当$n$充分大时有$\frac{\bar X-\mu}{\sigma/\sqrt n}\overset{近似}\sim\mathbf N(0,1)$</p>
+<p>然后把$\mu$和$\sigma^2$用参数代回，按标准正态得到置信区间，解不等式得到参数的区间估计。</p>
+<p><img src="https://s2.loli.net/2022/12/31/LhebI7dEgq9fz3N.png" alt="image.png" style="zoom:50%;" /></p>
+<h1 id="Chapter-8"><a href="#Chapter-8" class="headerlink" title="Chapter 8"></a>Chapter 8</h1><h2 id="§8-1-假设检验概述"><a href="#§8-1-假设检验概述" class="headerlink" title="§8.1 假设检验概述"></a>§8.1 假设检验概述</h2><p><strong>建立假设</strong>：</p>
+<p>对问题提出原假设(零假设)，记为$H_0$，其对立面称为对立假设(备择假设)，记为$H_1$或$H_\alpha$。</p>
+<p>原假设一般有符号$=$，$\leq$或$\ge$。</p>
+<p>假设检验就是要根据样本判断是否拒绝$H_0$。</p>
+<ul>
+<li>双侧假设检验：$H_0:\theta=\theta_0$，$H_1:\theta\ne\theta_0$</li>
+<li>右侧检验：$H_0:\theta\leq \theta_0$，$H_1:\theta&gt;\theta_0$</li>
+<li>左侧检验：$H_0:\theta\geq \theta_0$，$H_1:\theta&lt;\theta_0$</li>
+</ul>
+<p><strong>检验统计量</strong>：由样本对原假设进行检验总是通过一个统计量完成，称为检验统计量。</p>
+<p><strong>拒绝域</strong>：使原假设被拒绝的样本所组成的区域称为拒绝域，即拒绝$H_0$的样本值的取值区域，其补集称为接受域。</p>
+<p><strong>第一类错误</strong>：在原假设$H_0$为真的情况下拒绝$H_0$，一般设置为更严重的错误。</p>
+<p><strong>第二类错误</strong>：在原假设$H_0$为假的情况下接受$H_0$。</p>
+<p><strong>显著性检验</strong>：控制犯第一类错误的概率在一个较小的数$\alpha$以内，倾向于保护$H_0$</p>
+<p>显著性检验倾向于“宁可错杀也不可放过$H_0$”，一般原假设也是依此选定：</p>
+<ul>
+<li><p>判断病人得两种病中的哪种，需要控制把重症误判成轻症的错误率，因此倾向于把轻症$H_1$判成重症$H_0$，而非把重症$H_0$当轻症$H_1$放过。</p>
+</li>
+<li><p>想检验某结论成立，应提出$H_0$：结论不成立，然后说明样本取值在拒绝域内，即概率反证法。</p>
+<p>e.g. 是否有显著提高？$H_0$：没有显著提高，代入数据若能拒绝$H_0$说明确实有显著提高。</p>
+</li>
+</ul>
+<p>“如果连$H_0$都保护不住的结论，其真实性势必应当受到怀疑。”</p>
+<h2 id="§8-2-正态总体参数的假设检验"><a href="#§8-2-正态总体参数的假设检验" class="headerlink" title="§8.2 正态总体参数的假设检验"></a>§8.2 正态总体参数的假设检验</h2><p><strong>双边u检验法</strong>：</p>
+<p>已知$\sigma_0^2$，关于$H_0:\mu=\mu_0$的检验问题</p>
+<p>拒绝域：$|\bar X-\mu_0|$的值偏大，Ⅰ类风险$P_{H_0}\left\{\frac{|\bar X-\mu_0|}{\sigma_0/\sqrt n}&gt;u_{1-\frac{\alpha}{2}}\right\}=\alpha$</p>
+<p><strong>单边u检验法</strong>：</p>
+<ol>
+<li><p>已知$\sigma_0^2$，关于$H_0:\mu\leq\mu_0$的检验问题</p>
+<p>拒绝域：$\bar X-\mu_0$的值偏大，Ⅰ类风险$P_{H_0}\left\{\frac{\bar X-\mu_0}{\sigma_0/\sqrt n}&gt;u_{1-\alpha}\right\}=\alpha$</p>
+</li>
+<li><p>已知$\sigma_0^2$，关于$H_0:\mu\geq\mu_0$的检验问题</p>
+<p>拒绝域：$\bar X-\mu_0$的值偏小，Ⅰ类风险$P_{H_0}\left\{\frac{\bar X-\mu_0}{\sigma_0/\sqrt n}&lt;u_{\alpha}\right\}=\alpha$</p>
+</li>
+</ol>
+<p><strong>双边t检验法</strong>：</p>
+<p>未知$\mu,\sigma^2$，关于$H_0:\mu=\mu_0$的检验问题</p>
+<p>拒绝域：$|\bar X-\mu_0|$的值偏大，Ⅰ类风险$P_{H_0}\left\{\frac{|\bar X-\mu_0|}{S/\sqrt n}&gt;t_{1-\frac{\alpha}{2}}(n-1)\right\}=\alpha$</p>
+<p><strong>单边t检验法</strong>：</p>
+<ol>
+<li><p>未知$\mu,\sigma^2$，关于$H_0:\mu\leq\mu_0$的检验问题</p>
+<p>拒绝域：$\bar X-\mu_0$的值偏大，Ⅰ类风险$P_{H_0}\left\{\frac{\bar X-\mu_0}{S/\sqrt n}&gt;t_{1-\alpha}(n-1)\right\}=\alpha$</p>
+</li>
+<li><p>未知$\mu,\sigma^2$，关于$H_0:\mu\geq\mu_0$的检验问题</p>
+<p>拒绝域：$\bar X-\mu_0$的值偏小，Ⅰ类风险$P_{H_0}\left\{\frac{\bar X-\mu_0}{S/\sqrt n}&lt;t_{\alpha}(n-1)\right\}=\alpha$</p>
+</li>
+</ol>
+<p><strong>双边$\chi^2$检验法</strong>：</p>
+<p>未知$\mu,\sigma^2$，关于$H_0:\sigma^2=\sigma_0^2$的检验问题</p>
+<p>拒绝域：$S^2$不在$\sigma_0^2$附近波动或幅度太大，Ⅰ类风险$P_{H_0}\left\{\frac{(n-1)S^2}{\sigma_0^2}&lt;\chi^2_{\frac{\alpha}{2}}(n-1)\ or\ \frac{(n-1)S^2}{\sigma_0^2}&gt;\chi^2_{1-\frac{\alpha}{2}}(n-1)\right\}=\alpha$</p>
+<p>已知$\mu$未知$\sigma^2$，关于$H_0:\sigma^2=\sigma_0^2$的检验问题</p>
+<p>拒绝域：$P_{H_0}\left\{\frac{1}{\sigma_0^2}\sum\limits_{i=1}^{n}(X_i-\mu)^2&lt;\chi^2_{\frac{\alpha}{2}}(n)\ or\ \frac{1}{\sigma_0^2}\sum\limits_{i=1}^{n}(X_i-\mu)^2&gt;\chi^2_{1-\frac{\alpha}{2}}(n)\right\}=\alpha$</p>
+<p><strong>单边$\chi^2$检验法</strong>：</p>
+<ol>
+<li><p>未知$\mu,\sigma^2$，关于$H_0:\sigma^2\leq\sigma_0^2$的检验问题</p>
+<p>拒绝域：$P_{H_0}\left\{\frac{(n-1)S^2}{\sigma_0^2}&gt;\chi^2_{1-\alpha}(n-1)\right\}=\alpha$</p>
+</li>
+<li><p>未知$\mu,\sigma^2$，关于$H_0:\sigma^2\geq\sigma_0^2$的检验问题</p>
+<p>拒绝域：$P_{H_0}\left\{\frac{(n-1)S^2}{\sigma_0^2}&lt;\chi^2_{\alpha}(n-1)\right\}=\alpha$</p>
+</li>
+<li><p>已知$\mu$未知$\sigma^2$，关于$H_0:\sigma^2\leq\sigma_0^2$的检验问题</p>
+<p>拒绝域：$P_{H_0}\left\{\frac{1}{\sigma_0^2}\sum\limits_{i=1}^{n}(X_i-\mu)^2&gt;\chi^2_{1-\alpha}(n-1)\right\}=\alpha$</p>
+</li>
+<li><p>已知$\mu$未知$\sigma^2$，关于$H_0:\sigma^2\leq\sigma_0^2$的检验问题</p>
+<p>拒绝域：$P_{H_0}\left\{\frac{1}{\sigma_0^2}\sum\limits_{i=1}^{n}(X_i-\mu)^2&lt;\chi^2_{\alpha}(n-1)\right\}=\alpha$</p>
+</li>
+</ol>
+<p><strong>双总体均值差的检验</strong>：</p>
+<p>已知$\sigma_1^2,\sigma_2^2$，$U=\frac{\bar X-\bar Y-\delta}{\sqrt{\frac{\sigma_1^2}{n}+\frac{\sigma_2^2}{m}}}\sim \mathbf N(0,1)$</p>
+<ol>
+<li><p>关于$H_0:\mu_1-\mu_2=\delta$的检验问题，拒绝域$|U|\ge u_{1-\frac \alpha 2}$</p>
+</li>
+<li><p>关于$H_0:\mu_1-\mu_2\ge\delta$的检验问题，拒绝域$U\leq u_\alpha$</p>
+</li>
+<li><p>关于$H_0:\mu_1-\mu_2\le\delta$的检验问题，拒绝域$U\geq u_{1-\alpha}$</p>
+</li>
+</ol>
+<p>未知$\sigma_1^2,\sigma_2^2$但$\sigma_1^2=\sigma_2^2$，$T=\frac{\bar X-\bar Y-\delta}{\sqrt{\frac{1}{n}+\frac{1}{m}}S_\omega}\sim T(n+m-2)$，其中$S_\omega=\sqrt \frac{\left(n-1\right) S_{1}^{2}+\left(m-1\right) S_{2}^{2}}{\left(n+m-2\right)}$</p>
+<ol>
+<li><p>关于$H_0:\mu_1-\mu_2=\delta$的检验问题，拒绝域$|T|\ge t_{1-\frac \alpha 2}(n+m-2)$</p>
+</li>
+<li><p>关于$H_0:\mu_1-\mu_2\ge\delta$的检验问题，拒绝域$T\leq t_\alpha(n+m-2)$</p>
+</li>
+<li><p>关于$H_0:\mu_1-\mu_2\le\delta$的检验问题，拒绝域$T\geq t_{1-\alpha}(n+m-2)$</p>
+</li>
+</ol>
+<p><strong>双总体方差比的检验</strong>：</p>
+<p>未知$\mu_1,\mu_2$，$F=\frac{S_1^2}{S_2^2}\sim F(n-1,m-1)$</p>
+<ol>
+<li><p>关于$H_0:\sigma_1^2=\sigma_2^2$的检验问题，拒绝域$F\ge F_{1-\frac{\alpha}{2}}(n-1,m-1)$或$F\le F_{\frac \alpha 2}(n-1,m-1)$</p>
+</li>
+<li><p>关于$H_0:\sigma_1^2\ge \sigma_2^2$的检验问题，拒绝域$F\le F_\alpha(n-1,m-1)$</p>
+</li>
+<li>关于$H_0:\sigma_1^2\le \sigma_2^2$的检验问题，拒绝域$F\ge F_{1-\alpha}(n-1,m-1)$</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Probability-Statistics/" rel="tag"># Probability & Statistics</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/01/10/MA212_Probability_Statistics_Midterm/" rel="prev" title="MA212 概率论与数理统计 半期复习">
+      <i class="fa fa-chevron-left"></i> MA212 概率论与数理统计 半期复习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/03/30/%E5%AD%A6%E9%95%BF%E5%9B%A2%E4%BC%9A%E8%AE%AE22-6-17/" rel="next" title="6.17 概览与前瞻">
+      6.17 概览与前瞻 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script>
+  const gitalk = new Gitalk({
+    clientID: '79118b0b29b4170f24af',
+    clientSecret: '48ee47026d13b8a3a954b2b089ea320510282527',
+    repo: 'GuTaoZi.github.io',      // The repository of store comments,
+    owner: 'GuTaoZi',
+    admin: ['GuTaoZi'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+  </script>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">写在前面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-3"><span class="nav-number">2.</span> <span class="nav-text">Chapter 3</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-6-%E8%81%94%E5%90%88%E5%88%86%E5%B8%83%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E5%87%BD%E6%95%B0"><span class="nav-number">2.1.</span> <span class="nav-text">§3.6 联合分布随机变量函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A73-7-%E6%9E%81%E5%80%BC%E5%92%8C%E9%A1%BA%E5%BA%8F%E7%BB%9F%E8%AE%A1%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">§3.7 极值和顺序统计量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#r-v-%E6%9E%81%E5%80%BC%E7%9A%84%E5%88%86%E5%B8%83"><span class="nav-number">2.2.1.</span> <span class="nav-text">r.v.极值的分布</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-4"><span class="nav-number">3.</span> <span class="nav-text">Chapter 4</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-1-%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%9C%9F%E6%9C%9B"><span class="nav-number">3.1.</span> <span class="nav-text">§4.1 随机变量的期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-2-%E6%96%B9%E5%B7%AE%E4%B8%8E%E6%A0%87%E5%87%86%E5%B7%AE"><span class="nav-number">3.2.</span> <span class="nav-text">§4.2 方差与标准差</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-3-%E5%8D%8F%E6%96%B9%E5%B7%AE%E4%B8%8E%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">§4.3 协方差与相关系数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-4-%E6%9D%A1%E4%BB%B6%E6%9C%9F%E6%9C%9B"><span class="nav-number">3.4.</span> <span class="nav-text">§4.4 条件期望</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A74-x-%E5%B8%B8%E7%94%A8%E5%88%86%E5%B8%83%E7%9A%84%E5%88%86%E5%B8%83%E5%8F%8A%E6%95%B0%E5%AD%97%E7%89%B9%E5%BE%81"><span class="nav-number">3.5.</span> <span class="nav-text">§4.x 常用分布的分布及数字特征</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-5"><span class="nav-number">4.</span> <span class="nav-text">Chapter 5</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-1-%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B"><span class="nav-number">4.1.</span> <span class="nav-text">§5.1 大数定律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A75-2-%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86"><span class="nav-number">4.2.</span> <span class="nav-text">§5.2 中心极限定理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-6"><span class="nav-number">5.</span> <span class="nav-text">Chapter 6</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A76-2-%E6%95%B0%E7%90%86%E7%BB%9F%E8%AE%A1%EF%BC%9A%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">5.1.</span> <span class="nav-text">§6.2 数理统计：基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A76-3-%E6%8A%BD%E6%A0%B7%E5%88%86%E5%B8%83"><span class="nav-number">5.2.</span> <span class="nav-text">§6.3 抽样分布</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-7"><span class="nav-number">6.</span> <span class="nav-text">Chapter 7</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A77-1-%E7%82%B9%E4%BC%B0%E8%AE%A1"><span class="nav-number">6.1.</span> <span class="nav-text">§7.1 点估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A77-2-%E4%BC%B0%E8%AE%A1%E9%87%8F%E7%9A%84%E8%AF%84%E4%BB%B7%E6%A0%87%E5%87%86"><span class="nav-number">6.2.</span> <span class="nav-text">§7.2 估计量的评价标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A77-3-%E5%8C%BA%E9%97%B4%E4%BC%B0%E8%AE%A1"><span class="nav-number">6.3.</span> <span class="nav-text">§7.3 区间估计</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Chapter-8"><span class="nav-number">7.</span> <span class="nav-text">Chapter 8</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A78-1-%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C%E6%A6%82%E8%BF%B0"><span class="nav-number">7.1.</span> <span class="nav-text">§8.1 假设检验概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%C2%A78-2-%E6%AD%A3%E6%80%81%E6%80%BB%E4%BD%93%E5%8F%82%E6%95%B0%E7%9A%84%E5%81%87%E8%AE%BE%E6%A3%80%E9%AA%8C"><span class="nav-number">7.2.</span> <span class="nav-text">§8.2 正态总体参数的假设检验</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>

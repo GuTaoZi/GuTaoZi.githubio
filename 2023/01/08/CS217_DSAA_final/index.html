@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="复习再多，考试想不出来就是想不出来(。_。;)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS217 数据结构与算法分析 期末复习">
+<meta property="og:url" content="https://gutaozi.github.io/2023/01/08/CS217_DSAA_final/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="复习再多，考试想不出来就是想不出来(。_。;)">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/guLBibrv59NMZxQ.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/23DTsghj8wN7ZGF.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/H5OqWMoCKBQJN6k.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/Jls7Ym8nPtUubDe.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/L3ChUQbcRn1JkTs.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/iBv9AzLkywRgYu7.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/g2XKiwVMCQnkjtD.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/TQvS3cqBDfjxd8I.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/inEZaeqVXT1F4BD.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/uPpn5dhbofysRlq.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/k3pjNxn8EP4W7zs.png">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2019/03/countingSort.gif">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2019/03/radixSort.gif">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2019/03/Bucket_sort_1.svg_.png">
+<meta property="og:image" content="https://www.runoob.com/wp-content/uploads/2019/03/Bucket_sort_2.svg_.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/ZFqiK73UmcgL69T.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/SuFQyIO9J7kwRea.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/p1g4YT6nEUXZoFA.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/IRKWd4758mvjXpb.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/KExkrpRCdsSX3z2.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/m6Xb14INu9FPVLz.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/zetLS1yVfwFIPqs.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/kxRLO5YAUwJXFj2.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/07/8lW4O3DwILt5iad.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/08/183xdOHumtvXn2P.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/08/LICKz3nltBhc8Tx.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/08/k48ZqQhlP23gJnj.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/08/QCciM1UtHqRp3LT.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/08/kARudvoBUrhEZac.png">
+<meta property="article:published_time" content="2023-01-08T08:29:02.000Z">
+<meta property="article:modified_time" content="2023-01-08T08:29:02.000Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/01/07/guLBibrv59NMZxQ.png">
+
+<link rel="canonical" href="https://gutaozi.github.io/2023/01/08/CS217_DSAA_final/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CS217 数据结构与算法分析 期末复习 | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/01/08/CS217_DSAA_final/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS217 数据结构与算法分析 期末复习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-01-08 16:29:02" itemprop="dateCreated datePublished" datetime="2023-01-08T16:29:02+08:00">2023-01-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">复习再多，考试想不出来就是想不出来(。_。;)</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">Algorithm visualization</a></p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>Incremental technique, Recursive technique</p>
+<p>Divide-and-conquer Strategy</p>
+<p>Iteration, Recursion</p>
+<h2 id="Algorithm-Analysis"><a href="#Algorithm-Analysis" class="headerlink" title="Algorithm Analysis"></a>Algorithm Analysis</h2><p><img src="https://s2.loli.net/2023/01/07/guLBibrv59NMZxQ.png" alt="image.png" style="zoom:50%;" /></p>
+<p>CPU Basic (atomic) operations</p>
+<ul>
+<li>Initialization</li>
+<li>Arithmetic</li>
+<li>Comparison / Branching</li>
+<li>Memory Access</li>
+</ul>
+<p>Cost analysis, Correctness analysis</p>
+<p>Pseudocode</p>
+<p>Binary Search Algorithm</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//end state: l&gt;r, answer registered as ans</span></span><br><span class="line"><span class="keyword">while</span> (l&lt;=r)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">check</span>(mid))</span><br><span class="line">    &#123;</span><br><span class="line">        ans=mid;</span><br><span class="line">        r=mid<span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> l=mid+<span class="number">1</span>;</span><br><span class="line">&#125;<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,ans);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//end state: l==r, answer=l=r</span></span><br><span class="line"><span class="keyword">while</span> (l&lt;r)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">check</span>(mid)) r=mid</span><br><span class="line">    <span class="keyword">else</span> l=mid+<span class="number">1</span>;</span><br><span class="line">&#125;<span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,l); </span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//The smallest element no less than key</span></span><br><span class="line"><span class="type">int</span> l=<span class="number">1</span>,r=n;<span class="keyword">while</span> (l&lt;r)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> mid=(l+r)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (a[mid]&gt;=key) r=mid; </span><br><span class="line">    <span class="keyword">else</span> l=mid+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> l;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//The greatest element no greater than key</span></span><br><span class="line"><span class="type">int</span> l=<span class="number">1</span>,r=n;<span class="keyword">while</span> (l&lt;r)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> mid=(l+r+<span class="number">1</span>)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (a[mid]&lt;=key) l=mid; </span><br><span class="line">    <span class="keyword">else</span> r=mid<span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> l;</span><br></pre></td></tr></table></figure>
+<p>Big-O Notation</p>
+<p><img src="https://s2.loli.net/2023/01/07/23DTsghj8wN7ZGF.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Big-Ω Notation</p>
+<p><img src="https://s2.loli.net/2023/01/07/H5OqWMoCKBQJN6k.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Big-Θ Notation</p>
+<p><img src="https://s2.loli.net/2023/01/07/Jls7Ym8nPtUubDe.png" alt="image.png" style="zoom:50%;" /></p>
+<h2 id="Sorting"><a href="#Sorting" class="headerlink" title="Sorting"></a>Sorting</h2><p>Selection sort</p>
+<p><img src="https://s2.loli.net/2023/01/07/L3ChUQbcRn1JkTs.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Insertion sort</p>
+<p><img src="https://s2.loli.net/2023/01/07/iBv9AzLkywRgYu7.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Bubble sort</p>
+<p><img src="https://s2.loli.net/2023/01/07/g2XKiwVMCQnkjtD.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Merge sort</p>
+<p><img src="https://s2.loli.net/2023/01/07/TQvS3cqBDfjxd8I.png" alt="image.png" style="zoom:50%;" /></p>
+<p><img src="https://s2.loli.net/2023/01/07/inEZaeqVXT1F4BD.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Matser Theorem</p>
+<p><img src="https://s2.loli.net/2023/01/07/uPpn5dhbofysRlq.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Quick sort</p>
+<p>Worst $O(n^2)$, Expected $O(n\log n)$</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">quickSort</span>(<span class="params">arr, left, right</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> len = arr.<span class="property">length</span>,</span><br><span class="line">        partitionIndex,</span><br><span class="line">        left = <span class="keyword">typeof</span> left != <span class="string">&#x27;number&#x27;</span> ? <span class="number">0</span> : left,</span><br><span class="line">        right = <span class="keyword">typeof</span> right != <span class="string">&#x27;number&#x27;</span> ? len - <span class="number">1</span> : right;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (left &lt; right) &#123;</span><br><span class="line">        partitionIndex = <span class="title function_">partition</span>(arr, left, right);</span><br><span class="line">        <span class="title function_">quickSort</span>(arr, left, partitionIndex-<span class="number">1</span>);</span><br><span class="line">        <span class="title function_">quickSort</span>(arr, partitionIndex+<span class="number">1</span>, right);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> arr;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">partition</span>(<span class="params">arr, left ,right</span>) &#123;     <span class="comment">// 分区操作</span></span><br><span class="line">    <span class="keyword">var</span> pivot = left,                      <span class="comment">// 设定基准值（pivot）</span></span><br><span class="line">        index = pivot + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = index; i &lt;= right; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> (arr[i] &lt; arr[pivot]) &#123;</span><br><span class="line">            <span class="title function_">swap</span>(arr, i, index);</span><br><span class="line">            index++;</span><br><span class="line">        &#125;        </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="title function_">swap</span>(arr, pivot, index - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> index-<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//javascript version from runoob.com</span></span><br></pre></td></tr></table></figure>
+<p>$e_i$ and $e_j$ are compared IFF either one is the first among $e_i, e_{i+1},\cdots, e_j$ picked as a pivot.</p>
+<p><img src="https://s2.loli.net/2023/01/07/k3pjNxn8EP4W7zs.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Complexity Summary</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Sort</th>
+<th style="text-align:center">Average Time Complexity</th>
+<th style="text-align:center">Space Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Selection</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(1)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Insertion</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(1)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Bubble</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(1)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Heap</td>
+<td style="text-align:center">$O(n\log n)$</td>
+<td style="text-align:center">$O(1)$</td>
+</tr>
+<tr>
+<td style="text-align:center">Merge</td>
+<td style="text-align:center">$O(n\log n)$</td>
+<td style="text-align:center">Depends</td>
+</tr>
+<tr>
+<td style="text-align:center">Quick</td>
+<td style="text-align:center">$O(n\log n)$</td>
+<td style="text-align:center">$O(1)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1iK4y1a7BU">Shell sort</a></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">shell_sort</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> len)</span> &#123;</span><br><span class="line">        <span class="type">int</span> gap, i, j;</span><br><span class="line">        <span class="type">int</span> temp;</span><br><span class="line">        <span class="keyword">for</span> (gap = len &gt;&gt; <span class="number">1</span>; gap &gt; <span class="number">0</span>; gap &gt;&gt;= <span class="number">1</span>)</span><br><span class="line">                <span class="keyword">for</span> (i = gap; i &lt; len; i++) &#123;</span><br><span class="line">                        temp = arr[i];</span><br><span class="line">                        <span class="keyword">for</span> (j = i - gap; j &gt;= <span class="number">0</span> &amp;&amp; arr[j] &gt; temp; j -= gap)</span><br><span class="line">                                arr[j + gap] = arr[j];</span><br><span class="line">                        arr[j + gap] = temp;</span><br><span class="line">                &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Counting sort</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2019/03/countingSort.gif" style="zoom:50%;" /></p>
+<p>Radix sort</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2019/03/radixSort.gif" style="zoom:50%;" /></p>
+<p>Bucket sort</p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2019/03/Bucket_sort_1.svg_.png"  /></p>
+<p><img src="https://www.runoob.com/wp-content/uploads/2019/03/Bucket_sort_2.svg_.png"  /></p>
+<h2 id="Linked-List"><a href="#Linked-List" class="headerlink" title="Linked List"></a>Linked List</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Time Complexity</th>
+<th>Space Complexity</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insert</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>Delete</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>Find</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+</tr>
+<tr>
+<td>Update</td>
+<td>$O(n)$</td>
+<td>$O(1)$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Double linked list</p>
+<p>Circular linked list</p>
+<h2 id="Stack-amp-Queue"><a href="#Stack-amp-Queue" class="headerlink" title="Stack &amp; Queue"></a>Stack &amp; Queue</h2><h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><p>First In Last Out</p>
+<p><img src="https://s2.loli.net/2023/01/07/ZFqiK73UmcgL69T.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Applications: Delimiters balance problem, Evaluating arithmetic expressions, The runtime stack in memory</p>
+<p>Prefix/Infix/Postfix expression</p>
+<h3 id="Queue"><a href="#Queue" class="headerlink" title="Queue"></a>Queue</h3><p>First In First Out</p>
+<p><img src="https://s2.loli.net/2023/01/07/SuFQyIO9J7kwRea.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Ring queue</p>
+<p><img src="https://s2.loli.net/2023/01/07/p1g4YT6nEUXZoFA.png" alt="image.png" style="zoom:50%;" /></p>
+<p>All operations above takes $O(1)$ time complexity.</p>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><h3 id="String-matching"><a href="#String-matching" class="headerlink" title="String matching"></a>String matching</h3><p>Brute Force $O(mn)$</p>
+<p><img src="https://s2.loli.net/2023/01/07/IRKWd4758mvjXpb.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Rabin-Karp Algorithm $O(mn)$</p>
+<p><img src="https://s2.loli.net/2023/01/07/KExkrpRCdsSX3z2.png" alt="image.png" style="zoom:50%;" /></p>
+<p>KMP $O(m+n)$</p>
+<p><img src="https://s2.loli.net/2023/01/07/m6Xb14INu9FPVLz.png" alt="image.png" style="zoom:50%;" /></p>
+<p><img src="https://s2.loli.net/2023/01/07/zetLS1yVfwFIPqs.png" alt="image.png" style="zoom:50%;" /></p>
+<h3 id="FSA"><a href="#FSA" class="headerlink" title="FSA"></a>FSA</h3><ul>
+<li>$Q$, a set of states</li>
+<li>$q_0\in Q$, the start state</li>
+<li>$A\subseteq Q$, the accepting states</li>
+<li>$\Sigma$, the input alphabet</li>
+<li>$\delta$, the transition function $Q\times \Sigma→Q$</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/01/07/kxRLO5YAUwJXFj2.png" alt="image.png" style="zoom:50%;" /></p>
+<h2 id="Tree"><a href="#Tree" class="headerlink" title="Tree"></a>Tree</h2><p>Internal nodes, leaf nodes, root</p>
+<p>(proper) ancestor, descendant</p>
+<p>Path, Depth, Level, Height</p>
+<p>(full, complete) k-ary tree</p>
+<p>preorder, inorder, postorder traversal</p>
+<p>Character Encoding &amp; Huffman Tree</p>
+<p><img src="https://s2.loli.net/2023/01/07/8lW4O3DwILt5iad.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Given a Huffman tree, it includes at least 2 nodes, assume node $u$ and node $v$ have the top-2 lowest frequencies, then</p>
+<ol>
+<li>node $u$ and $v$ have the same parent node</li>
+<li>$depth(u)$ and $depth(v) \ge depth(x)$, where node $x$ is any leaf node in the Huffman tree.</li>
+</ol>
+<p>Huffman encoding is the optimum prefix code, i.e., the space cost is minimized.<a target="_blank" rel="noopener" href="http://home.cse.ust.hk/faculty/golin/COMP271Sp03/Notes/MyL17.pdf">Proof</a></p>
+<ol>
+<li>A tree with $n$ nodes with $n-1$ edges</li>
+</ol>
+<ul>
+<li>For each non-root node v, it has one and only one edge point to itself. </li>
+<li>A tree with n nodes, thus the number of non-root nodes is n-1.</li>
+<li>Thus, this tree has n-1 edges.</li>
+</ul>
+<ol>
+<li>Let $T$ be a tree where every internal node has at least 2 child nodes. If $m$ is the number of leaf nodes, then the number of internal nodes is at most $m-1$.</li>
+</ol>
+<ul>
+<li>Suppose internal node $v$ has $x_v$ child nodes </li>
+<li>The average child nodes of each internal node is $x$ </li>
+<li>It has $m$ leaf nodes, thus it has $m/x$ parent nodes at most, i.e., they are parent of leaf nodes. </li>
+<li>For $m/x$ internal nodes, it has at most $m/x^2$ parents. </li>
+<li>For $m/x^2$ internal nodes, it has at most $m/x^3$ parents. </li>
+<li>… </li>
+<li>The total number of internal nodes is $m/x + m/x^2 + … + 1$</li>
+<li>It is at most m-1. </li>
+</ul>
+<ol>
+<li>A complete binary tree with $n ≥ 2$ nodes has height $O(\log n)$</li>
+</ol>
+<ul>
+<li>Suppose the height is $h$. </li>
+<li>The number of nodes at each level: </li>
+<li>Level 0: $2^0 = 1$, Level 1: $2^1 = 2 $</li>
+<li>Level 2: $2^2 = 4$, Level 3: $2^3 = 8$</li>
+<li>… </li>
+<li>Level $h-1$: $2^(h-1)$, Level $h$: $x (x \ge 1) $</li>
+<li>Thus, $2^0 + 2^1 + … 2^{h-1} + x = n$</li>
+<li>$(1-2^{h-1})/(1-2) = n-x → 2^{h-1} &lt; n $</li>
+<li>Thus, $h = O(\log n)$</li>
+</ul>
+<h2 id="Advanced-Binary-Trees"><a href="#Advanced-Binary-Trees" class="headerlink" title="Advanced Binary Trees"></a>Advanced Binary Trees</h2><h3 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h3><ul>
+<li>Complete binary tree</li>
+<li>$O(n)$ space consumption </li>
+<li>$O(\log n)$ insertion time </li>
+<li>$O(\log n)$ delete-min time</li>
+</ul>
+<p>Suppose that node $u$ of $T$ is stored at $A[i]$. Then, the left child of $u$ is stored at $A[2i]$, and the right child at $A[2i+1]$.</p>
+<p>Suppose that node $u$ of $T$ is stored at $A[i]$. Then, the parent of $u$ is stored at $A[ \left \lfloor i/2 \right \rfloor ]$.</p>
+<p>Root-fix operation: Build a heap with $O(n)$ time.</p>
+<p>$O(\sum\limits_{i=0}^{h-1}(h-i)\times2^i)=O(2^h)=O(n)$</p>
+<h3 id="Binary-Search-Tree"><a href="#Binary-Search-Tree" class="headerlink" title="Binary Search Tree"></a>Binary Search Tree</h3><p>predecessor($\max\{a[i]\le q\}$), successor($\min\{a[i]\ge q\}$): $O(h)$</p>
+<p>↙↘↘↘↘↘，↘↙↙↙↙↙</p>
+<p>Insert: $O(h)$</p>
+<p><img src="https://s2.loli.net/2023/01/08/183xdOHumtvXn2P.png" alt="image.png" style="zoom: 40%;" /></p>
+<p>Delete: $O(h)$</p>
+<p><img src="https://s2.loli.net/2023/01/08/LICKz3nltBhc8Tx.png" alt="image.png" style="zoom:50%;" /></p>
+<h3 id="BBST"><a href="#BBST" class="headerlink" title="BBST"></a>BBST</h3><p>For every internal node $u$ of $T$, the height of the left subtree of $u$ differs from that the right subtree of $u$ by at most 1.</p>
+<p>Proof: A balanced binary tree with $n$ nodes has height $O(\log n)$.</p>
+<p>To construct a BBST with greatest height using $n$ nodes, each internal node should has subtrees that differ 1 in height. Denote $f(h)$ as the least number of nodes of a BBST with height $h$, then </p>
+<p>$f(1)=1, f(2)=2$</p>
+<p>$f(h)=f(h-1)+f(h-2)+1$</p>
+<p>$f(h)+1=f(h-1)+1+f(h-2)+1$</p>
+<p>$f(h)=\frac{1}{\sqrt 5}[(\frac{1+\sqrt 5}{2})^{h+1}-(\frac{1-\sqrt 5}{2})^{h+1}]-1$</p>
+<p>$n\ge \frac{1}{\sqrt 5}[(\frac{1+\sqrt 5}{2})^{h+1}-(\frac{1-\sqrt 5}{2})^{h+1}]-1$</p>
+<p>$h\le c\log n, h=O(\log n)$</p>
+<p>Insertion time analysis?</p>
+<p>Deletion time analysis?</p>
+<h2 id="Graph"><a href="#Graph" class="headerlink" title="Graph"></a>Graph</h2><p>BFS</p>
+<p>BFS tree, SSSP</p>
+<p>DFS</p>
+<p>DFS tree, Cycle detection, topological sort</p>
+<p><strong>Parenthesis Theorem</strong>: all the following are true: </p>
+<ul>
+<li>If $u$ is a proper ancestor of $v$ in DFS-tree of $T$, then $I(u)$ contains $I(v)$. </li>
+<li>If $u$ is a proper descendant of $v$ in DFS-tree of T, then $I(u)$ is contained in $I(v)$ .</li>
+<li>Otherwise, $I(u)$ and $I(v)$ are disjoint.</li>
+</ul>
+<p><strong>White Path Theorem</strong>: let $u$ be a vertex in $G$. Consider the moment when $u$ is pushed into the stack in the DFS algorithm. Then a vertex $v$ becomes a proper descendant of $u$ in the DFS-forest IFF we can go from $u$ to $v$ by travelling only on white vertices.</p>
+<p><strong>Cycle Theorem</strong>: let $T$ be an arbitrary DFS-forest. $G$ contains a cycle if and only if there is a backward edge with respect to $T$.</p>
+<ul>
+<li>If: trivial</li>
+<li>only if: Suppose the cycle is $v_1 → 𝑣_2 → ⋯ → 𝑣_𝑘 → 𝑣_1$, let $𝑣_𝑖$ be the first to enter the stack. Then by white path theorem, all the other vertices in the cycle must be proper descendants of $𝑣_𝑖$ in the DFS-forest. This means the edge pointing to $𝑣_𝑖$ in the cycle is a backward edge.</li>
+</ul>
+<p>Dijkstra: $O((|V|+|E|)\log |V|)$</p>
+<p><img src="https://s2.loli.net/2023/01/08/k48ZqQhlP23gJnj.png" alt="image.png" style="zoom:40%;" /></p>
+<p>Correctness proof: </p>
+<p><img src="https://s2.loli.net/2023/01/08/QCciM1UtHqRp3LT.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Minimum Spanning Tree (Prim): $O(|V|\log |V|+|E|)$</p>
+<p><img src="https://s2.loli.net/2023/01/08/kARudvoBUrhEZac.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Strongly Connected Components $O(|V|+|E|)$</p>
+<ol>
+<li><p>obtain $G^R$</p>
+</li>
+<li><p>DFS on $G^R$, obtain $L^R$</p>
+</li>
+<li>obtain $L$ by reversing $L^R$</li>
+<li>DFS on $G$ according to $L$</li>
+<li>obtain SCC from DFS-forest</li>
+</ol>
+<p>Correctness proof:</p>
+<ol>
+<li><p>Obtain $G^{SCC}$ by shrinking nodes</p>
+</li>
+<li><p>sink SCC: SCC without in-degree</p>
+</li>
+<li>DFS on $G$ starting from vertices of sink SCC.</li>
+</ol>
+<p>Let $S_1$ , $S_2$ be SCCs such that there is a path from $S_1$ to $S_2$ in $G^SCC$. In the ordering of $L$, the earliest vertex in $S_2$ must come before the earliest vertex in $S_1$</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/01/02/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix_Class/" rel="prev" title="CS205 C/C++ Project05设计报告 矩阵类">
+      <i class="fa fa-chevron-left"></i> CS205 C/C++ Project05设计报告 矩阵类
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/01/09/CS205_C&CPP_quiz/" rel="next" title="CS205 C/C++ Quiz题解析">
+      CS205 C/C++ Quiz题解析 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script>
+  const gitalk = new Gitalk({
+    clientID: '79118b0b29b4170f24af',
+    clientSecret: '48ee47026d13b8a3a954b2b089ea320510282527',
+    repo: 'GuTaoZi.github.io',      // The repository of store comments,
+    owner: 'GuTaoZi',
+    admin: ['GuTaoZi'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+  </script>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Algorithm-Analysis"><span class="nav-number">2.</span> <span class="nav-text">Algorithm Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sorting"><span class="nav-number">3.</span> <span class="nav-text">Sorting</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linked-List"><span class="nav-number">4.</span> <span class="nav-text">Linked List</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Stack-amp-Queue"><span class="nav-number">5.</span> <span class="nav-text">Stack &amp; Queue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">5.1.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Queue"><span class="nav-number">5.2.</span> <span class="nav-text">Queue</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#String"><span class="nav-number">6.</span> <span class="nav-text">String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#String-matching"><span class="nav-number">6.1.</span> <span class="nav-text">String matching</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FSA"><span class="nav-number">6.2.</span> <span class="nav-text">FSA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tree"><span class="nav-number">7.</span> <span class="nav-text">Tree</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Advanced-Binary-Trees"><span class="nav-number">8.</span> <span class="nav-text">Advanced Binary Trees</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Heap"><span class="nav-number">8.1.</span> <span class="nav-text">Heap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-Search-Tree"><span class="nav-number">8.2.</span> <span class="nav-text">Binary Search Tree</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BBST"><span class="nav-number">8.3.</span> <span class="nav-text">BBST</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graph"><span class="nav-number">9.</span> <span class="nav-text">Graph</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>

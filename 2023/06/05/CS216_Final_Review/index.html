@@ -28,7 +28,7 @@
 <meta property="og:description" content="原来算法学了这么多吗(＃°Д°)!">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-05T05:29:55.288Z">
-<meta property="article:modified_time" content="2023-06-05T09:34:08.761Z">
+<meta property="article:modified_time" content="2023-06-05T14:26:21.550Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Algorithm">
 <meta name="twitter:card" content="summary">
@@ -191,7 +191,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-06-05 13:29:55 / 修改时间：17:34:08" itemprop="dateCreated datePublished" datetime="2023-06-05T13:29:55+08:00">2023-06-05</time>
+              <time title="创建时间：2023-06-05 13:29:55 / 修改时间：22:26:21" itemprop="dateCreated datePublished" datetime="2023-06-05T13:29:55+08:00">2023-06-05</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -387,7 +387,7 @@
 <p>最大独立集：NP-complete</p>
 <p>竞争便利店选址问题：PSPACE-complete</p>
 <h3 id="均摊分析"><a href="#均摊分析" class="headerlink" title="均摊分析"></a>均摊分析</h3><p>这是赵老师的Lab课件内容，不过内容还挺重要的，之后再补吧。</p>
-<h2 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h2><h3 id="区间调度"><a href="#区间调度" class="headerlink" title="区间调度"></a>区间调度</h3><p>问题：工作用一系列区间表示，工作不可并行，每个工作等权，最大化截止时间前完成的工作数。</p>
+<h2 id="Chapter-3-贪心"><a href="#Chapter-3-贪心" class="headerlink" title="Chapter 3 - 贪心"></a>Chapter 3 - 贪心</h2><h3 id="区间调度"><a href="#区间调度" class="headerlink" title="区间调度"></a>区间调度</h3><p>问题：工作用一系列区间表示，工作不可并行，每个工作等权，最大化截止时间前完成的工作数。</p>
 <p>贪心算法：按照DDL升序排序，贪心地选择当前尚未错过开始时间且DDL最近的一个完成。</p>
 <p><strong>Theorem.</strong> 贪心算法是最优的</p>
 <p><strong>Proof.</strong> 反证法：假如贪心算法结果不是最优，令贪心结果为$\{i_n\}$，最优结果为$\{j_m\}$，且两种方案的前$r$项相同。我们在所有最优解中，找到一个$\{j_m\}$使得其和贪心方案的重叠部分最多，即$r$最大。</p>
@@ -400,6 +400,74 @@
 <p>第$d$个教室是因为贪心算法在规划第$j$节课时，前$d-1$个教室都放不下了，即该$d-1$个教室的最后一堂课的下课时间都比$j$的上课时间晚。</p>
 <p>由于贪心按上课时间升序排列课程，所以这$d-1$个教室中的课程开始时间都比$j$的开始时间要晚，因此在第$j$节课开课后有$d$节课在同时上课。</p>
 <p>根据题意，要能支持$d$节课同时进行至少需要$d$个教室，即不存在比贪心解更优的解。</p>
+<h3 id="最小化迟到"><a href="#最小化迟到" class="headerlink" title="最小化迟到"></a>最小化迟到</h3><p>问题：给定工作耗时和DDL，同时只能做一件事，迟到值设定为完成时间与DDL之间的差值，最小化最大的迟到值。</p>
+<p>贪心算法：DDL越早越先做</p>
+<p><strong>Observation.</strong> 存在没有任何空闲间隔的最优解，贪心解也没有任何空闲间隔</p>
+<p><strong>Observation.</strong> 对于没有空闲间隔的解，如果存在两个任务，DDL早的后完成，DDL晚的先完成，则称为一个逆序对。如果一个解有逆序对，那一定有一对连续规划的逆序对。(why?)</p>
+<p><strong>Claim.</strong> 交换逆序对不会使最大迟到值增加。</p>
+<p><strong>Proof.</strong> 记交换前的迟到值为$l$，交换后为$l’$，工作完成时间为$f$，截止时间为$d$。</p>
+<ul>
+<li>对于$k\ne i,j$，$l_k’=l_k$</li>
+<li>$l_i’\le l_i$</li>
+<li>$l_j’ = \max\{0,f_j-d_j\} = \max\{0,f_i-d_j\}\le \max\{0,f_i-d_i\} = l_i$</li>
+</ul>
+<p><strong>Theorem. </strong> 贪心解$S$是最优的</p>
+<p><strong>Proof.</strong> 令$S^\star$为一个没有空闲间隔且逆序对数量最少的最优解。</p>
+<p>如果$S^\star$没有逆序对，那么$S=S^\star$；</p>
+<p>如果有逆序对，记相邻逆序对为$(i,j)$。交换$i,j$不会得到更劣解，但是将逆序对数量减少了1，引出矛盾。</p>
+<h3 id="Dijkstra"><a href="#Dijkstra" class="headerlink" title="Dijkstra"></a>Dijkstra</h3><p>这也是老朋友了，每次贪心地挑dis最小的一个点去更新其他所有点。</p>
+<p><strong>Invariant.</strong> 对于每个已探索集合$S$中的点$u$，$d(u)$即为$s-u$最短路的长度。</p>
+<p><strong>Proof.</strong> 归纳法：</p>
+<p>基态：$|S|=1$时，显然。</p>
+<p>归纳假设：假设对于$|S|=1,\cdots,k$的时候结论均成立</p>
+<p>记下一个探索的点为$v$，选中的边是$(u,v)$，此时$s-v$路径的长度为$\pi (v) = d(u)+l_{(u,v)}$。考虑任一$s-v$路径$P$，假设$(x,y)$是路径上离开$S$的第一条边，记到$x$的子路径为$P’$，那么有如下不等式：</p>
+<script type="math/tex; mode=display">l(P)\ge l(P')+l_{(x,y)}\ge d(x)+l_{(x,y)}\ge \pi(y)\ge \pi(v)</script><p>从左到右四个不等号的原因分别为：边权非负，归纳假设，$\pi(y)$和$\pi(v)$的定义。由此证明了$d(v)=\pi(v)$即为$s-v$最短路的长度，$|S|=k+1$的时候也成立。</p>
+<h3 id="A-star"><a href="#A-star" class="headerlink" title="$A^\star$"></a>$A^\star$</h3><p>给定起点和终点，引入启发式函数，用$h(v,t)+\pi(v)$作为优先级。</p>
+<p>$h(v,t)&lt;d(v,t)$时保证结果正确，有可能比Dijkstra更快</p>
+<p>$h(v,t)=d(v,t)$时保证结果正确，最快，但需要完全正确的知识</p>
+<p>$h(v,t)&gt;d(v,t)$时，并不总能得到正确结果，不过可能还是快一些</p>
+<h3 id="最小生成树"><a href="#最小生成树" class="headerlink" title="最小生成树"></a>最小生成树</h3><h4 id="Prim"><a href="#Prim" class="headerlink" title="Prim"></a>Prim</h4><p>维护一个已选点的集合，迭代$n-1$次，每次将连接生成树和树外一点的最短边加入树，并且把树外断点加入集合。$O(m\log n)$</p>
+<h4 id="Kruskal"><a href="#Kruskal" class="headerlink" title="Kruskal"></a>Kruskal</h4><p>将边按边权升序排列依次加入生成树，如果成环了就不加（并查集）。$O(m\log m)$</p>
+<h4 id="Reverse-Delete"><a href="#Reverse-Delete" class="headerlink" title="Reverse-Delete"></a>Reverse-Delete</h4><p>按照边权降序排列边，如果删边不影响连通性就删，重复m次。$O(m\log n (\log\log n)^3)$</p>
+<h4 id="Borůvka"><a href="#Borůvka" class="headerlink" title="Borůvka"></a>Borůvka</h4><p>对于每个连通块，选择所有一端在连通块内，另一端在外的边中边权最小的一个加入生成树，迭代直到只剩一个连通块收工。$O(m\log n)$</p>
+<h3 id="单链路-K-聚类"><a href="#单链路-K-聚类" class="headerlink" title="单链路 K-聚类"></a>单链路 K-聚类</h3><p>问题：给定集合$U$，初始包含$n$个对象，将其分入$k$个非空集合，最大化不同集合之间距离的最小值。</p>
+<p>贪心算法：用Kruskal算法，但是只加$n-k$条边。等价于找最小生成树，然后删掉最贵的$k-1$条边。</p>
+<p><strong>Theorem.</strong> 贪心算法是最优的</p>
+<p>待补。</p>
+<h3 id="最小树形图"><a href="#最小树形图" class="headerlink" title="最小树形图"></a>最小树形图</h3><p>问题：给定有向图$G$和根节点$r$，边权非负，求根节点位于$r$的最小树形图。</p>
+<p>对于每个非根节点$v$，$y(v)$表示进入$v$的所有边中最小的边权，边$(u,v)$削减后的边权记为$c’(u,v)=c(u,v)-y(v)\ge 0$。</p>
+<h4 id="朱刘算法-Edmonds’-Algorithm"><a href="#朱刘算法-Edmonds’-Algorithm" class="headerlink" title="朱刘算法 / Edmonds’ Algorithm"></a>朱刘算法 / Edmonds’ Algorithm</h4><p>对于每个非根节点$v$，选择最小入边，构成边集$E^\star$</p>
+<p>$E^\star$中的所有边的削减后边权均为0，如果此时$E^\star$不包含环，则找到了最小树形图。</p>
+<p>如果包含一个环$C$，那么将$C$收缩为一个超级结点，并删除其自环。</p>
+<p>不断执行上述过程直到得到一个最小树形图，随后展开环删边断环即可。</p>
+<h4 id="正确性证明"><a href="#正确性证明" class="headerlink" title="正确性证明"></a>正确性证明</h4><p>较为复杂，可参考课件，待补。</p>
+<h3 id="哈夫曼编码"><a href="#哈夫曼编码" class="headerlink" title="哈夫曼编码"></a>哈夫曼编码</h3><h4 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h4><p>对于一个前缀编码格式$\gamma$，ABL (average bits per letter) 是每个字符的出现频率与其编码位数的乘积的和：</p>
+<script type="math/tex; mode=display">ABL(\gamma) = \sum\limits_{x\in S}f_x|\gamma(x)|</script><p>哈夫曼编码：每次贪心选取出现频率最低的两个结点，将其连接到同一个父结点上，定义父节点的出现频率为两个子节点之和。伪代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Huffman(S)</span><br><span class="line">&#123;</span><br><span class="line">    if |S| == 2</span><br><span class="line">    &#123;</span><br><span class="line">    	return tree with root and 2 leaves</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        let x and y be lowest-frequency letters in S</span><br><span class="line">        let S’ be S with x and y removed</span><br><span class="line">        insert new letter ω in S’ with f[ω] = f[x] + f[y]</span><br><span class="line">        T’= Huffman(S’)</span><br><span class="line">        T = add two children x and y to leaf ω from T’</span><br><span class="line">        return T</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="相关证明"><a href="#相关证明" class="headerlink" title="相关证明"></a>相关证明</h4><p>时间复杂度：$T(n)=T(n-1)+O(\log n)$，因此$T(n)=O(n\log n)$。</p>
+<p><strong>Claim.</strong> $ABL(T)=ABL(T’)+f_w$</p>
+<p><strong>Proof.</strong> $T$是由$T’$的$w$结点下接$x,y$结点形成的。</p>
+<script type="math/tex; mode=display">\begin{align}ABL(T) &= \sum\limits_{k\in S}f_k\cdot \small\text{dep}_T(k)\\&=f_x\cdot \small\text{dep}_T(x)+f_y\cdot \small\text{dep}_T(y)+\sum\limits_{k\in S/\{x,y\}}f_k\cdot \small\text{dep}_T(k)\\&=(f_y+f_z)\cdot (1+\small\text{dep}_{T'}(w))+\sum\limits_{k\in S/\{x,y\}}f_k\cdot \small\text{dep}_{T'}(k)\\&=f_w+f_w\cdot \small\text{dep}_{T'}(w)+\sum\limits_{k\in S/\{x,y\}}f_k\cdot \small\text{dep}_{T'}(k)\\&=f_w+\sum\limits_{k\in S'}f_k\cdot \small\text{dep}_{T'}(k)\\&=f_w+ABL(T')\end{align}</script><p><strong>Observations.</strong></p>
+<ul>
+<li>在最优的前缀编码树中，出现频率最低的字符对应的结点应该出现在最底层</li>
+<li>$n&gt;1$时，最低层总是有至少两个叶子节点</li>
+<li>同一层中的顺序并不影响编码最优性</li>
+</ul>
+<p><strong>Claim.</strong> 存在最优的前缀编码树，使得出现频率最低的两个字符作为树的两个相邻的叶子节点。</p>
+<p><strong>Claim.</strong> 对于给定字符集$S$，在所有前缀编码中，哈夫曼编码有最小的ABL。</p>
+<p><strong>Proof.</strong> 归纳法：</p>
+<p>基态：对于$|S|=2$，没有比一根两叶更短的编码了</p>
+<p>归纳假设：假设对于字符集$S’$，哈夫曼树$T’$给出的编码是最优的。其中$S’$没有加入最小频率的$x,y$而将$w$作为叶节点。</p>
+<p>归纳步骤：反证法。</p>
+<p>令$T$是哈夫曼树，假设存在树$Z$使得$ABL(Z)&lt;ABL(T)$，不失一般性地假设$Z$中$x, y$是相邻的叶子节点。将$x,y$从$Z$中删除得到$Z’$，记其父节点为$w’$。</p>
+<p>由于$ABL(Z)=ABL(Z’)+f_{w’}$，$ABL(T)=ABL(T’)+f_w$，且$ABL(Z)&lt;ABL(T)$，$f_w=f_{w’}$，得到$ABL(Z’)&lt;ABL(T’)$，与假设矛盾。</p>
+<h3 id="最优缓存"><a href="#最优缓存" class="headerlink" title="最优缓存"></a>最优缓存</h3><p>离线缓存 vs. 在线缓存：是否已知全部访问序列</p>
+<p>贪心替换：LIFO, FIFO, LRU, LFU</p>
+<p>最优贪心算法：Farthest-in-future (FF)，替换掉最晚在未来的访问中出现的成员。</p>
+<p>最优性证明比较微妙，建议自己看课件过一遍。</p>
+<h2 id="Chapter-4-分治"><a href="#Chapter-4-分治" class="headerlink" title="Chapter 4 - 分治"></a>Chapter 4 - 分治</h2><h3 id="逆序对计数"><a href="#逆序对计数" class="headerlink" title="逆序对计数"></a>逆序对计数</h3><p>$O(n\log n)$归并排序求逆序对</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Sort-and-Count(L)</span><br><span class="line">&#123;</span><br><span class="line">    if list L has one element</span><br><span class="line">    	return (0, L)</span><br><span class="line">    Divide the list into two halves A and B</span><br><span class="line">        (rA, A) = Sort-and-Count(A)</span><br><span class="line">        (rB, B) = Sort-and-Count(B)</span><br><span class="line">        (rAB, L) = Merge-and-Count(A, B)</span><br><span class="line">    return (rA + rB + rAB, L)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="线性求第k大"><a href="#线性求第k大" class="headerlink" title="线性求第k大"></a>线性求第k大</h3><p><del>这位更是印象深刻（✟Bo门✟</del></p>
 
     </div>
 
@@ -418,8 +486,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/06/04/%E5%AD%A6%E9%95%BF%E5%9B%A2%E8%AE%B0%E5%BD%95/" rel="prev" title="学长团记录">
-      <i class="fa fa-chevron-left"></i> 学长团记录
+    <a href="/2023/06/04/CS214_Final_Review/" rel="prev" title="CS214 计算机组成原理 期末复习">
+      <i class="fa fa-chevron-left"></i> CS214 计算机组成原理 期末复习
     </a></div>
       <div class="post-nav-item"></div>
     </div>
@@ -494,7 +562,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-%E7%A8%B3%E5%AE%9A%E5%8C%B9%E9%85%8D"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - 稳定匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8D"><span class="nav-number">1.1.</span> <span class="nav-text">定义(一对一匹配)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gale-Shapley-%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">Gale-Shapley 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GS%E7%AE%97%E6%B3%95-%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">1.3.</span> <span class="nav-text">GS算法 - 正确性证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E4%B8%80%E5%AE%9A%E7%BB%88%E6%AD%A2"><span class="nav-number">1.3.1.</span> <span class="nav-text">算法一定终止</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E7%9A%84%E5%AE%8C%E7%BE%8E%E6%80%A7"><span class="nav-number">1.3.2.</span> <span class="nav-text">匹配的完美性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">1.3.3.</span> <span class="nav-text">匹配的稳定性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A2%AB%E5%8A%A8%E6%96%B9%E5%88%A9%E7%9B%8A%E5%88%86%E6%9E%90"><span class="nav-number">1.5.</span> <span class="nav-text">主被动方利益分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E5%8A%A8%E6%96%B9%E6%9C%80%E4%BC%98%E6%80%A7"><span class="nav-number">1.5.1.</span> <span class="nav-text">主动方最优性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A2%AB%E5%8A%A8%E6%96%B9%E6%9C%80%E5%8A%A3%E6%80%A7"><span class="nav-number">1.5.2.</span> <span class="nav-text">被动方最劣性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%8C%B9%E9%85%8D"><span class="nav-number">1.6.</span> <span class="nav-text">一对多匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95GS%E7%AE%97%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">扩展GS算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2 - 算法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E5%88%86%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">运行时间分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Asymptotic-Order-of-Growth"><span class="nav-number">2.2.</span> <span class="nav-text">Asymptotic Order of Growth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.3.</span> <span class="nav-text">常见算法时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E9%9B%86%E9%97%AE%E9%A2%98"><span class="nav-number">2.4.</span> <span class="nav-text">独立集问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%87%E6%91%8A%E5%88%86%E6%9E%90"><span class="nav-number">2.5.</span> <span class="nav-text">均摊分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83"><span class="nav-number">3.</span> <span class="nav-text">贪心</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E8%B0%83%E5%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">区间调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86"><span class="nav-number">3.2.</span> <span class="nav-text">区间划分</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-%E7%A8%B3%E5%AE%9A%E5%8C%B9%E9%85%8D"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - 稳定匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89-%E4%B8%80%E5%AF%B9%E4%B8%80%E5%8C%B9%E9%85%8D"><span class="nav-number">1.1.</span> <span class="nav-text">定义(一对一匹配)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gale-Shapley-%E7%AE%97%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">Gale-Shapley 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GS%E7%AE%97%E6%B3%95-%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">1.3.</span> <span class="nav-text">GS算法 - 正确性证明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E4%B8%80%E5%AE%9A%E7%BB%88%E6%AD%A2"><span class="nav-number">1.3.1.</span> <span class="nav-text">算法一定终止</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E7%9A%84%E5%AE%8C%E7%BE%8E%E6%80%A7"><span class="nav-number">1.3.2.</span> <span class="nav-text">匹配的完美性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8C%B9%E9%85%8D%E7%9A%84%E7%A8%B3%E5%AE%9A%E6%80%A7"><span class="nav-number">1.3.3.</span> <span class="nav-text">匹配的稳定性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.</span> <span class="nav-text">算法实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E8%A2%AB%E5%8A%A8%E6%96%B9%E5%88%A9%E7%9B%8A%E5%88%86%E6%9E%90"><span class="nav-number">1.5.</span> <span class="nav-text">主被动方利益分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E5%8A%A8%E6%96%B9%E6%9C%80%E4%BC%98%E6%80%A7"><span class="nav-number">1.5.1.</span> <span class="nav-text">主动方最优性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A2%AB%E5%8A%A8%E6%96%B9%E6%9C%80%E5%8A%A3%E6%80%A7"><span class="nav-number">1.5.2.</span> <span class="nav-text">被动方最劣性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E5%AF%B9%E5%A4%9A%E5%8C%B9%E9%85%8D"><span class="nav-number">1.6.</span> <span class="nav-text">一对多匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%A9%E5%B1%95GS%E7%AE%97%E6%B3%95"><span class="nav-number">1.7.</span> <span class="nav-text">扩展GS算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2 - 算法分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E9%97%B4%E5%88%86%E6%9E%90"><span class="nav-number">2.1.</span> <span class="nav-text">运行时间分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Asymptotic-Order-of-Growth"><span class="nav-number">2.2.</span> <span class="nav-text">Asymptotic Order of Growth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6"><span class="nav-number">2.3.</span> <span class="nav-text">常见算法时间复杂度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8B%AC%E7%AB%8B%E9%9B%86%E9%97%AE%E9%A2%98"><span class="nav-number">2.4.</span> <span class="nav-text">独立集问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9D%87%E6%91%8A%E5%88%86%E6%9E%90"><span class="nav-number">2.5.</span> <span class="nav-text">均摊分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-3-%E8%B4%AA%E5%BF%83"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3 - 贪心</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E8%B0%83%E5%BA%A6"><span class="nav-number">3.1.</span> <span class="nav-text">区间调度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8C%BA%E9%97%B4%E5%88%92%E5%88%86"><span class="nav-number">3.2.</span> <span class="nav-text">区间划分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%8C%96%E8%BF%9F%E5%88%B0"><span class="nav-number">3.3.</span> <span class="nav-text">最小化迟到</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra"><span class="nav-number">3.4.</span> <span class="nav-text">Dijkstra</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-star"><span class="nav-number">3.5.</span> <span class="nav-text">$A^\star$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="nav-number">3.6.</span> <span class="nav-text">最小生成树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Prim"><span class="nav-number">3.6.1.</span> <span class="nav-text">Prim</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kruskal"><span class="nav-number">3.6.2.</span> <span class="nav-text">Kruskal</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reverse-Delete"><span class="nav-number">3.6.3.</span> <span class="nav-text">Reverse-Delete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Boru%CC%8Avka"><span class="nav-number">3.6.4.</span> <span class="nav-text">Borůvka</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E9%93%BE%E8%B7%AF-K-%E8%81%9A%E7%B1%BB"><span class="nav-number">3.7.</span> <span class="nav-text">单链路 K-聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E6%A0%91%E5%BD%A2%E5%9B%BE"><span class="nav-number">3.8.</span> <span class="nav-text">最小树形图</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%B1%E5%88%98%E7%AE%97%E6%B3%95-Edmonds%E2%80%99-Algorithm"><span class="nav-number">3.8.1.</span> <span class="nav-text">朱刘算法 &#x2F; Edmonds’ Algorithm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E6%80%A7%E8%AF%81%E6%98%8E"><span class="nav-number">3.8.2.</span> <span class="nav-text">正确性证明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%88%E5%A4%AB%E6%9B%BC%E7%BC%96%E7%A0%81"><span class="nav-number">3.9.</span> <span class="nav-text">哈夫曼编码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="nav-number">3.9.1.</span> <span class="nav-text">算法流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E8%AF%81%E6%98%8E"><span class="nav-number">3.9.2.</span> <span class="nav-text">相关证明</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E7%BC%93%E5%AD%98"><span class="nav-number">3.10.</span> <span class="nav-text">最优缓存</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-4-%E5%88%86%E6%B2%BB"><span class="nav-number">4.</span> <span class="nav-text">Chapter 4 - 分治</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%BA%8F%E5%AF%B9%E8%AE%A1%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">逆序对计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%B1%82%E7%AC%ACk%E5%A4%A7"><span class="nav-number">4.2.</span> <span class="nav-text">线性求第k大</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

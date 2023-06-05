@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="O(ρ∗(P)n+m)找出所有模式串出现位置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于重复因子的字符串匹配">
+<meta property="og:url" content="https://gutaozi.github.io/2022/11/12/String%20matching%20based%20on%20repetition%20factors/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="O(ρ∗(P)n+m)找出所有模式串出现位置">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2022/11/12/ifog5x8TtJZ2nWA.png">
+<meta property="og:image" content="https://s2.loli.net/2022/11/12/IRE4jmoYUKyQCXg.png">
+<meta property="article:published_time" content="2022-11-12T06:33:58.000Z">
+<meta property="article:modified_time" content="2022-11-12T06:33:58.000Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="Algorithm">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2022/11/12/ifog5x8TtJZ2nWA.png">
+
+<link rel="canonical" href="https://gutaozi.github.io/2022/11/12/String%20matching%20based%20on%20repetition%20factors/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>基于重复因子的字符串匹配 | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2022/11/12/String%20matching%20based%20on%20repetition%20factors/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于重复因子的字符串匹配
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-12 14:33:58" itemprop="dateCreated datePublished" datetime="2022-11-12T14:33:58+08:00">2022-11-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">O(ρ∗(P)n+m)找出所有模式串出现位置</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>出处：CLRS Problem 32-1，DSAA(H) 2021 Fall Midterm Final Problem</p>
+<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>记$y^i$为字符串$y$进行$i$次重复后的拼接字符串，例如$(ab)^3=ababab$。</p>
+<p>对于字符串$x\in\Sigma^{\star}$，若存在字符串$y\in\Sigma^{\star}$和正整数$r$，使得$x=y^r$，则称$r$为$x$的一个<strong>重复因子</strong>。</p>
+<p>记$\rho(x)$为字符串$x$的<strong>最大重复因子</strong>。</p>
+<ol>
+<li><p>设计算法对于输入字符串$P[1_\cdots m]$，对于$1\leq i\leq m$，求解$\rho(P[1_\cdots i])$，即$P$每个前缀串的最大重复因子。</p>
+</li>
+<li><p>记$\rho^{\star}(P)=max\{\rho(P[1_\cdots i])\}, 1\leq i\leq m$，即$P$所有前缀串中最大重复的因子。</p>
+<p>证明：从长度为$m$的二进制串集合中任取其一，则$\rho^{*}(P)$的期望值是$O(1)$的。</p>
+</li>
+<li><p>证明Galil &amp; Seiferas算法的正确性：</p>
+<p>该算法能在$O(\rho^{\star}(P)n+m)$的时间内，从文本串$T[1_\cdots n]$中匹配模式串$P[1_\cdots m]$的所有出现位置，且除模式串和文本串外，空间开销仅为$O(1)$。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">REPETITION_MATCHER(P, T)</span><br><span class="line">    m = P.length</span><br><span class="line">    n = T.length</span><br><span class="line">    k = 1 + ρ*(P)</span><br><span class="line">    q = 0</span><br><span class="line">    s = 0</span><br><span class="line">    while s ≤ n - m</span><br><span class="line">        if T[s + q + 1] == P[q + 1]</span><br><span class="line">            q = q + 1</span><br><span class="line">            if q == m</span><br><span class="line">                print &quot;Pattern occurs with shift&quot; s</span><br><span class="line">        if q == m or T[s + q + 1] != P[q + 1]</span><br><span class="line">            s = s + max(1, ceil(q / k))</span><br><span class="line">            q = 0</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="算法设计"><a href="#算法设计" class="headerlink" title="算法设计"></a>算法设计</h3><p>求出最长公共前后缀数组$\pi[m]$，记$k=m-\pi[m]$。</p>
+<p>若$k|m$，则$k$就是最小循环节，$\rho(P)=\frac{m}{k}$。</p>
+<p>$\pi[m]=0$的情况：除$P$本身外不存在循环节，$k=m$，显然$\rho(P)=1$成立。</p>
+<p>$\pi[m]&gt;0$的情况：由于$k|m$又$k≠m$，则$2k\leq m$，又有$\pi[m]\ge \frac{m}{2}$，因此最长公共前后缀有交集(如图)。</p>
+<p><img src="https://s2.loli.net/2022/11/12/ifog5x8TtJZ2nWA.png" alt="image.png" style="zoom: 33%;" /></p>
+<p>利用公共前后缀的性质，后缀(蓝色)的末尾$k$个字符与前缀的末尾$k$个字符相等，而前缀的末尾$k$个字符又是后缀(蓝色)的末尾倒数$k+1\sim2k$共$k$个字符，由此递推，由于$k|m$，有$k|\pi[m]$，末尾$k$个字符也就是$P$的循环节了。</p>
+<p><img src="https://s2.loli.net/2022/11/12/IRE4jmoYUKyQCXg.png" alt="image.png" style="zoom: 40%;" /></p>
+<p>现用反证法证明不存在更小的循环节/更大的$\rho(P)$：若存在更小的循环节，则说明$P$最长公共前后缀可以更长($\pi[m]$可以更大)，然而现在保证了$\pi[m]$的正确性，因而不存在更小的循环节。</p>
+<p>若$k\nmid m$，则除$P$本身外不存在循环节，$\rho(P)=1$，证明如下：</p>
+<p>假设$\rho(P)\ge2$，则说明$P$有至少重复两次的循环节，那么$P$最长公共前后缀应为恰好循环$\rho(P)-1$次的循环节，此时$k$应为单个循环节长度$\frac{m}{\rho(P)}$，则$k|m$，矛盾。</p>
+<p>时间复杂度：求$\pi[m]$耗时$O(m)$，判断整除等运算均为$O(1)$，整体时间复杂度$O(m)$</p>
+<h3 id="期望值证明"><a href="#期望值证明" class="headerlink" title="期望值证明"></a>期望值证明</h3><blockquote>
+<p>$^\star$这里貌似怪怪的，不太懂概率上界为什么是4就能说明期望有界了。</p>
+<p>$^\star$我感觉最后那个概率沿着这种思路应该不能粗暴相加要用容斥，现在没时间想先留个坑。</p>
+</blockquote>
+<p>二进制串$P$的长度为$i$的前缀子串一共有$2^i$种。假设$r|i$，则可以构造长度为$\frac{i}{r}$的循环节，共有$2^{\frac{i}{r}}$种，选中概率为$\frac{2^{\frac{i}{r}}}{2^i}=\frac{1}{2^{i\frac{r-1}{r}}}$。则利用布尔不等式计算$\rho(P[1_{\cdots}i])&gt; r$的概率为</p>
+<script type="math/tex; mode=display">\begin{aligned}
+\sum_{r^{\prime}>r, r^{\prime} \mid i} \frac{1}{2^{i \frac{\left(r^{\prime}-1\right)}{r^{\prime}}}} &=\frac{1}{2^{i}} \sum_{r^{\prime}>r, r^{\prime} \mid i} 2^{i / r^{\prime}} \\
+&=\frac{1}{2^{i}} \sum_{j=1}^{\left\lfloor{i/r}\rfloor\right.} 2^{j} \\
+& \leq \frac{2^{i / r}}{2^{i-1}} \\
+&=2^{i / r-i+1}
+\end{aligned}</script><p>接下来对于每个$i\in[1,m]$，用布尔不等式加和求$\rho(P)&gt;r$的概率上界：</p>
+<script type="math/tex; mode=display">\begin{aligned}
+\sum_{i=0}^{m} 2^{i / r-i+1} &=2 \sum_{i=1}^{m} 2^{\left(\frac{1}{r}-1\right)^{i}} \\
+&=2 \frac{1-2^{\frac{m+1}{r}-m-1}}{1-2^{\left(\frac{1}{r}-1\right)}} \\
+& \leq 2 \frac{1}{2^{\left(\frac{1}{r}-1\right)}}
+\end{aligned}</script><p>该式随$r$增长，较快地收敛到4，期望值是有界的且与$m$无关，因而为$O(1)$</p>
+<h3 id="Galil-amp-Seiferas算法"><a href="#Galil-amp-Seiferas算法" class="headerlink" title="Galil &amp; Seiferas算法"></a>Galil &amp; Seiferas算法</h3><blockquote>
+<p>This algorithm correctly finds the occurrences of the pattern $P$ for reasons similar to the Knuth Morris Pratt algorithm. That is, we know that we will only increase $q\ \rho^{\star}(P)$ many times before we have to bite the bullet and increase $s$, and $s$ can only be increased at most $n − m$ many times. It will definitely find every possible occurrence of the pattern because it searches for every time that the primitive root of $P$ occurs, and it must occur for $P$ to occur.</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algorithm/" rel="tag"># Algorithm</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/11/06/%E5%AD%A6%E9%95%BF%E5%9B%A2%E8%AE%B0%E5%BD%95/" rel="prev" title="学长团记录">
+      <i class="fa fa-chevron-left"></i> 学长团记录
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/11/27/CS205_%E9%A1%B9%E7%9B%AE%E8%AE%BE%E8%AE%A1%E6%8A%A5%E5%91%8A_Matrix%20Multiplication%20in%20C/" rel="next" title="CS205 C/C++ Project04设计报告 C语言矩阵乘法">
+      CS205 C/C++ Project04设计报告 C语言矩阵乘法 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script>
+  const gitalk = new Gitalk({
+    clientID: '79118b0b29b4170f24af',
+    clientSecret: '48ee47026d13b8a3a954b2b089ea320510282527',
+    repo: 'GuTaoZi.github.io',      // The repository of store comments,
+    owner: 'GuTaoZi',
+    admin: ['GuTaoZi'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+  </script>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.</span> <span class="nav-text">算法设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9B%E5%80%BC%E8%AF%81%E6%98%8E"><span class="nav-number">3.</span> <span class="nav-text">期望值证明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Galil-amp-Seiferas%E7%AE%97%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">Galil &amp; Seiferas算法</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>

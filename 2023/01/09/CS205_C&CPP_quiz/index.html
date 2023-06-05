@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="把坑都再踩一遍吧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS205 C&#x2F;C++ Quiz题解析">
+<meta property="og:url" content="https://gutaozi.github.io/2023/01/09/CS205_C&CPP_quiz/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="把坑都再踩一遍吧">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/01/09/yTuULq2IAljWaFz.png">
+<meta property="article:published_time" content="2023-01-09T12:52:06.000Z">
+<meta property="article:modified_time" content="2023-01-09T12:52:06.000Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/01/09/yTuULq2IAljWaFz.png">
+
+<link rel="canonical" href="https://gutaozi.github.io/2023/01/09/CS205_C&CPP_quiz/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CS205 C/C++ Quiz题解析 | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/01/09/CS205_C&CPP_quiz/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS205 C/C++ Quiz题解析
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-01-09 20:52:06" itemprop="dateCreated datePublished" datetime="2023-01-09T20:52:06+08:00">2023-01-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">把坑都再踩一遍吧</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h3><h4 id="Q1"><a href="#Q1" class="headerlink" title="Q1"></a>Q1</h4><p>The source code of program is as follows:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>The source code has been compiled to program <strong>hello</strong>, when you run it as follows, what <code>argc</code> will be?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./hello I LOVE CPP</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 4</p>
+<p>4个command line arguments分别是: ./hello, I, LOVE, CPP</p>
+</blockquote>
+<h4 id="Q2"><a href="#Q2" class="headerlink" title="Q2"></a>Q2</h4><p>The following code is the prototype/declaration of function mul.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">mul</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a * b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>这段代码是定义(definition)而非声明(prototype/declaration)</p>
+</blockquote>
+<h4 id="Q3"><a href="#Q3" class="headerlink" title="Q3"></a>Q3</h4><p>The data type of the variable <code>PI</code> is <code>double</code></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PI 3.14</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>宏不是变量(variable)</p>
+</blockquote>
+<h4 id="Q4"><a href="#Q4" class="headerlink" title="Q4"></a>Q4</h4><p>When a function prototype is declared in the header file you create, you do NOT need to define it in a CPP file.</p>
+<blockquote>
+<p>Answer: False</p>
+<p>头文件里的声明+CPP文件的定义才能使用函数。</p>
+</blockquote>
+<h4 id="Q5"><a href="#Q5" class="headerlink" title="Q5"></a>Q5</h4><p> IDE (Integrated development environment) is a powerful compiler with many userful features.</p>
+<blockquote>
+<p>Answer: False</p>
+<p>集成开发环境可不只是编译器啊</p>
+</blockquote>
+<h4 id="Q6"><a href="#Q6" class="headerlink" title="Q6"></a>Q6</h4><p>If you get 75 for one of your projects, which situation should most likely be?</p>
+<blockquote>
+<p>Answer: Finish all tasks</p>
+<p>为什么要复习这个啊=-=</p>
+</blockquote>
+<h3 id="Data-Types-and-Arithmetic-Operators"><a href="#Data-Types-and-Arithmetic-Operators" class="headerlink" title="Data Types and Arithmetic Operators"></a>Data Types and Arithmetic Operators</h3><h4 id="Q1-1"><a href="#Q1-1" class="headerlink" title="Q1"></a>Q1</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">signed</span> <span class="type">char</span> c1 = <span class="number">127</span>;</span><br><span class="line"><span class="type">signed</span> <span class="type">char</span> c2 = <span class="number">1</span>;</span><br><span class="line"><span class="type">int</span> csum = c1 + c2;</span><br><span class="line">cout &lt;&lt; csum;</span><br></pre></td></tr></table></figure>
+<p>What’s the output of the source code?</p>
+<blockquote>
+<p>Answer: 128</p>
+<p>为了计算，先转换成了int再做加法，结果储存进int型变量避免了溢出。</p>
+<p>整数运算只有int和long long两类运算，所以下面那段代码会输出-2147483648，就是先按int型计算溢出后再储存进long long。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = INT_MAX;</span><br><span class="line"><span class="type">int</span> y = <span class="number">1</span>;</span><br><span class="line"><span class="type">long</span> <span class="type">long</span> p = x + y;</span><br><span class="line">cout &lt;&lt; p;</span><br><span class="line"><span class="comment">//output: -2147483648</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="Q2-1"><a href="#Q2-1" class="headerlink" title="Q2"></a>Q2</h4><p><code>sizeof()</code> is a function and can yield the size in bytes of a type.</p>
+<blockquote>
+<p>Answer: False</p>
+<p><code>sizeof</code>是个操作符，不是函数！</p>
+</blockquote>
+<h4 id="Q3-1"><a href="#Q3-1" class="headerlink" title="Q3"></a>Q3</h4><p><code>size_t</code> is an unsigned integer type.</p>
+<blockquote>
+<p>Answer: True</p>
+<p>size_t 是无符号整数类型, 32 bit or 64 bit</p>
+</blockquote>
+<h4 id="Q4-1"><a href="#Q4-1" class="headerlink" title="Q4"></a>Q4</h4><p>What’s the value of the variable <code>num</code>?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">23</span> / <span class="number">4</span> * <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 20</p>
+<p>(int)23/4=5, (int)5*4=4.</p>
+</blockquote>
+<h4 id="Q5-1"><a href="#Q5-1" class="headerlink" title="Q5"></a>Q5</h4><p>What’s the value of variable <code>num</code>?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">23</span> / <span class="number">4.</span> * <span class="number">4</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 23</p>
+<p>23/(double)4.=5.75, 5.75*4=(double)23.00, (int)23.00=23</p>
+</blockquote>
+<h4 id="Q6-1"><a href="#Q6-1" class="headerlink" title="Q6"></a>Q6</h4><p>What’s the value of variable <code>num</code>?</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int num = 23 / 4 * 4.;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 20</p>
+<p>(int)23/4=5, 5*(double)4.=(double)20.00, (int)20.00=20</p>
+</blockquote>
+<h4 id="Q7"><a href="#Q7" class="headerlink" title="Q7"></a>Q7</h4><p> In the following code, since the variable num is not initialized explicitly, it will be initialized to 0 automatically.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num;</span><br><span class="line">std::cout&lt;&lt; num &lt;&lt; std::endl;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>在某些平台，未初始化的变量可能拥有随机值</p>
+</blockquote>
+<h4 id="Q8"><a href="#Q8" class="headerlink" title="Q8"></a>Q8</h4><p>auto is a placeholder type specifier in C++11. What is the value of the variable <code>val</code> in the following code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> val = <span class="number">2</span> / <span class="number">3</span>;</span><br><span class="line">val = <span class="number">3.14</span> * <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 6</p>
+<p>auto=int</p>
+</blockquote>
+<h3 id="Branching-and-Looping-Statements"><a href="#Branching-and-Looping-Statements" class="headerlink" title="Branching and Looping Statements"></a>Branching and Looping Statements</h3><h4 id="Q1-2"><a href="#Q1-2" class="headerlink" title="Q1"></a>Q1</h4><p> What’s the output of the following source code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">100</span>;</span><br><span class="line"><span class="type">int</span> y = <span class="number">30</span>;</span><br><span class="line">x+= (y-=<span class="number">10</span>);</span><br><span class="line">cout &lt;&lt; x;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 120</p>
+<p>先执行括号里的，再执行括号外的</p>
+</blockquote>
+<h4 id="Q2-2"><a href="#Q2-2" class="headerlink" title="Q2"></a>Q2</h4><p>What’s the output of the following source code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">100</span>;</span><br><span class="line"><span class="type">int</span> y = x++;</span><br><span class="line">cout &lt;&lt; y;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 100</p>
+<p>自增在后，先赋值再自增</p>
+</blockquote>
+<h4 id="Q3-2"><a href="#Q3-2" class="headerlink" title="Q3"></a>Q3</h4><p>What’s the output of the following source code:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">100</span>;</span><br><span class="line"><span class="type">int</span> y = (x = <span class="number">200</span>);</span><br><span class="line">cout &lt;&lt; y;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 200</p>
+<p>先执行括号里的，再执行括号外的</p>
+</blockquote>
+<h4 id="Q4-2"><a href="#Q4-2" class="headerlink" title="Q4"></a>Q4</h4><p> What’s the output of the following source code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a = <span class="number">2</span>, b = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (a||b++)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 0</p>
+<p>逻辑短路，自增不执行</p>
+</blockquote>
+<h4 id="Q5-2"><a href="#Q5-2" class="headerlink" title="Q5"></a>Q5</h4><p>What’s the output of the following source code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(i = <span class="number">1</span>; i &lt; <span class="number">100</span>; i+=<span class="number">2</span>)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//something</span></span><br><span class="line">&#125;</span><br><span class="line">cout &lt;&lt; i;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 101</p>
+<p>循环结束条件i&lt;100不满足时i=101</p>
+</blockquote>
+<h4 id="Q6-2"><a href="#Q6-2" class="headerlink" title="Q6"></a>Q6</h4><p>What’s the output of the source code</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> x = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">&#123;</span><br><span class="line">    x = <span class="number">0</span>;</span><br><span class="line">&#125; <span class="keyword">while</span>( x );</span><br><span class="line">cout &lt;&lt; x;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 0</p>
+<p>执行了一次就润了</p>
+</blockquote>
+<h4 id="Q7-1"><a href="#Q7-1" class="headerlink" title="Q7"></a>Q7</h4><p>The following source code (empty in the parentheses) can be compiled successfully.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>()</span><br><span class="line">&#123;</span><br><span class="line">	<span class="comment">//some lines here</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>for至少要有条件项</p>
+</blockquote>
+<h4 id="Q8-1"><a href="#Q8-1" class="headerlink" title="Q8"></a>Q8</h4><p>What is the output of the following code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> num = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">switch</span> (num)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;4&#x27;</span>:</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Key 4&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&#x27;5&#x27;</span>:</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Key 5&quot;</span> &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">default</span>:</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Undefined key.&quot;</span> &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Undefined key.</p>
+<p>注意char型的’5’≠int型的5</p>
+</blockquote>
+<h4 id="Q9"><a href="#Q9" class="headerlink" title="Q9"></a>Q9</h4><p>How many lines will be printed?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">size_t</span> i = <span class="number">10</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Line &quot;</span> &lt;&lt; i &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: $\infty$</p>
+<p>size_t 自减到负数之后会“溢出”到最大整数，死循环</p>
+</blockquote>
+<h3 id="Data-Structures"><a href="#Data-Structures" class="headerlink" title="Data Structures"></a>Data Structures</h3><h4 id="Q1-3"><a href="#Q1-3" class="headerlink" title="Q1"></a>Q1</h4><p>What’s the output of the source code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> numbers[<span class="number">4</span>] = &#123;<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>&#125;;</span><br><span class="line">idx = <span class="number">-1</span>;</span><br><span class="line">cout &lt;&lt; numbers[idx] &lt;&lt; endl;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Unpredictable result</p>
+<p>负下标越界，编译是能过，运行时要么段错误要么非法访问其他内存</p>
+</blockquote>
+<h4 id="Q2-3"><a href="#Q2-3" class="headerlink" title="Q2"></a>Q2</h4><p>What’s the output of the source code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> idx = <span class="number">0</span>;</span><br><span class="line"><span class="type">int</span> numbers[<span class="number">4</span>] = &#123;<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>&#125;;</span><br><span class="line">idx = <span class="number">4</span>;</span><br><span class="line">cout &lt;&lt; numbers[idx] &lt;&lt; endl;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Unpredictable result</p>
+<p>下标越界，编译是能过，运行时要么段错误要么非法访问其他内存</p>
+</blockquote>
+<h4 id="Q3-3"><a href="#Q3-3" class="headerlink" title="Q3"></a>Q3</h4><p>What’s the output if you compile the following source code with C++11 standard?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">string str&#123;<span class="string">&quot;hello&quot;</span>&#125;;</span><br><span class="line">cout &lt;&lt; str[<span class="number">1</span>] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: e</p>
+<p>str[1]是第二个元素</p>
+</blockquote>
+<h4 id="Q4-3"><a href="#Q4-3" class="headerlink" title="Q4"></a>Q4</h4><p>What’s the output?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> str[<span class="number">16</span>] = &#123;<span class="string">&quot;C++&quot;</span>&#125;;</span><br><span class="line">cout &lt;&lt; <span class="built_in">strlen</span>(str) &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 3</p>
+<p>赋值的时候末尾带了个’\0’，strlen读到’\0’就停了</p>
+</blockquote>
+<h4 id="Q5-3"><a href="#Q5-3" class="headerlink" title="Q5"></a>Q5</h4><p>What’s the output?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> str1[<span class="number">16</span>] = &#123;<span class="string">&quot;C++&quot;</span>&#125;;</span><br><span class="line"><span class="type">char</span> str2[<span class="number">16</span>];</span><br><span class="line">str2 = str1;</span><br><span class="line">cout &lt;&lt; str2 &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Compilation error.</p>
+<p>数组相当于常量指针，不能直接对其赋值</p>
+</blockquote>
+<h4 id="Q6-3"><a href="#Q6-3" class="headerlink" title="Q6"></a>Q6</h4><p>What’s the output?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">string str1 = &#123;<span class="string">&quot;C++&quot;</span>&#125;;</span><br><span class="line">string str2;</span><br><span class="line">str2 = str1;</span><br><span class="line">cout &lt;&lt; str2 &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: C++</p>
+<p>但是string可以直接赋值</p>
+</blockquote>
+<h4 id="Q7-2"><a href="#Q7-2" class="headerlink" title="Q7"></a>Q7</h4><p>What’s the output?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">union</span> <span class="title class_">twonumbers</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> n[<span class="number">2</span>];</span><br><span class="line">    <span class="type">double</span> d;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    twonumbers tn;</span><br><span class="line">    tn.d = <span class="number">1.23</span>;</span><br><span class="line">    tn.n[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    tn.n[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    cout &lt;&lt; tn.d &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 0</p>
+<p>union各成员共用一块内存，所占用的内存长度等于最长的成员的内存长度，通过n修改为0后用d访问也是0</p>
+</blockquote>
+<h4 id="Q8-2"><a href="#Q8-2" class="headerlink" title="Q8"></a>Q8</h4><p>The output of the following code is:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">bool</span> male;</span><br><span class="line">    <span class="type">int</span> id;</span><br><span class="line">    <span class="type">char</span> label;</span><br><span class="line">&#125;;</span><br><span class="line">std::cout &lt;&lt; <span class="built_in">sizeof</span>(<span class="keyword">struct</span> Person);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 12</p>
+<p>虽然bool和char都只占用一字节，但被占用4字节的int分隔开，结构体会为了对齐而给bool和char也分配4字节，总共12字节</p>
+</blockquote>
+<h3 id="Pointers-and-Dynamic-Memory-Management"><a href="#Pointers-and-Dynamic-Memory-Management" class="headerlink" title="Pointers and Dynamic Memory Management"></a>Pointers and Dynamic Memory Management</h3><h4 id="Q1-4"><a href="#Q1-4" class="headerlink" title="Q1"></a>Q1</h4><p>The following code can be compiled successfuly.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> value = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">double</span> *<span class="type">const</span> p = &amp;value;</span><br><span class="line">p[<span class="number">0</span>] = <span class="number">2.0</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: True</p>
+<p>type *const代表指针是常量，但指针所指的数据可以修改</p>
+</blockquote>
+<h4 id="Q2-4"><a href="#Q2-4" class="headerlink" title="Q2"></a>Q2</h4><p>The following source code is correct and cannot cause bugs.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *pint = (<span class="type">int</span> *)<span class="built_in">malloc</span>(<span class="number">8</span> * <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line"><span class="type">char</span> *pc = (<span class="type">char</span> *)pint;</span><br><span class="line">pc[<span class="number">8</span>] = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">*(pc + <span class="number">8</span>) = <span class="string">&#x27;b&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: True</p>
+<p>指针类型的转换，通过指针操作内存均合法，没有越界等问题</p>
+</blockquote>
+<h4 id="Q3-4"><a href="#Q3-4" class="headerlink" title="Q3"></a>Q3</h4><p>The following code can be compiled successfuly.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> value = <span class="number">0.0</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">double</span> *p = &amp;value;</span><br><span class="line">value = <span class="number">2.0</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: True</p>
+<p>const type <em>p和type const </em>p表示指针所指内容是常量，无法通过指针更改</p>
+<p>但可以通过其他方式修改内容</p>
+</blockquote>
+<h4 id="Q4-4"><a href="#Q4-4" class="headerlink" title="Q4"></a>Q4</h4><p>The following source code is correct.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *ptr;</span><br><span class="line">*ptr = <span class="number">3</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>不能对未分配内存的指针进行赋值</p>
+</blockquote>
+<h4 id="Q5-4"><a href="#Q5-4" class="headerlink" title="Q5"></a>Q5</h4><p>What’s the output of the following code on 64bit OS and CPU?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *numbers = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">8</span>];</span><br><span class="line">cout &lt;&lt; <span class="built_in">sizeof</span>(numbers) &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 8</p>
+<p>64位环境下，指针长度为8字节</p>
+</blockquote>
+<h4 id="Q6-4"><a href="#Q6-4" class="headerlink" title="Q6"></a>Q6</h4><p>What’s the output of the following code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> *numbers = <span class="keyword">new</span> <span class="type">int</span>[<span class="number">8</span>];</span><br><span class="line"><span class="type">char</span> *pc = (<span class="type">char</span> *)numbers;</span><br><span class="line">*numbers = <span class="number">0x0A0B0C0D</span>;</span><br><span class="line">cout &lt;&lt; (<span class="type">int</span>)pc[<span class="number">3</span>] &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 10</p>
+<p>第三行给number[0]赋值0x0A0B0C0D，一个int对应四个char，pc[3]代表其中第四个字节，即0x0A，转换后为10</p>
+</blockquote>
+<h4 id="Q7-3"><a href="#Q7-3" class="headerlink" title="Q7"></a>Q7</h4><p>What’s the output of the following code on 64bit OS and CPU?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> numbers[<span class="number">8</span>];</span><br><span class="line">cout &lt;&lt; <span class="built_in">sizeof</span>(numbers) &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 32</p>
+<p>对于数组，sizeof会返回其所指内存的大小</p>
+</blockquote>
+<h3 id="Basics-of-Functions"><a href="#Basics-of-Functions" class="headerlink" title="Basics of Functions"></a>Basics of Functions</h3><h4 id="Q1-5"><a href="#Q1-5" class="headerlink" title="Q1"></a>Q1</h4><p>What’s the output of the following code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">float</span> <span class="title">foo</span><span class="params">(<span class="type">float</span> *p, <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p[<span class="number">0</span>] = <span class="number">1.0f</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> values[<span class="number">4</span>] = &#123;<span class="number">3.0f</span>, <span class="number">4.0f</span>, <span class="number">5.0f</span>, <span class="number">6.0f</span>&#125;;</span><br><span class="line">    <span class="built_in">foo</span>(values + <span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">    cout &lt;&lt; *values &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    cout &lt;&lt; *values + <span class="number">2</span> &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    cout &lt;&lt; *(values + <span class="number">2</span>) &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    cout &lt;&lt; values[<span class="number">2</span>] &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 3 5 1 1</p>
+<p>四个数分别为 v[0], v[0]+2, v[2], v[2]，注意优先级</p>
+</blockquote>
+<h4 id="Q2-5"><a href="#Q2-5" class="headerlink" title="Q2"></a>Q2</h4><p>What’s the output of the following source code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">people</span></span><br><span class="line">&#123;</span><br><span class="line">    string name;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">(people &amp;p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p.name = <span class="string">&quot;No name&quot;</span>;</span><br><span class="line">    p.age = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    people p;</span><br><span class="line">    p.age = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">init</span>(p);</span><br><span class="line">    cout &lt;&lt; p.age &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 0</p>
+<p>p作为引用参数传入init，age被修改为0</p>
+</blockquote>
+<h4 id="Q3-5"><a href="#Q3-5" class="headerlink" title="Q3"></a>Q3</h4><p>What’s the output?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">area</span><span class="params">(<span class="type">int</span> &amp;x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x *= x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">area</span>(n);</span><br><span class="line">    std::cout &lt;&lt; n &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 100</p>
+<p>n作为引用参数传入area，乘方</p>
+</blockquote>
+<h4 id="Q4-5"><a href="#Q4-5" class="headerlink" title="Q4"></a>Q4</h4><p>What’s the output of the following code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">people</span></span><br><span class="line">&#123;</span><br><span class="line">    string name;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">(people *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p.name = <span class="string">&quot;No name&quot;</span>;</span><br><span class="line">    p.age = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    people p;</span><br><span class="line">    p.age = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">init</span>(p);</span><br><span class="line">    cout &lt;&lt; p.age &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Compilation error</p>
+<p>init函数要求传入指针，但传入的是people结构体变量</p>
+</blockquote>
+<h4 id="Q5-5"><a href="#Q5-5" class="headerlink" title="Q5"></a>Q5</h4><p>What’s the output of the following code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">float</span> <span class="title">area</span><span class="params">(<span class="type">float</span> &amp;x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x * x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> value = <span class="number">3.0f</span>;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">area</span>(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 9</p>
+<p>3.0f*3.0f=9.0f</p>
+</blockquote>
+<h4 id="Q6-5"><a href="#Q6-5" class="headerlink" title="Q6"></a>Q6</h4><p> What’s the output of the following code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">float</span> <span class="title">area</span><span class="params">(<span class="type">float</span> &amp;x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    x = x * x;</span><br><span class="line">    <span class="keyword">return</span> x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> value = <span class="number">3.0f</span>;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">area</span>(value) &lt;&lt; <span class="string">&quot; &quot;</span>;</span><br><span class="line">    cout &lt;&lt; value &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 9 9</p>
+<p>通过引用修改了x，并返回了修改后的x</p>
+</blockquote>
+<h4 id="Q7-4"><a href="#Q7-4" class="headerlink" title="Q7"></a>Q7</h4><p>What’s the ouput of function sum()?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> cookies[<span class="number">8</span>] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">16</span>, <span class="number">32</span>, <span class="number">64</span>, <span class="number">128</span>&#125;;</span><br><span class="line">    <span class="type">int</span> n = <span class="built_in">sum</span>(cookies, <span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> arr[], <span class="type">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="keyword">sizeof</span> arr;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 4 or 8</p>
+<p>传入参数实际上是指针，指针占用字节数可能是4或8</p>
+</blockquote>
+<h4 id="Q8-3"><a href="#Q8-3" class="headerlink" title="Q8"></a>Q8</h4><p>What’s the output of the following code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">float</span> <span class="title">area</span><span class="params">(<span class="type">float</span> *x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> *x * *x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">float</span> value = <span class="number">3.0f</span>;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">area</span>(value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Compilation error</p>
+<p>要求传入浮点型指针，实际传入浮点型变量</p>
+</blockquote>
+<h4 id="Q9-1"><a href="#Q9-1" class="headerlink" title="Q9"></a>Q9</h4><p>What’s the output of the following code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">people</span></span><br><span class="line">&#123;</span><br><span class="line">    string name;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">(people p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p.name = <span class="string">&quot;No name&quot;</span>;</span><br><span class="line">    p.age = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    people p;</span><br><span class="line">    p.age = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">init</span>(p);</span><br><span class="line">    cout &lt;&lt; p.age &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: -1</p>
+<p>函数参数是结构体变量，在传入后是对变量的拷贝进行操作，不影响变量本身</p>
+</blockquote>
+<h4 id="Q10"><a href="#Q10" class="headerlink" title="Q10"></a>Q10</h4><p> What’s the output of the following code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">people</span></span><br><span class="line">&#123;</span><br><span class="line">    string name;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">init</span><span class="params">(people *p)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    p-&gt;name = <span class="string">&quot;No name&quot;</span>;</span><br><span class="line">    p-&gt;age = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    people p;</span><br><span class="line">    p.age = <span class="number">-1</span>;</span><br><span class="line">    <span class="built_in">init</span>(&amp;p);</span><br><span class="line">    cout &lt;&lt; p.age &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 0</p>
+<p>传入参数是指针，通过指针对结构体成员变量age进行操作</p>
+</blockquote>
+<h3 id="Advances-in-Functions"><a href="#Advances-in-Functions" class="headerlink" title="Advances in Functions"></a>Advances in Functions</h3><h4 id="Q1-6"><a href="#Q1-6" class="headerlink" title="Q1"></a>Q1</h4><p> The following declaration correctly defines some default arguments</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">harpo</span><span class="params">(<span class="type">int</span> n = <span class="number">3</span>, <span class="type">int</span> m, <span class="type">int</span> k = <span class="number">3</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>所有默认参数必须集中放在最后</p>
+</blockquote>
+<h4 id="Q2-6"><a href="#Q2-6" class="headerlink" title="Q2"></a>Q2</h4><p>The functions and a function pointer are declared as follows. Which answers are correct?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">float</span> <span class="title">norm</span><span class="params">(<span class="type">float</span> x, <span class="type">float</span> y)</span></span>; <span class="comment">// declaration</span></span><br><span class="line"><span class="built_in">float</span> (*norm_ptr)(<span class="type">float</span> x, <span class="type">float</span> y); <span class="comment">// norm_ptr is a function pointer</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">norm_ptr = &amp;norm;</span><br><span class="line">(*norm_ptr)(<span class="number">-3.0f</span>, <span class="number">4.0f</span>);</span><br><span class="line"><span class="built_in">norm_ptr</span>(<span class="number">-3.0f</span>, <span class="number">4.0f</span>);</span><br><span class="line">norm_ptr = norm;</span><br><span class="line">(*norm_ptr)(<span class="number">-3.0f</span>, <span class="number">4.0f</span>);</span><br><span class="line"><span class="built_in">norm_ptr</span>(<span class="number">-3.0f</span>, <span class="number">4.0f</span>);</span><br></pre></td></tr></table></figure>
+<p>大概意思就是函数指针和函数名在使用时可以适当混用</p>
+</blockquote>
+<h4 id="Q3-6"><a href="#Q3-6" class="headerlink" title="Q3"></a>Q3</h4><p>Function overloading is that multiple functions share the same function name but different signatures as the two functions below:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">float</span> <span class="title">foo</span><span class="params">(<span class="type">float</span> arg)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">foo</span><span class="params">(<span class="type">double</span> arg)</span></span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: True</p>
+<p>你说得对</p>
+</blockquote>
+<h4 id="Q4-6"><a href="#Q4-6" class="headerlink" title="Q4"></a>Q4</h4><p>There is a function template. The specialization is correctly implemented in the following code.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function">T <span class="title">sum</span><span class="params">(T x, T y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The input type is &quot;</span> &lt;&lt; <span class="built_in">typeid</span>(T).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Point</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> x;</span><br><span class="line">    <span class="type">int</span> y;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// Specialization for Point + Point operation</span></span><br><span class="line"><span class="keyword">template</span></span><br><span class="line">Point <span class="built_in">sum</span>&lt;Point&gt;(Point pt1, Point pt2)</span><br><span class="line">&#123;</span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;The input type is &quot;</span> &lt;&lt; <span class="built_in">typeid</span>(pt1).<span class="built_in">name</span>() &lt;&lt; endl;</span><br><span class="line">    Point pt;</span><br><span class="line">    pt.x = pt1.x + pt2.x;</span><br><span class="line">    pt.y = pt1.y + pt2.y;</span><br><span class="line">    <span class="keyword">return</span> pt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>特例化应该这么写：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;&gt;</span><br><span class="line"><span class="function">Point <span class="title">sum</span><span class="params">(Point pt1, Point pt2)</span></span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="Q5-6"><a href="#Q5-6" class="headerlink" title="Q5"></a>Q5</h4><p>The following code correctly defines a function template:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt; </span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(T &amp;a, T &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    T temp; </span><br><span class="line">    temp = a;</span><br><span class="line">    a = b;</span><br><span class="line">    b = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: True</p>
+<p>你说得对</p>
+</blockquote>
+<h3 id="Basics-of-Classes"><a href="#Basics-of-Classes" class="headerlink" title="Basics of Classes"></a>Basics of Classes</h3><h4 id="Q1-7"><a href="#Q1-7" class="headerlink" title="Q1"></a>Q1</h4><p>The <strong>this</strong> pointer points to the object and can be used to invoke a member as in the following code.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> num;    </span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">foo</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>-&gt;num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//other members</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>静态函数无法调用非静态对象的成员，逻辑上不可行</p>
+</blockquote>
+<h4 id="Q2-7"><a href="#Q2-7" class="headerlink" title="Q2"></a>Q2</h4><p>What’s the output of the following code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    string name;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Person p;</span><br><span class="line">    p.name = <span class="string">&quot;No name&quot;</span>;</span><br><span class="line">    cout &lt;&lt; p.name;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Compilation error</p>
+<p>class成员在未声明为public时默认private，无法被外部直接调用</p>
+</blockquote>
+<h4 id="Q3-7"><a href="#Q3-7" class="headerlink" title="Q3"></a>Q3</h4><p>What’s the output of the source code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Hello</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> value;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span> </span>&#123; <span class="keyword">return</span> i + j; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">setValue</span><span class="params">(<span class="type">int</span> v)</span> </span>&#123; value = v; &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getValue</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> value; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Hello h1, h2;</span><br><span class="line">    h1.<span class="built_in">setValue</span>(<span class="number">5</span>);</span><br><span class="line">    cout &lt;&lt; h2.<span class="built_in">getValue</span>() &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Link error</p>
+<p>在对类的静态变量做操作前，需要先在类外进行定义。</p>
+</blockquote>
+<h4 id="Q4-7"><a href="#Q4-7" class="headerlink" title="Q4"></a>Q4</h4><p>A class is declared as follows. Please select correct answers for creating a variable.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Stock</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Stock</span>(); </span><br><span class="line">    <span class="built_in">Stock</span>(<span class="type">const</span> std::string &amp;co, <span class="type">long</span> n = <span class="number">0</span>, <span class="type">double</span> pr = <span class="number">0.0</span>);</span><br><span class="line">    ~<span class="built_in">Stock</span>(); </span><br><span class="line">    <span class="comment">//other members</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Stock st1;<span class="comment">//OK</span></span><br><span class="line"><span class="function">Stock <span class="title">st2</span><span class="params">(<span class="string">&quot;A&quot;</span>,<span class="number">3</span>,<span class="number">2.0f</span>)</span></span>;<span class="comment">//OK</span></span><br><span class="line">Stock st3 = <span class="built_in">Stock</span>(<span class="string">&quot;A&quot;</span>,<span class="number">3</span>,<span class="number">2.0f</span>);<span class="comment">//OK</span></span><br><span class="line">Stock st4 = (<span class="string">&quot;A&quot;</span>,,<span class="number">2.0f</span>);<span class="comment">//Error</span></span><br></pre></td></tr></table></figure>
+<p>无参构造器，含参构造器，默认参数不能间隔省略</p>
+</blockquote>
+<h4 id="Q5-7"><a href="#Q5-7" class="headerlink" title="Q5"></a>Q5</h4><p> What’s the output of the following source code?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Hello</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">static</span> <span class="type">int</span> value;</span><br><span class="line">    <span class="type">int</span> num;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">sum</span><span class="params">(<span class="type">int</span> i, <span class="type">int</span> j)</span> </span>&#123; <span class="keyword">return</span> i + j; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="built_in">sizeof</span>(Hello) &lt;&lt; endl;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 4</p>
+<p>用sizeof对类进行操作时，其大小为对齐后的非静态成员数据的类型大小之和</p>
+<p>如果是空类，占1字节</p>
+<p>如果含有虚函数，则额外占有4字节虚函数表大小</p>
+<p>与构造、析构函数等成员函数、静态变量无关</p>
+</blockquote>
+<h3 id="Advances-in-Classes"><a href="#Advances-in-Classes" class="headerlink" title="Advances in Classes"></a>Advances in Classes</h3><h4 id="Q1-8"><a href="#Q1-8" class="headerlink" title="Q1"></a>Q1</h4><p>Class Stonewt is declared as follows. </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Stonewt</span></span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//some members</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Stonewt</span>(<span class="type">double</span> lbs);</span><br><span class="line">    <span class="built_in">Stonewt</span>(<span class="type">int</span> stn, <span class="type">double</span> lbs);</span><br><span class="line">    <span class="built_in">Stonewt</span>();</span><br><span class="line">    ~<span class="built_in">Stonewt</span>();</span><br><span class="line">    <span class="function"><span class="keyword">operator</span> <span class="title">int</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">operator</span> <span class="title">double</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Which function will be invoked by the following line of code ?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Stonewt wt = <span class="number">120</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Stonewt(double lbs);</p>
+<p>隐式转换后调用上述构造器，决定用哪个构造器发生在编译过程</p>
+</blockquote>
+<h4 id="Q2-8"><a href="#Q2-8" class="headerlink" title="Q2"></a>Q2</h4><p>Class Stonewt is declared as above. </p>
+<p>Which function will be invoked by the following line of code ?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Stonewt <span class="title">wt</span><span class="params">(<span class="number">120</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Stonewt(double lbs);</p>
+<p><del>梅开二度</del></p>
+</blockquote>
+<h4 id="Q3-8"><a href="#Q3-8" class="headerlink" title="Q3"></a>Q3</h4><p>Class Stonewt is declared as above. </p>
+<p>Which function will be invoked by the following line of code ?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wt = <span class="number">120.0</span>; <span class="comment">//wt is an object of type Stonewt</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Stonewt(double lbs);</p>
+<p><del>三连加关注，CS不迷路</del></p>
+</blockquote>
+<h4 id="Q4-8"><a href="#Q4-8" class="headerlink" title="Q4"></a>Q4</h4><p>Class Stonewt is declared as above. </p>
+<p>Which function will be invoked by the following line of code ?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> f = wt; <span class="comment">//wt is an object of type Stonewt</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: operator double() const;</p>
+<p>隐式转换再赋值</p>
+</blockquote>
+<h4 id="Q5-8"><a href="#Q5-8" class="headerlink" title="Q5"></a>Q5</h4><p>We can change operators’ precedence by overloading.</p>
+<blockquote>
+<p>Answer: False</p>
+<p>运算含义可以改，但优先级改不了</p>
+</blockquote>
+<h4 id="Q6-6"><a href="#Q6-6" class="headerlink" title="Q6"></a>Q6</h4><p>If we define a memeber function as follows for class Time</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Time Time::<span class="keyword">operator</span>*(<span class="type">double</span> mult) <span class="type">const</span></span><br></pre></td></tr></table></figure>
+<p>then we can calculate as follows</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="number">3.3</span> * b;<span class="comment">//a and b are objects of type Time</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>重载的乘号，左边Time右边double，反过来不行</p>
+</blockquote>
+<h4 id="Q7-5"><a href="#Q7-5" class="headerlink" title="Q7"></a>Q7</h4><p>Assignment operator ‘=’ can be overloaded by a non-member function.</p>
+<blockquote>
+<p>Answer: False</p>
+<p>赋值符是一个特例，只能作为成员函数被重载</p>
+</blockquote>
+<h4 id="Q8-4"><a href="#Q8-4" class="headerlink" title="Q8"></a>Q8</h4><p>If the friend function is defined as in the following source code, it is a member function in the class.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Time</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> hours;</span><br><span class="line">    <span class="type">int</span> minutes;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Time</span>();</span><br><span class="line">    <span class="built_in">Time</span>(<span class="type">int</span> h, <span class="type">int</span> m = <span class="number">0</span>);</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">AddMin</span><span class="params">(<span class="type">int</span> m)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">AddHr</span><span class="params">(<span class="type">int</span> h)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Reset</span><span class="params">(<span class="type">int</span> h = <span class="number">0</span>, <span class="type">int</span> m = <span class="number">0</span>)</span></span>;</span><br><span class="line">    Time <span class="keyword">operator</span>+(<span class="type">const</span> Time &amp;t) <span class="type">const</span>;</span><br><span class="line">    Time <span class="keyword">operator</span>-(<span class="type">const</span> Time &amp;t) <span class="type">const</span>;</span><br><span class="line">    Time <span class="keyword">operator</span>*(<span class="type">double</span> n) <span class="type">const</span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Show</span><span class="params">()</span> <span class="type">const</span></span>;</span><br><span class="line">    <span class="keyword">friend</span> Time <span class="keyword">operator</span>*(<span class="type">double</span> mult, Time in);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>友元函数需要在类内声明，私有公有没区别，也可以在类内定义，但友元终究不是成员</p>
+</blockquote>
+<h4 id="Q9-2"><a href="#Q9-2" class="headerlink" title="Q9"></a>Q9</h4><p>operator+() overloads the + operator, and it can only be used for mathematical addition.</p>
+<blockquote>
+<p>Answer: False</p>
+<p>你想把加号重载成乘法运算符也没人拦你（</p>
+</blockquote>
+<h4 id="Q10-1"><a href="#Q10-1" class="headerlink" title="Q10"></a>Q10</h4><p>A conversion function is defined outside of the declaration of class Stonewt as follow.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Stonewt::<span class="keyword">operator</span> <span class="title">double</span><span class="params">()</span> <span class="type">const</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> pounds;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: It’s correctly defined.</p>
+<p>冇问题</p>
+</blockquote>
+<h3 id="Dynamic-Memory-Management-in-Classes"><a href="#Dynamic-Memory-Management-in-Classes" class="headerlink" title="Dynamic Memory Management in Classes"></a>Dynamic Memory Management in Classes</h3><h4 id="Q1-9"><a href="#Q1-9" class="headerlink" title="Q1"></a>Q1</h4><p>Please read the following code and choose correct answers:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *name;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Person</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        name = <span class="keyword">new</span> <span class="type">char</span>[<span class="number">128</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    ~<span class="built_in">Person</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Person p1;</span><br><span class="line">    Person p2;</span><br><span class="line">    p1 = p2;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: </p>
+<ul>
+<li>The code can be compiled without error.</li>
+<li>Runtime error.</li>
+<li>It can cause memory double free problem.</li>
+<li>It can cause memory leak.</li>
+</ul>
+<p>编译是能过，但是由于p1和p2的析构函数会对name做两次delete，所以会双重释放运行错误，而且p1原本申请的char[128]会没有指针指向它，所以会有内存泄漏风险</p>
+</blockquote>
+<h4 id="Q2-9"><a href="#Q2-9" class="headerlink" title="Q2"></a>Q2</h4><p>If you do not define a default constructor for a class explicitly, then no default constructor for that class.</p>
+<blockquote>
+<p>Answer: False</p>
+<p>如果你没有显式定义任何一个构造器，类会隐含一个默认无参构造器</p>
+</blockquote>
+<h4 id="Q3-9"><a href="#Q3-9" class="headerlink" title="Q3"></a>Q3</h4><p>If assignment operator is not defined in class Person, the following code will invoke default assignment operator.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p1 = p2 = p3; <span class="comment">//p1, p2 and p3 are objects of type Person</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: True</p>
+<p>如果没有重载赋值符，则会调用默认赋值符</p>
+</blockquote>
+<h4 id="Q4-9"><a href="#Q4-9" class="headerlink" title="Q4"></a>Q4</h4><p>For class Person, which of the constructors is its default constructor?</p>
+<blockquote>
+<p>Answer: </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person::<span class="built_in">Person</span>(<span class="type">int</span> n = <span class="number">0</span>);</span><br></pre></td></tr></table></figure>
+<p>有参数，但是所有参数都有默认值，就是默认构造器</p>
+</blockquote>
+<h4 id="Q5-9"><a href="#Q5-9" class="headerlink" title="Q5"></a>Q5</h4><p>You can define two constructors as follows for class Person</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Person</span>()&#123;...&#125;</span><br><span class="line"><span class="built_in">Person</span>(<span class="type">int</span> m = <span class="number">0</span>) &#123;...&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>那么问题来了，猜猜看Person()会调用哪个？</p>
+</blockquote>
+<h4 id="Q6-7"><a href="#Q6-7" class="headerlink" title="Q6"></a>Q6</h4><p>For class Person, which of the constructors is a copy constructor?</p>
+<blockquote>
+<p>Answer:</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Person::<span class="built_in">Person</span>(<span class="type">const</span> Person &amp; p);</span><br></pre></td></tr></table></figure>
+<p>将常量引用作为参数的构造器是复制构造器</p>
+</blockquote>
+<h3 id="Class-Inheritance"><a href="#Class-Inheritance" class="headerlink" title="Class Inheritance"></a>Class Inheritance</h3><h4 id="Q1-10"><a href="#Q1-10" class="headerlink" title="Q1"></a>Q1</h4><p> What’s the output?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> weight;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Animal</span>(<span class="type">int</span> w = <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        weight = w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">virtual</span> <span class="type">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; weight &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> : <span class="keyword">public</span> Animal</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Dog</span>(<span class="type">int</span> w = <span class="number">0</span>) : <span class="built_in">Animal</span>(w) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Dog &quot;</span>;</span><br><span class="line">        Animal::<span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;wangwang&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Dog <span class="title">dog</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line">    Animal *p = &amp;dog;</span><br><span class="line">    p-&gt;<span class="built_in">print</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Dog 5</p>
+<p>由于覆写了虚函数print()，主函数语句调用的是Dog::print()，而Dog::print()再调用了Animal::print()</p>
+</blockquote>
+<h4 id="Q2-10"><a href="#Q2-10" class="headerlink" title="Q2"></a>Q2</h4><p>What is the output?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> weight;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Animal</span>(<span class="type">int</span> w = <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        weight = w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; weight &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> : <span class="keyword">public</span> Animal</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Dog</span>(<span class="type">int</span> w = <span class="number">0</span>) : <span class="built_in">Animal</span>(w) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Dog &quot;</span>;</span><br><span class="line">        Animal::<span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;wangwang&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Dog <span class="title">dog</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line">    Animal *p = &amp;dog;</span><br><span class="line">    p-&gt;<span class="built_in">print</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: 5</p>
+<p>由于p是Animal类，其成员函数均为Animal类中的定义</p>
+</blockquote>
+<h4 id="Q3-10"><a href="#Q3-10" class="headerlink" title="Q3"></a>Q3</h4><p>What is the output?</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> weight;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Animal</span>(<span class="type">int</span> w = <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        weight = w;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; weight &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> : <span class="keyword">public</span> Animal</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Dog</span>(<span class="type">int</span> w = <span class="number">0</span>) : <span class="built_in">Animal</span>(w) &#123;&#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;Dog &quot;</span>;</span><br><span class="line">        Animal::<span class="built_in">print</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">speak</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="string">&quot;wangwang&quot;</span> &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Dog <span class="title">dog</span><span class="params">(<span class="number">5</span>)</span></span>;</span><br><span class="line">    Animal *p = &amp;dog;</span><br><span class="line">    p-&gt;<span class="built_in">speak</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: Compilation error</p>
+<p>p是Animal类对象，speak()是其子类的函数，p的成员函数编译时静态绑定至Animal定义，因此p未定义speak()函数。</p>
+</blockquote>
+<h3 id="Class-Templates-and-std-Library"><a href="#Class-Templates-and-std-Library" class="headerlink" title="Class Templates and std Library"></a>Class Templates and std Library</h3><h4 id="Q1-11"><a href="#Q1-11" class="headerlink" title="Q1"></a>Q1</h4><p>Please choose the right answer(s) for declaring a class template</p>
+<blockquote>
+<p>Answer: </p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>  &lt;<span class="keyword">class</span> <span class="title class_">Type</span>&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ClassName</span>&#123;...&#125;</span><br><span class="line"><span class="keyword">template</span>  &lt;<span class="keyword">typename</span> Type&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ClassName</span>&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>本来是class的，在众人要求下添加了typename关键字，于是两个都能用</p>
+</blockquote>
+<h4 id="Q2-11"><a href="#Q2-11" class="headerlink" title="Q2"></a>Q2</h4><p>Matx and Matx12f are declared in the following figure. Please choose the correct statement(s).</p>
+<p><img src="https://s2.loli.net/2023/01/09/yTuULq2IAljWaFz.png" alt="image.png"></p>
+<blockquote>
+<p>Answer: Matx is a class tempate, Matx12f is a template class.</p>
+<p>不准确地来说，模板类是由类模板衍生出的类</p>
+</blockquote>
+<h3 id="Error-Handling"><a href="#Error-Handling" class="headerlink" title="Error Handling"></a>Error Handling</h3><h4 id="Q1-12"><a href="#Q1-12" class="headerlink" title="Q1"></a>Q1</h4><p>A try block can be followed by multiple catch blocks.</p>
+<blockquote>
+<p>Answer: True</p>
+<p>你说得对，而且catch括号内的类型不会隐式转换，但是子类可以被父类catch</p>
+</blockquote>
+<h4 id="Q2-12"><a href="#Q2-12" class="headerlink" title="Q2"></a>Q2</h4><p>The following source code <strong>cannot</strong> be compiled successfully.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">gmean</span><span class="params">(<span class="type">double</span> a, <span class="type">double</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; <span class="number">0</span> || b &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">string</span>(<span class="string">&quot;bad arguments&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">sqrt</span>(a*b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">try</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">gmean</span>(<span class="number">3</span>, <span class="number">-3</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: True</p>
+<p>没有catch的try是不完整的</p>
+</blockquote>
+<h4 id="Q3-11"><a href="#Q3-11" class="headerlink" title="Q3"></a>Q3</h4><p> The following code <strong>cannot</strong> be compiled successfully since ‘try’ is commented.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">double</span> <span class="title">gmean</span><span class="params">(<span class="type">double</span> a, <span class="type">double</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (a &lt; <span class="number">0</span> || b &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="built_in">string</span>(<span class="string">&quot;bad arguments&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> std::<span class="built_in">sqrt</span>(a*b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//try</span></span><br><span class="line">    <span class="comment">//&#123;</span></span><br><span class="line">        <span class="built_in">gmean</span>(<span class="number">3</span>, <span class="number">-3</span>);</span><br><span class="line">    <span class="comment">//&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Answer: False</p>
+<p>throw了可以不try-catch，不过一抛就终止运行而已</p>
+</blockquote>
+<h4 id="Q4-10"><a href="#Q4-10" class="headerlink" title="Q4"></a>Q4</h4><p>When an exception is thrown, the program must be terminated.</p>
+<blockquote>
+<p>Answer: False</p>
+<p>如果抛的异常被catch住了，程序就可以继续运行catch内的内容</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/01/08/CS217_DSAA_final/" rel="prev" title="CS217 数据结构与算法分析 期末复习">
+      <i class="fa fa-chevron-left"></i> CS217 数据结构与算法分析 期末复习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/01/10/CS205_C&CPP_final/" rel="next" title="CS205 C/C++ 期末复习">
+      CS205 C/C++ 期末复习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script>
+  const gitalk = new Gitalk({
+    clientID: '79118b0b29b4170f24af',
+    clientSecret: '48ee47026d13b8a3a954b2b089ea320510282527',
+    repo: 'GuTaoZi.github.io',      // The repository of store comments,
+    owner: 'GuTaoZi',
+    admin: ['GuTaoZi'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+  </script>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Getting-Started"><span class="nav-number">1.</span> <span class="nav-text">Getting Started</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1"><span class="nav-number">1.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2"><span class="nav-number">1.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3"><span class="nav-number">1.3.</span> <span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4"><span class="nav-number">1.4.</span> <span class="nav-text">Q4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5"><span class="nav-number">1.5.</span> <span class="nav-text">Q5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q6"><span class="nav-number">1.6.</span> <span class="nav-text">Q6</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Types-and-Arithmetic-Operators"><span class="nav-number">2.</span> <span class="nav-text">Data Types and Arithmetic Operators</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-1"><span class="nav-number">2.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-1"><span class="nav-number">2.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-1"><span class="nav-number">2.3.</span> <span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-1"><span class="nav-number">2.4.</span> <span class="nav-text">Q4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5-1"><span class="nav-number">2.5.</span> <span class="nav-text">Q5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q6-1"><span class="nav-number">2.6.</span> <span class="nav-text">Q6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q7"><span class="nav-number">2.7.</span> <span class="nav-text">Q7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q8"><span class="nav-number">2.8.</span> <span class="nav-text">Q8</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Branching-and-Looping-Statements"><span class="nav-number">3.</span> <span class="nav-text">Branching and Looping Statements</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-2"><span class="nav-number">3.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-2"><span class="nav-number">3.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-2"><span class="nav-number">3.3.</span> <span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-2"><span class="nav-number">3.4.</span> <span class="nav-text">Q4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5-2"><span class="nav-number">3.5.</span> <span class="nav-text">Q5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q6-2"><span class="nav-number">3.6.</span> <span class="nav-text">Q6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q7-1"><span class="nav-number">3.7.</span> <span class="nav-text">Q7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q8-1"><span class="nav-number">3.8.</span> <span class="nav-text">Q8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q9"><span class="nav-number">3.9.</span> <span class="nav-text">Q9</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Data-Structures"><span class="nav-number">4.</span> <span class="nav-text">Data Structures</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-3"><span class="nav-number">4.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-3"><span class="nav-number">4.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-3"><span class="nav-number">4.3.</span> <span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-3"><span class="nav-number">4.4.</span> <span class="nav-text">Q4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5-3"><span class="nav-number">4.5.</span> <span class="nav-text">Q5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q6-3"><span class="nav-number">4.6.</span> <span class="nav-text">Q6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q7-2"><span class="nav-number">4.7.</span> <span class="nav-text">Q7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q8-2"><span class="nav-number">4.8.</span> <span class="nav-text">Q8</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pointers-and-Dynamic-Memory-Management"><span class="nav-number">5.</span> <span class="nav-text">Pointers and Dynamic Memory Management</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-4"><span class="nav-number">5.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-4"><span class="nav-number">5.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-4"><span class="nav-number">5.3.</span> <span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-4"><span class="nav-number">5.4.</span> <span class="nav-text">Q4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5-4"><span class="nav-number">5.5.</span> <span class="nav-text">Q5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q6-4"><span class="nav-number">5.6.</span> <span class="nav-text">Q6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q7-3"><span class="nav-number">5.7.</span> <span class="nav-text">Q7</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basics-of-Functions"><span class="nav-number">6.</span> <span class="nav-text">Basics of Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-5"><span class="nav-number">6.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-5"><span class="nav-number">6.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-5"><span class="nav-number">6.3.</span> <span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-5"><span class="nav-number">6.4.</span> <span class="nav-text">Q4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5-5"><span class="nav-number">6.5.</span> <span class="nav-text">Q5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q6-5"><span class="nav-number">6.6.</span> <span class="nav-text">Q6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q7-4"><span class="nav-number">6.7.</span> <span class="nav-text">Q7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q8-3"><span class="nav-number">6.8.</span> <span class="nav-text">Q8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q9-1"><span class="nav-number">6.9.</span> <span class="nav-text">Q9</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q10"><span class="nav-number">6.10.</span> <span class="nav-text">Q10</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advances-in-Functions"><span class="nav-number">7.</span> <span class="nav-text">Advances in Functions</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-6"><span class="nav-number">7.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-6"><span class="nav-number">7.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-6"><span class="nav-number">7.3.</span> <span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-6"><span class="nav-number">7.4.</span> <span class="nav-text">Q4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5-6"><span class="nav-number">7.5.</span> <span class="nav-text">Q5</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Basics-of-Classes"><span class="nav-number">8.</span> <span class="nav-text">Basics of Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-7"><span class="nav-number">8.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-7"><span class="nav-number">8.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-7"><span class="nav-number">8.3.</span> <span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-7"><span class="nav-number">8.4.</span> <span class="nav-text">Q4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5-7"><span class="nav-number">8.5.</span> <span class="nav-text">Q5</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Advances-in-Classes"><span class="nav-number">9.</span> <span class="nav-text">Advances in Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-8"><span class="nav-number">9.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-8"><span class="nav-number">9.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-8"><span class="nav-number">9.3.</span> <span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-8"><span class="nav-number">9.4.</span> <span class="nav-text">Q4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5-8"><span class="nav-number">9.5.</span> <span class="nav-text">Q5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q6-6"><span class="nav-number">9.6.</span> <span class="nav-text">Q6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q7-5"><span class="nav-number">9.7.</span> <span class="nav-text">Q7</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q8-4"><span class="nav-number">9.8.</span> <span class="nav-text">Q8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q9-2"><span class="nav-number">9.9.</span> <span class="nav-text">Q9</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q10-1"><span class="nav-number">9.10.</span> <span class="nav-text">Q10</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dynamic-Memory-Management-in-Classes"><span class="nav-number">10.</span> <span class="nav-text">Dynamic Memory Management in Classes</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-9"><span class="nav-number">10.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-9"><span class="nav-number">10.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-9"><span class="nav-number">10.3.</span> <span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-9"><span class="nav-number">10.4.</span> <span class="nav-text">Q4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q5-9"><span class="nav-number">10.5.</span> <span class="nav-text">Q5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q6-7"><span class="nav-number">10.6.</span> <span class="nav-text">Q6</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-Inheritance"><span class="nav-number">11.</span> <span class="nav-text">Class Inheritance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-10"><span class="nav-number">11.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-10"><span class="nav-number">11.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-10"><span class="nav-number">11.3.</span> <span class="nav-text">Q3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Class-Templates-and-std-Library"><span class="nav-number">12.</span> <span class="nav-text">Class Templates and std Library</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-11"><span class="nav-number">12.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-11"><span class="nav-number">12.2.</span> <span class="nav-text">Q2</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Handling"><span class="nav-number">13.</span> <span class="nav-text">Error Handling</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Q1-12"><span class="nav-number">13.1.</span> <span class="nav-text">Q1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q2-12"><span class="nav-number">13.2.</span> <span class="nav-text">Q2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q3-11"><span class="nav-number">13.3.</span> <span class="nav-text">Q3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Q4-10"><span class="nav-number">13.4.</span> <span class="nav-text">Q4</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>
