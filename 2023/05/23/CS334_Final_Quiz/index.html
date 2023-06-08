@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/05/23/akqROWXvn49rxZe.png">
 <meta property="og:image" content="https://s2.loli.net/2023/05/23/rEflwc6y9Ovp2eP.png">
 <meta property="article:published_time" content="2023-05-23T05:09:18.000Z">
-<meta property="article:modified_time" content="2023-05-23T05:09:18.000Z">
+<meta property="article:modified_time" content="2023-06-08T10:25:30.661Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Operating System">
 <meta name="twitter:card" content="summary">
@@ -196,6 +196,13 @@
 
               <time title="创建时间：2023-05-23 13:09:18" itemprop="dateCreated datePublished" datetime="2023-05-23T13:09:18+08:00">2023-05-23</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-08 18:25:30" itemprop="dateModified" datetime="2023-06-08T18:25:30+08:00">2023-06-08</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -250,6 +257,9 @@
 <li>A round-robin scheduling algorithm is non-preemptive, because it does not preempt the running process when another process switches from waiting to ready</li>
 <li>Re-parenting happens when the parent process terminates before the child process</li>
 </ol>
+<p><strong>Answers：</strong></p>
+<details>FTTTT TTTFT TFFTF ??TFF TFFTF FTTFT</details>
+
 <h2 id="Q2-Short-Answers"><a href="#Q2-Short-Answers" class="headerlink" title="Q2. Short Answers"></a>Q2. Short Answers</h2><ol>
 <li><p>A solution to the critical section problem must satisfy ______, ______ and ______.</p>
 </li>
@@ -277,6 +287,22 @@
 <li><p>______ is the phenomenon in which increasing the number of page frames results in an increase in the number of page faults for certain memory access patterns. This phenomenon is commonly experienced when using the ______ page replacement algorithm.</p>
 </li>
 </ol>
+<p><strong>Answers</strong>:</p>
+<details>
+    <p>1. Mutual exclusion, progress, bounded waiting</p>
+    <p>2. 2^30 Bytes, 2^21 Bytes, 2^12 Bytes</p>
+    <p>3. Internal fragmentation, Connot support larger address space, Hard to do inter-process sharing</p>
+    <p>4. CPU hardware cache to store PTEs that have been mostly reccently used, to spend up virtual address translation; When chaging page tables or updating page table contents.</p>
+    <p>5. OS content switch must also saave and restire all pairs sof segment registers; A segment may grow, which may or may not be possible; Management of free spaces of physical memory with variable-sized segments; External fragmentation</p>
+    <p>6. User, Supervisor, Machine</p>
+    <p>7. Register, Block, Stack</p>
+    <p>8. A hard link is a directory entry pointing to the iNode of an existing file; A symbolic link creates a new iNode, with the path to the target file in its data block; Deleting the target file does not affect the hard link, but deleting the target file makes the soft link invalid.</p>
+    <p>9. FAT32 stores file names and attributes in the directory entries; ext2/3 file system stores the file name in the directry entries, and the file attributes in the iNode.</p>
+    <p>10. one-to-one, Many-to-one, Many-to-many mapping</p>
+    <p>11. 0x dd 42 34 e7</p>
+    <p>12. Bélady's Anomalty, FIFO</p>
+</details>
+
 <h2 id="Q3-Questions-and-Answers"><a href="#Q3-Questions-and-Answers" class="headerlink" title="Q3. Questions and Answers"></a>Q3. Questions and Answers</h2><ol>
 <li><p>On some CPU architecture, the page size is 16B, each page table entry is 4B, the virtual address has 8 bits.</p>
 <p>(1) What is the size of the virtual space?</p>
@@ -285,6 +311,13 @@
 <p>(4) If the CPU architecture changes to support page size of 32B, everything else remains unchanged. With the following page table, what is the physical address of 0x64?</p>
 <p>Extra: The physical address of the virtual address 0x364 is 0x1164. What is the corresponding PFN(in decimal numbers)?</p>
 <p><img src="https://s2.loli.net/2023/05/23/akqROWXvn49rxZe.png" alt="image.png"></p>
+<p><strong>Answers</strong>:</p>
+<details>
+    <p>(1) 256 Bytes</p>
+    <p>(2) 2 levels</p>
+    <p>(3) 0x3e4</p>
+    <p>(4) 0xc8</p>
+</details>
 </li>
 <li><p>Suppose we have 3 page frames(1, 2, 3), 4 virtual pages(A, B, C, D), consider the following reference string: A B C A D B A C B C. What are the number of page faults for the following page replacement policies? Show each step in the tables.</p>
 <p>(1) MIN</p>
@@ -292,23 +325,356 @@
 <p>(3) FIFO</p>
 <p>(4) Clock (hint: only second page reference set reference bit)</p>
 <p><img src="https://s2.loli.net/2023/05/23/rEflwc6y9Ovp2eP.png" alt="image.png"></p>
+<p><strong>Answers</strong>:</p>
+<details>
+    <table>
+    <tr>
+        <td></td>
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>A</td>
+        <td>D</td>
+        <td>B</td>
+        <td>A</td>
+        <td>C</td>
+        <td>B</td>
+        <td>C</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>A</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>C</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td></td>
+        <td>B</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td></td>
+        <td></td>
+        <td>C</td>
+        <td></td>
+        <td>D</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td></td>
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>A</td>
+        <td>D</td>
+        <td>B</td>
+        <td>A</td>
+        <td>C</td>
+        <td>B</td>
+        <td>C</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>A</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td></td>
+        <td>B</td>
+        <td></td>
+        <td></td>
+        <td>D</td>
+        <td></td>
+        <td></td>
+        <td>C</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td></td>
+        <td></td>
+        <td>C</td>
+        <td></td>
+        <td></td>
+        <td>B</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td></td>
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>A</td>
+        <td>D</td>
+        <td>B</td>
+        <td>A</td>
+        <td>C</td>
+        <td>B</td>
+        <td>C</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>A</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>D</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td></td>
+        <td>B</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>A</td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td></td>
+        <td></td>
+        <td>C</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>B</td>
+        <td></td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td></td>
+        <td>A</td>
+        <td>B</td>
+        <td>C</td>
+        <td>A</td>
+        <td>D</td>
+        <td>B</td>
+        <td>A</td>
+        <td>C</td>
+        <td>B</td>
+        <td>C</td>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>A</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td></td>
+        <td>B</td>
+        <td></td>
+        <td></td>
+        <td>D</td>
+        <td></td>
+        <td></td>
+        <td>C</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td></td>
+        <td></td>
+        <td>C</td>
+        <td></td>
+        <td></td>
+        <td>B</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+</details>
 </li>
 <li><p>In a computer system that supports demand-paging, the memory access time is 50 ns, the average page fault service time is 5 ms. The page fault rate $p$ is 1/5000. What is the Effective Access Time?</p>
+<p><strong>Answer</strong>:</p>
+<details>
+    <p>1.05 μs</p>
+</details>
 </li>
 <li><p>Consider a set of 4 processes, with their arrival time and CPU burst time shown in the table. What is the average turnaround time with the following CPU scheduling algorithm?</p>
 <p>(1) Non-preemptive SJF</p>
 <p>(2) Preemptive SJF</p>
 <p>(3) Round-robin with a scheduling quantum of 2(let’s assume here if two process arrive at the ready queue at the same time, the one with running-ready state transition is placed at the end of the queue).</p>
+<p><strong>Answers:</strong></p>
+<details>
+<table>
+    <p>(1) (6 + 11 + 5 + 5) / 4 = 6.75</p>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+    </tr>
+    <tr>
+        <td>P1</td>
+        <td>P1</td>
+        <td>P1</td>
+        <td>P1</td>
+        <td>P1</td>
+        <td>P1</td>
+        <td>P3</td>
+        <td>P4</td>
+        <td>P4</td>
+        <td>P2</td>
+        <td>P2</td>
+        <td>P2</td>
+    </tr>
+</table>
+<p>(2) (12 + 4 + 1 + 3) / 4 = 5</p>
+<table>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+    </tr>
+    <tr>
+        <td>P1</td>
+        <td>P2</td>
+        <td>P3</td>
+        <td>P2</td>
+        <td>P2</td>
+        <td>P4</td>
+        <td>P4</td>
+        <td>P1</td>
+        <td>P1</td>
+        <td>P1</td>
+        <td>P1</td>
+        <td>P1</td>
+    </tr>
+</table>
+<p>(3) (12 + 9 + 3 + 5) / 4 = 7.25</p>
+<table>
+    <tr>
+        <td>1</td>
+        <td>2</td>
+        <td>3</td>
+        <td>4</td>
+        <td>5</td>
+        <td>6</td>
+        <td>7</td>
+        <td>8</td>
+        <td>9</td>
+        <td>10</td>
+        <td>11</td>
+        <td>12</td>
+    </tr>
+    <tr>
+        <td>P1</td>
+        <td>P1</td>
+        <td>P2</td>
+        <td>P2</td>
+        <td>P3</td>
+        <td>P1</td>
+        <td>P1</td>
+        <td>P4</td>
+        <td>P4</td>
+        <td>P2</td>
+        <td>P1</td>
+        <td>P1</td>
+    </tr>
+</table>
+</details>
 </li>
 <li><p>In a disk scheduling algorithm, the range of the cylinders is 0~99. The arm head is originally located at track 50. The queue of requests is 25, 98, 52, 67, 42, 8. What is head movement distance, considering the following disk scheduling algorithms? Hint: for SCAN/C-SCAN/LOOK/C_LOOK, the arm head moves towards 99 first; for C-LOOK/C-SCAN, both directions count towards movement distance.</p>
 <p>(1) SSTF</p>
 <p>(2) C-LOOK</p>
 <p>(3) SCAN</p>
 <p>(4) FIFO</p>
+<p><strong>Answers:</strong></p>
+<details>
+    <p>(1) 136</p>
+    <p>(2) 172</p>
+    <p>(3) 142</p>
+    <p>(4) 218</p>
+</details>
 </li>
 <li><p>A Turing Class student designed an iNode-based file system, called TCFS. The structure of an iNode in Site FS has 256 bytes, with 10 direct block pointers, 2 single indirect block pointers, and 1 double indirect block pointer. A block pointer takes 8 bytes. The block size is 8 KB.</p>
 <p>(1) What is the maximum size of a file in TCFS?</p>
 <p>(2) What is the maximum size of a file system with TCFS format?</p>
+<p><strong>Answers:</strong></p>
+<details>
+    <p>10*8KB + 2*(8K/8)*8KB + (8K/8)*(8K/8)*8KB = 8GB</p>
+    <p> 2 ^ 64 * 8K = 2 ^ 77</p>
+</details>
+
+
 </li>
 </ol>
 
