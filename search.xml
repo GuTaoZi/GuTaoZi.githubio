@@ -7409,13 +7409,46 @@ a & \text { if } n=0
 <li>Bagging</li>
 <li>Random Forests</li>
 </ul>
-<h3 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h3><p>在带权重的训练数据上训练弱学习者，表现好的学习者给更多权重</p>
+<h4 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h4><p>在带权重的训练数据上训练弱学习者，表现好的学习者给更多权重</p>
 <p>难样本给更高权重，简单样本给更低权重</p>
 <p>错误率决定了最终的贡献比：</p>
 <script type="math/tex; mode=display">\alpha_m=\frac 1 2 \log(\frac{1-err_m}{err_m})</script><p><img src="https://s2.loli.net/2023/06/14/tpjgqJIMOQrNUAb.png" alt="image.png" style="zoom: 33%;" /></p>
 <p>数据集上的权重从均权开始，错的人越多权值变得越大，越少就变小</p>
-<script type="math/tex; mode=display">w_i=w_i*\exp[-\alpha_my_iG_m(x_i)]</script><h3 id="Bagging-amp-Bootstrapping"><a href="#Bagging-amp-Bootstrapping" class="headerlink" title="Bagging &amp; Bootstrapping"></a>Bagging &amp; Bootstrapping</h3><p>Bootstrapping是重采样，按照经验分布进行采样</p>
-]]></content>
+<script type="math/tex; mode=display">w_i=w_i*\exp[-\alpha_my_iG_m(x_i)]</script><h4 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h4><p>Bootstrapping是重采样，按照经验分布进行采样</p>
+<p>Bagging和Boosting都基于Bootstrapping</p>
+<p>都使用了重采样来生成弱分类器</p>
+<p>Bagging = Bootstrap aggregation</p>
+<p>每次就选等大的一部分数据用来训练一个弱分类器。</p>
+<h4 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h4><p>不拆数据了，拆特征维数，每次只用一部分特征来分类，多长几棵树投票。</p>
+<p>一般拆出来训练的特征维数$m\le\sqrt d$</p>
+<h3 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h3><p>无监督学习，分成$k$个聚类</p>
+<h4 id="K-means"><a href="#K-means" class="headerlink" title="K-means"></a>K-means</h4><p>最小化聚类内部的均方差：</p>
+<script type="math/tex; mode=display">J=\sum\limits_{j=1}^k\sum\limits_{x_i\in C_j}||x_i-\mu_j||^2</script><p>$\mu_j$是第$j$个聚类中的平均值</p>
+<p>优点：容易实现</p>
+<p>缺点：得知道$K$；维数灾难；没有理论基础</p>
+<h4 id="K-means的一些问题"><a href="#K-means的一些问题" class="headerlink" title="K-means的一些问题"></a>K-means的一些问题</h4><p><strong>怎么取$k$？</strong></p>
+<p>多试几个，选”elbow-point”</p>
+<p>G-means算法</p>
+<ol>
+<li>用一个小$k$开始</li>
+<li>从$k$个聚类中心点跑K-means</li>
+<li>看看聚类是否环绕这些中心正态分布</li>
+<li>如果OK就不管，如果不是那就拆成两个聚类中心</li>
+<li>继续迭代，直到大家都正态分布</li>
+</ol>
+<p><strong>怎么评价模型？</strong></p>
+<p>内部评价：高聚类内部相似度，低聚类外部相似度数据检验，可以用 Davies-Bouldin index评估聚类的紧密型</p>
+<p>外部评价：利用对外部数据的知识库做评估(是否符合客观规律)</p>
+<p><strong>如果不想要圆形聚类呢？</strong></p>
+<p>其他方法：spectral clustering, kernelized K-means, DBSCAN, BIRCH, etc.</p>
+<p><strong>怎么初始化？</strong></p>
+<p>K-means对聚类中心的选取高度敏感，收敛速度和聚类效果都有影响。</p>
+<p>比较安全的技巧是新聚类中心和之前的聚类中心安排得尽量远</p>
+<p>解决方案是多重开几次选最好的。</p>
+<p><strong>其他的限制？</strong></p>
+<p>对一些样本做硬赋值，高斯混合模型允许软赋值(不同的赋值有概率)</p>
+<p>对离群的例子高敏感，K-median在这方面的鲁棒性更好</p>
+<script type="math/tex; mode=display">\Huge \mathscr{Good\ luck!}</script>]]></content>
       <categories>
         <category>CS</category>
       </categories>
