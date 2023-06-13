@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 6.2.0">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"slideLeftBigIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="AI这东西随主人的，我学不进去它也学不进去">
@@ -27,11 +27,13 @@
 <meta property="og:site_name" content="咕桃w！">
 <meta property="og:description" content="AI这东西随主人的，我学不进去它也学不进去">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://s2.loli.net/2023/06/13/TnYsVXi8B56aeuJ.png">
 <meta property="article:published_time" content="2023-06-12T03:13:10.621Z">
-<meta property="article:modified_time" content="2023-06-13T11:40:23.690Z">
+<meta property="article:modified_time" content="2023-06-13T13:49:11.626Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Artificial Intelligence">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/06/13/TnYsVXi8B56aeuJ.png">
 
 <link rel="canonical" href="https://gutaozi.github.io/2023/06/12/CS311_Final_Review/">
 
@@ -105,6 +107,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -139,11 +142,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -197,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-13 19:40:23" itemprop="dateModified" datetime="2023-06-13T19:40:23+08:00">2023-06-13</time>
+                <time title="修改时间：2023-06-13 21:49:11" itemprop="dateModified" datetime="2023-06-13T21:49:11+08:00">2023-06-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -500,9 +530,66 @@
 </ul>
 <h3 id="alpha-beta-剪枝"><a href="#alpha-beta-剪枝" class="headerlink" title="$\alpha-\beta$ 剪枝"></a>$\alpha-\beta$ 剪枝</h3><p>$\alpha$：$\text{MAX}$结点目前已经探索的结点中最大的一个。当前结点不会探索比$\alpha$估值还低的结点。</p>
 <p>$\beta$：$\text{MIN}$结点目前已经探索的节点中最小的一个。当前结点不会探索比$\beta$估值还高的结点。</p>
-<p><strong>什么时候要剪呢？</strong></p>
-<p>$\text{MAX}$视角：$\text{MIN}$在再下一步的结点中，发现了比$\alpha$还低的值，那$\text{Min}$肯定会选这个分支，导致$\text{MAX}$的估值小于$\alpha$，为了避免这种局面，当下一层的$\text{MIN}$发现了一个比$\alpha$还小的值时，说明对手足够聪明的情况下，$\text{MAX}$在这一分支会被对手限制到不如$\alpha$的局面，剪掉。</p>
+<h4 id="什么时候要剪呢？"><a href="#什么时候要剪呢？" class="headerlink" title="什么时候要剪呢？"></a>什么时候要剪呢？</h4><p>$\text{MAX}$视角：$\text{MIN}$在再下一步的结点中，发现了比$\alpha$还低的值，那$\text{Min}$肯定会选这个分支，导致$\text{MAX}$的估值小于$\alpha$，为了避免这种局面，当下一层的$\text{MIN}$发现了一个比$\alpha$还小的值时，说明对手足够聪明的情况下，$\text{MAX}$在这一分支会被对手限制到不如$\alpha$的局面，剪掉。</p>
 <p>$\text{MIN}$视角：$\text{MAX}$在再下一步的结点中，发现了比$\beta$还大的值，那$\text{MAX}$肯定会选这个分支，导致$\text{MIN}$的估值大于$\beta$，为了避免这种局面，当下一层的$\text{MAX}$发现了一个比$\beta$还大的值时，说明对手足够聪明的情况下，会选择这个新的分支规避$\beta$的限制，故剪掉。</p>
+<h4 id="“自裁式”实现"><a href="#“自裁式”实现" class="headerlink" title="“自裁式”实现"></a>“自裁式”实现</h4><p>上面的说法更像是当前结点主动剪子结点。但还有一种“自裁式”的剪法，就是某个结点发现自己太好了，肯定会被足够聪明的上一层剪掉，就自裁了。</p>
+<p>搜索的时候，父结点把自己的$\alpha-\beta$给子结点，探索完一个子结点后，做如下操作：</p>
+<p>当前节点是$\text{MAX}$，如果$\text{MIN}$子结点给出的估值比当前最高的还高，那就检查有没有超过当前节点的$\beta$，如果超过了当前节点的$\beta$，说明当前这一支太好了，会被更高层的$\text{MIN}$掐掉，所以这个$\text{MAX}$结点就被整个剪掉了；如果没超过$\beta$而且还比当前最高还高，那就更新当前的最高值和$\alpha$。</p>
+<p>当前节点是$\text{MIN}$时同理，如果这个$\text{MIN}$结点能把最优解掐到不足$\alpha$，那$\text{MIN}$结点的$\text{MAX}$父节点肯定不乐意啊，所以一整个$\text{MIN}$结点就被剪掉了。</p>
+<p><img src="https://s2.loli.net/2023/06/13/TnYsVXi8B56aeuJ.png" alt="image.png"></p>
+<center>Minimax搜索伪代码</center>
+
+<h4 id="换序剪枝"><a href="#换序剪枝" class="headerlink" title="换序剪枝"></a>换序剪枝</h4><p>$\alpha-\beta$ 剪枝的效果受访问顺序影响，有可能导致剪枝的结点最后才被访问，这就剪了个寂寞。</p>
+<p>最差的顺序相当于没有剪枝，复杂度是$O(b^m)$。</p>
+<p>最好的顺序则是把最“聪明”的结点都放在最先访问，实际复杂度是$O(b^{m/2})$，直接开了个根号。</p>
+<p>如何找到一个好的顺序呢？除了动用领域知识，还可以保存历史表，以前发现最好的几步可能在之后还是最好的几步，或是保存状态以供重复时使用。</p>
+<h4 id="实际情况"><a href="#实际情况" class="headerlink" title="实际情况"></a>实际情况</h4><p>上面的$\alpha-\beta$剪枝伪代码还是要一直搜到叶子结点，依然是不现实的，所以将$\text{Util(s)}$函数更换为可以评价中局的启发式函数$\text{eval(s)}$。</p>
+<h3 id="期望Minimax搜索"><a href="#期望Minimax搜索" class="headerlink" title="期望Minimax搜索"></a>期望Minimax搜索</h3><p>对于带有随机性的博弈，期望Minimax搜索在$\text{MIN}$和$\text{MAX}$之外又加入了$\text{Chance}$层，会返回当前所有可能发生的情况合起来的期望。</p>
+<script type="math/tex; mode=display">f(s)=\left\{\begin{align*}&\text{Utility(s)}&\text{if Terminal-test(s)}\\ &\max_{a\in\text{Actions(s)}}f(\text{Result(s,a)})&\text{if Player(s)=MAX}\\&\min_{a\in\text{Actions(s)}}f(\text{Result(s,a)})&\text{if Player(s)=MIN}\\&\sum\limits_{r}P(r)f(\text{Result(s,r)})&\text{if Player(s)=Chance}\end{align*}\right.</script><p>其中$r$代表了所有的随机事件。</p>
+<h2 id="Chapter-5-约束满足问题"><a href="#Chapter-5-约束满足问题" class="headerlink" title="Chapter 5 - 约束满足问题"></a>Chapter 5 - 约束满足问题</h2><h3 id="CSP概述"><a href="#CSP概述" class="headerlink" title="CSP概述"></a>CSP概述</h3><p>也是搜索问题，但是我们更关心目标本身。</p>
+<p>CSP的状态是因子表示的，也就是由一组变量表示。</p>
+<p>一个目标测试(goal test)是对于这组变量(的子集)的一组限制。</p>
+<p><strong>CSP问题的三个要素</strong></p>
+<ol>
+<li>变量集合$X$</li>
+<li>变量定义域的集合$D$</li>
+<li>约束的集合$C$</li>
+</ol>
+<p>CSP的解：在定义域$D$中，对变量$X$找到一个合适的赋值方案$s$，满足所有的约束$C$。这样的解称为一致的赋值(consistent assignment)。</p>
+<p>变量类型：离散/连续</p>
+<p>限制类型：一元(unary)，二元(binary)，全局(global)，偏好/软限制(preferences/soft constraints)</p>
+<h3 id="解决CSP"><a href="#解决CSP" class="headerlink" title="解决CSP"></a>解决CSP</h3><p>暴力太慢，配合推理(inference)和搜索(search)来加速。</p>
+<p>Inference主要是约束传播(constraint propagation)，是指一个变量的合法取值变少时，其他变量的合法取值也会变少。</p>
+<p>Search的DFS和BFS都是老朋友了，新来了个BTS。</p>
+<p>回溯搜索(Backtracking search, BTS)也是一种DFS，满足以下条件：</p>
+<ul>
+<li>一次赋一个变量的值：赋值顺序是可交换的</li>
+<li>赋值的时候就注意和之前的赋值不能冲突</li>
+</ul>
+<h3 id="改进BTS的三种方法"><a href="#改进BTS的三种方法" class="headerlink" title="改进BTS的三种方法"></a>改进BTS的三种方法</h3><h4 id="最小剩余值-Minimum-Remaining-Value"><a href="#最小剩余值-Minimum-Remaining-Value" class="headerlink" title="最小剩余值(Minimum Remaining Value)"></a>最小剩余值(Minimum Remaining Value)</h4><p>Q：先给哪个变量赋值？</p>
+<blockquote>
+<p>先挑硬柿子捏</p>
+</blockquote>
+<p>每次挑剩余选择最少的结点赋值。</p>
+<h4 id="最小限制值-Least-Constraining-Value"><a href="#最小限制值-Least-Constraining-Value" class="headerlink" title="最小限制值(Least Constraining Value)"></a>最小限制值(Least Constraining Value)</h4><p>Q：给这个变量赋哪个值？</p>
+<blockquote>
+<p>少给后人添麻烦</p>
+</blockquote>
+<p>每次挑对别人限制最少的结点赋值。</p>
+<h4 id="前向检查-Forward-Checking"><a href="#前向检查-Forward-Checking" class="headerlink" title="前向检查(Forward Checking)"></a>前向检查(Forward Checking)</h4><p>Q：世界末日是可预见的吗？</p>
+<blockquote>
+<p>关心每个人的未来</p>
+</blockquote>
+<p>每次赋值后检查所有未赋值变量定义域是否为空。</p>
+<p>在前向检查的时候用到了约束传播的思想，用已赋值的变量去限制未赋值的变量，看还有没有合法赋值，不过这里并不做未赋值变量之间的检查。</p>
+<h3 id="一致性"><a href="#一致性" class="headerlink" title="一致性"></a>一致性</h3><h4 id="点一致性-一元限制"><a href="#点一致性-一元限制" class="headerlink" title="点一致性(一元限制)"></a>点一致性(一元限制)</h4><p>如果一个点的定义域内所有的值都满足所有的一元限制，那它拥有点一致性</p>
+<h4 id="弧一致性-二元限制"><a href="#弧一致性-二元限制" class="headerlink" title="弧一致性(二元限制)"></a>弧一致性(二元限制)</h4><p>两个变量$X\rightarrow Y$具有弧一致性，当且仅当对$X$的每个值都有对应的$Y$的值满足二元条件。</p>
+<p><strong>弧一致性检验</strong></p>
+<p>AC-3算法，复杂度$O(n^2d^3)$。</p>
+<p>$\text{REVISE()}$函数根据给定的两个变量，将第一个变量定义域中找不到第二个变量定义域对应值的值删掉，只有删了至少一个值的时候才会返回真，说明需要对前者的邻居再进行$\text{REVISE}$，复杂度$O(d^2)$，$d$是定义域大小。</p>
+<p>$\text{AC-3()}$函数维护一个初始包含所有弧的队列，每次取出一个做$\text{REVISE}$，如果前变量的定义域缩小了，那就用它接着更新它的其他邻居，直到所有弧都出队(被满足)，或是有一个点的定义域被删干净了(不满足)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">function AC-3(csp)</span><br><span class="line">returns False if an inconsistency is found, True otherwise</span><br><span class="line">inputs: csp, a binary CSP with components (X, D, C)</span><br><span class="line">local variables: queue, a queue of arcs, initially all the arcs in csp</span><br><span class="line">while queue is not empty do</span><br><span class="line">    (Xi, Xj) = REMOVE-FIRST(queue)</span><br><span class="line">    if REVISE(csp, Xi, Xj)then</span><br><span class="line">        if size of Di = 0 then return False</span><br><span class="line">        for each Xk in Xi.NEIGHBORS- &#123;Xj&#125; do</span><br><span class="line">            add (Xk,Xi) to queue</span><br><span class="line">return true</span><br><span class="line"></span><br><span class="line">function REVISE(csp, Xi, Xj)</span><br><span class="line">returns True if we revise the domain of Xi</span><br><span class="line">revised = False</span><br><span class="line">for each x in Di do</span><br><span class="line">    if no value y in Dj allows (x, y) to satisfy the constraint between Xi and Xj then</span><br><span class="line">        delete x from D;</span><br><span class="line">        revised = True</span><br><span class="line">return revised</span><br></pre></td></tr></table></figure>
+<h4 id="路径一致性-多元限制"><a href="#路径一致性-多元限制" class="headerlink" title="路径一致性(多元限制)"></a>路径一致性(多元限制)</h4><p>弧一致性的多元推广。</p>
 
     </div>
 
@@ -597,7 +684,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - 人工智能概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E4%BD%93"><span class="nav-number">1.1.</span> <span class="nav-text">智能体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2 - 搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">搜索概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">2.2.</span> <span class="nav-text">无信息搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.</span> <span class="nav-text">有信息搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83BFS"><span class="nav-number">2.3.1.</span> <span class="nav-text">贪心BFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#A-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.2.</span> <span class="nav-text">A*搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E6%8E%A5%E5%8F%97%E7%9A%84%E5%90%AF%E5%8F%91%E5%87%BD%E6%95%B0-Admissible-heuristics"><span class="nav-number">2.3.3.</span> <span class="nav-text">可接受的启发函数(Admissible heuristics)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IDA-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.4.</span> <span class="nav-text">IDA*搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2"><span class="nav-number">2.4.</span> <span class="nav-text">局部搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%88%AC%E5%B1%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">爬山算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">遗传算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB"><span class="nav-number">2.4.3.</span> <span class="nav-text">模拟退火</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-3-%E5%90%AF%E5%8F%91%E4%B8%8E%E5%85%83%E5%90%AF%E5%8F%91"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3 - 启发与元启发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-4-%E5%AF%B9%E6%8A%97%E6%90%9C%E7%B4%A2"><span class="nav-number">4.</span> <span class="nav-text">Chapter 4 - 对抗搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimax%E6%90%9C%E7%B4%A2"><span class="nav-number">4.1.</span> <span class="nav-text">Minimax搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alpha-beta-%E5%89%AA%E6%9E%9D"><span class="nav-number">4.2.</span> <span class="nav-text">$\alpha-\beta$ 剪枝</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - 人工智能概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E4%BD%93"><span class="nav-number">1.1.</span> <span class="nav-text">智能体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2 - 搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">搜索概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">2.2.</span> <span class="nav-text">无信息搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.</span> <span class="nav-text">有信息搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83BFS"><span class="nav-number">2.3.1.</span> <span class="nav-text">贪心BFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#A-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.2.</span> <span class="nav-text">A*搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E6%8E%A5%E5%8F%97%E7%9A%84%E5%90%AF%E5%8F%91%E5%87%BD%E6%95%B0-Admissible-heuristics"><span class="nav-number">2.3.3.</span> <span class="nav-text">可接受的启发函数(Admissible heuristics)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IDA-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.4.</span> <span class="nav-text">IDA*搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2"><span class="nav-number">2.4.</span> <span class="nav-text">局部搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%88%AC%E5%B1%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">爬山算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">遗传算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB"><span class="nav-number">2.4.3.</span> <span class="nav-text">模拟退火</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-3-%E5%90%AF%E5%8F%91%E4%B8%8E%E5%85%83%E5%90%AF%E5%8F%91"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3 - 启发与元启发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-4-%E5%AF%B9%E6%8A%97%E6%90%9C%E7%B4%A2"><span class="nav-number">4.</span> <span class="nav-text">Chapter 4 - 对抗搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimax%E6%90%9C%E7%B4%A2"><span class="nav-number">4.1.</span> <span class="nav-text">Minimax搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alpha-beta-%E5%89%AA%E6%9E%9D"><span class="nav-number">4.2.</span> <span class="nav-text">$\alpha-\beta$ 剪枝</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A6%81%E5%89%AA%E5%91%A2%EF%BC%9F"><span class="nav-number">4.2.1.</span> <span class="nav-text">什么时候要剪呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%80%9C%E8%87%AA%E8%A3%81%E5%BC%8F%E2%80%9D%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.2.2.</span> <span class="nav-text">“自裁式”实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%A2%E5%BA%8F%E5%89%AA%E6%9E%9D"><span class="nav-number">4.2.3.</span> <span class="nav-text">换序剪枝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E6%83%85%E5%86%B5"><span class="nav-number">4.2.4.</span> <span class="nav-text">实际情况</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9BMinimax%E6%90%9C%E7%B4%A2"><span class="nav-number">4.3.</span> <span class="nav-text">期望Minimax搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-5-%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">Chapter 5 - 约束满足问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSP%E6%A6%82%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text">CSP概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3CSP"><span class="nav-number">5.2.</span> <span class="nav-text">解决CSP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9BBTS%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">5.3.</span> <span class="nav-text">改进BTS的三种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%89%A9%E4%BD%99%E5%80%BC-Minimum-Remaining-Value"><span class="nav-number">5.3.1.</span> <span class="nav-text">最小剩余值(Minimum Remaining Value)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E9%99%90%E5%88%B6%E5%80%BC-Least-Constraining-Value"><span class="nav-number">5.3.2.</span> <span class="nav-text">最小限制值(Least Constraining Value)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E6%A3%80%E6%9F%A5-Forward-Checking"><span class="nav-number">5.3.3.</span> <span class="nav-text">前向检查(Forward Checking)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">5.4.</span> <span class="nav-text">一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%82%B9%E4%B8%80%E8%87%B4%E6%80%A7-%E4%B8%80%E5%85%83%E9%99%90%E5%88%B6"><span class="nav-number">5.4.1.</span> <span class="nav-text">点一致性(一元限制)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%A7%E4%B8%80%E8%87%B4%E6%80%A7-%E4%BA%8C%E5%85%83%E9%99%90%E5%88%B6"><span class="nav-number">5.4.2.</span> <span class="nav-text">弧一致性(二元限制)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E4%B8%80%E8%87%B4%E6%80%A7-%E5%A4%9A%E5%85%83%E9%99%90%E5%88%B6"><span class="nav-number">5.4.3.</span> <span class="nav-text">路径一致性(多元限制)</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -704,6 +791,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
