@@ -28,8 +28,11 @@
 <meta property="og:description" content="AI这东西随主人的，我学不进去它也学不进去">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s2.loli.net/2023/06/13/TnYsVXi8B56aeuJ.png">
+<meta property="og:image" content="https://s2.loli.net/2023/06/13/DzvuyEiZMP172UW.png">
+<meta property="og:image" content="https://s2.loli.net/2023/06/13/LYKqpsglET7nU3W.png">
+<meta property="og:image" content="https://s2.loli.net/2023/06/13/xFzXuBYUosTMe4w.png">
 <meta property="article:published_time" content="2023-06-12T03:13:10.621Z">
-<meta property="article:modified_time" content="2023-06-13T14:32:29.069Z">
+<meta property="article:modified_time" content="2023-06-13T16:22:01.392Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Artificial Intelligence">
 <meta name="twitter:card" content="summary">
@@ -227,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-13 22:32:29" itemprop="dateModified" datetime="2023-06-13T22:32:29+08:00">2023-06-13</time>
+                <time title="修改时间：2023-06-14 00:22:01" itemprop="dateModified" datetime="2023-06-14T00:22:01+08:00">2023-06-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -260,7 +263,7 @@
 <li>约束满足问题</li>
 <li>逻辑</li>
 <li>机器学习概述</li>
-<li>线性回归与逻辑回归</li>
+<li>线性回归与对数回归</li>
 <li>支持向量机</li>
 <li>感知机与神经网络</li>
 <li>决策树与朴素贝叶斯</li>
@@ -612,7 +615,137 @@
 <li>复杂度会远远小于$O(|\text{Knowledge Base}|)$</li>
 </ul>
 <p><del>一阶逻辑？ Nobody cares(</del></p>
-<h2 id="Chapter-7-机器学习概述"><a href="#Chapter-7-机器学习概述" class="headerlink" title="Chapter 7 - 机器学习概述"></a>Chapter 7 - 机器学习概述</h2>
+<h2 id="Chapter-7-机器学习概述"><a href="#Chapter-7-机器学习概述" class="headerlink" title="Chapter 7 - 机器学习概述"></a>Chapter 7 - 机器学习概述</h2><blockquote>
+<p>A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E.</p>
+<p>Tom Mitchell. Machine Learning 1997.</p>
+</blockquote>
+<h3 id="无监督学习"><a href="#无监督学习" class="headerlink" title="无监督学习"></a>无监督学习</h3><p>无监督学习：训练样本没有标签</p>
+<p>应用：聚类，切割</p>
+<p>算法：K-means, Gaussian mixtures, hierarchical clustering, spectral clustering, etc.</p>
+<h3 id="监督学习"><a href="#监督学习" class="headerlink" title="监督学习"></a>监督学习</h3><p>监督学习：训练样本带有对应的标签</p>
+<p>应用：分类(样本→离散)，回归(样本→连续)</p>
+<p>分类算法：Support Vector Machines, neural networks, decision trees, K-nearest neighbors, naïve Bayes, etc.</p>
+<h3 id="K近邻"><a href="#K近邻" class="headerlink" title="K近邻"></a>K近邻</h3><p>两个相似的样本应该拥有相同的标签。</p>
+<p>每个样本视为$d$维空间的点，距离用欧氏距离表示。</p>
+<p>训练算法：直接把样本和标签丢到训练集就行</p>
+<p>分类算法：给定一个测试样本，看看距离它最近的$k$个样本标签是什么，哪个标签样本数多，测试样本就被分到哪个标签。</p>
+<p>优点：</p>
+<ul>
+<li>简单</li>
+<li>实际效果好</li>
+<li>不需要建立模型，或者做假设，又或者调参</li>
+<li>有新样本很快就扩展了</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>需要很大的空间来存整个训练集</li>
+<li>慢，给定$n$样本$d$特征，需要$O(nd)$才能跑出来</li>
+<li>维数灾难：样本分布位于中心附近的概率，随着维度的增加，越来越低；而样本处在边缘的概率，则越来越高。</li>
+</ul>
+<h3 id="Train-Validation-and-Test"><a href="#Train-Validation-and-Test" class="headerlink" title="Train, Validation and Test"></a>Train, Validation and Test</h3><p>样本内误差：</p>
+<script type="math/tex; mode=display">E^{\text{train}}(f) = \sum\limits_{i=1}^n \text{loss}(y_i,f(x_i))</script><p>损失函数$\text{loss()}$可以是分类误差(不一样时1)，也可以是均方误差(差值平方和)</p>
+<p>目标是最小化训练误差，同时希望样本外误差(测试误差)最小。</p>
+<h3 id="过拟合和欠拟合"><a href="#过拟合和欠拟合" class="headerlink" title="过拟合和欠拟合"></a>过拟合和欠拟合</h3><p><img src="https://s2.loli.net/2023/06/13/DzvuyEiZMP172UW.png" alt="image.png" style="zoom:50%;" /></p>
+<p>这幅图蛮重要的，嗯。</p>
+<p><strong>如何避免过拟合？</strong></p>
+<ul>
+<li>减少特征数量：特征选择</li>
+<li>模型选择</li>
+<li>正则化(regularization)：削弱部分特征的重要程度</li>
+<li>做交叉验证(cross-validation)，检验测试误差</li>
+</ul>
+<p><strong>正则化</strong></p>
+<p>最小化：$\sum_{i=1}^{n} \operatorname{loss}\left(y_{i}, f\left(x_{i}\right)\right)+C \times R(f)$</p>
+<p>目标是避免高阶多项式的出现</p>
+<h3 id="Train-Validation-and-Test-1"><a href="#Train-Validation-and-Test-1" class="headerlink" title="Train, Validation and Test"></a>Train, Validation and Test</h3><p>把数据集分成三部分，训练集给样本给标签，验证集给样本看结果用来调参，测试集用来评估最终性能。</p>
+<h4 id="K-fold交叉验证"><a href="#K-fold交叉验证" class="headerlink" title="K-fold交叉验证"></a>K-fold交叉验证</h4><p>把数据集分成等大的$k$个子集，每次把其中一个挑出来用来当测试集算误差，最后把所有的误差再加起来。</p>
+<h4 id="混淆矩阵-Confusion-matrix"><a href="#混淆矩阵-Confusion-matrix" class="headerlink" title="混淆矩阵(Confusion matrix)"></a>混淆矩阵(Confusion matrix)</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Actual</th>
+<th>Label</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Predicted</strong></td>
+<td>True Positive</td>
+<td>False Positive</td>
+</tr>
+<tr>
+<td><strong>Label</strong></td>
+<td>False Negative</td>
+<td>True Negative</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Accuracy</strong>: $\text{(TP+TN)/Total}$</p>
+<p><strong>Precision</strong>:  $\text{TP/(TP+FP)}$</p>
+<p><strong>Sensitivity</strong>:  $\text{TP/(TP+FN)}$</p>
+<p><strong>Specificity</strong>:  $\text{TN/(TN+FP)}$</p>
+<h2 id="Chapter-8-线性回归与对数回归"><a href="#Chapter-8-线性回归与对数回归" class="headerlink" title="Chapter 8 - 线性回归与对数回归"></a>Chapter 8 - 线性回归与对数回归</h2><h3 id="线性回归"><a href="#线性回归" class="headerlink" title="线性回归"></a>线性回归</h3><p>$f(x) = \beta_0 + \sum\limits_{j=1}^d \beta_jx_j$，其中$\beta_j\in \mathbb R,\ j\in \{1,\cdots,d\}$</p>
+<p>学习线性模型其实就是学习$\beta$。</p>
+<p>最小化损失函数$R$：</p>
+<script type="math/tex; mode=display">R=\frac{1}{2n}\sum\limits_{i=1}^n(y_i-f(x_i))^2=\left.\frac{1}{2 n} \sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\sum_{j=1}^{d} \beta_{j} x_{i j}\right)\right)^{2}</script><p>如果用矩阵形式表示：</p>
+<p><img src="https://s2.loli.net/2023/06/13/LYKqpsglET7nU3W.png" alt="image.png"></p>
+<h4 id="正规方程"><a href="#正规方程" class="headerlink" title="正规方程"></a>正规方程</h4><p>我们有$R(\beta) = \frac{1}{2n}||(y-X\beta)||^2 = \frac{1}{2n}(y-X\beta)^T(y-X\beta)$，求偏导有</p>
+<script type="math/tex; mode=display">\frac{\partial^2R}{\partial \beta^2}=-\frac{1}{n}X^T(y-X\beta),\ \frac{\partial^2R}{\partial \beta^2}=\frac{1}{n}X^TX</script><p>二阶偏导为正，说明正定，令一阶偏导为0求得$\beta_\min = (X^TX)^{-1}X^Ty$</p>
+<p>优点：不用定义收敛率，也不用迭代</p>
+<p>缺点：需要保证$X^TX$可逆；当维数$d$很高的时候求逆是$O(d^3)$的，很慢。</p>
+<h4 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h4><p>同时让$\beta$的每个分量沿着梯度下降：</p>
+<p>$\beta_i = \beta_i-\alpha \frac{\partial R}{\partial \beta_i}$，其中$\alpha$是学习率。</p>
+<p>优点：高维依然很管用</p>
+<p>缺点：需要迭代，有时候迭代很多代才收敛；需要调参$\alpha$</p>
+<h4 id="实际考虑"><a href="#实际考虑" class="headerlink" title="实际考虑"></a>实际考虑</h4><ul>
+<li>一般会把数据做个归一化，把数据变小点</li>
+<li>学习率不能太大，也不能太小</li>
+<li>损失函数应该随着迭代递减</li>
+<li>如果优化程度在$\epsilon$之内说明收敛了</li>
+<li>什么时候$X^TX$不可逆？<ul>
+<li>样本过少，特征过多</li>
+<li>特征之间线性相关</li>
+</ul>
+</li>
+</ul>
+<h3 id="对数回归"><a href="#对数回归" class="headerlink" title="对数回归"></a>对数回归</h3><p>做分类，线性回归也不是不行，只是表现一般，而且预测值有时候又不在$[0, 1]$之间。</p>
+<p>对数回归不是一个回归方法，而是一个分类方法，虽然怪怪的但是课件原话。</p>
+<script type="math/tex; mode=display">g(x) = \text{SIGMOID}(z) = \frac{e^z}{1+e^z}</script><p><img src="https://s2.loli.net/2023/06/13/xFzXuBYUosTMe4w.png" alt="image.png" style="zoom:50%;" /></p>
+<p>对数回归用的$f$就不太一样了，相当于是把输出映射到了$[0,1]$</p>
+<script type="math/tex; mode=display">f(x)=g(\beta_0+\sum\limits_{j=1}^d\beta_jx_j),\ R=\frac{1}{2n}\sum\limits_{i=1}^n(y_i-f(x_i))^2</script><p>分类的时候，离哪边近就分到哪边。</p>
+<p>旧损失函数$\text{Loss}=\frac 1 2(f(x)-y)^2$这个时候就不是简单的二次函数了，可能有很多局部最优，所以对旧损失函数的梯度下降寄了。为了全局最优，对损失使用凸函数罢！</p>
+<script type="math/tex; mode=display">\text{Cost}(f(x),y)=\left\{\begin{align*}&-\log(f(x))\quad&\text{if } y = 1\\&-\log(1-f(x))\quad&\text{if } y = 0\end{align*}\right.</script><p>所以有损失函数：</p>
+<script type="math/tex; mode=display">\text{Loss}(f(x),y)=-y\log(f(x))-(1-y)\log(1-f(x))</script><script type="math/tex; mode=display">R(\beta)=\frac{1}{n}\sum\limits_{i=1}^n\text{Loss}_i</script><p>好了，我们又可以梯度下降了。</p>
+<h2 id="Chapter-9-支持向量机"><a href="#Chapter-9-支持向量机" class="headerlink" title="Chapter 9 - 支持向量机"></a>Chapter 9 - 支持向量机</h2><h3 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h3><p>线性模型的分类靠超平面：$f(x)=<w,x>+b=0$</p>
+<p>支持向量机要求所有点都在正负超平面之外(含超平面)，正负超平面：$<w,x>+b=±c$</p>
+<p> 不过我们可以通过放缩变成：$<w,x>+b=±1$</p>
+<p>在正负超平面上的俩决策临界点连线垂直三个超平面，所以有$x^+-x^-=\lambda w$</p>
+<p>又有$\lambda=\frac{2}{||w||_2^2}$，正负超平面之间的距离就是$M=\frac 2 {||w||_2}$</p>
+<p>现在的目标就是最大化$M$，满足$<w,x_i>+b\left\{\begin{align<em>}&amp;\ge 1\quad &amp;\text{if } y_i&amp;=1\\&amp;\le -1\quad &amp;\text{if } y_i&amp;=-1\end{align</em>}\right.$</p>
+<p>再换句话，就是求$w,b$来达到$\min\limits_w\frac{||w||^2_2}{2}$，条件是$y_i(<w,x_i>+b)\ge 1$</p>
+<p><del>过程太复杂不想写了aaaaa</del></p>
+<p>等明天醒了补！</p>
+<p><strong>解题步骤</strong></p>
+<ul>
+<li>解对偶优化问题，算出$\alpha^*$</li>
+<li>用$\alpha^<em>$算出$w(\alpha^</em>)$和$b(\alpha^*)$</li>
+<li>用这个式子分类：$\text{sign}(\sum\limits_{i=1}^n\alpha_i^<em>y_ik(x_i,x)+b(\alpha^</em>))$</li>
+</ul>
+<h3 id="非线性模型"><a href="#非线性模型" class="headerlink" title="非线性模型"></a>非线性模型</h3><p>把输入空间映射到特征空间，特征空间维数越高，数据越可能线性可分。</p>
+<p>映射完之后该咋做咋做就好了，映射用的函数叫核函数。</p>
+<p>线性核，多项式核，高斯核</p>
+<h2 id="Chapter-10-感知机与神经网络"><a href="#Chapter-10-感知机与神经网络" class="headerlink" title="Chapter 10 - 感知机与神经网络"></a>Chapter 10 - 感知机与神经网络</h2><h3 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h3><p>$f(x_i)=\text{sign}(\sum\limits_{j=0}^dw_jx_{ij})$</p>
+<p>如果数据线性可分那就好办，否则不收敛</p>
+<p>从一个随机的超平面开始，用训练数据来调整的迭代方法</p>
+<p>发现$y_if(x_i)\le 0$时，更新全部$w_j=w_j+y_ix_{ij}$</p>
+<p>感性理解，就是把每个分量拉回来对应的$x$值</p>
+<p>$w_j$决定了$x_j$对结果的权重，可能得到很多解</p>
+<h3 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h3><p>感知机用的是分段函数，换成SIGMOID，也可以换成别的激活函数比如tanh</p>
+<p>简单的例子：用OR，NAND，AND感知机拼成XOR网络</p>
+<h4 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h4><p>明天醒的时候再看</p>
+<h2 id="Chapter-11-决策树和朴素贝叶斯"><a href="#Chapter-11-决策树和朴素贝叶斯" class="headerlink" title="Chapter 11 - 决策树和朴素贝叶斯"></a>Chapter 11 - 决策树和朴素贝叶斯</h2><h3 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h3>
     </div>
 
     
@@ -706,7 +839,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - 人工智能概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E4%BD%93"><span class="nav-number">1.1.</span> <span class="nav-text">智能体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2 - 搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">搜索概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">2.2.</span> <span class="nav-text">无信息搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.</span> <span class="nav-text">有信息搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83BFS"><span class="nav-number">2.3.1.</span> <span class="nav-text">贪心BFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#A-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.2.</span> <span class="nav-text">A*搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E6%8E%A5%E5%8F%97%E7%9A%84%E5%90%AF%E5%8F%91%E5%87%BD%E6%95%B0-Admissible-heuristics"><span class="nav-number">2.3.3.</span> <span class="nav-text">可接受的启发函数(Admissible heuristics)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IDA-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.4.</span> <span class="nav-text">IDA*搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2"><span class="nav-number">2.4.</span> <span class="nav-text">局部搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%88%AC%E5%B1%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">爬山算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">遗传算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB"><span class="nav-number">2.4.3.</span> <span class="nav-text">模拟退火</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-3-%E5%90%AF%E5%8F%91%E4%B8%8E%E5%85%83%E5%90%AF%E5%8F%91"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3 - 启发与元启发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-4-%E5%AF%B9%E6%8A%97%E6%90%9C%E7%B4%A2"><span class="nav-number">4.</span> <span class="nav-text">Chapter 4 - 对抗搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimax%E6%90%9C%E7%B4%A2"><span class="nav-number">4.1.</span> <span class="nav-text">Minimax搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alpha-beta-%E5%89%AA%E6%9E%9D"><span class="nav-number">4.2.</span> <span class="nav-text">$\alpha-\beta$ 剪枝</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A6%81%E5%89%AA%E5%91%A2%EF%BC%9F"><span class="nav-number">4.2.1.</span> <span class="nav-text">什么时候要剪呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%80%9C%E8%87%AA%E8%A3%81%E5%BC%8F%E2%80%9D%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.2.2.</span> <span class="nav-text">“自裁式”实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%A2%E5%BA%8F%E5%89%AA%E6%9E%9D"><span class="nav-number">4.2.3.</span> <span class="nav-text">换序剪枝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E6%83%85%E5%86%B5"><span class="nav-number">4.2.4.</span> <span class="nav-text">实际情况</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9BMinimax%E6%90%9C%E7%B4%A2"><span class="nav-number">4.3.</span> <span class="nav-text">期望Minimax搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-5-%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">Chapter 5 - 约束满足问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSP%E6%A6%82%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text">CSP概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3CSP"><span class="nav-number">5.2.</span> <span class="nav-text">解决CSP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9BBTS%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">5.3.</span> <span class="nav-text">改进BTS的三种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%89%A9%E4%BD%99%E5%80%BC-Minimum-Remaining-Value"><span class="nav-number">5.3.1.</span> <span class="nav-text">最小剩余值(Minimum Remaining Value)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E9%99%90%E5%88%B6%E5%80%BC-Least-Constraining-Value"><span class="nav-number">5.3.2.</span> <span class="nav-text">最小限制值(Least Constraining Value)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E6%A3%80%E6%9F%A5-Forward-Checking"><span class="nav-number">5.3.3.</span> <span class="nav-text">前向检查(Forward Checking)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">5.4.</span> <span class="nav-text">一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%82%B9%E4%B8%80%E8%87%B4%E6%80%A7-%E4%B8%80%E5%85%83%E9%99%90%E5%88%B6"><span class="nav-number">5.4.1.</span> <span class="nav-text">点一致性(一元限制)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%A7%E4%B8%80%E8%87%B4%E6%80%A7-%E4%BA%8C%E5%85%83%E9%99%90%E5%88%B6"><span class="nav-number">5.4.2.</span> <span class="nav-text">弧一致性(二元限制)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E4%B8%80%E8%87%B4%E6%80%A7-%E5%A4%9A%E5%85%83%E9%99%90%E5%88%B6"><span class="nav-number">5.4.3.</span> <span class="nav-text">路径一致性(多元限制)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-6-%E9%80%BB%E8%BE%91"><span class="nav-number">6.</span> <span class="nav-text">Chapter 6 - 逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BA%E5%9E%AB"><span class="nav-number">6.1.</span> <span class="nav-text">铺垫</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resolution"><span class="nav-number">6.2.</span> <span class="nav-text">Resolution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forward-Backward-chaining"><span class="nav-number">6.3.</span> <span class="nav-text">Forward &#x2F; Backward chaining</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-7-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%BF%B0"><span class="nav-number">7.</span> <span class="nav-text">Chapter 7 - 机器学习概述</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - 人工智能概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E4%BD%93"><span class="nav-number">1.1.</span> <span class="nav-text">智能体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2 - 搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">搜索概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">2.2.</span> <span class="nav-text">无信息搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.</span> <span class="nav-text">有信息搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83BFS"><span class="nav-number">2.3.1.</span> <span class="nav-text">贪心BFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#A-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.2.</span> <span class="nav-text">A*搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E6%8E%A5%E5%8F%97%E7%9A%84%E5%90%AF%E5%8F%91%E5%87%BD%E6%95%B0-Admissible-heuristics"><span class="nav-number">2.3.3.</span> <span class="nav-text">可接受的启发函数(Admissible heuristics)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IDA-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.4.</span> <span class="nav-text">IDA*搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2"><span class="nav-number">2.4.</span> <span class="nav-text">局部搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%88%AC%E5%B1%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">爬山算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">遗传算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB"><span class="nav-number">2.4.3.</span> <span class="nav-text">模拟退火</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-3-%E5%90%AF%E5%8F%91%E4%B8%8E%E5%85%83%E5%90%AF%E5%8F%91"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3 - 启发与元启发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-4-%E5%AF%B9%E6%8A%97%E6%90%9C%E7%B4%A2"><span class="nav-number">4.</span> <span class="nav-text">Chapter 4 - 对抗搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Minimax%E6%90%9C%E7%B4%A2"><span class="nav-number">4.1.</span> <span class="nav-text">Minimax搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#alpha-beta-%E5%89%AA%E6%9E%9D"><span class="nav-number">4.2.</span> <span class="nav-text">$\alpha-\beta$ 剪枝</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%97%B6%E5%80%99%E8%A6%81%E5%89%AA%E5%91%A2%EF%BC%9F"><span class="nav-number">4.2.1.</span> <span class="nav-text">什么时候要剪呢？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E2%80%9C%E8%87%AA%E8%A3%81%E5%BC%8F%E2%80%9D%E5%AE%9E%E7%8E%B0"><span class="nav-number">4.2.2.</span> <span class="nav-text">“自裁式”实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8D%A2%E5%BA%8F%E5%89%AA%E6%9E%9D"><span class="nav-number">4.2.3.</span> <span class="nav-text">换序剪枝</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E6%83%85%E5%86%B5"><span class="nav-number">4.2.4.</span> <span class="nav-text">实际情况</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%9F%E6%9C%9BMinimax%E6%90%9C%E7%B4%A2"><span class="nav-number">4.3.</span> <span class="nav-text">期望Minimax搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-5-%E7%BA%A6%E6%9D%9F%E6%BB%A1%E8%B6%B3%E9%97%AE%E9%A2%98"><span class="nav-number">5.</span> <span class="nav-text">Chapter 5 - 约束满足问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSP%E6%A6%82%E8%BF%B0"><span class="nav-number">5.1.</span> <span class="nav-text">CSP概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3CSP"><span class="nav-number">5.2.</span> <span class="nav-text">解决CSP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E8%BF%9BBTS%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95"><span class="nav-number">5.3.</span> <span class="nav-text">改进BTS的三种方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E5%89%A9%E4%BD%99%E5%80%BC-Minimum-Remaining-Value"><span class="nav-number">5.3.1.</span> <span class="nav-text">最小剩余值(Minimum Remaining Value)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%B0%8F%E9%99%90%E5%88%B6%E5%80%BC-Least-Constraining-Value"><span class="nav-number">5.3.2.</span> <span class="nav-text">最小限制值(Least Constraining Value)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E6%A3%80%E6%9F%A5-Forward-Checking"><span class="nav-number">5.3.3.</span> <span class="nav-text">前向检查(Forward Checking)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E6%80%A7"><span class="nav-number">5.4.</span> <span class="nav-text">一致性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%82%B9%E4%B8%80%E8%87%B4%E6%80%A7-%E4%B8%80%E5%85%83%E9%99%90%E5%88%B6"><span class="nav-number">5.4.1.</span> <span class="nav-text">点一致性(一元限制)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%A7%E4%B8%80%E8%87%B4%E6%80%A7-%E4%BA%8C%E5%85%83%E9%99%90%E5%88%B6"><span class="nav-number">5.4.2.</span> <span class="nav-text">弧一致性(二元限制)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B7%AF%E5%BE%84%E4%B8%80%E8%87%B4%E6%80%A7-%E5%A4%9A%E5%85%83%E9%99%90%E5%88%B6"><span class="nav-number">5.4.3.</span> <span class="nav-text">路径一致性(多元限制)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-6-%E9%80%BB%E8%BE%91"><span class="nav-number">6.</span> <span class="nav-text">Chapter 6 - 逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%93%BA%E5%9E%AB"><span class="nav-number">6.1.</span> <span class="nav-text">铺垫</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Resolution"><span class="nav-number">6.2.</span> <span class="nav-text">Resolution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Forward-Backward-chaining"><span class="nav-number">6.3.</span> <span class="nav-text">Forward &#x2F; Backward chaining</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-7-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%A6%82%E8%BF%B0"><span class="nav-number">7.</span> <span class="nav-text">Chapter 7 - 机器学习概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">7.1.</span> <span class="nav-text">无监督学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0"><span class="nav-number">7.2.</span> <span class="nav-text">监督学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K%E8%BF%91%E9%82%BB"><span class="nav-number">7.3.</span> <span class="nav-text">K近邻</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Train-Validation-and-Test"><span class="nav-number">7.4.</span> <span class="nav-text">Train, Validation and Test</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%8B%9F%E5%90%88%E5%92%8C%E6%AC%A0%E6%8B%9F%E5%90%88"><span class="nav-number">7.5.</span> <span class="nav-text">过拟合和欠拟合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Train-Validation-and-Test-1"><span class="nav-number">7.6.</span> <span class="nav-text">Train, Validation and Test</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#K-fold%E4%BA%A4%E5%8F%89%E9%AA%8C%E8%AF%81"><span class="nav-number">7.6.1.</span> <span class="nav-text">K-fold交叉验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B7%E6%B7%86%E7%9F%A9%E9%98%B5-Confusion-matrix"><span class="nav-number">7.6.2.</span> <span class="nav-text">混淆矩阵(Confusion matrix)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-8-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E4%B8%8E%E5%AF%B9%E6%95%B0%E5%9B%9E%E5%BD%92"><span class="nav-number">8.</span> <span class="nav-text">Chapter 8 - 线性回归与对数回归</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">8.1.</span> <span class="nav-text">线性回归</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E8%A7%84%E6%96%B9%E7%A8%8B"><span class="nav-number">8.1.1.</span> <span class="nav-text">正规方程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">8.1.2.</span> <span class="nav-text">梯度下降</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E8%80%83%E8%99%91"><span class="nav-number">8.1.3.</span> <span class="nav-text">实际考虑</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E6%95%B0%E5%9B%9E%E5%BD%92"><span class="nav-number">8.2.</span> <span class="nav-text">对数回归</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-9-%E6%94%AF%E6%8C%81%E5%90%91%E9%87%8F%E6%9C%BA"><span class="nav-number">9.</span> <span class="nav-text">Chapter 9 - 支持向量机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">9.1.</span> <span class="nav-text">线性模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%9E%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">9.2.</span> <span class="nav-text">非线性模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-10-%E6%84%9F%E7%9F%A5%E6%9C%BA%E4%B8%8E%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">10.</span> <span class="nav-text">Chapter 10 - 感知机与神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%84%9F%E7%9F%A5%E6%9C%BA"><span class="nav-number">10.1.</span> <span class="nav-text">感知机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">10.2.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD%E7%AE%97%E6%B3%95"><span class="nav-number">10.2.1.</span> <span class="nav-text">反向传播算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-11-%E5%86%B3%E7%AD%96%E6%A0%91%E5%92%8C%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF"><span class="nav-number">11.</span> <span class="nav-text">Chapter 11 - 决策树和朴素贝叶斯</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%A0%91"><span class="nav-number">11.1.</span> <span class="nav-text">决策树</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
