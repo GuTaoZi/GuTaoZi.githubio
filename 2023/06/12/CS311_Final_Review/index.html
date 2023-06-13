@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/06/13/xFzXuBYUosTMe4w.png">
 <meta property="og:image" content="https://s2.loli.net/2023/06/14/tpjgqJIMOQrNUAb.png">
 <meta property="article:published_time" content="2023-06-12T03:13:10.621Z">
-<meta property="article:modified_time" content="2023-06-13T17:37:27.747Z">
+<meta property="article:modified_time" content="2023-06-13T17:47:50.055Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Artificial Intelligence">
 <meta name="twitter:card" content="summary">
@@ -231,7 +231,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-14 01:37:27" itemprop="dateModified" datetime="2023-06-14T01:37:27+08:00">2023-06-14</time>
+                <time title="修改时间：2023-06-14 01:47:50" itemprop="dateModified" datetime="2023-06-14T01:47:50+08:00">2023-06-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -691,7 +691,7 @@
 <p>学习线性模型其实就是学习$\beta$。</p>
 <p>最小化损失函数$R$：</p>
 <script type="math/tex; mode=display">R=\frac{1}{2n}\sum\limits_{i=1}^n(y_i-f(x_i))^2=\left.\frac{1}{2 n} \sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\sum_{j=1}^{d} \beta_{j} x_{i j}\right)\right)^{2}</script><p>如果用矩阵形式表示：</p>
-<p><img src="https://s2.loli.net/2023/06/13/LYKqpsglET7nU3W.png" alt="image.png"></p>
+<p><img src="https://s2.loli.net/2023/06/13/LYKqpsglET7nU3W.png" alt="image.png" style="zoom: 50%;" /></p>
 <h4 id="正规方程"><a href="#正规方程" class="headerlink" title="正规方程"></a>正规方程</h4><p>我们有$R(\beta) = \frac{1}{2n}||(y-X\beta)||^2 = \frac{1}{2n}(y-X\beta)^T(y-X\beta)$，求偏导有</p>
 <script type="math/tex; mode=display">\frac{\partial^2R}{\partial \beta^2}=-\frac{1}{n}X^T(y-X\beta),\ \frac{\partial^2R}{\partial \beta^2}=\frac{1}{n}X^TX</script><p>二阶偏导为正，说明正定，令一阶偏导为0求得$\beta_\min = (X^TX)^{-1}X^Ty$</p>
 <p>优点：不用定义收敛率，也不用迭代</p>
@@ -719,13 +719,13 @@
 <p>旧损失函数$\text{Loss}=\frac 1 2(f(x)-y)^2$这个时候就不是简单的二次函数了，可能有很多局部最优，所以对旧损失函数的梯度下降寄了。为了全局最优，对损失使用凸函数罢！</p>
 <script type="math/tex; mode=display">\text{Cost}(f(x),y)=\left\{\begin{align*}&-\log(f(x))\quad&\text{if } y = 1\\&-\log(1-f(x))\quad&\text{if } y = 0\end{align*}\right.</script><p>所以有损失函数：</p>
 <script type="math/tex; mode=display">\text{Loss}(f(x),y)=-y\log(f(x))-(1-y)\log(1-f(x))</script><script type="math/tex; mode=display">R(\beta)=\frac{1}{n}\sum\limits_{i=1}^n\text{Loss}_i</script><p>好了，我们又可以梯度下降了。</p>
-<h2 id="Chapter-9-支持向量机"><a href="#Chapter-9-支持向量机" class="headerlink" title="Chapter 9 - 支持向量机"></a>Chapter 9 - 支持向量机</h2><h3 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h3><p>线性模型的分类靠超平面：$f(x)=<w,x>+b=0$</p>
-<p>支持向量机要求所有点都在正负超平面之外(含超平面)，正负超平面：$<w,x>+b=±c$</p>
-<p> 不过我们可以通过放缩变成：$<w,x>+b=±1$</p>
+<h2 id="Chapter-9-支持向量机"><a href="#Chapter-9-支持向量机" class="headerlink" title="Chapter 9 - 支持向量机"></a>Chapter 9 - 支持向量机</h2><h3 id="线性模型"><a href="#线性模型" class="headerlink" title="线性模型"></a>线性模型</h3><p>线性模型的分类靠超平面：$f(x)=\left \langle w,x\right \rangle+b=0$</p>
+<p>支持向量机要求所有点都在正负超平面之外(含超平面)，正负超平面：$\left \langle w,x\right \rangle+b=±c$</p>
+<p> 不过我们可以通过放缩变成：$\left \langle w,x\right \rangle+b=±1$</p>
 <p>在正负超平面上的俩决策临界点连线垂直三个超平面，所以有$x^+-x^-=\lambda w$</p>
 <p>又有$\lambda=\frac{2}{||w||_2^2}$，正负超平面之间的距离就是$M=\frac 2 {||w||_2}$</p>
-<p>现在的目标就是最大化$M$，满足$<w,x_i>+b\left\{\begin{align<em>}&amp;\ge 1\quad &amp;\text{if } y_i&amp;=1\\&amp;\le -1\quad &amp;\text{if } y_i&amp;=-1\end{align</em>}\right.$</p>
-<p>再换句话，就是求$w,b$来达到$\min\limits_w\frac{||w||^2_2}{2}$，条件是$y_i(<w,x_i>+b)\ge 1$</p>
+<p>现在的目标就是最大化$M$，满足</p>
+<script type="math/tex; mode=display">\left \langle w,x_i\right \rangle+b\left\{\begin{align*}&\ge 1\quad &\text{if } y_i&=1\\&\le -1\quad &\text{if } y_i&=-1\end{align*}\right.</script><p>再换句话，就是求$w,b$来达到$\min\limits_w\frac{||w||^2_2}{2}$，条件是$y_i(\left \langle w,x_i\right \rangle+b)\ge 1$</p>
 <p><del>过程太复杂不想写了aaaaa</del></p>
 <p>等明天醒了补！</p>
 <p><strong>解题步骤</strong></p>
