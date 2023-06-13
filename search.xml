@@ -7345,9 +7345,9 @@ a & \text { if } n=0
 <p>等明天醒了补！</p>
 <p><strong>解题步骤</strong></p>
 <ul>
-<li>解对偶优化问题，算出$\alpha^*$</li>
-<li>用$\alpha^<em>$算出$w(\alpha^</em>)$和$b(\alpha^*)$</li>
-<li>用这个式子分类：$\text{sign}(\sum\limits_{i=1}^n\alpha_i^<em>y_ik(x_i,x)+b(\alpha^</em>))$</li>
+<li>解对偶优化问题，算出$\alpha^\star$</li>
+<li>用$\alpha^\star$算出$w(\alpha^\star)$和$b(\alpha^\star)$</li>
+<li>用这个式子分类：$\text{sign}(\sum\limits_{i=1}^n\alpha_i^\star y_ik(x_i,x)+b(\alpha^\star))$</li>
 </ul>
 <h3 id="非线性模型"><a href="#非线性模型" class="headerlink" title="非线性模型"></a>非线性模型</h3><p>把输入空间映射到特征空间，特征空间维数越高，数据越可能线性可分。</p>
 <p>映射完之后该咋做咋做就好了，映射用的函数叫核函数。</p>
