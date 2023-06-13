@@ -7308,7 +7308,7 @@ a & \text { if } n=0
 <script type="math/tex; mode=display">R=\frac{1}{2n}\sum\limits_{i=1}^n(y_i-f(x_i))^2=\left.\frac{1}{2 n} \sum_{i=1}^{n}\left(y_{i}-\beta_{0}-\sum_{j=1}^{d} \beta_{j} x_{i j}\right)\right)^{2}</script><p>如果用矩阵形式表示：</p>
 <p><img src="https://s2.loli.net/2023/06/13/LYKqpsglET7nU3W.png" alt="image.png" style="zoom: 50%;" /></p>
 <h4 id="正规方程"><a href="#正规方程" class="headerlink" title="正规方程"></a>正规方程</h4><p>我们有$R(\beta) = \frac{1}{2n}||(y-X\beta)||^2 = \frac{1}{2n}(y-X\beta)^T(y-X\beta)$，求偏导有</p>
-<script type="math/tex; mode=display">\frac{\partial^2R}{\partial \beta^2}=-\frac{1}{n}X^T(y-X\beta),\ \frac{\partial^2R}{\partial \beta^2}=\frac{1}{n}X^TX</script><p>二阶偏导为正，说明正定，令一阶偏导为0求得$\beta_\min = (X^TX)^{-1}X^Ty$</p>
+<script type="math/tex; mode=display">\frac{\partial R}{\partial \beta}=-\frac{1}{n}X^T(y-X\beta),\ \frac{\partial^2R}{\partial \beta^2}=\frac{1}{n}X^TX</script><p>二阶偏导为正，说明正定，令一阶偏导为0求得$\beta_\min = (X^TX)^{-1}X^Ty$</p>
 <p>优点：不用定义收敛率，也不用迭代</p>
 <p>缺点：需要保证$X^TX$可逆；当维数$d$很高的时候求逆是$O(d^3)$的，很慢。</p>
 <h4 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h4><p>同时让$\beta$的每个分量沿着梯度下降：</p>
