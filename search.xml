@@ -7361,7 +7361,61 @@ a & \text { if } n=0
 <h3 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h3><p>感知机用的是分段函数，换成SIGMOID，也可以换成别的激活函数比如tanh</p>
 <p>简单的例子：用OR，NAND，AND感知机拼成XOR网络</p>
 <h4 id="反向传播算法"><a href="#反向传播算法" class="headerlink" title="反向传播算法"></a>反向传播算法</h4><p>明天醒的时候再看</p>
-<h2 id="Chapter-11-决策树和朴素贝叶斯"><a href="#Chapter-11-决策树和朴素贝叶斯" class="headerlink" title="Chapter 11 - 决策树和朴素贝叶斯"></a>Chapter 11 - 决策树和朴素贝叶斯</h2><h3 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h3>]]></content>
+<h2 id="Chapter-11-决策树和朴素贝叶斯"><a href="#Chapter-11-决策树和朴素贝叶斯" class="headerlink" title="Chapter 11 - 决策树和朴素贝叶斯"></a>Chapter 11 - 决策树和朴素贝叶斯</h2><h3 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h3><p>还是做分类的。不需要实数输入，所以不需要数值化特征。</p>
+<ol>
+<li>主要的决策：下一个用哪个标准分类？</li>
+<li>用同质性作为衡量标准：如果分类两边样本数量相等同质性最高，如果分完只剩一类了那就最低。</li>
+<li>熵函数 $\text{Entropy}(S)=-p_+\log p_+ - -p_-\log p_-$是个关于x=0.5对称的凸函数</li>
+</ol>
+<p>收获函数$\text{Gain}(S,A)=\text{Entropy}(S)-\sum\limits_{v\in\text{Value(A)}}\frac{|S_v|}{|S|}\text{Entropy}(S_v)$</p>
+<p>把子结点人数占比作为权重，子结点熵值作为权值，父节点熵值减去子结点熵值的加权平均就是熵值收获。</p>
+<p>很容易过拟合，两种解法：要么别长出来，要么先长出来再剪(这个更好，用一个验证集检验剪枝后有没有比之前更差)。</p>
+<p><strong>CART</strong>用$Gini=1-p_+^2-p_-^2$代替信息熵。</p>
+<p><strong>实际问题</strong></p>
+<ul>
+<li>先降维，保留特征性最强的特征</li>
+<li>用集成方法：随机森林</li>
+<li>先均衡数据集：对主要数据欠采样，对少数数据过采样</li>
+</ul>
+<p><strong>优点</strong>：</p>
+<ul>
+<li>简单可解释</li>
+<li>可以转成分类规则</li>
+<li>对于分类数据很好</li>
+<li>构造简单</li>
+<li>不用归一化数据</li>
+</ul>
+<p><strong>缺点</strong>：</p>
+<ul>
+<li>不稳定，一个样本不同树可能就不同</li>
+<li>单变量，不处理组合特征</li>
+<li>某些结点的选择可能取决于之前的选择</li>
+<li>需要平衡数据</li>
+</ul>
+<h3 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h3><script type="math/tex; mode=display">p(A|B)=\frac{p(B|A)*p(A)}{p(B)}=\frac{p(B|A)*p(A)}{p(B|\overline A)p(\overline A)+p(B|A)*p(A)}</script><p>希望通过$p(y|x)$来找到$f(x)=y$的映射。</p>
+<h4 id="判别模型"><a href="#判别模型" class="headerlink" title="判别模型"></a>判别模型</h4><p>对$p(y|x)$建模，然后给条决策边界来分类。</p>
+<h4 id="生成模型"><a href="#生成模型" class="headerlink" title="生成模型"></a>生成模型</h4><p>对$p(x|y)$和$p(y)$建模，然后用贝叶斯算使得$p(y|x)=\frac{p(x|y)p(y)}{p(x)}≈p(x|y)p(y)$最大的$y$值作为结果。</p>
+<p>输入$x$维数比较高的时候，可以默认不同维特征之间相互独立。</p>
+<p><strong>解题步骤</strong></p>
+<ul>
+<li>对每个标签$y$算$p(y)$</li>
+<li>对每个标签$y$和每个特征$a_i$算$p(a_i|y)$</li>
+</ul>
+<p>$m-$估计概率：$p(a_j|y)=\frac{n_c+m*p}{n_y+m}$</p>
+<p>其中$p$是事先约定的值，不知道怎么可以用特征$y$可能的取值数量的倒数</p>
+<h2 id="Chapter-12-集成学习与聚类"><a href="#Chapter-12-集成学习与聚类" class="headerlink" title="Chapter 12 - 集成学习与聚类"></a>Chapter 12 - 集成学习与聚类</h2><h3 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h3><p>用同样的训练数据，训练独立的弱学习者，策略有三：</p>
+<ul>
+<li>Boosting</li>
+<li>Bagging</li>
+<li>Random Forests</li>
+</ul>
+<h3 id="Boosting"><a href="#Boosting" class="headerlink" title="Boosting"></a>Boosting</h3><p>在带权重的训练数据上训练弱学习者，表现好的学习者给更多权重</p>
+<p>难样本给更高权重，简单样本给更低权重</p>
+<p>错误率决定了最终的贡献比：</p>
+<script type="math/tex; mode=display">\alpha_m=\frac 1 2 \log(\frac{1-err_m}{err_m})</script><p><img src="https://s2.loli.net/2023/06/14/tpjgqJIMOQrNUAb.png" alt="image.png" style="zoom: 33%;" /></p>
+<p>数据集上的权重从均权开始，错的人越多权值变得越大，越少就变小</p>
+<script type="math/tex; mode=display">w_i=w_i*\exp[-\alpha_my_iG_m(x_i)]</script><h3 id="Bagging-amp-Bootstrapping"><a href="#Bagging-amp-Bootstrapping" class="headerlink" title="Bagging &amp; Bootstrapping"></a>Bagging &amp; Bootstrapping</h3><p>Bootstrapping是重采样，按照经验分布进行采样</p>
+]]></content>
       <categories>
         <category>CS</category>
       </categories>
