@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="如果你觉得可笑就笑吧，很快就轮到操作系统嘲笑你了。——Three Easy Pieces">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS311 人工智能 期末复习">
+<meta property="og:url" content="https://gutaozi.github.io/2023/06/12/CS311_Final_Review/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="如果你觉得可笑就笑吧，很快就轮到操作系统嘲笑你了。——Three Easy Pieces">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-12T03:13:10.621Z">
+<meta property="article:modified_time" content="2023-06-12T06:47:07.040Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="Artificial Intelligence">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://gutaozi.github.io/2023/06/12/CS311_Final_Review/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CS311 人工智能 期末复习 | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/06/12/CS311_Final_Review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS311 人工智能 期末复习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-06-12 11:13:10 / 修改时间：14:47:07" itemprop="dateCreated datePublished" datetime="2023-06-12T11:13:10+08:00">2023-06-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">如果你觉得可笑就笑吧，很快就轮到操作系统嘲笑你了。——Three Easy Pieces</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>$\huge\text{Outline}$</p>
+<ol>
+<li>人工智能概述</li>
+<li>搜索</li>
+<li>启发与元启发</li>
+<li>对抗搜索</li>
+<li>约束满足问题</li>
+<li>逻辑</li>
+<li>机器学习概述</li>
+<li>线性回归与逻辑回归</li>
+<li>支持向量机</li>
+<li>感知机与神经网络</li>
+<li>决策树与朴素贝叶斯</li>
+<li>集成学习与聚类</li>
+<li>强化学习</li>
+<li>自然语言处理</li>
+</ol>
+<hr>
+<h2 id="Chapter-1-人工智能概述"><a href="#Chapter-1-人工智能概述" class="headerlink" title="Chapter 1 - 人工智能概述"></a>Chapter 1 - 人工智能概述</h2><p>第一课略，大致是概念的介绍和AI发展的介绍。</p>
+<h3 id="智能体"><a href="#智能体" class="headerlink" title="智能体"></a>智能体</h3><p><strong>智能体的特征</strong></p>
+<ul>
+<li><p>通过探测器感知环境</p>
+<p>perceiving its environment through sensors</p>
+</li>
+<li><p>根据环境利用执行器执行操作</p>
+<p>acting upon that environment through actuators</p>
+</li>
+</ul>
+<p>智能体运行周期：感知(perceive)，思考(perceive)，行动(act)</p>
+<p>智能体是Architecture和Program的互补兼容。</p>
+<p><strong>Rationality的评价标准：PEAS</strong></p>
+<ul>
+<li>Performance</li>
+<li>Environment</li>
+<li>Actuators</li>
+<li>Sensors</li>
+</ul>
+<p><strong>智能体的类型</strong></p>
+<ul>
+<li><p>Simple reflex agents</p>
+<p>只根据当前状态决策行动，需要完全可观测环境，且正确行动只与当前观测有关。</p>
+</li>
+<li><p>Model-based reflex agents</p>
+<p>智能机内部状态由历史观测决定，可以处理部分可观测环境</p>
+<p>建立环境模型：环境如何独立演变 + 行动如何影响环境</p>
+</li>
+<li><p>Goal-based agents</p>
+<p>拥有目标信息，考虑每种行动对接近目标的贡献</p>
+</li>
+<li><p>Utility-based agents</p>
+<p>Utility function评估智能体性能，选择最大化期望utility的行动</p>
+</li>
+<li><p>Learning agents</p>
+<p>Learning element：根据输入进行提升</p>
+<p>Performance element：选择执行的行动</p>
+<p>Critic：由固定的性能评估标准决定智能体的表现</p>
+<p>Problem Generator：允许智能体进行探索</p>
+</li>
+</ul>
+<p><strong>智能体的状态</strong></p>
+<ul>
+<li><p>原子表示Atomic Representation</p>
+<p>每个环境状态都是不具有内部结构的黑盒</p>
+<p>Search, games, Markov decision processes, hidden Markov models, etc</p>
+</li>
+<li><p>因子表示Factored Representation</p>
+<p>每个状态都有一些属性，可以用一组变量来表示</p>
+<p> Constraint satisfaction, and Bayesian networks. </p>
+</li>
+<li><p>结构表示Structured Representation</p>
+<p>状态之间的关系可以显式表达</p>
+<p>First order logic, knowledge-based learning, natural language understanding. </p>
+</li>
+</ul>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p><strong>环境的类型</strong></p>
+<ul>
+<li><p>完全可观测Fully observable/部分可观测Partially observable</p>
+</li>
+<li><p>确定Deterministic/随机Stochastic</p>
+<p>下一步的环境是否只由Agent的行动和当前环境决定。</p>
+</li>
+<li><p>Episodic/Sequential</p>
+<p>前者说明每一步行动不影响下一步，后者说明会影响。</p>
+</li>
+<li><p>静态Static/动态Dynamic</p>
+<p>环境在智能体运行时是否变化(半动态：环境不变，但评分变动)</p>
+</li>
+<li><p>离散Discrete/连续Continuous</p>
+</li>
+<li><p>单智能体Single-agent/多智能体Multi-agent</p>
+</li>
+<li><p>已知Known/未知Unknown</p>
+<p>设计者是否拥有对环境的知识</p>
+</li>
+</ul>
+<h2 id="Chapter-2-搜索"><a href="#Chapter-2-搜索" class="headerlink" title="Chapter 2 - 搜索"></a>Chapter 2 - 搜索</h2><h3 id="搜索概述"><a href="#搜索概述" class="headerlink" title="搜索概述"></a>搜索概述</h3><p><strong>通过搜索解决问题</strong></p>
+<ol>
+<li><p>定义问题</p>
+<p>(a)目标形式化</p>
+<p>(b)问题形式化</p>
+</li>
+<li><p>两步解决问题</p>
+<p>(a)离线搜索不同行动</p>
+<p>(b)执行搜索结果</p>
+</li>
+</ol>
+<p><strong>问题形式化</strong></p>
+<ul>
+<li>初始状态</li>
+<li>状态：所有由初始状态，通过任意行动序列可达的状态集合(状态空间)</li>
+<li>行动：对于一个状态，智能体可以执行的所有行动(行动空间)</li>
+<li>转化模型：描述每个行动对当前状态造成的影响</li>
+<li>目标检测：决定给定状态是否已经达到目标</li>
+<li>路径开销：根据性能标准为动作序列赋上数值开销的函数</li>
+</ul>
+<p><strong>状态空间 vs. 搜索空间</strong></p>
+<ul>
+<li><p>状态空间是实际状态的集合</p>
+</li>
+<li><p>搜索空间是抽象成搜索树/图的可行解集合</p>
+</li>
+<li><p>搜索树描述了行动序列</p>
+<ul>
+<li><p>根节点：初始状态</p>
+</li>
+<li><p>分支：行动</p>
+</li>
+<li><p>结点：行动的结果</p>
+<p>每个结点有：父节点，子节点，深度，路径开销，在状态空间对应的状态</p>
+</li>
+</ul>
+</li>
+<li><p>扩张Expand：对于给定结点，创建所有子结点的函数</p>
+</li>
+</ul>
+<p><strong>搜索空间的三个区域</strong></p>
+<ol>
+<li>Explored (a.k.a. Closed List, Visited Set) </li>
+<li>Frontier  (a.k.a. Ready list, Open List, the Fringe) </li>
+<li>Unexplored</li>
+</ol>
+<p>搜索就是从3到2再到1的过程，搜索策略决定了顺序。</p>
+<p><strong>搜索策略</strong></p>
+<p>搜索策略由选定结点进行扩张的顺序来定义，评价标准：</p>
+<ul>
+<li>完备性Completeness</li>
+<li>时间复杂度Time complexity</li>
+<li>空间复杂度Space complexity</li>
+<li>最优性Optimality</li>
+</ul>
+<p>时间复杂度和空间复杂度的评估：</p>
+<ul>
+<li>$b$ - 搜索树最大的分支数量</li>
+<li>$d$ - 解的深度</li>
+<li>$m$ - 状态空间的最大深度</li>
+</ul>
+<h3 id="无信息搜索"><a href="#无信息搜索" class="headerlink" title="无信息搜索"></a>无信息搜索</h3><p>不使用domain knowledge的搜索。</p>
+<ul>
+<li><p>Breadth-first search / 广度优先 / BFS</p>
+<p>优先探索最浅的结点</p>
+</li>
+<li><p>Depth-first search / 深度优先 / DFS</p>
+<p>优先探索最深的结点</p>
+</li>
+<li><p>Depth-limited search / 深度限制 / DLS</p>
+<p>带深度限制的DFS</p>
+</li>
+<li><p>Iterative-deepening search / 迭代加深 / IDS</p>
+<p>不断放宽深度限制(提高深度上限)的DLS</p>
+</li>
+<li><p>Uniform-cost search (UCS) / 统一代价 / UCS</p>
+<p>优先探索开销最小的结点（参考Dijkstra）</p>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>完备性</th>
+<th>时间</th>
+<th>空间</th>
+<th>最优性</th>
+<th>实现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>BFS</td>
+<td>有限分支则完备</td>
+<td>$O(b^d)$</td>
+<td>$O(b^d)$</td>
+<td>每步开销都为1则最优</td>
+<td>Queue</td>
+</tr>
+<tr>
+<td>DFS</td>
+<td>有限状态空间则完备</td>
+<td>$O(b^m)$</td>
+<td>$O(bm)$</td>
+<td>否</td>
+<td>Stack</td>
+</tr>
+<tr>
+<td>UCS</td>
+<td>有限开销则完备</td>
+<td>$O(b^{C^*/\epsilon})$</td>
+<td>$O(b^{C^*/\epsilon})$</td>
+<td>是</td>
+<td>Heap</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>* 其中$C^*$是最优解的开销，每一步行动至少开销$\epsilon$</p>
+<h3 id="有信息搜索"><a href="#有信息搜索" class="headerlink" title="有信息搜索"></a>有信息搜索</h3><p>使用领域知识来获取关于当前状态与目标距离的信息。</p>
+<h4 id="贪心BFS"><a href="#贪心BFS" class="headerlink" title="贪心BFS"></a>贪心BFS</h4><p>把到目标的估计费用$h(n)$当作唯一标准贪心搜索</p>
+<h4 id="A-搜索"><a href="#A-搜索" class="headerlink" title="A*搜索"></a>A*搜索</h4><p>$f(n)=$到当前结点的费用$g(n)$+当前结点到目标的估计费用$h(n)$</p>
+<p>$f(n)$是经过结点$n$的最优路径费用的估值</p>
+<p>完备性：是</p>
+<p>时间复杂度：指数级</p>
+<p>空间复杂度：每个结点都在内存里，最大的问题</p>
+<p>最优性：是</p>
+<h4 id="可接受的启发函数-Admissible-heuristics"><a href="#可接受的启发函数-Admissible-heuristics" class="headerlink" title="可接受的启发函数(Admissible heuristics)"></a>可接受的启发函数(Admissible heuristics)</h4><p>如果启发式函数从不高估到达目标的费用，那么就是可接受的(admissible)，并且使用该启发式函数的A*得到的解是最优的。</p>
+<p>证明：</p>
+<ul>
+<li><p>Suppose $G_o$ is the optimal goal.</p>
+<p>Suppose $G_s$ is some suboptimal goal.</p>
+<p>Suppose $n$ is on the shortest path to $G_o$. </p>
+</li>
+<li><p>$f(G_s) = g(G_s)$ since $h(G_s) = 0$</p>
+<p>$f(G_o ) = g(G_o )$ since $h(G_o ) = 0$</p>
+<p>$g(G_s)&gt;g(G_o )$ since $G_s$ is suboptimal</p>
+</li>
+<li><p>Then $f(G_s) &gt; f(G_o ) . . . (1)$</p>
+<p>$h(n)\le h^*(n)$ since h is admissible</p>
+<p>$g(n)+h(n)\le g(n)+h^* (n) = g(G_o ) = f(G_o )$</p>
+<p>Then $f(n) \le f(G_o ) . . . (2)$</p>
+</li>
+<li><p>From (1) and (2) $f(G_s)&gt;f(n)$, so A* will never select $G_s$ during the search and hence A* is optimal.</p>
+</li>
+</ul>
+<h4 id="IDA-搜索"><a href="#IDA-搜索" class="headerlink" title="IDA*搜索"></a>IDA*搜索</h4><p>把迭代加深方法加到A*搜索上。</p>
+<h3 id="局部搜索"><a href="#局部搜索" class="headerlink" title="局部搜索"></a>局部搜索</h3><p>不关心到目标的路径，优化问题可以使用局部搜索。</p>
+<p>只维护当前状态，并通过移动到相邻状态，试图优化。</p>
+<ul>
+<li>不需要维护搜索树</li>
+<li>内存占用小</li>
+<li>在连续或较大的状态空间中找到较好解</li>
+</ul>
+<h4 id="爬山算法"><a href="#爬山算法" class="headerlink" title="爬山算法"></a>爬山算法</h4><p>贪心局部搜索，只选择最优的邻居进行探索，到达峰值时停止(可能是局部峰值)</p>
+<p>每个结点代表一个状态和一个值</p>
+<p>变种：</p>
+<ul>
+<li>Sideways moves 允许转移到与当前状态同等优的解</li>
+<li>Random-restart 多试几次取最优</li>
+<li>Stochastic 随机选择不同的上坡算子</li>
+</ul>
+<p>改进：</p>
+<ul>
+<li>Hill climbing：取决于地形，多重开几次还是不错的</li>
+<li>Local beam search：同时维护前k优的解，探索其邻居</li>
+<li>Stochastic beam search：随机选择k个解(不一定是前k优)，探索其邻居</li>
+</ul>
+<h4 id="遗传算法"><a href="#遗传算法" class="headerlink" title="遗传算法"></a>遗传算法</h4><p>Stochastic beam search的变种。</p>
+<p>自然选择，种群，个体，基因，健壮函数，交叉互换，后代，变异</p>
+<h4 id="模拟退火"><a href="#模拟退火" class="headerlink" title="模拟退火"></a>模拟退火</h4><p>温度指数级下降，以一定概率接受较劣解，温度越高跳出当前解的可能性越高。</p>
+<p>接受概率：$P = e^{-\Delta E/T}$</p>
+<h2 id="Chapter-3-启发与元启发"><a href="#Chapter-3-启发与元启发" class="headerlink" title="Chapter 3 - 启发与元启发"></a>Chapter 3 - 启发与元启发</h2><p>这个更像是支线，待补</p>
+<h2 id="Chapter-4-对抗搜索"><a href="#Chapter-4-对抗搜索" class="headerlink" title="Chapter 4 - 对抗搜索"></a>Chapter 4 - 对抗搜索</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Artificial-Intelligence/" rel="tag"># Artificial Intelligence</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/05/CS216_Final_Review/" rel="prev" title="CS216 算法设计与分析 期末复习">
+      <i class="fa fa-chevron-left"></i> CS216 算法设计与分析 期末复习
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script>
+  const gitalk = new Gitalk({
+    clientID: '79118b0b29b4170f24af',
+    clientSecret: '48ee47026d13b8a3a954b2b089ea320510282527',
+    repo: 'GuTaoZi.github.io',      // The repository of store comments,
+    owner: 'GuTaoZi',
+    admin: ['GuTaoZi'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+  </script>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-1-%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">Chapter 1 - 人工智能概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E4%BD%93"><span class="nav-number">1.1.</span> <span class="nav-text">智能体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">1.2.</span> <span class="nav-text">环境</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-2-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.</span> <span class="nav-text">Chapter 2 - 搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%90%9C%E7%B4%A2%E6%A6%82%E8%BF%B0"><span class="nav-number">2.1.</span> <span class="nav-text">搜索概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">2.2.</span> <span class="nav-text">无信息搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%89%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.</span> <span class="nav-text">有信息搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%AA%E5%BF%83BFS"><span class="nav-number">2.3.1.</span> <span class="nav-text">贪心BFS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#A-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.2.</span> <span class="nav-text">A*搜索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E6%8E%A5%E5%8F%97%E7%9A%84%E5%90%AF%E5%8F%91%E5%87%BD%E6%95%B0-Admissible-heuristics"><span class="nav-number">2.3.3.</span> <span class="nav-text">可接受的启发函数(Admissible heuristics)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#IDA-%E6%90%9C%E7%B4%A2"><span class="nav-number">2.3.4.</span> <span class="nav-text">IDA*搜索</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E6%90%9C%E7%B4%A2"><span class="nav-number">2.4.</span> <span class="nav-text">局部搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%88%AC%E5%B1%B1%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">爬山算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%97%E4%BC%A0%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.2.</span> <span class="nav-text">遗传算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E6%8B%9F%E9%80%80%E7%81%AB"><span class="nav-number">2.4.3.</span> <span class="nav-text">模拟退火</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-3-%E5%90%AF%E5%8F%91%E4%B8%8E%E5%85%83%E5%90%AF%E5%8F%91"><span class="nav-number">3.</span> <span class="nav-text">Chapter 3 - 启发与元启发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chapter-4-%E5%AF%B9%E6%8A%97%E6%90%9C%E7%B4%A2"><span class="nav-number">4.</span> <span class="nav-text">Chapter 4 - 对抗搜索</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>
