@@ -7185,6 +7185,7 @@ a & \text { if } n=0
 <li>一次赋一个变量的值：赋值顺序是可交换的</li>
 <li>赋值的时候就注意和之前的赋值不能冲突</li>
 </ul>
+<p><del>感觉和DFS没区别啊= =</del></p>
 <h3 id="改进BTS的三种方法"><a href="#改进BTS的三种方法" class="headerlink" title="改进BTS的三种方法"></a>改进BTS的三种方法</h3><h4 id="最小剩余值-Minimum-Remaining-Value"><a href="#最小剩余值-Minimum-Remaining-Value" class="headerlink" title="最小剩余值(Minimum Remaining Value)"></a>最小剩余值(Minimum Remaining Value)</h4><p>Q：先给哪个变量赋值？</p>
 <blockquote>
 <p>先挑硬柿子捏</p>
@@ -7209,7 +7210,28 @@ a & \text { if } n=0
 <p>$\text{AC-3()}$函数维护一个初始包含所有弧的队列，每次取出一个做$\text{REVISE}$，如果前变量的定义域缩小了，那就用它接着更新它的其他邻居，直到所有弧都出队(被满足)，或是有一个点的定义域被删干净了(不满足)。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">function AC-3(csp)</span><br><span class="line">returns False if an inconsistency is found, True otherwise</span><br><span class="line">inputs: csp, a binary CSP with components (X, D, C)</span><br><span class="line">local variables: queue, a queue of arcs, initially all the arcs in csp</span><br><span class="line">while queue is not empty do</span><br><span class="line">    (Xi, Xj) = REMOVE-FIRST(queue)</span><br><span class="line">    if REVISE(csp, Xi, Xj)then</span><br><span class="line">        if size of Di = 0 then return False</span><br><span class="line">        for each Xk in Xi.NEIGHBORS- &#123;Xj&#125; do</span><br><span class="line">            add (Xk,Xi) to queue</span><br><span class="line">return true</span><br><span class="line"></span><br><span class="line">function REVISE(csp, Xi, Xj)</span><br><span class="line">returns True if we revise the domain of Xi</span><br><span class="line">revised = False</span><br><span class="line">for each x in Di do</span><br><span class="line">    if no value y in Dj allows (x, y) to satisfy the constraint between Xi and Xj then</span><br><span class="line">        delete x from D;</span><br><span class="line">        revised = True</span><br><span class="line">return revised</span><br></pre></td></tr></table></figure>
 <h4 id="路径一致性-多元限制"><a href="#路径一致性-多元限制" class="headerlink" title="路径一致性(多元限制)"></a>路径一致性(多元限制)</h4><p>弧一致性的多元推广。</p>
-]]></content>
+<h2 id="Chapter-6-逻辑"><a href="#Chapter-6-逻辑" class="headerlink" title="Chapter 6 - 逻辑"></a>Chapter 6 - 逻辑</h2><p><del>经过了数理逻辑导论和离散数学的洗礼</del>我觉得这部分还是得复习一下，至少要知道Resolution和Forward/Backward Chaining怎么证。</p>
+<h3 id="铺垫"><a href="#铺垫" class="headerlink" title="铺垫"></a>铺垫</h3><p>原子命题，复合命题，逻辑算符，重言式与矛盾式</p>
+<p>Inference: Modus Ponens</p>
+<p>Common Rules: Addition, Simplification, Disjunctive-syllogism, Hypothetical-syllogism</p>
+<p>Entailment, Semantics: KB ⊨ α</p>
+<p>Inference, Syntax: KB ⊢ α</p>
+<p> Sound &amp; Complete, Validity &amp; Satisfiability </p>
+<h3 id="Resolution"><a href="#Resolution" class="headerlink" title="Resolution"></a>Resolution</h3><p>使用Resolution rule：一堆$\vee$连接的文字中的某个文字的否命题与其同时成立，则可以将该文字剔除。</p>
+<script type="math/tex; mode=display">l_1\vee\cdots\vee l_k\quad \overline{l_i}\over l_1\vee\cdots\vee l_{i-1}\vee l_{i+1}\vee\cdots\vee l_k</script><p>一般转成合取范式(CNF)再用Resolution rule。</p>
+<h3 id="Forward-Backward-chaining"><a href="#Forward-Backward-chaining" class="headerlink" title="Forward / Backward chaining"></a>Forward / Backward chaining</h3><p>在霍恩子句上用Modus Ponens。</p>
+<p>前向链接：把已知逻辑式塞到所有规则的前提里，把结论塞回知识库，直到解决问题。对命题逻辑是完备的。</p>
+<ul>
+<li>数据驱动，自动化，无意识推理</li>
+<li>可能做很多无用功</li>
+</ul>
+<p>后向链接：为了得到问题的结论，需要得到问题的前提，递归证明前提。可以做记忆化。时间上是线性的，对霍恩子句是完备的。</p>
+<ul>
+<li>目标驱动，适用于解决问题</li>
+<li>复杂度会远远小于$O(|\text{Knowledge Base}|)$</li>
+</ul>
+<p><del>一阶逻辑？ Nobody cares(</del></p>
+<h2 id="Chapter-7-机器学习概述"><a href="#Chapter-7-机器学习概述" class="headerlink" title="Chapter 7 - 机器学习概述"></a>Chapter 7 - 机器学习概述</h2>]]></content>
       <categories>
         <category>CS</category>
       </categories>
