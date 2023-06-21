@@ -9492,4 +9492,106 @@ n_{i}
         <tag>学长团</tag>
       </tags>
   </entry>
+  <entry>
+    <title>A Brief View of EvoRL</title>
+    <url>/2023/06/21/Learning%20EvoRL_A_Survey/</url>
+    <content><![CDATA[<h3 id="Reinforcement-Learning"><a href="#Reinforcement-Learning" class="headerlink" title="Reinforcement Learning"></a>Reinforcement Learning</h3><ul>
+<li>Model-based<ul>
+<li>Estimate transition function and reward function</li>
+<li>Establish a complete MDP</li>
+</ul>
+</li>
+<li>Model-free<ul>
+<li>Large sample training, no need to know two functions</li>
+<li>policy-based<ul>
+<li>Trust Region Policy Optimization (TRPO)</li>
+<li>Proximal Policy Optimization (PPO)</li>
+<li>Asynchronous Advantage Actor-Critic (A3C)</li>
+<li>Deep Deterministic Policy Gradient (DDPG)</li>
+<li>Twin Delayed DDPG (TD3)</li>
+<li>Soft Actor-Critic (SAC)</li>
+</ul>
+</li>
+<li>value-based<ul>
+<li>​    Deep Q-Network (DQN)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Evolutionary-Computation"><a href="#Evolutionary-Computation" class="headerlink" title="Evolutionary Computation"></a>Evolutionary Computation</h3><h4 id="Evolutionary-Strategies"><a href="#Evolutionary-Strategies" class="headerlink" title="Evolutionary Strategies"></a>Evolutionary Strategies</h4><ul>
+<li><p>Canonical ES</p>
+<p>Variation -&gt; evaluation -&gt; selection</p>
+</li>
+<li><p>Covariance Matrix ES</p>
+<p>Adaptively update: mutation step size, covariance matrix</p>
+</li>
+<li><p>Natural ES</p>
+<p>Update distribution parameters by estimating search gradient </p>
+</li>
+</ul>
+<p>Integration with RL: policy search, exploration, reward shaping, hyperparameter optimization, meta-RL, multi-objective RL</p>
+<h4 id="Genetic-Algorithms"><a href="#Genetic-Algorithms" class="headerlink" title="Genetic Algorithms"></a>Genetic Algorithms</h4><p>selection -&gt; crossover -&gt; mutation</p>
+<p>combinatorial optimization problems</p>
+<p>Integration with RL: policy search, exploration, reward shaping, hyperparameter optimization, meta-RL, multi-objective RL</p>
+<h4 id="Genetic-Programming"><a href="#Genetic-Programming" class="headerlink" title="Genetic Programming"></a>Genetic Programming</h4><p>Search space: set of programs</p>
+<p>Fitness: observing the behavior of program</p>
+<p>Programs viewed as data: crossover &amp; mutation</p>
+<p>Data interpreted as programs: execution</p>
+<p>Numerical optimization problems, problems with programmatic solutions</p>
+<p>Integration with RL: policy search, reward shaping, meta-RL</p>
+<h3 id="EvoRL-Frame"><a href="#EvoRL-Frame" class="headerlink" title="EvoRL Frame"></a>EvoRL Frame</h3><p><img src="https://s2.loli.net/2023/06/21/I9k8NUYCKVWvLRJ.png" alt="image.png" style="zoom:50%;" /></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>EC methods</th>
+<th>Encodings</th>
+<th>Variation</th>
+<th>Selection criteria</th>
+<th>Target Problem in RL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ES</td>
+<td>Real</td>
+<td>Mutation</td>
+<td>Performance</td>
+<td>Continuous optimization</td>
+</tr>
+<tr>
+<td>GA</td>
+<td>Int, real, indirect</td>
+<td>Crossover, mutation</td>
+<td>Performance, diversity</td>
+<td>General optimization</td>
+</tr>
+<tr>
+<td>GP</td>
+<td>Syntax free, executable graph</td>
+<td>Crossover, mutation</td>
+<td>Performance, interpretability</td>
+<td>Regression / control problems</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h3 id="EC-in-HPO"><a href="#EC-in-HPO" class="headerlink" title="EC in HPO"></a>EC in HPO</h3><h4 id="Darwinian-evolutionary-methods"><a href="#Darwinian-evolutionary-methods" class="headerlink" title="Darwinian evolutionary methods"></a>Darwinian evolutionary methods</h4><p>Randomly initialized parameters, GA-evolved hyperparameters</p>
+<p>Inefficiency: loss of already acquired knowledge</p>
+<h4 id="Lamarckian-evolutionary-methods"><a href="#Lamarckian-evolutionary-methods" class="headerlink" title="Lamarckian evolutionary methods"></a>Lamarckian evolutionary methods</h4><p>Inherited parameters, evolved hyperparameters</p>
+<p>asynchronous PBT</p>
+<h3 id="Hybrid-methods"><a href="#Hybrid-methods" class="headerlink" title="Hybrid methods"></a>Hybrid methods</h3><p>Inheritance of parameters + random restarts</p>
+<h3 id="EC-in-Policy-Search"><a href="#EC-in-Policy-Search" class="headerlink" title="EC in Policy Search"></a>EC in Policy Search</h3><h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p>Bai Hui, Cheng Ran, Jin Yaochu. Evolutionary Reinforcement Learning: A Survey. <em>Intell Comput</em>. 2023:2;0025. DOI:<a href="https://doi.org/10.34133/icomputing.0025">10.34133/icomputing.0025</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/30981469">从遗传算法到OpenAI新方向：进化策略工作机制全解</a></p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Artificial Intelligence</tag>
+        <tag>Reinforcement Learning</tag>
+        <tag>Evolutionary Computation</tag>
+      </tags>
+  </entry>
 </search>
