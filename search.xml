@@ -9582,7 +9582,12 @@ n_{i}
 <h4 id="Lamarckian-evolutionary-methods"><a href="#Lamarckian-evolutionary-methods" class="headerlink" title="Lamarckian evolutionary methods"></a>Lamarckian evolutionary methods</h4><p>Inherited parameters, evolved hyperparameters</p>
 <p>asynchronous PBT</p>
 <h3 id="Hybrid-methods"><a href="#Hybrid-methods" class="headerlink" title="Hybrid methods"></a>Hybrid methods</h3><p>Inheritance of parameters + random restarts</p>
-<h3 id="EC-in-Policy-Search"><a href="#EC-in-Policy-Search" class="headerlink" title="EC in Policy Search"></a>EC in Policy Search</h3><h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p>Bai Hui, Cheng Ran, Jin Yaochu. Evolutionary Reinforcement Learning: A Survey. <em>Intell Comput</em>. 2023:2;0025. DOI:<a href="https://doi.org/10.34133/icomputing.0025">10.34133/icomputing.0025</a></p>
+<h3 id="EC-in-Policy-Search"><a href="#EC-in-Policy-Search" class="headerlink" title="EC in Policy Search"></a>EC in Policy Search</h3><ul>
+<li>Canonical ES-based</li>
+<li>NES-based</li>
+<li></li>
+</ul>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p>Bai Hui, Cheng Ran, Jin Yaochu. Evolutionary Reinforcement Learning: A Survey. <em>Intell Comput</em>. 2023:2;0025. DOI:<a href="https://doi.org/10.34133/icomputing.0025">10.34133/icomputing.0025</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/30981469">从遗传算法到OpenAI新方向：进化策略工作机制全解</a></p>
 ]]></content>
       <categories>
@@ -9592,6 +9597,21 @@ n_{i}
         <tag>Artificial Intelligence</tag>
         <tag>Reinforcement Learning</tag>
         <tag>Evolutionary Computation</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Fisher Information Matrix</title>
+    <url>/2023/06/23/Fisher_Info_Matrix/</url>
+    <content><![CDATA[<h2 id="Fisher-Information"><a href="#Fisher-Information" class="headerlink" title="Fisher Information"></a>Fisher Information</h2><p>Learning a parameter vector $\theta$:</p>
+<p>$\underset{\theta \in \mathbb R^n}{\arg\max}\ p(x|\theta)$</p>
+<p>Here $p(x|\theta)$ is the likelihood, which we need to maximize wrt. $\theta$.</p>
+<p>Score function:</p>
+<script type="math/tex; mode=display">s(\theta) = \nabla_{\theta} \log p(x \vert \theta)</script>]]></content>
+      <categories>
+        <category>Math</category>
+      </categories>
+      <tags>
+        <tag>Probability &amp; Statistics</tag>
       </tags>
   </entry>
 </search>
