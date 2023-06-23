@@ -9602,11 +9602,15 @@ n_{i}
   <entry>
     <title>Fisher Information Matrix</title>
     <url>/2023/06/23/Fisher_Info_Matrix/</url>
-    <content><![CDATA[<h2 id="Fisher-Information"><a href="#Fisher-Information" class="headerlink" title="Fisher Information"></a>Fisher Information</h2><p>Learning a parameter vector $\theta$:</p>
-<p>$\underset{\theta \in \mathbb R^n}{\arg\max}\ p(x|\theta)$</p>
-<p>Here $p(x|\theta)$ is the likelihood, which we need to maximize wrt. $\theta$.</p>
-<p>Score function:</p>
-<script type="math/tex; mode=display">s(\theta) = \nabla_{\theta} \log p(x \vert \theta)</script>]]></content>
+    <content><![CDATA[<p>Learning a parameter  vector $\theta$:</p>
+<script type="math/tex; mode=display">\underset{\theta\in\mathbb R^n}{\arg\max}\ p(x|\theta)</script><p>Here $p(x|\theta)$ is the likelihood, which we need to maximize wrt. $\theta$.</p>
+<p><strong>Score function</strong>:</p>
+<script type="math/tex; mode=display">s(\theta) =\nabla_{\theta}\log p(x\vert\theta)</script><p><strong>Claim.</strong> The expected value of $s(\theta)$ wrt. $\theta$ is $0$.</p>
+<p><strong>Proof.</strong> </p>
+<script type="math/tex; mode=display">\begin{align*} \mathop{\mathbb{E}}_{p(x\vert\theta)}\left[ s(\theta)\right] &=\mathop{\mathbb{E}}_{p(x\vert\theta)}\left[\nabla\log p(x\vert\theta)\right]\\[5pt]    &=\int\nabla\log p(x\vert\theta)  p(x\vert\theta)\text{d}x\\[5pt]    &=\int\frac{\nabla p(x\vert\theta)}{p(x\vert\theta)} p(x\vert\theta)\text{d}x\\[5pt]    &=\int\nabla p(x\vert\theta)\text{d}x\\[5pt]    &=\nabla\int p(x\vert\theta)\text{d}x\\[5pt]    &=\nabla 1\\[5pt]    &= 0\end{align*}</script><p><strong>Fisher Information Matrix</strong> is the covariance of score function:</p>
+<p>$\text F=\mathop{\mathbb{E}}_{p(x\vert\theta)}\left[ (s(\theta) - 0)(s(\theta) - 0)^{\text{T}}\right] =\mathop{\mathbb{E}}_{p(x\vert\theta)}\left[\nabla\log p(x\vert\theta)\nabla\log p(x\vert\theta)^{\text{T}}\right] $</p>
+<p>Calculating the exact expectation can be hard, so we approximate the expectation by using <a href="https://en.wikipedia.org/wiki/Empirical_distribution_function">empirical distribution</a>. Given training data $X =\{ x_1, x_2,\cdots, x_N\}$, we have <strong>Empirical Fisher Information Matrix</strong>:</p>
+<script type="math/tex; mode=display">\begin{align}\text F &=\frac{1}{N}\sum_{i=1}^{N}\nabla\log p(x_i\vert\theta)\nabla\log p(x_i\vert\theta)^{\text{T}} .\end{align}</script>]]></content>
       <categories>
         <category>Math</category>
       </categories>
