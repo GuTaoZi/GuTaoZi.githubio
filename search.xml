@@ -9623,4 +9623,39 @@ n_{i}
         <tag>学长团</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Reinforcement Learning Seminar Ⅰ</title>
+    <url>/2023/07/02/RL_Seminar_1/</url>
+    <content><![CDATA[<h2 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h2><p>Text editor: $\text{Textmacs}$</p>
+<p>Email: <a href="mailto: yli340@uic.edu">yli340@uic.edu</a></p>
+<h2 id="From-Physics-to-Control-Theory"><a href="#From-Physics-to-Control-Theory" class="headerlink" title="From Physics to Control Theory"></a>From Physics to Control Theory</h2><p>State of Newton’s System(deterministic):</p>
+<script type="math/tex; mode=display">s(t) = \begin{bmatrix}x(t)\\\dot x(t)\end{bmatrix}.</script><p>State-space form of Newton’s 2nd Law:</p>
+<script type="math/tex; mode=display">\begin{align*}\dot s(t) &=\begin{bmatrix}\dot x(t)\\\ddot x(t)\end{bmatrix}\\&= \begin{bmatrix}0\quad1\\0\quad0\end{bmatrix} \begin{bmatrix}x(t)\\\dot x(t)\end{bmatrix} + \begin{bmatrix}0\quad0\\0\quad1\end{bmatrix}\begin{bmatrix}0\\u\end{bmatrix}\\&=A s(t) + B\begin{bmatrix}0\\u\end{bmatrix}.\end{align*}</script><p>What’s a linear transformation? </p>
+<script type="math/tex; mode=display">\mathscr A(x) = \begin{bmatrix}\mathscr Ae_1\quad \mathscr Ae_2\end{bmatrix}x.</script><p>Group, Flow, Lie Group</p>
+<p>General form of state transform:</p>
+<script type="math/tex; mode=display">\dot s(t) = f(s(t), u(t)).</script><h2 id="From-Deterministic-to-Stochastic"><a href="#From-Deterministic-to-Stochastic" class="headerlink" title="From Deterministic to Stochastic"></a>From Deterministic to Stochastic</h2><blockquote>
+<p>Discrete System Only</p>
+</blockquote>
+<h3 id="Without-Controller"><a href="#Without-Controller" class="headerlink" title="Without Controller:"></a>Without Controller:</h3><p>$\dot s(t)=f(s(t)) \rightarrow s_{t+1} = f(s_t)$</p>
+<p>Stochastic dynamic system:</p>
+<p>$s_{t+1} = f(s_t) \rightarrow s_{t+1} \sim p(s_t)$</p>
+<p>Markov System (memoryless):</p>
+<p>$s_{t+1} \sim p(s_0,\cdots,s_t)=p(s_t)$</p>
+<h3 id="With-Controller"><a href="#With-Controller" class="headerlink" title="With Controller:"></a>With Controller:</h3><p>$x_{t+1}=f(x_t,u_t)\rightarrow s_{t+1}\sim p(s_t,a_t)$</p>
+<h2 id="Introduction-to-RL"><a href="#Introduction-to-RL" class="headerlink" title="Introduction to RL"></a>Introduction to RL</h2><p>Interact with environment</p>
+<p>Logic -&gt; Supervised -&gt; RL</p>
+<p>Safe RL</p>
+<p>Sim2Real</p>
+<h2 id="Next-Seminar-MDP"><a href="#Next-Seminar-MDP" class="headerlink" title="Next Seminar: MDP"></a>Next Seminar: MDP</h2><p>Maximize reward function</p>
+<p>$\pi: S\rightarrow\Delta(A)$</p>
+<p>$r: S\times A\rightarrow[0,1]$</p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Artificial Intelligence</tag>
+        <tag>Reinforcement Learning</tag>
+      </tags>
+  </entry>
 </search>
