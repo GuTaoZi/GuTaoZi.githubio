@@ -9658,4 +9658,66 @@ n_{i}
         <tag>Reinforcement Learning</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Reinforcement Learning Seminar Ⅱ</title>
+    <url>/2023/07/09/RL_Seminar_2/</url>
+    <content><![CDATA[<h2 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h2><p>深圳市-福田区-景田路-中国茶宫-6层</p>
+<h2 id="Markov-Decision-Process-MDP"><a href="#Markov-Decision-Process-MDP" class="headerlink" title="Markov Decision Process (MDP)"></a>Markov Decision Process (MDP)</h2><h3 id="State-Space-Form-with-Controller"><a href="#State-Space-Form-with-Controller" class="headerlink" title="State Space Form, with Controller"></a>State Space Form, with Controller</h3><script type="math/tex; mode=display">x_{t+1}=f(x_t,u_t)</script><p>Consider a space system with perturbation</p>
+<script type="math/tex; mode=display">x_{t+1}=f(x_t,u_t,w_t)</script><p>where $w_t\sim P$.</p>
+<p>The system $x_{t+1}=f(x_t,u_t,w_t)$ is equivalent to $x_{t+1}=D(x_t,u_t)$. </p>
+<h3 id="MDP"><a href="#MDP" class="headerlink" title="MDP"></a>MDP</h3><p><strong>Assumption.</strong> $|S|,|A|\le \infty$</p>
+<p>An infinite-horizon Markov Decision Process is a tuple $(S,A,r,\gamma,\mathbb P)$, where $S$ is the state space, $A$ is the action space, $r: A\times S\rightarrow [0,1]$, $\gamma\in(0,1)$ is the discount factor and $\mathbb P: S\times A\rightarrow \Delta(S)$ is the transition kernel(aka. model/dynamics).</p>
+<p><strong>State-Value function</strong></p>
+<p>$V:S\rightarrow [0,1]$, defined as</p>
+<script type="math/tex; mode=display">V^\pi(s)\triangleq \mathbb E_{s_{h+1}\sim \mathbb P(s_h,a_h),a_h\sim\pi(s_h)}(\sum\limits_{h=1}^\infty \gamma^hr(s_h,a_h)|s_1=s)</script><p>where $\pi = (\pi_1,\pi_2,\cdots)$</p>
+<p>State-Action Value Function</p>
+<p>$Q^\pi(s,a) \triangleq ?$</p>
+<h2 id="Value-Iteration"><a href="#Value-Iteration" class="headerlink" title="Value Iteration"></a>Value Iteration</h2><p>$\{Q_1,Q_2,\cdots,Q_\infty\}$. Goal: $Q_\infty=Q^\star$, $Q^\star\triangleq Q^{\pi^\star}$, $Q^\star(s,a)\triangleq r(s,a) + \gamma\mathbb E_{s’\sim\mathbb P(s,a)}(V^{\pi^\star}(s’))$.</p>
+<script type="math/tex; mode=display">V_{k+1(s)}\leftarrow r(s,a)+\gamma\max\limits_{a'\in A}(\mathbb E_{s'\sim\mathbb P(s,a)}(Q_k(s',a')))</script><script type="math/tex; mode=display">\pi^\star(s) = \mathop{\arg\max}\limits_{a\in A} Q_\infty(s,a)</script><p><strong>Bellman Optimality Operator</strong></p>
+<p>$\Tau^\star: Q\rightarrow Q$ defined as</p>
+<script type="math/tex; mode=display">Q_{k+1}\triangleq \Tau^\star Q_k</script><script type="math/tex; mode=display">V_{k+1(s)}\leftarrow r(s,a)+\gamma\max\limits_{a'\in A}(\mathbb E_{s'\sim\mathbb P(s,a)}(Q_k(s',a')))</script><p>for all $(s,a)\in S\times A$.</p>
+<p><strong>Theorem.</strong> $Q_\infty$ is the fixed point of $\Tau^\star$, i.e., $Q_\infty=\Tau^\star Q_\infty$</p>
+<p>Proof: $Q$ is a contraction mapping of $\Tau^\star$’s Banach Space</p>
+<h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><p>$r(s,a) = \int R(s,a)d D(s,a) = \mathbb E(R(s,a))$</p>
+<p>$\Delta_n$: Probability simplex</p>
+<p>$\Delta_2 = \{x\in \mathbb R^3 : \mathbb 1^T x=1,x\succeq 0\}$</p>
+<p>Policy: $\pi: S\rightarrow \Delta(A)$</p>
+<p>Deterministic policy $\pi:S\rightarrow A$</p>
+<p>Nonstationary policy $\pi: S\times T\rightarrow \Delta(A)$</p>
+<p>Optimal policy $\pi^\star=\mathop{\arg\max}\limits_{\pi} V^\pi(s_1)$</p>
+<p><strong>Banach space</strong></p>
+<ul>
+<li>Complete: Any Cauchy Sequence converges<ul>
+<li>Cauchy Sequence: $\{x_k\}_{k=1}^\infty,\ \forall \epsilon\ \exists N$ s.t. $k&gt;N$, $|x_{k+1}-x_k|&lt;\epsilon$</li>
+</ul>
+</li>
+<li>Normed: Distance can be defined (Metric space?)<ul>
+<li>Metric: two-point distance, norm: distance to $O$</li>
+</ul>
+</li>
+<li>Vector space</li>
+</ul>
+<p><strong>Contraction mapping</strong></p>
+<p>$\Tau: V\rightarrow V$</p>
+<p>$\mathbb F||v||\le ||v||,\ F||v||\le\gamma||v||, \gamma\in(0,1)$</p>
+<p><strong>Theorem.</strong> Banach Space Fixed Point Theorem</p>
+<p>If $\Tau$ is a contraction mapping on $\mathscr B$</p>
+<p>$\forall x\in \mathscr B, \Tau^\infty x=t_{fix}$</p>
+<p>where $\Tau^\infty t_{fix}=t_{fix}$ </p>
+<h2 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h2><ol>
+<li>Prove that the system $x_{t+1}=f(x_t,u_t,w_t)$ is equivalent to $x_{t+1}=D(x_t,u_t)$.</li>
+<li>Prove that an infinite horizon MDP with a stationary policy $\pi$ is a Markov process. (hint: prove $s’\sim\mathbb P(s,\pi(s))$ is Markovian)</li>
+<li>Prove that for an infinite horizon MDP with discount factor $\gamma\in (0,1)$, the optimal policy is stationary and deterministic, i.e., $\pi^\star = (\pi^\star,\pi^\star,\cdots,\pi^\star)$ or $\pi^\star:S\rightarrow \Delta(A)$.</li>
+<li>State and prove the Banach Space Fixed Point Theorem.</li>
+<li>Prove that $Q_\infty=\Tau^\star Q_\infty$ using Banach Space Fixed Point Theorem. (Hint: Prove that the $\Tau^\star$ in )</li>
+</ol>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Artificial Intelligence</tag>
+        <tag>Reinforcement Learning</tag>
+      </tags>
+  </entry>
 </search>
