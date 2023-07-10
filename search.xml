@@ -9737,7 +9737,7 @@ E(\bold w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\bold w)-t_n\}^2</script><p>Root
 <script type="math/tex; mode=display">
 E_\text{RMS}=\sqrt{2E(\bold w^\star)/N}</script><p>Regularized error</p>
 <script type="math/tex; mode=display">
-\tilde E(\bold w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\bold w)-t_n\}^2+\frac\lambda 2\left \|  w\right \| ^2</script><h4 id="Overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a>Overfitting</h4><p>Paradoxical?</p>
+\tilde E(\bold w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\bold w)-t_n\}^2+\frac\lambda 2\left \|  w\right \| ^2</script><h4 id="Overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a>Overfitting</h4><p>Paradoxical?                         </p>
 <ul>
 <li><p>A polynomial of given order contains all lower order polynomials as special cases</p>
 <p>So high-order polynomials are capable of generating results at least as good as low-order ones?</p>
@@ -9748,7 +9748,16 @@ E_\text{RMS}=\sqrt{2E(\bold w^\star)/N}</script><p>Regularized error</p>
 </ul>
 <p>Polynomials with higher orders are becoming increasingly tuned to the random noise on the target values.</p>
 <p>The larger the data set, the more complex (flexible) the model that we can afford to fit to the data.</p>
-]]></content>
+<h3 id="Probability-Theory"><a href="#Probability-Theory" class="headerlink" title="Probability Theory"></a>Probability Theory</h3><p>The Rules of Probability</p>
+<ul>
+<li>sum rule</li>
+<li>product rule</li>
+</ul>
+<p>Probability densities</p>
+<p>Expectations and covariances</p>
+<p>The Gaussian distribution</p>
+<script type="math/tex; mode=display">
+\mathscr N(x|\mu,\sigma^2)=\frac 1 {(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac 1 {2\sigma^2}(x-\mu)^2\right\}</script>]]></content>
       <categories>
         <category>CS</category>
       </categories>
