@@ -9674,10 +9674,10 @@ n_{i}
 <p>$Q^\pi(s,a) \triangleq ?$</p>
 <h2 id="Value-Iteration"><a href="#Value-Iteration" class="headerlink" title="Value Iteration"></a>Value Iteration</h2><p>$\{Q_1,Q_2,\cdots,Q_\infty\}$. Goal: $Q_\infty=Q^\star$, $Q^\star\triangleq Q^{\pi^\star}$, $Q^\star(s,a)\triangleq r(s,a) + \gamma\mathbb E_{s’\sim\mathbb P(s,a)}(V^{\pi^\star}(s’))$.</p>
 <script type="math/tex; mode=display">V_{k+1(s)}\leftarrow r(s,a)+\gamma\max\limits_{a'\in A}(\mathbb E_{s'\sim\mathbb P(s,a)}(Q_k(s',a')))</script><script type="math/tex; mode=display">\pi^\star(s) = \mathop{\arg\max}\limits_{a\in A} Q_\infty(s,a)</script><p><strong>Bellman Optimality Operator</strong></p>
-<p>$\Tau^\star: Q\rightarrow Q$ defined as</p>
-<script type="math/tex; mode=display">Q_{k+1}\triangleq \Tau^\star Q_k</script><script type="math/tex; mode=display">V_{k+1(s)}\leftarrow r(s,a)+\gamma\max\limits_{a'\in A}(\mathbb E_{s'\sim\mathbb P(s,a)}(Q_k(s',a')))</script><p>for all $(s,a)\in S\times A$.</p>
-<p><strong>Theorem.</strong> $Q_\infty$ is the fixed point of $\Tau^\star$, i.e., $Q_\infty=\Tau^\star Q_\infty$</p>
-<p>Proof: $Q$ is a contraction mapping of $\Tau^\star$’s Banach Space</p>
+<p>$\text T^\star: Q\rightarrow Q$ defined as</p>
+<script type="math/tex; mode=display">Q_{k+1}\triangleq \text T^\star Q_k</script><script type="math/tex; mode=display">V_{k+1(s)}\leftarrow r(s,a)+\gamma\max\limits_{a'\in A}(\mathbb E_{s'\sim\mathbb P(s,a)}(Q_k(s',a')))</script><p>for all $(s,a)\in S\times A$.</p>
+<p><strong>Theorem.</strong> $Q_\infty$ is the fixed point of $\text T^\star$, i.e., $Q_\infty=\text T^\star Q_\infty$</p>
+<p>Proof: $Q$ is a contraction mapping of $\text T^\star$’s Banach Space</p>
 <h2 id="Appendix"><a href="#Appendix" class="headerlink" title="Appendix"></a>Appendix</h2><p>$r(s,a) = \int R(s,a)d D(s,a) = \mathbb E(R(s,a))$</p>
 <p>$\Delta_n$: Probability simplex</p>
 <p>$\Delta_2 = \{x\in \mathbb R^3 : \mathbb 1^T x=1,x\succeq 0\}$</p>
@@ -9698,18 +9698,18 @@ n_{i}
 <li>Vector space</li>
 </ul>
 <p><strong>Contraction mapping</strong></p>
-<p>$\Tau: V\rightarrow V$</p>
+<p>$\text T: V\rightarrow V$</p>
 <p>$\mathbb F||v||\le ||v||,\ F||v||\le\gamma||v||, \gamma\in(0,1)$</p>
 <p><strong>Theorem.</strong> Banach Space Fixed Point Theorem</p>
-<p>If $\Tau$ is a contraction mapping on $\mathscr B$</p>
-<p>$\forall x\in \mathscr B, \Tau^\infty x=t_{fix}$</p>
-<p>where $\Tau^\infty t_{fix}=t_{fix}$ </p>
+<p>If $\text T$ is a contraction mapping on $\mathscr B$</p>
+<p>$\forall x\in \mathscr B, \text T^\infty x=t_{fix}$</p>
+<p>where $\text T^\infty t_{fix}=t_{fix}$ </p>
 <h2 id="Assignment"><a href="#Assignment" class="headerlink" title="Assignment"></a>Assignment</h2><ol>
 <li>Prove that the system $x_{t+1}=f(x_t,u_t,w_t)$ is equivalent to $x_{t+1}=D(x_t,u_t)$.</li>
 <li>Prove that an infinite horizon MDP with a stationary policy $\pi$ is a Markov process. (hint: prove $s’\sim\mathbb P(s,\pi(s))$ is Markovian)</li>
 <li>Prove that for an infinite horizon MDP with discount factor $\gamma\in (0,1)$, the optimal policy is stationary and deterministic, i.e., $\pi^\star = (\pi^\star,\pi^\star,\cdots,\pi^\star)$ or $\pi^\star:S\rightarrow \Delta(A)$.</li>
 <li>State and prove the Banach Space Fixed Point Theorem.</li>
-<li>Prove that $Q_\infty=\Tau^\star Q_\infty$ using Banach Space Fixed Point Theorem. (Hint: Prove that the $\Tau^\star$ in )</li>
+<li>Prove that $Q_\infty=\text T^\star Q_\infty$ using Banach Space Fixed Point Theorem. (Hint: Prove that the $\text T^\star$ in )</li>
 </ol>
 ]]></content>
       <categories>
@@ -9718,6 +9718,43 @@ n_{i}
       <tags>
         <tag>Artificial Intelligence</tag>
         <tag>Reinforcement Learning</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CS329 Machine Learning Preview</title>
+    <url>/2023/07/10/CS329_Preview/</url>
+    <content><![CDATA[<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ol>
+<li>Introduction</li>
+<li>Probability Distributions</li>
+</ol>
+<h2 id="Chapter-1-Introduction"><a href="#Chapter-1-Introduction" class="headerlink" title="Chapter 1 - Introduction"></a>Chapter 1 - Introduction</h2><h3 id="Example-Polynomial-Curve-Fitting"><a href="#Example-Polynomial-Curve-Fitting" class="headerlink" title="Example: Polynomial Curve Fitting"></a>Example: Polynomial Curve Fitting</h3><h4 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a>Definitions</h4><p>Input data set $\bold x\equiv (x_1,\cdots,x_N)^\text T$</p>
+<p>Target data set $\bold t\equiv (t_1,\cdots,t_N)^\text T$</p>
+<p>Fit the data using a polynomial function of the form</p>
+<script type="math/tex; mode=display">
+y(x,\bold w)=w_0+w_1x+w_2x^2+\cdots+w_Mx^M=\sum\limits_{j=0}^{M}w_jx^j</script><p>Minimize the loss function</p>
+<script type="math/tex; mode=display">
+E(\bold w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\bold w)-t_n\}^2</script><p>Root-mean-square(RMS) error</p>
+<script type="math/tex; mode=display">
+E_\text{RMS}=\sqrt{2E(\bold w^\star)/N}</script><p>Regularized error</p>
+<script type="math/tex; mode=display">
+\tilde E(\bold w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\bold w)-t_n\}^2+\frac\lambda 2\left \|  w\right \| ^2</script><h4 id="Overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a>Overfitting</h4><p>Paradoxical?</p>
+<ul>
+<li><p>A polynomial of given order contains all lower order polynomials as special cases</p>
+<p>So high-order polynomials are capable of generating results at least as good as low-order ones?</p>
+</li>
+<li><p>A power series expansion of the function contains terms of all orders</p>
+<p>So results should improve monotonically as the order increases?</p>
+</li>
+</ul>
+<p>Polynomials with higher orders are becoming increasingly tuned to the random noise on the target values.</p>
+<p>The larger the data set, the more complex (flexible) the model that we can afford to fit to the data.</p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Artificial Intelligence</tag>
+        <tag>Machine Learning</tag>
       </tags>
   </entry>
 </search>
