@@ -578,6 +578,7 @@
     <url>/2022/08/12/2022%E5%9F%B9%E5%85%BB%E6%96%B9%E6%A1%88%E8%A7%A3%E8%AF%BB%E6%95%99%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p><strong>点击下载：</strong><a href="http://tao.sustech.edu.cn/UserFiles/editor/file/20220809/1660027475636002188.zip"><strong>南方科技大学2022级本科人才培养方案</strong></a></p>
 <blockquote>
+<p><strong>本博客适用于南方科技大学2022级新生，2023年培养方案解读施工中，请耐心等待。</strong></p>
 <p>南科大会在每个年级入学前发布对应年级的培养方案，内容包含：</p>
 <ul>
 <li>通识课程培养方案</li>
@@ -9767,6 +9768,35 @@ n_{i}
       </categories>
       <tags>
         <tag>学长团</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Multi-Objective Evolutionary Algorithms</title>
+    <url>/2023/07/25/MOEA/</url>
+    <content><![CDATA[<p>$\Huge\text{Outline}$</p>
+<ol>
+<li>NSGA-2</li>
+<li>LMOCSO</li>
+<li>DMOPSO</li>
+</ol>
+<h3 id="NSGA-2"><a href="#NSGA-2" class="headerlink" title="NSGA-2"></a>NSGA-2</h3><p><a href="https://ieeexplore.ieee.org/document/996017">A fast and elitist multiobjective genetic algorithm: NSGA-II</a></p>
+<h3 id="LMOCSO"><a href="#LMOCSO" class="headerlink" title="LMOCSO"></a>LMOCSO</h3><p><a href="https://ieeexplore.ieee.org/document/8681243">Efficient Large-Scale Multiobjective Optimization Based on a Competitive Swarm Optimizer</a></p>
+<p>Particle updating strategy:</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\vec {v_l}(t+1)&=r_0\vec {v_l}(t)+r_1(\vec {x_w}(t)-\vec {x_l}(t))\\
+\vec {x_l}(t+1)&=\vec {x_l}(t)+\vec {v_l}(t+1)+r_0(\vec {v_l}(t+1)-\vec {v_l}(t))
+\end{align*}</script><p><img src="https://s2.loli.net/2023/07/25/S3Z4V2myaMhTOBb.png" alt="image.png" style="zoom:25%;" /></p>
+<p>Fitness: the minimum SDE-based distance</p>
+<script type="math/tex; mode=display">
+\text{Fitness}(\mathbf p)=\min\limits_{\mathbf q \in  P\backslash\{\mathbf p\}}\sqrt{\sum\limits_{i=1}^{M}(\max\{0,f_i(\vec q)-f_i(\vec p)\})^2}</script><h3 id="DMOPSO"><a href="#DMOPSO" class="headerlink" title="DMOPSO"></a>DMOPSO</h3><p><a href="https://ieeexplore.ieee.org/document/6900464">DMOPSO: Dual multi-objective particle swarm optimization</a></p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Algorithm</tag>
+        <tag>Evolutionary Computation</tag>
       </tags>
   </entry>
 </search>
