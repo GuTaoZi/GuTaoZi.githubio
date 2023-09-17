@@ -10200,4 +10200,56 @@ n_{i}
         <tag>妮可指南</tag>
       </tags>
   </entry>
+  <entry>
+    <title>CS329 Machine Learning Notes</title>
+    <url>/2023/09/12/CS329_Notes/</url>
+    <content><![CDATA[<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ol>
+<li>Introduction</li>
+</ol>
+<h2 id="Chapter-0-Introduction"><a href="#Chapter-0-Introduction" class="headerlink" title="Chapter 0 - Introduction"></a>Chapter 0 - Introduction</h2><ul>
+<li><strong>Machine Learning</strong>—minimization of some loss function for generalizing data sets with models.</li>
+<li><strong>Datasets</strong>—annotated, indexed, organized</li>
+<li><strong>Models</strong>—tree, distance, probabilistic, graph, bio-inspired</li>
+<li><strong>Optimization</strong>—algorithms can minimize the loss</li>
+</ul>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
+        <tag>Artificial Intelligence</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CS315 Computer Security Notes</title>
+    <url>/2023/09/12/CS315_Notes/</url>
+    <content><![CDATA[<h2 id="Lecture-1"><a href="#Lecture-1" class="headerlink" title="Lecture 1"></a>Lecture 1</h2><h3 id="Three-Pillars-of-Computer-Security"><a href="#Three-Pillars-of-Computer-Security" class="headerlink" title="Three Pillars of Computer Security"></a>Three Pillars of Computer Security</h3><ul>
+<li><strong>Confidentiality</strong> involves the protection of computer systems and data privacy, preventing unauthorized access or disclosure. </li>
+<li><strong>Integrity</strong> concerns the protection of computer systems and data from unauthorized alteration or corruption.</li>
+<li><strong>Availability</strong> ensures that computer systems and networks are operational, unaffected by accidental failures or malicious attacks.</li>
+</ul>
+<h3 id="Three-More-Concepts-in-Computer-Security"><a href="#Three-More-Concepts-in-Computer-Security" class="headerlink" title="Three More Concepts in Computer Security"></a>Three More Concepts in Computer Security</h3><ul>
+<li><strong>Authenticity</strong> verifies the identity of a subject or a resource. </li>
+<li><strong>Accountability</strong> assures that actions performed can be traced and recorded.</li>
+<li><strong>Non-repudiation</strong> prevents entities from denying their actions or occurrences of events.</li>
+</ul>
+<h3 id="The-3A-Principle-in-Computer-Security"><a href="#The-3A-Principle-in-Computer-Security" class="headerlink" title="The 3A Principle in Computer Security"></a>The 3A Principle in Computer Security</h3><ul>
+<li><strong>Authentication</strong> recognizes and records who accesses information. </li>
+<li><strong>Authorization</strong> gives specific permissions to users based on actual demands. </li>
+<li><strong>Accounting</strong> collects and traces interactions between users and the system.</li>
+</ul>
+<h3 id="Proving-Methods-in-Computer-Security"><a href="#Proving-Methods-in-Computer-Security" class="headerlink" title="Proving Methods in Computer Security"></a>Proving Methods in Computer Security</h3><ul>
+<li>Formal Verification</li>
+<li>Security Proofs</li>
+<li>Logical Measures</li>
+</ul>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Computer Security</tag>
+      </tags>
+  </entry>
 </search>
