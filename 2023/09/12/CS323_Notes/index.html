@@ -20,20 +20,23 @@
     var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"slideLeftBigIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Notes for Computer Security">
+  <meta name="description" content="Notes for Compilers">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CS315 Computer Security Notes">
-<meta property="og:url" content="https://gutaozi.github.io/2023/09/18/CS323_Notes/index.html">
+<meta property="og:title" content="CS323 Compilers Notes">
+<meta property="og:url" content="https://gutaozi.github.io/2023/09/12/CS323_Notes/index.html">
 <meta property="og:site_name" content="咕桃w！">
-<meta property="og:description" content="Notes for Computer Security">
+<meta property="og:description" content="Notes for Compilers">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-09-18T02:20:26.621Z">
-<meta property="article:modified_time" content="2023-09-12T06:37:42.761Z">
+<meta property="og:image" content="https://s2.loli.net/2023/09/18/SGh7Y2mHFJ8bM63.png">
+<meta property="og:image" content="https://s2.loli.net/2023/09/18/5u4hoNQi9xWJHtz.png">
+<meta property="article:published_time" content="2023-09-12T06:26:52.122Z">
+<meta property="article:modified_time" content="2023-09-18T04:09:59.553Z">
 <meta property="article:author" content="咕桃">
-<meta property="article:tag" content="Computer Security">
+<meta property="article:tag" content="Compiler">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/09/18/SGh7Y2mHFJ8bM63.png">
 
-<link rel="canonical" href="https://gutaozi.github.io/2023/09/18/CS323_Notes/">
+<link rel="canonical" href="https://gutaozi.github.io/2023/09/12/CS323_Notes/">
 
 
 <script id="page-configurations">
@@ -46,7 +49,7 @@
   };
 </script>
 
-  <title>CS315 Computer Security Notes | 咕桃w！</title>
+  <title>CS323 Compilers Notes | 咕桃w！</title>
   
 
 
@@ -195,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/09/18/CS323_Notes/">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/09/12/CS323_Notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
@@ -208,7 +211,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CS315 Computer Security Notes
+          CS323 Compilers Notes
         </h1>
 
         <div class="post-meta">
@@ -218,14 +221,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2023-09-18 10:20:26" itemprop="dateCreated datePublished" datetime="2023-09-18T10:20:26+08:00">2023-09-18</time>
+              <time title="创建时间：2023-09-12 14:26:52" itemprop="dateCreated datePublished" datetime="2023-09-12T14:26:52+08:00">2023-09-12</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-12 14:37:42" itemprop="dateModified" datetime="2023-09-12T14:37:42+08:00">2023-09-12</time>
+                <time title="修改时间：2023-09-18 12:09:59" itemprop="dateModified" datetime="2023-09-18T12:09:59+08:00">2023-09-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,7 +241,7 @@
             </span>
 
           
-            <div class="post-description">Notes for Computer Security</div>
+            <div class="post-description">Notes for Compilers</div>
 
         </div>
       </header>
@@ -249,25 +252,199 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Lecture-1"><a href="#Lecture-1" class="headerlink" title="Lecture 1"></a>Lecture 1</h2><h3 id="Three-Pillars-of-Computer-Security"><a href="#Three-Pillars-of-Computer-Security" class="headerlink" title="Three Pillars of Computer Security"></a>Three Pillars of Computer Security</h3><ul>
-<li><strong>Confidentiality</strong> involves the protection of computer systems and data privacy, preventing unauthorized access or disclosure. </li>
-<li><strong>Integrity</strong> concerns the protection of computer systems and data from unauthorized alteration or corruption.</li>
-<li><strong>Availability</strong> ensures that computer systems and networks are operational, unaffected by accidental failures or malicious attacks.</li>
+        <h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ol>
+<li>Introduction</li>
+<li>Lexical Analysis</li>
+</ol>
+<h2 id="Lecture-1-Introduction"><a href="#Lecture-1-Introduction" class="headerlink" title="Lecture 1 - Introduction"></a>Lecture 1 - Introduction</h2><blockquote>
+<p>To be continued</p>
+</blockquote>
+<h2 id="Lecture-2-Lexical-Analysis"><a href="#Lecture-2-Lexical-Analysis" class="headerlink" title="Lecture 2 - Lexical Analysis"></a>Lecture 2 - Lexical Analysis</h2><h3 id="The-Role-of-Lexical-Analyzer"><a href="#The-Role-of-Lexical-Analyzer" class="headerlink" title="The Role of Lexical Analyzer"></a>The Role of Lexical Analyzer</h3><ul>
+<li>Read the input characters of the source program</li>
+<li>Group them into lexemes</li>
+<li><p>Produce a sequence of tokens</p>
+</li>
+<li><p>Add lexemes into the symbol table when necessary</p>
+</li>
 </ul>
-<h3 id="Three-More-Concepts-in-Computer-Security"><a href="#Three-More-Concepts-in-Computer-Security" class="headerlink" title="Three More Concepts in Computer Security"></a>Three More Concepts in Computer Security</h3><ul>
-<li><strong>Authenticity</strong> verifies the identity of a subject or a resource. </li>
-<li><strong>Accountability</strong> assures that actions performed can be traced and recorded.</li>
-<li><strong>Non-repudiation</strong> prevents entities from denying their actions or occurrences of events.</li>
+<p><img src="https://s2.loli.net/2023/09/18/SGh7Y2mHFJ8bM63.png" alt="image.png"></p>
+<p><strong>lexeme</strong>: a string of characters that is a lowest-level syntactic unit in programming languages</p>
+<p><strong>token</strong>: a syntactic category representing a class of lexemes. Formally, it is a pair <em><token name, attribute value></em></p>
+<ul>
+<li><strong>Token name</strong> (compulsory): an abstract symbol representing the kind of the token</li>
+<li><strong>Attribute value</strong> (optional): points to the symbol table</li>
 </ul>
-<h3 id="The-3A-Principle-in-Computer-Security"><a href="#The-3A-Principle-in-Computer-Security" class="headerlink" title="The 3A Principle in Computer Security"></a>The 3A Principle in Computer Security</h3><ul>
-<li><strong>Authentication</strong> recognizes and records who accesses information. </li>
-<li><strong>Authorization</strong> gives specific permissions to users based on actual demands. </li>
-<li><strong>Accounting</strong> collects and traces interactions between users and the system.</li>
+<p><strong>pattern</strong>:  a description of the form that the lexemes of the token may take</p>
+<p>e.g.</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;CS%d&quot;</span>,course_id);</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Lexeme</th>
+<th><code>printf</code></th>
+<th><code>course_id</code></th>
+<th><code>&quot;CS%d&quot;</code></th>
+<th><code>(</code></th>
+<th>…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Token</strong></td>
+<td>id</td>
+<td>id</td>
+<td>literal</td>
+<td>left_parenthesis</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>An <code>id</code> token is associated with:</p>
+<ol>
+<li>its lexeme</li>
+<li>type</li>
+<li>the declaration location(where first found)</li>
+</ol>
+<blockquote>
+<p>Q: function?</p>
+</blockquote>
+<p>Token attributes are stored in the <strong>symbol table</strong>.</p>
+<p><strong>Lexical error</strong>: none of the patterns for tokens match any prefix of the remaining input.</p>
+<h3 id="Specification-of-Tokens-Regex"><a href="#Specification-of-Tokens-Regex" class="headerlink" title="Specification of Tokens (Regex)"></a>Specification of Tokens (Regex)</h3><p><strong>Alphabet</strong>: any <u>finite</u> set of symbols</p>
+<p><strong>String</strong>: (defined over an alphabet) a <u>finite</u> sequence of symbols drawn from an alphabet</p>
+<p><strong>Prefix, Proper Prefix, Suffix, Proper Suffix</strong>: n+1, n-1, n+1, n-1</p>
+<p><strong>Substring, Proper Substring, Subsequences</strong>: n(n+1)/2+1, n(n+1)/2-1, 2^n</p>
+<p><strong>String Operations</strong></p>
+<ul>
+<li><strong>Concatenation</strong>: $x$=butter, $y$=fly, $xy$=butterfly</li>
+<li><strong>Exponentiation</strong>: $s^0=\epsilon, s^1=s, s^i=s^{i-1}s$</li>
 </ul>
-<h3 id="Proving-Methods-in-Computer-Security"><a href="#Proving-Methods-in-Computer-Security" class="headerlink" title="Proving Methods in Computer Security"></a>Proving Methods in Computer Security</h3><ul>
-<li>Formal Verification</li>
-<li>Security Proofs</li>
-<li>Logical Measures</li>
+<p><strong>Language</strong>: any <strong>countable set</strong>$^1$ of strings over some fixed alphabet</p>
+<ul>
+<li>[x] The set containing only the empty string $\{\epsilon\}$ is a language, denoted $\empty$.</li>
+<li>[x] The set of all grammatically correct English sentences</li>
+<li>[x] The set of all syntactically well-formed C programs</li>
+</ul>
+<blockquote>
+<p>$^1$A countable set is a set with the same cardinality (number of elements) as some subset of the set of natural numbers.</p>
+</blockquote>
+<p><strong>Operations on Languages</strong></p>
+<ul>
+<li>Union $L\bigcup M=\{s|s \text{ is in } L\text{ or }s \text{ is in }M\}$</li>
+<li>Concatenation $LM=\{s|s \text{ is in } L\text{ and }s \text{ is in }M\}$</li>
+<li>Kleene closure $L^\star=\bigcup_{i=0}^{\infty}L^i$</li>
+<li>Positive closure $L^+=\bigcup_{i=1}^{\infty}L^i$</li>
+</ul>
+<p><strong>Regex</strong> over an alphabet $\Sigma$</p>
+<ul>
+<li><p><strong>BASIS</strong></p>
+<ul>
+<li>$\epsilon$ is a regex, $L(\epsilon)=\{\epsilon\}$</li>
+<li>If $a$ is a symbol in $\Sigma$, then $a$ is a regex, $L(a)=\{a\}$</li>
+</ul>
+</li>
+<li><p><strong>INDUCTION</strong>: Regex $r$ and $s$ denote the languages $L(r)$ and $L(s)$</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+&(r)|(s) &\rightarrow &\quad L(r)\bigcup L(s)\\
+&(r)(s) &\rightarrow &\quad L(r)L(s)\\
+&(r)^\star &\rightarrow &\quad (L(r))^\star\\
+&(r) &\rightarrow &\quad L(r)
+\end{align*}</script></li>
+</ul>
+<p><strong>Precedence</strong>: closure $^\star$ &gt; concatenation &gt; union $|$</p>
+<p><strong>Associativity</strong>: left associative</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>LAW</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$r</td>
+<td>s=s</td>
+<td>r$</td>
+<td>$</td>
+<td>$ is commutative</td>
+</tr>
+<tr>
+<td>$r</td>
+<td>(s</td>
+<td>t)=(r</td>
+<td>s)</td>
+<td>t$</td>
+<td>$</td>
+<td>$ is associative</td>
+</tr>
+<tr>
+<td>$r(st)=(rs)t$</td>
+<td>Concatenation is associative</td>
+</tr>
+<tr>
+<td>$r(s</td>
+<td>t)=rs</td>
+<td>rt;\ (s</td>
+<td>t)r=sr</td>
+<td>tr$</td>
+<td>Concatenation distributes over $</td>
+<td>$</td>
+</tr>
+<tr>
+<td>$r=\epsilon r=r\epsilon$</td>
+<td>$\epsilon$ is the identity for concatenation</td>
+</tr>
+<tr>
+<td>$r^\star=(r</td>
+<td>\epsilon)^\star$</td>
+<td>$\epsilon$ is guaranteed in a closure</td>
+</tr>
+<tr>
+<td>$r^\star=r^{\star\star}$</td>
+<td>$^\star$ is idempotent</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>e.g. Regex for C identifiers</p>
+<p>$id\rightarrow letter_(letter_|digit)^\star$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(A|B|...|Z|a|b|...|z|_)((A|B|...|Z|a|b|...|z|_)|(0|1|</span><br><span class="line">...|9))*</span><br></pre></td></tr></table></figure>
+<p><strong>Regular Definitions</strong>: For notational convenience, we can give names to certain regexes and use those names in subsequent expressions.</p>
+<p><strong>Notational extensions</strong></p>
+<ul>
+<li>$r^+=rr^\star,\ r^\star=r^+|\epsilon$</li>
+<li>$r?=r|\epsilon$</li>
+<li>$[a_1a_2…a_n]=a_1|a_2|…|a_n$, $[a-e]=a|b|c|d|e$</li>
+</ul>
+<h3 id="Recognition-of-Tokens-Transition-Diagrams"><a href="#Recognition-of-Tokens-Transition-Diagrams" class="headerlink" title="Recognition of Tokens (Transition Diagrams)"></a>Recognition of Tokens (Transition Diagrams)</h3><p><strong>whitespace token</strong>: ws→ (blank | tab | newline)$^+$</p>
+<p>The lexical analyzer restarts from the next character when recognizing a whitespace token.</p>
+<p><strong>Transition Diagrams</strong></p>
+<p><img src="https://s2.loli.net/2023/09/18/5u4hoNQi9xWJHtz.png" alt="image.png"></p>
+<p><strong>States</strong></p>
+<ul>
+<li>conditions that could occur during the process of scanning</li>
+<li>start state: indicated by starting edge</li>
+<li>accepting states(final): double circles </li>
+</ul>
+<p><strong>The Retract Action</strong></p>
+<p>Retract the <code>forward</code> pointer when falling into $\star$ states. </p>
+<p><strong>Edges</strong>: from one state to another</p>
+<p><strong>Handling Reserved Words</strong></p>
+<blockquote>
+<p>Problem: the transition diagram that searches for identifiers can also recognize reserved words</p>
+</blockquote>
+<ul>
+<li><p>Pre-install strategy</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span>(<span class="built_in">getToken</span>(),<span class="built_in">installID</span>())</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Multi-state transition diagrams strategy</p>
+<p>Create a separate transition diagram with a <u>high priority</u> for each keyword</p>
+</li>
+<li></li>
 </ul>
 
     </div>
@@ -278,7 +455,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Computer-Security/" rel="tag"># Computer Security</a>
+              <a href="/tags/Compiler/" rel="tag"># Compiler</a>
           </div>
 
         
@@ -287,10 +464,13 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/09/12/CS315_Notes/" rel="prev" title="CS323 Compilers Notes">
-      <i class="fa fa-chevron-left"></i> CS323 Compilers Notes
+    <a href="/2023/09/12/CS329_Notes/" rel="prev" title="CS329 Machine Learning Notes">
+      <i class="fa fa-chevron-left"></i> CS329 Machine Learning Notes
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/18/CS315_Notes/" rel="next" title="CS315 Computer Security Notes">
+      CS315 Computer Security Notes <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -363,7 +543,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-1"><span class="nav-number">1.</span> <span class="nav-text">Lecture 1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Three-Pillars-of-Computer-Security"><span class="nav-number">1.1.</span> <span class="nav-text">Three Pillars of Computer Security</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Three-More-Concepts-in-Computer-Security"><span class="nav-number">1.2.</span> <span class="nav-text">Three More Concepts in Computer Security</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-3A-Principle-in-Computer-Security"><span class="nav-number">1.3.</span> <span class="nav-text">The 3A Principle in Computer Security</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Proving-Methods-in-Computer-Security"><span class="nav-number">1.4.</span> <span class="nav-text">Proving Methods in Computer Security</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline"><span class="nav-number">1.</span> <span class="nav-text">Outline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">Lecture 1 - Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-2-Lexical-Analysis"><span class="nav-number">3.</span> <span class="nav-text">Lecture 2 - Lexical Analysis</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Role-of-Lexical-Analyzer"><span class="nav-number">3.1.</span> <span class="nav-text">The Role of Lexical Analyzer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Specification-of-Tokens-Regex"><span class="nav-number">3.2.</span> <span class="nav-text">Specification of Tokens (Regex)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recognition-of-Tokens-Transition-Diagrams"><span class="nav-number">3.3.</span> <span class="nav-text">Recognition of Tokens (Transition Diagrams)</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
