@@ -9784,12 +9784,94 @@ n_{i}
     <url>/2023/09/12/CS329_Notes/</url>
     <content><![CDATA[<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ol>
 <li>Introduction</li>
+<li>Preliminary</li>
 </ol>
-<h2 id="Chapter-0-Introduction"><a href="#Chapter-0-Introduction" class="headerlink" title="Chapter 0 - Introduction"></a>Chapter 0 - Introduction</h2><ul>
+<h2 id="Chapter-1-Introduction"><a href="#Chapter-1-Introduction" class="headerlink" title="Chapter 1 - Introduction"></a>Chapter 1 - Introduction</h2><h3 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h3><ul>
 <li><strong>Machine Learning</strong>—minimization of some loss function for generalizing data sets with models.</li>
 <li><strong>Datasets</strong>—annotated, indexed, organized</li>
 <li><strong>Models</strong>—tree, distance, probabilistic, graph, bio-inspired</li>
 <li><strong>Optimization</strong>—algorithms can minimize the loss</li>
+</ul>
+<h3 id="Linear-Optimization-Model"><a href="#Linear-Optimization-Model" class="headerlink" title="Linear Optimization Model"></a>Linear Optimization Model</h3><script type="math/tex; mode=display">
+Y=AX+W,\quad W\sim \mathbf N(0,R)\\
+L(x)=\frac 1 2 (Y-AX)^\text TR^{-1}(Y-AX)\\</script><p>Find $X^\star$ to minimize the loss function:</p>
+<script type="math/tex; mode=display">
+X^\star=\min\limits_X(Y-AX)^\text TR^{-1}(Y-AX)\\
+\text {Let } \frac{\partial}{\partial X^\text T}(Y-AX)^\text TR^{-1}(Y-AX)=0\\
+\Rightarrow X^\star = (A^\text T R^{-1}A)A^{\text T}R^{-1}Y</script><h3 id="Euclidean-Distance-Optimization"><a href="#Euclidean-Distance-Optimization" class="headerlink" title="Euclidean Distance Optimization"></a>Euclidean Distance Optimization</h3><p>Point $x_0$, model $\mathbf b^\text Tx=d$.</p>
+<script type="math/tex; mode=display">
+x^\star = \min\limits_{x}(x-x_0)^\text T(x-x_0), \text{s.t.}\ \mathbf{b}^\text Tx-d=0</script><p>Lagrange optimization:</p>
+<script type="math/tex; mode=display">
+\mathbf b^\text T(x_0-\lambda \mathbf b)=d\\
+\lambda = \frac{\mathbf b^\text Tx_0-d}{\mathbf b^\text T\mathbf b}\\
+L(x,\lambda)=\frac 1 2 (x-x_0)^\text T(x-x_0)+\lambda(\mathbf b^\text Tx-d)\\
+\frac{\partial L}{\partial x^\text T}=x^\star-x_0+\lambda \mathbf b=0\\
+x^\star=x_0-\frac{(\mathbf b^\text Tx_0-d)\mathbf b}{\mathbf b^\text T\mathbf b}</script><h3 id="Convex-Optimization"><a href="#Convex-Optimization" class="headerlink" title="Convex Optimization"></a>Convex Optimization</h3><h4 id="Unconstrained-optimization"><a href="#Unconstrained-optimization" class="headerlink" title="Unconstrained optimization"></a>Unconstrained optimization</h4><h5 id="Gradient-descent"><a href="#Gradient-descent" class="headerlink" title="Gradient descent"></a>Gradient descent</h5><script type="math/tex; mode=display">
+f(x_{t+1})=f(x_t)-\eta\nabla f(x_t)^\text T(x-x_t)</script><h5 id="Gauss-Newton’s-Method"><a href="#Gauss-Newton’s-Method" class="headerlink" title="Gauss-Newton’s Method"></a>Gauss-Newton’s Method</h5><p>Use a second-order approximation to function:</p>
+<script type="math/tex; mode=display">
+f(x+\Delta x)\approx f(x)+\nabla f(x)^\text T\Delta x+\frac 1 2 \Delta x^\text T\nabla^2f(x)\Delta x</script><p>Choose $\Delta x$ to minimize above:</p>
+<script type="math/tex; mode=display">
+\Delta x=-[\nabla^2f(x)]^{-1}\nabla f(x)</script><p>Descent direction:</p>
+<script type="math/tex; mode=display">
+\nabla f(x)^\text T\Delta x= -\nabla f(x)^\text T[\nabla^2f(x)]^{-1}\nabla f(x)<0</script><h5 id="Batch-Gradient-Descent"><a href="#Batch-Gradient-Descent" class="headerlink" title="Batch Gradient Descent"></a>Batch Gradient Descent</h5><p>Minimize empirical loss, assuming it’s convex and unconstrained.</p>
+<ul>
+<li>Gradient descent on the empirical loss</li>
+<li>Gradient is the average of the gradient for all samples</li>
+<li>Very slow when $n$ is very large</li>
+</ul>
+<script type="math/tex; mode=display">
+w^{k+1}\leftarrow w^k-\eta_t(\frac1 n \sum\limits_{i=1}^n\frac{\partial L(w,x_i,y_i)}{\partial w})</script><h5 id="Stochastic-Gradient-Descent"><a href="#Stochastic-Gradient-Descent" class="headerlink" title="Stochastic Gradient Descent"></a>Stochastic Gradient Descent</h5><p>Compute gradient from just one or a few samples</p>
+<script type="math/tex; mode=display">
+w^{k+1}\leftarrow w^k-\eta_t \frac{\partial L(w,x_i,y_i)}{\partial w}</script><h4 id="Constrained-optimization"><a href="#Constrained-optimization" class="headerlink" title="Constrained optimization"></a>Constrained optimization</h4><h5 id="Lagrange-methods"><a href="#Lagrange-methods" class="headerlink" title="Lagrange methods"></a>Lagrange methods</h5><h5 id="Bayesian-methods"><a href="#Bayesian-methods" class="headerlink" title="Bayesian methods"></a>Bayesian methods</h5><h3 id="Non-convex-Optimization"><a href="#Non-convex-Optimization" class="headerlink" title="Non-convex Optimization"></a>Non-convex Optimization</h3><h4 id="Heuristic-algorithms"><a href="#Heuristic-algorithms" class="headerlink" title="Heuristic algorithms"></a>Heuristic algorithms</h4><h4 id="Random-search"><a href="#Random-search" class="headerlink" title="Random search"></a>Random search</h4><h3 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h3><ul>
+<li>Bayes</li>
+<li>KNN</li>
+<li>K-means</li>
+<li>Decision Tree</li>
+<li>SVM</li>
+<li>Boosting</li>
+<li>Ensemble Learning</li>
+<li>Linear Statistical Learning</li>
+<li>Nonlinear Statistical Learning</li>
+<li>Deep Neural Networks</li>
+<li>Generative Adversarial Networks</li>
+<li>Bayesian Networks</li>
+<li>Reinforcement Learning</li>
+<li>Federated Learning</li>
+</ul>
+<h2 id="Chapter-2-Preliminary"><a href="#Chapter-2-Preliminary" class="headerlink" title="Chapter 2 - Preliminary"></a>Chapter 2 - Preliminary</h2><h3 id="Curve-Fitting-and-Regularization"><a href="#Curve-Fitting-and-Regularization" class="headerlink" title="Curve Fitting and Regularization"></a>Curve Fitting and Regularization</h3><p><strong>Polynomial Curve Fitting</strong></p>
+<script type="math/tex; mode=display">
+y(x,\mathbf{w})=w_{0}+w_{1}x+w_{2}x+...+w_Mx^M=\sum^M_{i=0}w_ix^i</script><p><strong>Sum-of-Squares Error Function</strong></p>
+<script type="math/tex; mode=display">
+E(\mathbf w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2</script><p><strong>Root-Mean-Square (RMS) Error</strong></p>
+<script type="math/tex; mode=display">
+E_{\text{RMS}}=\sqrt{2E(\mathbf w^\star)/N}</script><p><strong>Regularization</strong></p>
+<script type="math/tex; mode=display">
+\tilde E(\mathbf w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2 + {\color{red}\frac{\lambda}2 \| \mathbf w \| ^2}</script><h3 id="Probabilities-and-Gaussian-Distributions"><a href="#Probabilities-and-Gaussian-Distributions" class="headerlink" title="Probabilities and Gaussian Distributions"></a>Probabilities and Gaussian Distributions</h3><p>Review:</p>
+<ul>
+<li><p>Marginal/Joint/Conditional Probability</p>
+</li>
+<li><p>Sum/Product Rule</p>
+</li>
+<li><p>Bayes’ Theorem</p>
+</li>
+<li><p>Probability Densities</p>
+</li>
+<li><p>Transformed Densities</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
+&=p_x(g(y))|g\prime(y)|
+\end{align*}</script></li>
+<li><p>Expectations</p>
+</li>
+<li><p>Variances and Covariances</p>
+</li>
+<li><p>The Gaussian Distribution</p>
+</li>
+<li><p>Gaussian Mean and Variance</p>
+</li>
+<li><p>The Multivariate Gaussian</p>
+</li>
 </ul>
 ]]></content>
       <categories>
