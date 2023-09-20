@@ -6095,55 +6095,6 @@ a & \text { if } n=0
       </tags>
   </entry>
   <entry>
-    <title>CS329 Machine Learning Preview</title>
-    <url>/2023/07/10/CS329_Preview/</url>
-    <content><![CDATA[<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ol>
-<li>Introduction</li>
-<li>Probability Distributions</li>
-</ol>
-<h2 id="Chapter-1-Introduction"><a href="#Chapter-1-Introduction" class="headerlink" title="Chapter 1 - Introduction"></a>Chapter 1 - Introduction</h2><h3 id="Example-Polynomial-Curve-Fitting"><a href="#Example-Polynomial-Curve-Fitting" class="headerlink" title="Example: Polynomial Curve Fitting"></a>Example: Polynomial Curve Fitting</h3><h4 id="Definitions"><a href="#Definitions" class="headerlink" title="Definitions"></a>Definitions</h4><p>Input data set $\mathbf x\equiv (x_1,\cdots,x_N)^\text T$</p>
-<p>Target data set $\mathbf t\equiv (t_1,\cdots,t_N)^\text T$</p>
-<p>Fit the data using a polynomial function of the form</p>
-<script type="math/tex; mode=display">
-y(x,\mathbf w)=w_0+w_1x+w_2x^2+\cdots+w_Mx^M=\sum\limits_{j=0}^{M}w_jx^j</script><p>Minimize the loss function</p>
-<script type="math/tex; mode=display">
-E(\mathbf w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2</script><p>Root-mean-square(RMS) error</p>
-<script type="math/tex; mode=display">
-E_\text{RMS}=\sqrt{2E(\mathbf w^\star)/N}</script><p>Regularized error</p>
-<script type="math/tex; mode=display">
-\tilde E(\mathbf w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2+\frac\lambda 2\left \|  w\right \| ^2</script><h4 id="Overfitting"><a href="#Overfitting" class="headerlink" title="Overfitting"></a>Overfitting</h4><p>Paradoxical?                         </p>
-<ul>
-<li><p>A polynomial of given order contains all lower order polynomials as special cases</p>
-<p>So high-order polynomials are capable of generating results at least as good as low-order ones?</p>
-</li>
-<li><p>A power series expansion of the function contains terms of all orders</p>
-<p>So results should improve monotonically as the order increases?</p>
-</li>
-</ul>
-<p>Polynomials with higher orders are becoming increasingly tuned to the random noise on the target values.</p>
-<p>The larger the data set, the more complex (flexible) the model that we can afford to fit to the data.</p>
-<h3 id="Probability-Theory"><a href="#Probability-Theory" class="headerlink" title="Probability Theory"></a>Probability Theory</h3><p>The Rules of Probability</p>
-<ul>
-<li>sum rule</li>
-<li>product rule</li>
-</ul>
-<p>Probability densities</p>
-<p>Expectations and covariances</p>
-<p>Bayesian probabilities</p>
-<p>The Gaussian distribution</p>
-<script type="math/tex; mode=display">
-\mathscr N(x|\mu,\sigma^2)=\frac 1 {(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac 1 {2\sigma^2}(x-\mu)^2\right\}</script><p>D-dimensional Gaussian distribution</p>
-<script type="math/tex; mode=display">
-\mathscr N(\mathbf x|\mathbf\mu,\mathbf\Sigma)=\frac 1 {(2\pi)^{D/2}}\frac 1 {|\mathbf\Sigma|^{1/2}}\exp\left\{-\frac 1 2(\mathbf x-\mathbf\mu)^\text T\mathbf\Sigma^{-1}(\mathbf x - \mathbf \mu)\right\}</script>]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Machine Learning</tag>
-        <tag>Artificial Intelligence</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CS217 数据结构与算法分析 期末复习</title>
     <url>/2023/01/08/CS217_DSAA_final/</url>
     <content><![CDATA[<p><a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">Algorithm visualization</a></p>
@@ -9867,7 +9818,9 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
 <li><p>Variances and Covariances</p>
 </li>
 <li><p>The Gaussian Distribution</p>
-</li>
+<script type="math/tex; mode=display">
+\mathscr N(x|\mu,\sigma^2)=\frac 1 {(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac 1 {2\sigma^2}(x-\mu)^2\right\}</script><script type="math/tex; mode=display">
+\mathscr N(\mathbf x|\mathbf\mu,\mathbf\Sigma)=\frac 1 {(2\pi)^{D/2}}\frac 1 {|\mathbf\Sigma|^{1/2}}\exp\left\{-\frac 1 2(\mathbf x-\mathbf\mu)^\text T\mathbf\Sigma^{-1}(\mathbf x - \mathbf \mu)\right\}</script></li>
 <li><p>Gaussian Mean and Variance</p>
 </li>
 <li><p>The Multivariate Gaussian</p>
@@ -9885,7 +9838,11 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
   <entry>
     <title>CS315 Computer Security Notes</title>
     <url>/2023/09/18/CS315_Notes/</url>
-    <content><![CDATA[<h2 id="Lecture-1"><a href="#Lecture-1" class="headerlink" title="Lecture 1"></a>Lecture 1</h2><h3 id="Three-Pillars-of-Computer-Security"><a href="#Three-Pillars-of-Computer-Security" class="headerlink" title="Three Pillars of Computer Security"></a>Three Pillars of Computer Security</h3><ul>
+    <content><![CDATA[<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ol>
+<li>Introduction</li>
+<li>Malware Reverse Engineering</li>
+</ol>
+<h2 id="Lecture-1-Introduction"><a href="#Lecture-1-Introduction" class="headerlink" title="Lecture 1 - Introduction"></a>Lecture 1 - Introduction</h2><h3 id="Three-Pillars-of-Computer-Security"><a href="#Three-Pillars-of-Computer-Security" class="headerlink" title="Three Pillars of Computer Security"></a>Three Pillars of Computer Security</h3><ul>
 <li><strong>Confidentiality</strong> involves the protection of computer systems and data privacy, preventing unauthorized access or disclosure. </li>
 <li><strong>Integrity</strong> concerns the protection of computer systems and data from unauthorized alteration or corruption.</li>
 <li><strong>Availability</strong> ensures that computer systems and networks are operational, unaffected by accidental failures or malicious attacks.</li>
@@ -9905,6 +9862,7 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
 <li>Security Proofs</li>
 <li>Logical Measures</li>
 </ul>
+<h2 id="Lecture-2-Malware-Reverse-Engineering"><a href="#Lecture-2-Malware-Reverse-Engineering" class="headerlink" title="Lecture 2 - Malware Reverse Engineering"></a>Lecture 2 - Malware Reverse Engineering</h2><h3 id="Introduction-to-Reverse-Engineering"><a href="#Introduction-to-Reverse-Engineering" class="headerlink" title="Introduction to Reverse Engineering"></a>Introduction to Reverse Engineering</h3><p><u><strong>Reverse Engineering</strong></u> is the practice of unlocking knowledge or blueprints from any man-made item. Contrasting scientific research, it’s applied to man-made, rather than natural phenomena.</p>
 ]]></content>
       <categories>
         <category>CS</category>
