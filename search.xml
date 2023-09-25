@@ -9899,6 +9899,7 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
     <content><![CDATA[<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ol>
 <li>Introduction</li>
 <li>Lexical Analysis</li>
+<li>Finite Automata</li>
 </ol>
 <h2 id="Lecture-1-Introduction"><a href="#Lecture-1-Introduction" class="headerlink" title="Lecture 1 - Introduction"></a>Lecture 1 - Introduction</h2><blockquote>
 <p>To be continued</p>
@@ -10088,7 +10089,25 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
 <li><p>Multi-state transition diagrams strategy</p>
 <p>Create a separate transition diagram with a <u>high priority</u> for each keyword</p>
 </li>
-<li></li>
+</ul>
+<p><strong>Building the Entire Lexical Analyzer</strong></p>
+<ul>
+<li>Try the transition diagram for each type of token sequentially</li>
+<li>Run transition diagrams in parallel</li>
+<li>Combining all transition diagrams into one</li>
+</ul>
+<h2 id="Lecture-3-Finite-Automata"><a href="#Lecture-3-Finite-Automata" class="headerlink" title="Lecture 3 - Finite Automata"></a>Lecture 3 - Finite Automata</h2><p>Finite automata are graphs simply saying “yes” or “no” about each possible input string(pattern match).</p>
+<ul>
+<li><p>Nondeterministic finite automata</p>
+<blockquote>
+<p>A symbol can label several edges out of the same state (allowing multiple target states), and the empty string ! is a possible label.</p>
+</blockquote>
+</li>
+<li><p>Deterministic finite automata</p>
+<blockquote>
+<p>For each state and for each symbol in the input alphabet, there is exactly one edge with that symbol leaving that state.</p>
+</blockquote>
+</li>
 </ul>
 ]]></content>
       <categories>
