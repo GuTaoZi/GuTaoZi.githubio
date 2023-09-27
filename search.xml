@@ -9819,14 +9819,32 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
 </li>
 <li><p>The Gaussian Distribution</p>
 <script type="math/tex; mode=display">
-\mathscr N(x|\mu,\sigma^2)=\frac 1 {(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac 1 {2\sigma^2}(x-\mu)^2\right\}</script><script type="math/tex; mode=display">
-\mathscr N(\mathbf x|\mathbf\mu,\mathbf\Sigma)=\frac 1 {(2\pi)^{D/2}}\frac 1 {|\mathbf\Sigma|^{1/2}}\exp\left\{-\frac 1 2(\mathbf x-\mathbf\mu)^\text T\mathbf\Sigma^{-1}(\mathbf x - \mathbf \mu)\right\}</script></li>
+\mathscr N(x|\mu,\sigma^2)=\frac 1 {(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac 1 {2\sigma^2}(x-\mu)^2\right\}</script></li>
 <li><p>Gaussian Mean and Variance</p>
-</li>
-<li><p>The Multivariate Gaussian</p>
-</li>
+<script type="math/tex; mode=display">
+\mathbb E[x]=\int_{-\infty}^\infty \mathcal N(x\vert \mu,\sigma^2)x dx = \mu\\
+\mathbb E[x^2]=\int_{-\infty}^\infty \mathcal N(x\vert \mu,\sigma^2)x^2 dx = \mu^2 + \sigma^2\\
+\text{var}[x]=\mathbb E[x^2]-\mathbb E[x]^2 = \sigma^2</script></li>
 </ul>
-]]></content>
+<ul>
+<li>The Multivariate Gaussian<script type="math/tex; mode=display">
+\mathscr N(\mathbf x|\mathbf\mu,\mathbf\Sigma)=\frac 1 {(2\pi)^{D/2}}\frac 1 {|\mathbf\Sigma|^{1/2}}\exp\left\{-\frac 1 2(\mathbf x-\mathbf\mu)^\text T\mathbf\Sigma^{-1}(\mathbf x - \mathbf \mu)\right\}</script></li>
+</ul>
+<h3 id="Bayesian-Inferences-ML-and-MAP"><a href="#Bayesian-Inferences-ML-and-MAP" class="headerlink" title="Bayesian Inferences (ML and MAP)"></a>Bayesian Inferences (ML and MAP)</h3><h4 id="Maximum-Log-Likelihood"><a href="#Maximum-Log-Likelihood" class="headerlink" title="Maximum (Log) Likelihood"></a>Maximum (Log) Likelihood</h4><script type="math/tex; mode=display">
+\ln p(x|\mu,\sigma^2)=-\frac 1 {2\sigma^2}\sum\limits_{n=1}^N(x_n-\mu)^2 - \frac{N}2 \ln \sigma^2-\frac{N}2 \ln(2\pi)</script><script type="math/tex; mode=display">
+\mu_{ML}=\frac 1 N \sum\limits_{n=1}^N x_n\quad \sigma^2_{ML}=\frac 1 N  \sum\limits_{n=1}^N (x_n-\mu_{ML})^2</script><h4 id="Properties-of-mu-ML-and-sigma-2-ML"><a href="#Properties-of-mu-ML-and-sigma-2-ML" class="headerlink" title="Properties of $\mu_{ML}$ and $\sigma^2_{ML}$"></a>Properties of $\mu_{ML}$ and $\sigma^2_{ML}$</h4><script type="math/tex; mode=display">
+\begin{align*}
+\mathbb E[\mu_{ML}]&=\mu\\
+\mathbb E[\sigma^2_{ML}]&=(\frac{N-1}N)\sigma^2\\
+\widetilde \sigma^2&= (\frac N{N-1})\sigma^2_{ML}\\
+&=\frac 1{N-1} \sum\limits_{n=1}^N (x_n-\mu_{ML})^2
+\end{align*}</script><h4 id="MAP-Maximum-A-Posteriori"><a href="#MAP-Maximum-A-Posteriori" class="headerlink" title="MAP: Maximum A Posteriori"></a>MAP: Maximum A <em>Posteriori</em></h4><script type="math/tex; mode=display">
+p(\bold w\vert \alpha)=\mathcal N(\bold w|\bold 0,\alpha^{-1}\bold I)=(\frac\alpha{2\pi})^{(M+1)/2} \exp\{-\frac\alpha 2 \bold w^\text{T}\bold w\}</script><script type="math/tex; mode=display">
+\begin{align*}
+&p(\bold w \vert\bold x,\bold t,\alpha,\beta)&\propto\quad&p(\bold t\vert \bold x,\bold w,\beta)&p(\bold w\vert\alpha)\\
+&\text{posteriori}&\propto\quad&\text{likelihood}&\text{priori}
+\end{align*}</script><script type="math/tex; mode=display">
+\beta\widetilde E(\bold w)=\frac\beta 2\sum\limits_{n=1}^N\{y(x_n,\bold w)-t_n\}^2+\frac\alpha 2 \bold w^\text{T}\bold w</script>]]></content>
       <categories>
         <category>CS</category>
       </categories>
@@ -9967,11 +9985,9 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
 <li><strong>Exponentiation</strong>: $s^0=\epsilon, s^1=s, s^i=s^{i-1}s$</li>
 </ul>
 <p><strong>Language</strong>: any <strong>countable set</strong>$^1$ of strings over some fixed alphabet</p>
-<ul>
-<li>[x] The set containing only the empty string $\{\epsilon\}$ is a language, denoted $\empty$.</li>
-<li>[x] The set of all grammatically correct English sentences</li>
-<li>[x] The set of all syntactically well-formed C programs</li>
-</ul>
+<p>✅The set containing only the empty string $\{\epsilon\}$ is a language, denoted $\emptyset$.</p>
+<p>✅The set of all grammatically correct English sentences</p>
+<p>✅The set of all syntactically well-formed C programs</p>
 <blockquote>
 <p>$^1$A countable set is a set with the same cardinality (number of elements) as some subset of the set of natural numbers.</p>
 </blockquote>
@@ -10011,41 +10027,27 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
 </thead>
 <tbody>
 <tr>
-<td>$r</td>
-<td>s=s</td>
-<td>r$</td>
-<td>$</td>
-<td>$ is commutative</td>
+<td>$r\vert s=s\vert r$</td>
+<td>$\vert $ is commutative</td>
 </tr>
 <tr>
-<td>$r</td>
-<td>(s</td>
-<td>t)=(r</td>
-<td>s)</td>
-<td>t$</td>
-<td>$</td>
-<td>$ is associative</td>
+<td>$r\vert (s\vert t)=(r\vert s)\vert t$</td>
+<td>$\vert $ is associative</td>
 </tr>
 <tr>
 <td>$r(st)=(rs)t$</td>
 <td>Concatenation is associative</td>
 </tr>
 <tr>
-<td>$r(s</td>
-<td>t)=rs</td>
-<td>rt;\ (s</td>
-<td>t)r=sr</td>
-<td>tr$</td>
-<td>Concatenation distributes over $</td>
-<td>$</td>
+<td>$r(s\vert t)=rs\vert rt;\ (s\vert t)r=sr\vert tr$</td>
+<td>Concatenation distributes over $\vert $</td>
 </tr>
 <tr>
 <td>$r=\epsilon r=r\epsilon$</td>
 <td>$\epsilon$ is the identity for concatenation</td>
 </tr>
 <tr>
-<td>$r^\star=(r</td>
-<td>\epsilon)^\star$</td>
+<td>$r^\star=(r\vert \epsilon)^\star$</td>
 <td>$\epsilon$ is guaranteed in a closure</td>
 </tr>
 <tr>
@@ -10096,7 +10098,7 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
 <li>Run transition diagrams in parallel</li>
 <li>Combining all transition diagrams into one</li>
 </ul>
-<h2 id="Lecture-3-Finite-Automata"><a href="#Lecture-3-Finite-Automata" class="headerlink" title="Lecture 3 - Finite Automata"></a>Lecture 3 - Finite Automata</h2><p>Finite automata are graphs simply saying “yes” or “no” about each possible input string(pattern match).</p>
+<h2 id="Lecture-3-Finite-Automata"><a href="#Lecture-3-Finite-Automata" class="headerlink" title="Lecture 3 - Finite Automata"></a>Lecture 3 - Finite Automata</h2><h3 id="Automata"><a href="#Automata" class="headerlink" title="Automata"></a>Automata</h3><p>Finite automata are graphs simply saying “yes” or “no” about each possible input string(pattern match).</p>
 <ul>
 <li><p>Nondeterministic finite automata</p>
 <blockquote>
@@ -10107,6 +10109,84 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
 <blockquote>
 <p>For each state and for each symbol in the input alphabet, there is exactly one edge with that symbol leaving that state.</p>
 </blockquote>
+</li>
+</ul>
+<p><strong>Nondeterministic Finite Automata</strong>: 5-tuple</p>
+<ol>
+<li>A finite set of states $S$</li>
+<li>A set of input symbols $\Sigma$, the <strong>input alphabet</strong>. We assume that the empty string $\epsilon$ is never a member of $\Sigma$ </li>
+<li>A <strong>transition function</strong> that gives, for each state, and for each symbol in $\Sigma\cup\{\epsilon\}$ <u>a set of next states</u> </li>
+<li>A <strong>start state</strong> (or initial state) $s_0$ from $S$ </li>
+<li>A set of <strong>accepting states</strong> (or final states) $F$, a subset of $S$</li>
+</ol>
+<p><strong>Transition Table</strong></p>
+<p><img src="https://s2.loli.net/2023/09/25/3sFkCmprPOjaqN7.png" alt="image.png" style="zoom:50%;" /></p>
+<p><strong>Acceptance of Input Strings</strong></p>
+<p>An NFA accepts an input string $x$ <strong>if and only if</strong>:</p>
+<p>There is a path in the transition graph from the start state to one accepting state, such that the symbols along the path form $x$ ($\epsilon$ labels are ignored).</p>
+<p>The language defined or accepted by an NFA: </p>
+<p>The set of strings labelling some path from the start state to an accepting state.</p>
+<p><strong>Deterministic Finite Automata</strong>: special NFA s.t.</p>
+<ul>
+<li>There are no moves on input $\epsilon$</li>
+<li>For each state $s$ and input symbol $a$, there is exactly one edge out of $s$ labeled $a$ (i.e., exactly one target state)</li>
+</ul>
+<h3 id="From-Regex-to-Automata"><a href="#From-Regex-to-Automata" class="headerlink" title="From Regex to Automata"></a>From Regex to Automata</h3><p>Regex→NFA→DFA</p>
+<p>Algorithms: Thompson’s construction + subset construction</p>
+<h4 id="Subset-construction"><a href="#Subset-construction" class="headerlink" title="Subset construction"></a>Subset construction</h4><p>Each state of the constructed DFA corresponds to a set of NFA states</p>
+<p>The algorithm simulates “in parallel” all possible moves an NFA can make on a given input string to map a set of NFA states to a DFA state.</p>
+<p><strong>Operations</strong></p>
+<ul>
+<li><p>$\epsilon$-closure($s$)</p>
+<p>Set of NFA states reachable from NFA state s on $\epsilon$- transitions alone.</p>
+<p>(Computed by DFS/BFS)</p>
+</li>
+<li><p>$\epsilon$-closure($T$)</p>
+<p>Set of NFA states reachable from some NFA state $s$ in set $T$ on $\epsilon$-transitions alone</p>
+</li>
+<li><p>move($T, a$)</p>
+<p>Set of NFA states to which there is a transition on input symbol $a$ from some state $s$ in $T$ (i.e., the target states of those states in $T$ when seeing $a$)</p>
+</li>
+</ul>
+<p><strong>Dstates &amp; Dtran</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">while(there is an unmarked state T in Dstates)</span><br><span class="line">&#123;</span><br><span class="line">	mark T;</span><br><span class="line">	for(each input symbol a)</span><br><span class="line">	&#123;</span><br><span class="line">		U=epsilon-closure(move(T,a));</span><br><span class="line">		if(U is not in Dstates)</span><br><span class="line">		&#123;</span><br><span class="line">			add U as an unmarked state to Dstates;</span><br><span class="line">		&#125;</span><br><span class="line">		Dtran[T,a]=U;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Thompson’s-Construction"><a href="#Thompson’s-Construction" class="headerlink" title="Thompson’s Construction"></a>Thompson’s Construction</h4><p>The algorithm works recursively by splitting a regex into subexpressions, from which the NFA will be constructed using the following rules:</p>
+<ul>
+<li><p>Two basis rules: handle subexpressions with no operators</p>
+<p><img src="https://s2.loli.net/2023/09/25/pMlOHkGaq45ifB2.png" alt="image.png" style="zoom: 33%;" /></p>
+</li>
+<li><p>Three inductive rules: construct larger NFA’s from the smaller NFA’s for subexpressions</p>
+<ul>
+<li><p>Union</p>
+<p><img src="https://s2.loli.net/2023/09/25/dGVNmClnbRIA8PJ.png" alt="image.png" style="zoom: 33%;" /></p>
+</li>
+<li><p>Concatenation</p>
+<p><img src="https://s2.loli.net/2023/09/25/aLXCdiM1eEKwOZ9.png" alt="image.png" style="zoom:33%;" /></p>
+</li>
+<li><p>Kleene Closure</p>
+<p><img src="https://s2.loli.net/2023/09/25/nDjpL8lB63obcd7.png" alt="image.png" style="zoom:33%;" /></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="DFA’s-for-Lexical-Analyzers"><a href="#DFA’s-for-Lexical-Analyzers" class="headerlink" title="DFA’s for Lexical Analyzers"></a>DFA’s for Lexical Analyzers</h3><p><strong>Combining NFA’s</strong></p>
+<ul>
+<li><p>Why?</p>
+<p>A single automaton to recognize lexemes matching any pattern (in the lex program)</p>
+</li>
+<li><p>How?</p>
+<p>Introduce a new start state with $\epsilon$-transitions to each of the start states of the NFA’s for pattern $p_i$</p>
+</li>
+</ul>
+<p>The languages of big NFA is the <strong>union</strong> of the languages of small NFA’s.</p>
+<p>Different <strong>accepting states</strong> correspond to different <strong>patterns</strong>.</p>
+<p><strong>DFA’s for Lexical Analyzers</strong></p>
+<ul>
+<li>Convert the NFA for all the patterns into an equivalent DFA</li>
+<li>An accepting state of the DFA corresponds to a subset of the NFA states, in which at least one is an accepting NFA state<ul>
+<li>If there are multiple accepting NFA states, this means that <strong>conflicts</strong> arise (the prefix of the input string matches multiple patterns)</li>
+<li>Solution for conflicts: pattern priority</li>
+</ul>
 </li>
 </ul>
 ]]></content>
