@@ -9747,17 +9747,21 @@ n_{i}
 Y=AX+W,\quad W\sim \mathbf N(0,R)\\
 L(x)=\frac 1 2 (Y-AX)^\text TR^{-1}(Y-AX)\\</script><p>Find $X^\star$ to minimize the loss function:</p>
 <script type="math/tex; mode=display">
-X^\star=\min\limits_X(Y-AX)^\text TR^{-1}(Y-AX)\\
-\text {Let } \frac{\partial}{\partial X^\text T}(Y-AX)^\text TR^{-1}(Y-AX)=0\\
-\Rightarrow X^\star = (A^\text T R^{-1}A)A^{\text T}R^{-1}Y</script><h3 id="Euclidean-Distance-Optimization"><a href="#Euclidean-Distance-Optimization" class="headerlink" title="Euclidean Distance Optimization"></a>Euclidean Distance Optimization</h3><p>Point $x_0$, model $\mathbf b^\text Tx=d$.</p>
+\begin{align*}
+&X^\star=\min\limits_X(Y-AX)^\text TR^{-1}(Y-AX)\\
+&\text {Let } \frac{\partial}{\partial X^\text T}(Y-AX)^\text TR^{-1}(Y-AX)=0\\
+&\Rightarrow X^\star = (A^\text T R^{-1}A)A^{\text T}R^{-1}Y
+\end{align*}</script><h3 id="Euclidean-Distance-Optimization"><a href="#Euclidean-Distance-Optimization" class="headerlink" title="Euclidean Distance Optimization"></a>Euclidean Distance Optimization</h3><p>Point $x_0$, model $\mathbf b^\text Tx=d$.</p>
 <script type="math/tex; mode=display">
 x^\star = \min\limits_{x}(x-x_0)^\text T(x-x_0), \text{s.t.}\ \mathbf{b}^\text Tx-d=0</script><p>Lagrange optimization:</p>
 <script type="math/tex; mode=display">
-\mathbf b^\text T(x_0-\lambda \mathbf b)=d\\
-\lambda = \frac{\mathbf b^\text Tx_0-d}{\mathbf b^\text T\mathbf b}\\
-L(x,\lambda)=\frac 1 2 (x-x_0)^\text T(x-x_0)+\lambda(\mathbf b^\text Tx-d)\\
-\frac{\partial L}{\partial x^\text T}=x^\star-x_0+\lambda \mathbf b=0\\
-x^\star=x_0-\frac{(\mathbf b^\text Tx_0-d)\mathbf b}{\mathbf b^\text T\mathbf b}</script><h3 id="Convex-Optimization"><a href="#Convex-Optimization" class="headerlink" title="Convex Optimization"></a>Convex Optimization</h3><h4 id="Unconstrained-optimization"><a href="#Unconstrained-optimization" class="headerlink" title="Unconstrained optimization"></a>Unconstrained optimization</h4><h5 id="Gradient-descent"><a href="#Gradient-descent" class="headerlink" title="Gradient descent"></a>Gradient descent</h5><script type="math/tex; mode=display">
+\begin{align*}
+d&=\mathbf b^\text T(x_0-\lambda \mathbf b)\\
+\lambda &= \frac{\mathbf b^\text Tx_0-d}{\mathbf b^\text T\mathbf b}\\
+L(x,\lambda)&=\frac 1 2 (x-x_0)^\text T(x-x_0)+\lambda(\mathbf b^\text Tx-d)\\
+\frac{\partial L}{\partial x^\text T}&=x^\star-x_0+\lambda \mathbf b=0\\
+x^\star&=x_0-\frac{(\mathbf b^\text Tx_0-d)\mathbf b}{\mathbf b^\text T\mathbf b}
+\end{align*}</script><h3 id="Convex-Optimization"><a href="#Convex-Optimization" class="headerlink" title="Convex Optimization"></a>Convex Optimization</h3><h4 id="Unconstrained-optimization"><a href="#Unconstrained-optimization" class="headerlink" title="Unconstrained optimization"></a>Unconstrained optimization</h4><h5 id="Gradient-descent"><a href="#Gradient-descent" class="headerlink" title="Gradient descent"></a>Gradient descent</h5><script type="math/tex; mode=display">
 f(x_{t+1})=f(x_t)-\eta\nabla f(x_t)^\text T(x-x_t)</script><h5 id="Gauss-Newton’s-Method"><a href="#Gauss-Newton’s-Method" class="headerlink" title="Gauss-Newton’s Method"></a>Gauss-Newton’s Method</h5><p>Use a second-order approximation to function:</p>
 <script type="math/tex; mode=display">
 f(x+\Delta x)\approx f(x)+\nabla f(x)^\text T\Delta x+\frac 1 2 \Delta x^\text T\nabla^2f(x)\Delta x</script><p>Choose $\Delta x$ to minimize above:</p>
@@ -9795,17 +9799,25 @@ y(x,\mathbf{w})=w_{0}+w_{1}x+w_{2}x+...+w_Mx^M=\sum^M_{i=0}w_ix^i</script><p><st
 <script type="math/tex; mode=display">
 E(\mathbf w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2</script><p><strong>Root-Mean-Square (RMS) Error</strong></p>
 <script type="math/tex; mode=display">
-E_{\text{RMS}}=\sqrt{2E(\mathbf w^\star)/N}</script><p><strong>Regularization</strong></p>
+E_{\text{RMS}}=\sqrt{2E(\mathbf w^\star)/N}</script><p>where $\mathbf w^\star=\mathop{\text{argmin}}\limits_{\bf w}\ E(\bf w)$.</p>
+<p><strong>Regularization</strong></p>
+<p>Discourage the coefficients from reaching large values.</p>
 <script type="math/tex; mode=display">
-\tilde E(\mathbf w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2 + {\color{red}\frac{\lambda}2 \| \mathbf w \| ^2}</script><h3 id="Probabilities-and-Gaussian-Distributions"><a href="#Probabilities-and-Gaussian-Distributions" class="headerlink" title="Probabilities and Gaussian Distributions"></a>Probabilities and Gaussian Distributions</h3><p>Review:</p>
-<ul>
+\tilde E(\mathbf w)=\frac 1 2 \sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2 + {\color{red}\frac{\lambda}2 \| \mathbf w \| ^2}</script><p>where $|{\bf w}|={\bf w}^T{\bf w}=w_0^2+w_1^2+\cdots+w_M^2$. </p>
+<blockquote>
+<p>Note that often the coefficient $w_0$ is omitted from the regularizer because its inclusion causes the results to depend on the choice of origin for the target variable (Hastie et al., 2001), or it may be included but with its own regularization coefficient</p>
+</blockquote>
+<h3 id="Probabilities-Theory"><a href="#Probabilities-Theory" class="headerlink" title="Probabilities Theory"></a>Probabilities Theory</h3><h4 id="Basic-Concepts"><a href="#Basic-Concepts" class="headerlink" title="Basic Concepts"></a>Basic Concepts</h4><ul>
 <li><p>Marginal/Joint/Conditional Probability</p>
 </li>
 <li><p>Sum/Product Rule</p>
 </li>
-<li><p>Bayes’ Theorem</p>
-</li>
 <li><p>Probability Densities</p>
+</li>
+<li><p>Bayes’ Theorem</p>
+<script type="math/tex; mode=display">
+p(Y\vert X)=\frac{p(X\vert Y)p(Y)}{p(X)}</script></li>
+<li><p>Prior/Posterior Probability</p>
 </li>
 <li><p>Transformed Densities</p>
 <script type="math/tex; mode=display">
@@ -9817,76 +9829,74 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
 </li>
 <li><p>Variances and Covariances</p>
 </li>
+</ul>
+<h4 id="Gaussian-Distribution"><a href="#Gaussian-Distribution" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h4><ul>
 <li><p>The Gaussian Distribution</p>
 <script type="math/tex; mode=display">
-\mathscr N(x|\mu,\sigma^2)=\frac 1 {(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac 1 {2\sigma^2}(x-\mu)^2\right\}</script></li>
+\mathcal N(x|\mu,\sigma^2)=\frac 1 {(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac 1 {2\sigma^2}(x-\mu)^2\right\}</script></li>
 <li><p>Gaussian Mean and Variance</p>
 <script type="math/tex; mode=display">
-\mathbb E[x]=\int_{-\infty}^\infty \mathcal N(x\vert \mu,\sigma^2)x dx = \mu\\
-\mathbb E[x^2]=\int_{-\infty}^\infty \mathcal N(x\vert \mu,\sigma^2)x^2 dx = \mu^2 + \sigma^2\\
-\text{var}[x]=\mathbb E[x^2]-\mathbb E[x]^2 = \sigma^2</script></li>
+\begin{align*}
+\mathbb E[x]&=\int_{-\infty}^\infty \mathcal N(x\vert \mu,\sigma^2)x dx = \mu\\
+\mathbb E[x^2]&=\int_{-\infty}^\infty \mathcal N(x\vert \mu,\sigma^2)x^2 dx = \mu^2 + \sigma^2\\
+\text{var}[x]&=\mathbb E[x^2]-\mathbb E[x]^2 = \sigma^2
+\end{align*}</script></li>
+<li><p>The Multivariate Gaussian</p>
+<script type="math/tex; mode=display">
+\mathcal N(\mathbf x|\mathbf\mu,\mathbf\Sigma)=\frac 1 {(2\pi)^{D/2}}\frac 1 {|\mathbf\Sigma|^{1/2}}\exp\left\{-\frac 1 2(\mathbf x-\mathbf\mu)^\text T\mathbf\Sigma^{-1}(\mathbf x - \mathbf \mu)\right\}</script></li>
 </ul>
-<ul>
-<li>The Multivariate Gaussian<script type="math/tex; mode=display">
-\mathscr N(\mathbf x|\mathbf\mu,\mathbf\Sigma)=\frac 1 {(2\pi)^{D/2}}\frac 1 {|\mathbf\Sigma|^{1/2}}\exp\left\{-\frac 1 2(\mathbf x-\mathbf\mu)^\text T\mathbf\Sigma^{-1}(\mathbf x - \mathbf \mu)\right\}</script></li>
-</ul>
-<h3 id="Bayesian-Inferences-ML-and-MAP"><a href="#Bayesian-Inferences-ML-and-MAP" class="headerlink" title="Bayesian Inferences (ML and MAP)"></a>Bayesian Inferences (ML and MAP)</h3><h4 id="Maximum-Log-Likelihood"><a href="#Maximum-Log-Likelihood" class="headerlink" title="Maximum (Log) Likelihood"></a>Maximum (Log) Likelihood</h4><script type="math/tex; mode=display">
-\ln p(x|\mu,\sigma^2)=-\frac 1 {2\sigma^2}\sum\limits_{n=1}^N(x_n-\mu)^2 - \frac{N}2 \ln \sigma^2-\frac{N}2 \ln(2\pi)</script><script type="math/tex; mode=display">
-\mu_{ML}=\frac 1 N \sum\limits_{n=1}^N x_n\quad \sigma^2_{ML}=\frac 1 N  \sum\limits_{n=1}^N (x_n-\mu_{ML})^2</script><h4 id="Properties-of-mu-ML-and-sigma-2-ML"><a href="#Properties-of-mu-ML-and-sigma-2-ML" class="headerlink" title="Properties of $\mu_{ML}$ and $\sigma^2_{ML}$"></a>Properties of $\mu_{ML}$ and $\sigma^2_{ML}$</h4><script type="math/tex; mode=display">
+<h4 id="Likelihood-Function"><a href="#Likelihood-Function" class="headerlink" title="Likelihood Function"></a>Likelihood Function</h4><p>For a data set of independent observations $\mathbf x = (x_1,\cdots,x_N)^\text T$ of a Gaussian Distribution, its likelihood function is</p>
+<script type="math/tex; mode=display">
+p(\mathbf x \vert \mu,\sigma^2)=\prod\limits_{n=1}^N\mathcal N(x_n\vert\mu,\sigma^2)</script><p>Log Likelihood Function: </p>
+<script type="math/tex; mode=display">
+\ln p(\mathbf x|\mu,\sigma^2)=-\frac 1 {2\sigma^2}\sum\limits_{n=1}^N(x_n-\mu)^2 - \frac{N}2 \ln \sigma^2-\frac{N}2 \ln(2\pi)</script><p>By maximizing the log likelihood function, we have</p>
+<script type="math/tex; mode=display">
+\mu_{ML}=\frac 1 N \sum\limits_{n=1}^N x_n,\quad \sigma^2_{ML}=\frac 1 N  \sum\limits_{n=1}^N (x_n-\mu_{ML})^2</script><p>corresponding to the <strong>sample mean</strong> and the <strong>sample variance</strong>.</p>
+<h4 id="Properties-of-mu-ML-and-sigma-2-ML"><a href="#Properties-of-mu-ML-and-sigma-2-ML" class="headerlink" title="Properties of $\mu_{ML}$ and $\sigma^2_{ML}$"></a>Properties of $\mu_{ML}$ and $\sigma^2_{ML}$</h4><p>The MLE will obtain the correct mean but will underestimate the true variance by a factor $\frac{N-1}{N}$ (bias).</p>
+<script type="math/tex; mode=display">
 \begin{align*}
 \mathbb E[\mu_{ML}]&=\mu\\
 \mathbb E[\sigma^2_{ML}]&=(\frac{N-1}N)\sigma^2\\
 \widetilde \sigma^2&= (\frac N{N-1})\sigma^2_{ML}\\
 &=\frac 1{N-1} \sum\limits_{n=1}^N (x_n-\mu_{ML})^2
-\end{align*}</script><h4 id="MAP-Maximum-A-Posteriori"><a href="#MAP-Maximum-A-Posteriori" class="headerlink" title="MAP: Maximum A Posteriori"></a>MAP: Maximum A <em>Posteriori</em></h4><script type="math/tex; mode=display">
-p(\bold w\vert \alpha)=\mathcal N(\bold w|\bold 0,\alpha^{-1}\bold I)=(\frac\alpha{2\pi})^{(M+1)/2} \exp\{-\frac\alpha 2 \bold w^\text{T}\bold w\}</script><script type="math/tex; mode=display">
+\end{align*}</script><h4 id="Curve-fitting-re-visited"><a href="#Curve-fitting-re-visited" class="headerlink" title="Curve fitting re-visited"></a>Curve fitting re-visited</h4><p>Given $x$, the corresponding value of $t$ has a Gaussian distribution with a mean equal to the value $y(x, \mathbf w)$.</p>
+<script type="math/tex; mode=display">
+p(t\vert x,\mathbf w,\beta)=\mathcal N(t\vert y(x,\mathbf w),\beta^{-1})</script><p>where $\beta$ is the precision parameter corresponding to the inverse variance of the distribution: $\beta^{-1}=\sigma^2$.</p>
+<p>Training data:</p>
+<ul>
+<li>Input values $\mathbf x=(x_1,\cdots,x_N)^\text T$</li>
+<li>Target values $\mathbf t=(t_1,\cdots,t_N)^\text T$</li>
+</ul>
+<p>Likelihood function:</p>
+<script type="math/tex; mode=display">
+p(\mathbf t\vert \mathbf x,\mathbf w,\beta)=\prod\limits_{n=1}^N\mathcal N(t_n\vert y(x_n,\mathbf w),\beta^{-1})</script><p>Log likelihood function:</p>
+<script type="math/tex; mode=display">
+\ln p(\mathbf t\vert \mathbf x,\mathbf w,\beta)=-\frac\beta 2 \sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2+\frac N 2 \ln \beta -\frac N 2 \ln(2\pi)</script><ul>
+<li>The last two terms do not depend on $\bf w$, omitted.</li>
+<li>Dividing a positive constant $\beta$ does not alter $\mathbf w_{ML}$, replace $\frac \beta 2$ with $\frac 1 2$.</li>
+</ul>
+<p>So <strong>maximizing the likelihood function</strong> is equivalent to <strong>minimizing the sum-of-squares error function</strong> $\sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2$.</p>
+<p>After obtaining $\mathbf w_{ML}$, we can further maximize the likelihood function w.r.t. $\beta$:</p>
+<script type="math/tex; mode=display">
+\frac 1 {\beta_{ML}}=\sum\limits_{n=1}^N\{y(x_n,\mathbf w_{ML})-t_n\}^2</script><p>Substitute $\mathbf w_{ML}$ and $\beta_{ML}$ back to get <strong>predictive distribution</strong>:</p>
+<script type="math/tex; mode=display">
+p(\mathbf t\vert \mathbf x,\mathbf w_{ML},\beta_{ML})=\prod\limits_{n=1}^N\mathcal N(t_n\vert y(x_n,\mathbf w_{ML}),\beta^{-1}_{ML})</script><h4 id="MAP-Maximum-Posteriori"><a href="#MAP-Maximum-Posteriori" class="headerlink" title="MAP: Maximum Posteriori"></a>MAP: Maximum Posteriori</h4><script type="math/tex; mode=display">
+p(\mathbf w\vert \alpha)=\mathcal N(\mathbf w|\mathbf 0,\alpha^{-1}\mathbf I)=(\frac\alpha{2\pi})^{(M+1)/2} \exp\{-\frac\alpha 2 \mathbf w^\text{T}\mathbf w\}</script><script type="math/tex; mode=display">
+\text{ref:}\mathcal N(\mathbf x|\mathbf\mu,\mathbf\Sigma)=\frac 1 {(2\pi)^{D/2}}\frac 1 {|\mathbf\Sigma|^{1/2}}\exp\left\{-\frac 1 2(\mathbf x-\mathbf\mu)^\text T\mathbf\Sigma^{-1}(\mathbf x - \mathbf \mu)\right\}</script><p>where $\alpha$ is the precision of the distribution(<em>hyperparameter</em>), and $M+1$ is the total number of elements in the vector $\bf w$ for an $M^\text{th}$ order polynomial.</p>
+<p>Bayes’ Theorem: the posterior distribution for $\bf w$ is proportional to the product of the prior distribution and the likelihood function:</p>
+<script type="math/tex; mode=display">
 \begin{align*}
-&p(\bold w \vert\bold x,\bold t,\alpha,\beta)&\propto\quad&p(\bold t\vert \bold x,\bold w,\beta)&p(\bold w\vert\alpha)\\
+&p(\mathbf w \vert\mathbf x,\mathbf t,\alpha,\beta)&\propto\quad&p(\mathbf t\vert \mathbf x,\mathbf w,\beta)&p(\mathbf w\vert\alpha)\\
 &\text{posteriori}&\propto\quad&\text{likelihood}&\text{priori}
 \end{align*}</script><script type="math/tex; mode=display">
-\beta\widetilde E(\bold w)=\frac\beta 2\sum\limits_{n=1}^N\{y(x_n,\bold w)-t_n\}^2+\frac\alpha 2 \bold w^\text{T}\bold w</script>]]></content>
+\beta\widetilde E(\mathbf w)=\frac\beta 2\sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2+\frac\alpha 2 \mathbf w^\text{T}\mathbf w</script><p><strong>Maximizing the posterior distribution</strong> is equivalent to <strong>minimizing the regularized sum-of-squares error function</strong></p>
+]]></content>
       <categories>
         <category>CS</category>
       </categories>
       <tags>
         <tag>Machine Learning</tag>
         <tag>Artificial Intelligence</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CS315 Computer Security Notes</title>
-    <url>/2023/09/18/CS315_Notes/</url>
-    <content><![CDATA[<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ol>
-<li>Introduction</li>
-<li>Malware Reverse Engineering</li>
-</ol>
-<h2 id="Lecture-1-Introduction"><a href="#Lecture-1-Introduction" class="headerlink" title="Lecture 1 - Introduction"></a>Lecture 1 - Introduction</h2><h3 id="Three-Pillars-of-Computer-Security"><a href="#Three-Pillars-of-Computer-Security" class="headerlink" title="Three Pillars of Computer Security"></a>Three Pillars of Computer Security</h3><ul>
-<li><strong>Confidentiality</strong> involves the protection of computer systems and data privacy, preventing unauthorized access or disclosure. </li>
-<li><strong>Integrity</strong> concerns the protection of computer systems and data from unauthorized alteration or corruption.</li>
-<li><strong>Availability</strong> ensures that computer systems and networks are operational, unaffected by accidental failures or malicious attacks.</li>
-</ul>
-<h3 id="Three-More-Concepts-in-Computer-Security"><a href="#Three-More-Concepts-in-Computer-Security" class="headerlink" title="Three More Concepts in Computer Security"></a>Three More Concepts in Computer Security</h3><ul>
-<li><strong>Authenticity</strong> verifies the identity of a subject or a resource. </li>
-<li><strong>Accountability</strong> assures that actions performed can be traced and recorded.</li>
-<li><strong>Non-repudiation</strong> prevents entities from denying their actions or occurrences of events.</li>
-</ul>
-<h3 id="The-3A-Principle-in-Computer-Security"><a href="#The-3A-Principle-in-Computer-Security" class="headerlink" title="The 3A Principle in Computer Security"></a>The 3A Principle in Computer Security</h3><ul>
-<li><strong>Authentication</strong> recognizes and records who accesses information. </li>
-<li><strong>Authorization</strong> gives specific permissions to users based on actual demands. </li>
-<li><strong>Accounting</strong> collects and traces interactions between users and the system.</li>
-</ul>
-<h3 id="Proving-Methods-in-Computer-Security"><a href="#Proving-Methods-in-Computer-Security" class="headerlink" title="Proving Methods in Computer Security"></a>Proving Methods in Computer Security</h3><ul>
-<li>Formal Verification</li>
-<li>Security Proofs</li>
-<li>Logical Measures</li>
-</ul>
-<h2 id="Lecture-2-Malware-Reverse-Engineering"><a href="#Lecture-2-Malware-Reverse-Engineering" class="headerlink" title="Lecture 2 - Malware Reverse Engineering"></a>Lecture 2 - Malware Reverse Engineering</h2><h3 id="Introduction-to-Reverse-Engineering"><a href="#Introduction-to-Reverse-Engineering" class="headerlink" title="Introduction to Reverse Engineering"></a>Introduction to Reverse Engineering</h3><p><u><strong>Reverse Engineering</strong></u> is the practice of unlocking knowledge or blueprints from any man-made item. Contrasting scientific research, it’s applied to man-made, rather than natural phenomena.</p>
-]]></content>
-      <categories>
-        <category>CS</category>
-      </categories>
-      <tags>
-        <tag>Computer Security</tag>
       </tags>
   </entry>
   <entry>
