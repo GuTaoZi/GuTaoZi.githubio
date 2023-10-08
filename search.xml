@@ -9777,7 +9777,15 @@ f(x+\Delta x)\approx f(x)+\nabla f(x)^\text T\Delta x+\frac 1 2 \Delta x^\text T
 <script type="math/tex; mode=display">
 w^{k+1}\leftarrow w^k-\eta_t(\frac1 n \sum\limits_{i=1}^n\frac{\partial L(w,x_i,y_i)}{\partial w})</script><h5 id="Stochastic-Gradient-Descent"><a href="#Stochastic-Gradient-Descent" class="headerlink" title="Stochastic Gradient Descent"></a>Stochastic Gradient Descent</h5><p>Compute gradient from just one or a few samples</p>
 <script type="math/tex; mode=display">
-w^{k+1}\leftarrow w^k-\eta_t \frac{\partial L(w,x_i,y_i)}{\partial w}</script><h4 id="Constrained-optimization"><a href="#Constrained-optimization" class="headerlink" title="Constrained optimization"></a>Constrained optimization</h4><h5 id="Lagrange-methods"><a href="#Lagrange-methods" class="headerlink" title="Lagrange methods"></a>Lagrange methods</h5><h5 id="Bayesian-methods"><a href="#Bayesian-methods" class="headerlink" title="Bayesian methods"></a>Bayesian methods</h5><h3 id="Non-convex-Optimization"><a href="#Non-convex-Optimization" class="headerlink" title="Non-convex Optimization"></a>Non-convex Optimization</h3><h4 id="Heuristic-algorithms"><a href="#Heuristic-algorithms" class="headerlink" title="Heuristic algorithms"></a>Heuristic algorithms</h4><h4 id="Random-search"><a href="#Random-search" class="headerlink" title="Random search"></a>Random search</h4><h3 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h3><ul>
+w^{k+1}\leftarrow w^k-\eta_t \frac{\partial L(w,x_i,y_i)}{\partial w}</script><h4 id="Constrained-optimization"><a href="#Constrained-optimization" class="headerlink" title="Constrained optimization"></a>Constrained optimization</h4><ul>
+<li>Lagrange methods</li>
+<li>Bayesian methods</li>
+</ul>
+<h3 id="Non-convex-Optimization"><a href="#Non-convex-Optimization" class="headerlink" title="Non-convex Optimization"></a>Non-convex Optimization</h3><ul>
+<li>Heuristic algorithms</li>
+<li>Random search</li>
+</ul>
+<h3 id="Algorithms"><a href="#Algorithms" class="headerlink" title="Algorithms"></a>Algorithms</h3><ul>
 <li>Bayes</li>
 <li>KNN</li>
 <li>K-means</li>
@@ -9922,7 +9930,142 @@ s^2(x)&=\beta^{-1}+\phi(x)^\text T\textbf S\phi(x)
 <h3 id="Curse-of-Dimensionality"><a href="#Curse-of-Dimensionality" class="headerlink" title="Curse of Dimensionality"></a>Curse of Dimensionality</h3><script type="math/tex; mode=display">
 y(\mathbf x,\mathbf w)=w_0+\sum\limits_{i=1}^D w_ix_i+\sum\limits_{i=1}^D\sum\limits_{j=1}^Dw_{ij}x_ix_j+\sum\limits_{i=1}^D\sum\limits_{j=1}^D\sum\limits_{k=1}^Dw_{ijk}x_ix_jx_k+\cdots</script><p>For a polynomial of order $M$, the growth in the number of coefficients is $D^M$.</p>
 <p>In spaces of high dimensionality, most of the volume of a sphere is concentrated in a thin shell near the surface, most of the probability mass of a Gaussian is located within a thin shell at a specific radius.</p>
-<h3 id="Decision-Theory"><a href="#Decision-Theory" class="headerlink" title="Decision Theory"></a>Decision Theory</h3>]]></content>
+<p><img src="https://s2.loli.net/2023/10/08/QfxjJAYzwHd8TVe.png" alt="image.png" style="zoom: 67%;" /></p>
+<h3 id="Decision-Theory"><a href="#Decision-Theory" class="headerlink" title="Decision Theory"></a>Decision Theory</h3><h4 id="Confusion-Matrix"><a href="#Confusion-Matrix" class="headerlink" title="Confusion Matrix"></a>Confusion Matrix</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Truth/Decision</th>
+<th>Positive</th>
+<th>Negative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Positive</strong></td>
+<td>TP</td>
+<td>FN</td>
+</tr>
+<tr>
+<td><strong>Negative</strong></td>
+<td>FP</td>
+<td>TN</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><img src="https://s2.loli.net/2023/10/08/frI2BYLVbCgKNkc.png" alt="image.png" style="zoom:50%;" /></p>
+<h4 id="Receiver-Operating-Characteristic-Curve"><a href="#Receiver-Operating-Characteristic-Curve" class="headerlink" title="Receiver Operating Characteristic Curve"></a>Receiver Operating Characteristic Curve</h4><p><img src="https://s2.loli.net/2023/10/08/Edem7OF3T8hXSaU.png" alt="image.png" style="zoom: 33%;" /></p>
+<h4 id="Minimizing-the-misclassification-rate"><a href="#Minimizing-the-misclassification-rate" class="headerlink" title="Minimizing the misclassification rate"></a>Minimizing the misclassification rate</h4><p><img src="https://s2.loli.net/2023/10/08/YCeVcwDHuzB4i3k.png" alt="image.png"></p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p(\text{correct})&=\sum\limits_{k=1}^Kp(\mathbf x\in\mathcal R_k,\mathcal C_k) = \sum\limits_{k=1}^K\int_{\mathcal R_k} p(\mathbf x,\mathcal C_k)\text d \mathbf x\\
+\end{align*}</script><h4 id="Minimizing-the-expected-loss"><a href="#Minimizing-the-expected-loss" class="headerlink" title="Minimizing the expected loss"></a>Minimizing the expected loss</h4><script type="math/tex; mode=display">
+\mathbb E[L]=\sum\limits_k\sum\limits_j\int_{\mathcal R_j}L_{kj}p(\mathbf x,\mathcal C_k)\text d \mathbf x</script><p>Each $\mathbf x$ can be assigned  independently to one of the decision regions $\mathcal R_j$.</p>
+<p>Goal is to choose $\mathcal R_j$ to minimize $\mathbb E[L]$, we should minimize $\sum\limits_{k} L_{kj}p(\mathbf x,\mathcal C_k)$ for each $\mathbf x$.</p>
+<p>Common factor $p(\mathbf x)$ can be eliminated from $p(\mathbf x,\mathcal C_k)=p(\mathcal C_k\vert\mathbf x)p(\mathbf x)$.</p>
+<p>Thus the decision rule that minimizes the expected loss is the one that assigns each new $\mathbf x$ to the class $j$ for which the quantity $\sum\limits_{k} L_{kj}p(\mathcal C_k\vert\mathbf x)$ is a minimum.</p>
+<h4 id="Reject-Option"><a href="#Reject-Option" class="headerlink" title="Reject Option"></a>Reject Option</h4><p>Introducing a threshold $\theta$ and rejecting those inputs $x$ for which the largest of the posterior probabilities $p(\mathcal C_k\vert \mathbf x)$ is less than or equal to $\theta$. </p>
+<ul>
+<li>$\theta=1$: all examples are rejected.</li>
+<li>$\theta&lt;\frac 1 K$: ($K$ classes) no examples are  rejected.</li>
+</ul>
+<p><img src="https://s2.loli.net/2023/10/08/yoqniUgpIN5b71F.png" alt="image.png" style="zoom:50%;" /></p>
+<h4 id="Inference-and-Decision"><a href="#Inference-and-Decision" class="headerlink" title="Inference and Decision"></a>Inference and Decision</h4><p><strong>Generative model</strong>: Model the distribution of inputs as well as outputs. Because by sampling from them it is possible to generate synthetic data points in the input space.</p>
+<p><strong>Discriminative model</strong>: model the posterior probabilities directly.</p>
+<p><strong>Discriminant function</strong>: Learn a function that maps inputs x directly into decisions.</p>
+<p><a name="3-ways-to-solve-decision-problems"><strong>3 Ways to Solve Decision Problems</strong></a></p>
+<ul>
+<li><p>(a)    By inference, determine $p(\mathbf x\vert \mathcal C_k)$ and $p(\mathcal C_k)$, then uses Bayes’ Theorem</p>
+<script type="math/tex; mode=display">
+p(\mathcal C_k\vert\mathbf x)=\frac{p(\mathbf x\vert\mathcal C_k)p(\mathcal C_k)}{p(\mathbf x)}=\frac{p(\mathbf x\vert\mathcal C_k)p(\mathcal C_k)}{\sum\limits_{k}p(\mathbf x\vert\mathcal C_k)p(\mathcal C_k)}=\frac{p(\mathbf x,\mathcal C_k)}{\sum\limits_{k}p(\mathbf x,\mathcal C_k)}</script><p>Equivalently, we can model the joint distribution $p(\mathbf x, \mathcal C_k)$ directly and then normalize to obtain the posterior probabilities.  (generative model)</p>
+</li>
+<li><p>(b)    By inference, determine the posterior class probabilities $p(\mathcal C_k\vert\mathbf x)$ directly. (discriminative model)</p>
+</li>
+<li>(c)    Find a function $f(x)$, called a <strong>discriminant function</strong>, which maps each input $\mathbf x$ directly onto a class label. <em>Probabilities play no role.</em></li>
+</ul>
+<details>
+    <summary>Pros/Cons of the three approaches(extract from PRML)</summary>
+    <p>Let us consider the relative merits of these three alternatives. Approach (a) is the most demanding because it involves finding the joint distribution over both <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="79" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-texatom texclass="ORD"><mjx-mi class="mjx-b"><mjx-c class="mjx-c1D431 TEX-B"></mjx-c></mjx-mi></mjx-texatom></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mi mathvariant="bold">x</mi></mrow></math></mjx-assistive-mml></mjx-container> and <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="80" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-msub><mjx-texatom texclass="ORD"><mjx-mi class="mjx-cal mjx-i"><mjx-c class="mjx-c43 TEX-C"></mjx-c></mjx-mi></mjx-texatom><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mrow data-mjx-texclass="ORD"><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">C</mi></mrow><mi>k</mi></msub></math></mjx-assistive-mml></mjx-container>. For many applications, <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="81" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-texatom texclass="ORD"><mjx-mi class="mjx-b"><mjx-c class="mjx-c1D431 TEX-B"></mjx-c></mjx-mi></mjx-texatom></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mi mathvariant="bold">x</mi></mrow></math></mjx-assistive-mml></mjx-container> will have high dimensionality, and consequently we may need a large training set in order to be able to determine the class-conditional densities to reasonable accuracy. Note that the class priors <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="82" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-msub><mjx-texatom texclass="ORD"><mjx-mi class="mjx-cal mjx-i"><mjx-c class="mjx-c43 TEX-C"></mjx-c></mjx-mi></mjx-texatom><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi><mo stretchy="false">(</mo><msub><mrow data-mjx-texclass="ORD"><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">C</mi></mrow><mi>k</mi></msub><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container> can often be estimated simply from the fractions of the training set data points in each of the classes. One advantage of approach (a), however, is that it also allows the marginal density of data <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="83" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-texatom texclass="ORD"><mjx-mi class="mjx-b"><mjx-c class="mjx-c1D431 TEX-B"></mjx-c></mjx-mi></mjx-texatom><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi><mo stretchy="false">(</mo><mrow data-mjx-texclass="ORD"><mi mathvariant="bold">x</mi></mrow><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container> to be determined from <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="84" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-texatom texclass="ORD"><mjx-mi class="mjx-b"><mjx-c class="mjx-c1D431 TEX-B"></mjx-c></mjx-mi></mjx-texatom><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-munder space="4"><mjx-row><mjx-base><mjx-mo class="mjx-sop"><mjx-c class="mjx-c2211 TEX-S1"></mjx-c></mjx-mo></mjx-base></mjx-row><mjx-row><mjx-under style="padding-top: 0.167em; padding-left: 0.344em;"><mjx-texatom size="s" texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-texatom></mjx-under></mjx-row></mjx-munder><mjx-mi class="mjx-i" space="2"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-texatom texclass="ORD"><mjx-mi class="mjx-b"><mjx-c class="mjx-c1D431 TEX-B"></mjx-c></mjx-mi></mjx-texatom><mjx-mo class="mjx-n"><mjx-c class="mjx-c7C"></mjx-c></mjx-mo><mjx-msub><mjx-texatom texclass="ORD"><mjx-mi class="mjx-cal mjx-i"><mjx-c class="mjx-c43 TEX-C"></mjx-c></mjx-mi></mjx-texatom><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-msub><mjx-texatom texclass="ORD"><mjx-mi class="mjx-cal mjx-i"><mjx-c class="mjx-c43 TEX-C"></mjx-c></mjx-mi></mjx-texatom><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi><mo stretchy="false">(</mo><mrow data-mjx-texclass="ORD"><mi mathvariant="bold">x</mi></mrow><mo stretchy="false">)</mo><mo>=</mo><munder><mo data-mjx-texclass="OP" movablelimits="false">∑</mo><mrow data-mjx-texclass="ORD"><mi>k</mi></mrow></munder><mi>p</mi><mo stretchy="false">(</mo><mrow data-mjx-texclass="ORD"><mi mathvariant="bold">x</mi></mrow><mo data-mjx-texclass="ORD" fence="false" stretchy="false">|</mo><msub><mrow data-mjx-texclass="ORD"><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">C</mi></mrow><mi>k</mi></msub><mo stretchy="false">)</mo><mi>p</mi><mo stretchy="false">(</mo><msub><mrow data-mjx-texclass="ORD"><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">C</mi></mrow><mi>k</mi></msub><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container>. This can be useful for detecting new data points that have low probability under the model and for which the predictions maybe of low accuracy, which is known as <em>outlier detection</em> or <em>novelty detection</em>.</p>
+    <p>However, if we only wish to make classification decisions, then it can be wasteful of computational resources, and excessively demanding of data, to find the joint distribution <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="85" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-texatom texclass="ORD"><mjx-mi class="mjx-b"><mjx-c class="mjx-c1D431 TEX-B"></mjx-c></mjx-mi></mjx-texatom><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo><mjx-msub space="2"><mjx-texatom texclass="ORD"><mjx-mi class="mjx-cal mjx-i"><mjx-c class="mjx-c43 TEX-C"></mjx-c></mjx-mi></mjx-texatom><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi><mo stretchy="false">(</mo><mrow data-mjx-texclass="ORD"><mi mathvariant="bold">x</mi></mrow><mo>,</mo><msub><mrow data-mjx-texclass="ORD"><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">C</mi></mrow><mi>k</mi></msub><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container> when in fact we only really need the posterior probabilities <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="86" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-msub><mjx-texatom texclass="ORD"><mjx-mi class="mjx-cal mjx-i"><mjx-c class="mjx-c43 TEX-C"></mjx-c></mjx-mi></mjx-texatom><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c7C"></mjx-c></mjx-mo><mjx-texatom texclass="ORD"><mjx-mi class="mjx-b"><mjx-c class="mjx-c1D431 TEX-B"></mjx-c></mjx-mi></mjx-texatom><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi><mo stretchy="false">(</mo><msub><mrow data-mjx-texclass="ORD"><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">C</mi></mrow><mi>k</mi></msub><mo data-mjx-texclass="ORD" fence="false" stretchy="false">|</mo><mrow data-mjx-texclass="ORD"><mi mathvariant="bold">x</mi></mrow><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container>, which can be obtained directly through approach (b). Indeed, the class-conditional densities may contain a lot of structure that has little effect on the posterior probabilities, as illustrated in Figure 1.27. There has been much interest in exploring the relative merits of generative and discriminative approaches to machine learning, and in finding ways to combine them.</p>
+    <p><img src="https://s2.loli.net/2023/10/08/sF7Khkg2mebAyVP.png" alt="image.png" style="zoom:50%;"></p>
+    <p>An even simpler approach is (c) in which we use the training data to find a discriminant function <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="95" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D453 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container> that maps each <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="96" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-b"><mjx-c class="mjx-c1D431 TEX-B"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="bold">x</mi></math></mjx-assistive-mml></mjx-container> directly onto a class label, thereby combining the inference and decision stages into a single learning problem. In the example of Figure 1.27, this would correspond to finding the value of <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="97" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-b"><mjx-c class="mjx-c1D431 TEX-B"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi mathvariant="bold">x</mi></math></mjx-assistive-mml></mjx-container> shown by the vertical green line, because this is the decision boundary giving the minimum probability of misclassification.</p>
+    <p>With option (c), however, we no longer have access to the posterior probabilities <mjx-container class="MathJax CtxtMenu_Attached_0" jax="CHTML" tabindex="0" ctxtmenu_counter="98" style="font-size: 122.1%; position: relative;"><mjx-math class="MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D45D TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-msub><mjx-texatom texclass="ORD"><mjx-mi class="mjx-cal mjx-i"><mjx-c class="mjx-c43 TEX-C"></mjx-c></mjx-mi></mjx-texatom><mjx-script style="vertical-align: -0.15em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub><mjx-mo class="mjx-n"><mjx-c class="mjx-c7C"></mjx-c></mjx-mo><mjx-texatom texclass="ORD"><mjx-mi class="mjx-b"><mjx-c class="mjx-c1D431 TEX-B"></mjx-c></mjx-mi></mjx-texatom><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>p</mi><mo stretchy="false">(</mo><msub><mrow data-mjx-texclass="ORD"><mi data-mjx-variant="-tex-calligraphic" mathvariant="script">C</mi></mrow><mi>k</mi></msub><mo data-mjx-texclass="ORD" fence="false" stretchy="false">|</mo><mrow data-mjx-texclass="ORD"><mi mathvariant="bold">x</mi></mrow><mo stretchy="false">)</mo></math></mjx-assistive-mml></mjx-container>. There are many powerful reasons for wanting to compute the posterior probabilities, even if we subsequently use them to make decisions. These include:</p>
+    <ul>
+<li>Minimizing risk.</li>
+<li>Reject option. </li>
+<li>Compensating for class priors.</li>
+<li>Combining models. </li>
+</ul>
+</details>
+
+<h4 id="Loss-functions-for-regression"><a href="#Loss-functions-for-regression" class="headerlink" title="Loss functions for regression"></a>Loss functions for regression</h4><p>For each input $\bf x$, choose a specific estimation $y(\bf x)$ of the value $t$.</p>
+<script type="math/tex; mode=display">
+\mathbb E[L]=\iint L(t,y(\mathbf x))p({\bf x},t)\text d {\bf x}\text dt</script><p>Take squared loss $L(t,y({\bf x}))=\{y({\bf x})-t\}^2$ for example</p>
+<script type="math/tex; mode=display">
+\mathbb E[L]=\iint \{y({\bf x})-t\}^2p({\bf x},t)\text d {\bf x}\text dt</script><h5 id="Method-1-Calculus-of-Variations"><a href="#Method-1-Calculus-of-Variations" class="headerlink" title="Method 1. Calculus of Variations"></a>Method 1. Calculus of Variations</h5><p>Using a calculus of variations to give $y({\bf x})$ so as to minimize $\mathbb E[L]$:</p>
+<script type="math/tex; mode=display">
+\frac{\partial \mathbb E[L]}{\partial y({\bf x})}=2\int \{y({\bf x})-t\}^2p({\bf x},t)\text d t =0</script><p>Solving for $y({\bf x})$, and using the sum and product rules of probability, we obtain the <a name="regression-function">regression function</a>:</p>
+<script type="math/tex; mode=display">
+y({\bf x})=\frac{\int tp({\bf x},t)\text d t}{p({\bf x})}=\int t p(t\vert \mathbf x)\text d t=\mathbb E_t[t\vert \mathbf x]</script><p>which is the conditional average of $t$ conditioned on $\bf x$.</p>
+<h5 id="Method-2-Expanding-the-square-term"><a href="#Method-2-Expanding-the-square-term" class="headerlink" title="Method 2. Expanding the square term"></a>Method 2. Expanding the square term</h5><script type="math/tex; mode=display">
+\begin{align*}
+\{y({\bf x})-t\}^2&=\{y({\bf x})-\mathbb E_t[t\vert\mathbf x]+\mathbb E_t[t\vert\mathbf x]-t\}^2\\
+&=\{y({\bf x})-\mathbb E_t[t\vert\mathbf x]\}^2+2\{y({\bf x})-\mathbb E_t[t\vert\mathbf x]\}\{\mathbb E_t[t\vert\mathbf x]-t\}+\{\mathbb E_t[t\vert\mathbf x]-t\}^2
+\end{align*}</script><p>Substitute into the loss function and perform the integral on $t$:</p>
+<script type="math/tex; mode=display">
+\mathbb E[L]=\int\{y({\bf x})-\mathbb E_t[t\vert\mathbf x]\}^2p(\mathbf x)\text d \mathbf x+\int\{\mathbb E_t[t\vert\mathbf x]-t\}^2p(\mathbf x)\text d\mathbf x</script><p>When $y({\bf x})=\mathbb E_t[t\vert \mathbf x]$, loss function $\mathbb E[L]$ is minimized.</p>
+<p>The second term represents the intrinsic variability of the target data and can be regarded as <strong>noise</strong>, or minimum value of the loss function.</p>
+<p><strong>3 Ways to Solve Regression Problems</strong> (in order of decreasing complexity)</p>
+<ul>
+<li>(a)    Inference to determine the joint density $p({\bf x},t)$, then normalize to find the conditional density $p(t\vert \mathbf x)$, finally marginalize to find the conditional mean by the <a href="#regression-function">regression function</a>.</li>
+<li>(b)    Inference to determine the conditional density $p(t\vert \mathbf x)$,  then marginalize to find the conditional mean by the <a href="#regression-function">regression function</a>.</li>
+<li>(c)    Find a regression function $y(\mathbf x)$ directly from the training data.</li>
+</ul>
+<p>The relative merits of these three approaches follow the same lines as for <a href="#3-ways-to-solve-decision-problems">classification problems</a>.</p>
+<details>
+    <summary>Minkowski loss</summary>
+<script type="math/tex; mode=display">
+\mathbb E[L_q]=\iint \vert y(\mathbf x)-t\vert^q p(\mathbf x,t)\text d \mathbf x\text d t</script><p><img src="https://s2.loli.net/2023/10/08/sq5Oz4LW1bVXuvG.png" alt="image.png" style="zoom: 33%;" /></p>
+<p>The minimum of $\mathbb E[L_q]$ is given by:</p>
+<ul>
+<li>$q\rightarrow 0$: conditional mode</li>
+<li>$q=1$: conditional median</li>
+<li>$q=2$: conditional mean</li>
+</ul>
+</details>
+
+<h3 id="Information-Theory"><a href="#Information-Theory" class="headerlink" title="Information Theory"></a>Information Theory</h3><h4 id="Entropy-statistical"><a href="#Entropy-statistical" class="headerlink" title="Entropy(statistical)"></a>Entropy(statistical)</h4><h5 id="Discrete"><a href="#Discrete" class="headerlink" title="Discrete"></a>Discrete</h5><p>Allocate $N$ identical objects in $M$ bins.</p>
+<script type="math/tex; mode=display">
+W=\frac{N!}{\prod\limits_in_i!}</script><script type="math/tex; mode=display">
+\text H=\frac 1 N \ln W\simeq -\lim\limits_{N\rightarrow\infty}\sum\limits_{i}(\frac{n_i}N)\ln(\frac{n_i}N)=-\sum\limits_{i}p_i\ln p_i</script><p>Entropy maximized when $\forall i,\ p_i=\frac 1 M$.</p>
+<p><strong>Continuous</strong></p>
+<p>Put bins of width $\Delta$ along the real line.</p>
+<script type="math/tex; mode=display">
+\lim\limits_{\Delta\rightarrow0}\left\{-\sum\limits_{i}p(x_i)\Delta\ln p(x_i)\right\}=-\int p(x)\ln p(x)\text d x</script><p>For fixed $\sigma^2$, when $p(x)=\mathcal N(x\vert\mu,\sigma^2)$, differential entropy is maximized</p>
+<script type="math/tex; mode=display">
+\text H[x]=\frac 1 2\{1+\ln(2\pi\sigma^2)\}</script><h4 id="Entropy"><a href="#Entropy" class="headerlink" title="Entropy"></a>Entropy</h4><script type="math/tex; mode=display">
+\begin{align*}
+\text H[x]&=-\sum\limits_x p(x)\ln p(x)\\
+\text H[x]&=-\int p(x)\ln p(x)\text d x
+\end{align*}</script><h4 id="Conditional-Entropy"><a href="#Conditional-Entropy" class="headerlink" title="Conditional Entropy"></a>Conditional Entropy</h4><script type="math/tex; mode=display">
+\text H[y\vert x]=-\iint p(\mathbf y,\mathbf x)\ln p(\mathbf y\vert\mathbf x)\text d\mathbf y\text d\mathbf x</script><script type="math/tex; mode=display">
+\text H[\mathbf x,\mathbf y]=\text H[\mathbf y\vert\mathbf x]+\text H[\mathbf x]</script><h4 id="Relative-Entropy-The-Kullback-Leibler-Divergence"><a href="#Relative-Entropy-The-Kullback-Leibler-Divergence" class="headerlink" title="Relative Entropy (The Kullback-Leibler Divergence)"></a>Relative Entropy (The Kullback-Leibler Divergence)</h4><p>KL divergence describes a distance between model $p$ and model $q$.</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\text{KL}(p\|q)&=-\int p(\mathbf x)\ln q(\mathbf x)\text d\mathbf x-\left(-\int p(\mathbf x)\ln p(\mathbf x)\text d\mathbf x\right)\\
+&=-\int p(\mathbf x)\ln \left\{\frac{q(\mathbf x)}{p(\mathbf x)}\right\}\text d\mathbf x
+\end{align*}</script><ol>
+<li>It is not a symmetrical quantity: $\text{KL}(p|q)\not\equiv \text{KL}(q|p)$.</li>
+<li>$\text {KL}(p|q)\ge 0$, with equality IFF $p(\mathbf x)=q(\mathbf x)$.</li>
+</ol>
+<h4 id="Mutual-Information"><a href="#Mutual-Information" class="headerlink" title="Mutual Information"></a>Mutual Information</h4><p>Mutual information describes the degree of dependence between $\mathbf x$ and $\mathbf y$ </p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\text I[\mathbf x,\mathbf y]&\equiv\text{KL}(p(\mathbf x,\mathbf y)\|p(\mathbf x)p(\mathbf y))\\
+&=-\iint p(\mathbf x,\mathbf y)\ln\left(\frac{p(\mathbf x)p(\mathbf y)}{p(\mathbf x,\mathbf y)}\right)\text d\mathbf x\text d\mathbf y
+\end{align*}</script><script type="math/tex; mode=display">
+\text I[\mathbf x,\mathbf y]=\text H[\mathbf x]-\text H[\mathbf x\vert\mathbf y]=\text H[\mathbf y]-\text H[\mathbf y\vert\mathbf x]</script>]]></content>
       <categories>
         <category>CS</category>
       </categories>
