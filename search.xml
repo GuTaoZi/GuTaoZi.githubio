@@ -10053,19 +10053,43 @@ W=\frac{N!}{\prod\limits_in_i!}</script><script type="math/tex; mode=display">
 \text H[\mathbf x,\mathbf y]=\text H[\mathbf y\vert\mathbf x]+\text H[\mathbf x]</script><h4 id="Relative-Entropy-The-Kullback-Leibler-Divergence"><a href="#Relative-Entropy-The-Kullback-Leibler-Divergence" class="headerlink" title="Relative Entropy (The Kullback-Leibler Divergence)"></a>Relative Entropy (The Kullback-Leibler Divergence)</h4><p>KL divergence describes a distance between model $p$ and model $q$.</p>
 <script type="math/tex; mode=display">
 \begin{align*}
-\text{KL}(p\|q)&=-\int p(\mathbf x)\ln q(\mathbf x)\text d\mathbf x-\left(-\int p(\mathbf x)\ln p(\mathbf x)\text d\mathbf x\right)\\
+\text{KL}(p\|q)&=\text{Cross Entropy C}(p\|q)-\text {Entropy H}(p)\\
+&=-\int p(\mathbf x)\ln q(\mathbf x)\text d\mathbf x-\left(-\int p(\mathbf x)\ln p(\mathbf x)\text d\mathbf x\right)\\
 &=-\int p(\mathbf x)\ln \left\{\frac{q(\mathbf x)}{p(\mathbf x)}\right\}\text d\mathbf x
 \end{align*}</script><ol>
 <li>It is not a symmetrical quantity: $\text{KL}(p|q)\not\equiv \text{KL}(q|p)$.</li>
 <li>$\text {KL}(p|q)\ge 0$, with equality IFF $p(\mathbf x)=q(\mathbf x)$.</li>
 </ol>
+<p>Approximate distribution $p(\mathbf x)$ using distribution $q(\mathbf x\vert\boldsymbolθ)$  governed by a set of adjustable parameters $\boldsymbol\theta$. One way to determine $\boldsymbol\theta$ is to minimize the KL divergence between the two distributions.</p>
+<script type="math/tex; mode=display">
+\text{KL}(p\|q)\simeq \frac 1 N \sum\limits_{n=1}^N\{\ln q(\mathbf x_n\vert\boldsymbol\theta)+\ln p(\mathbf x_n)\}</script><p>The 1st term is the negative log likelihood function for $\boldsymbol\theta$. The 2nd term is independent of $\boldsymbol\theta$. So minimizing this KL divergence is equivalent to maximizing the likelihood function.</p>
+<h4 id="Cross-Entropy-for-Machine-Learning"><a href="#Cross-Entropy-for-Machine-Learning" class="headerlink" title="Cross Entropy for Machine Learning"></a>Cross Entropy for Machine Learning</h4><ul>
+<li>Goal of ML: $p(\text{real data})\approx p(\text{model}\vert\theta)$</li>
+<li>We assume: $p(\text{training data})\approx p(\text{real data})$</li>
+<li>Operation of ML: $p(\text{training data})\approx p(\text{model}\vert\theta)$</li>
+</ul>
+<p>Minimizing $\text{KL}(p(\text{training data})|p(\text{model}\vert\theta))$ is equivalent to minimizing $\text C(p(\text{training data})|p(\text{model}\vert\theta))$ as $\text H(p(\text{training data}))$ is fixed.</p>
+<p><strong>Example. Bernoulli model</strong></p>
+<script type="math/tex; mode=display">
+p(\text{model}\vert\theta)=\rho^t(1-\rho)^{1-t}</script><script type="math/tex; mode=display">
+\text C=-\frac 1 N \sum\limits_nt_n\ln\rho+(1-t_n)\ln(1-\rho)</script><p>where $t_n$ is the training data and $\rho$ is the model parameter.</p>
+<p><strong>Example. Gaussian model</strong></p>
+<script type="math/tex; mode=display">
+p(\text{model}\vert\theta)\propto e^{-\frac{(t-\mu)^2}{2}}</script><script type="math/tex; mode=display">
+\text C\propto \frac 1 N \sum\limits_n(t_n-\mu)^2</script><p>where $t_n$ is the training data and $\mu$ is the model parameter.</p>
 <h4 id="Mutual-Information"><a href="#Mutual-Information" class="headerlink" title="Mutual Information"></a>Mutual Information</h4><p>Mutual information describes the degree of dependence between $\mathbf x$ and $\mathbf y$ </p>
 <script type="math/tex; mode=display">
 \begin{align*}
 \text I[\mathbf x,\mathbf y]&\equiv\text{KL}(p(\mathbf x,\mathbf y)\|p(\mathbf x)p(\mathbf y))\\
 &=-\iint p(\mathbf x,\mathbf y)\ln\left(\frac{p(\mathbf x)p(\mathbf y)}{p(\mathbf x,\mathbf y)}\right)\text d\mathbf x\text d\mathbf y
 \end{align*}</script><script type="math/tex; mode=display">
-\text I[\mathbf x,\mathbf y]=\text H[\mathbf x]-\text H[\mathbf x\vert\mathbf y]=\text H[\mathbf y]-\text H[\mathbf y\vert\mathbf x]</script>]]></content>
+\text I[\mathbf x,\mathbf y]=\text H[\mathbf x]-\text H[\mathbf x\vert\mathbf y]=\text H[\mathbf y]-\text H[\mathbf y\vert\mathbf x]</script><h4 id="Information-Gain"><a href="#Information-Gain" class="headerlink" title="Information Gain"></a>Information Gain</h4><p>Given $N$ balls and a balance, one of these balls is lighter.</p>
+<p>In $N$ balls, the probability of each ball being lighter is $\frac 1 N$. Total information: </p>
+<script type="math/tex; mode=display">
+\text H[X]=-\sum\limits_{n=1}^N\frac 1 N\log\frac 1 N=\log N</script><p>For each time of weighing, the balance has three possible cases, therefore the information gain each time:</p>
+<script type="math/tex; mode=display">
+\text H[Y]=-\sum\limits_{n=1}^3\frac 1 3\log\frac 1 3=\log 3</script><p>So the least number of weighing to find the lighter ball is $\frac{\text H[X]}{\text H[Y]}=\frac{\log N}{\log 3}$.</p>
+]]></content>
       <categories>
         <category>CS</category>
       </categories>
