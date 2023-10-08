@@ -9841,7 +9841,7 @@ p_y(y)&=p_x(x)|\frac{dx}{dy}|\\
 \mathbb E[x^2]&=\int_{-\infty}^\infty \mathcal N(x\vert \mu,\sigma^2)x^2 dx = \mu^2 + \sigma^2\\
 \text{var}[x]&=\mathbb E[x^2]-\mathbb E[x]^2 = \sigma^2
 \end{align*}</script></li>
-<li><p>The Multivariate Gaussian</p>
+<li><p><a name="multigaussian">The Multivariate Gaussian</a></p>
 <script type="math/tex; mode=display">
 \mathcal N(\mathbf x|\mathbf\mu,\mathbf\Sigma)=\frac 1 {(2\pi)^{D/2}}\frac 1 {|\mathbf\Sigma|^{1/2}}\exp\left\{-\frac 1 2(\mathbf x-\mathbf\mu)^\text T\mathbf\Sigma^{-1}(\mathbf x - \mathbf \mu)\right\}</script></li>
 </ul>
@@ -9867,7 +9867,7 @@ p(t\vert x,\mathbf w,\beta)=\mathcal N(t\vert y(x,\mathbf w),\beta^{-1})</script
 <li>Input values $\mathbf x=(x_1,\cdots,x_N)^\text T$</li>
 <li>Target values $\mathbf t=(t_1,\cdots,t_N)^\text T$</li>
 </ul>
-<p>Likelihood function:</p>
+<p><a name="likeli">Likelihood function</a>:</p>
 <script type="math/tex; mode=display">
 p(\mathbf t\vert \mathbf x,\mathbf w,\beta)=\prod\limits_{n=1}^N\mathcal N(t_n\vert y(x_n,\mathbf w),\beta^{-1})</script><p>Log likelihood function:</p>
 <script type="math/tex; mode=display">
@@ -9878,19 +9878,51 @@ p(\mathbf t\vert \mathbf x,\mathbf w,\beta)=\prod\limits_{n=1}^N\mathcal N(t_n\v
 <p>So <strong>maximizing the likelihood function</strong> is equivalent to <strong>minimizing the sum-of-squares error function</strong> $\sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2$.</p>
 <p>After obtaining $\mathbf w_{ML}$, we can further maximize the likelihood function w.r.t. $\beta$:</p>
 <script type="math/tex; mode=display">
-\frac 1 {\beta_{ML}}=\sum\limits_{n=1}^N\{y(x_n,\mathbf w_{ML})-t_n\}^2</script><p>Substitute $\mathbf w_{ML}$ and $\beta_{ML}$ back to get <strong>predictive distribution</strong>:</p>
+\frac 1 {\beta_{ML}}=\sum\limits_{n=1}^N\{y(x_n,\mathbf w_{ML})-t_n\}^2</script><p>Substitute $\mathbf w_{ML}$ and $\beta_{ML}$ back to get <a name="predictive_distribution"><strong>predictive distribution</strong></a>:</p>
 <script type="math/tex; mode=display">
-p(\mathbf t\vert \mathbf x,\mathbf w_{ML},\beta_{ML})=\prod\limits_{n=1}^N\mathcal N(t_n\vert y(x_n,\mathbf w_{ML}),\beta^{-1}_{ML})</script><h4 id="MAP-Maximum-Posteriori"><a href="#MAP-Maximum-Posteriori" class="headerlink" title="MAP: Maximum Posteriori"></a>MAP: Maximum Posteriori</h4><script type="math/tex; mode=display">
-p(\mathbf w\vert \alpha)=\mathcal N(\mathbf w|\mathbf 0,\alpha^{-1}\mathbf I)=(\frac\alpha{2\pi})^{(M+1)/2} \exp\{-\frac\alpha 2 \mathbf w^\text{T}\mathbf w\}</script><script type="math/tex; mode=display">
-\text{ref:}\mathcal N(\mathbf x|\mathbf\mu,\mathbf\Sigma)=\frac 1 {(2\pi)^{D/2}}\frac 1 {|\mathbf\Sigma|^{1/2}}\exp\left\{-\frac 1 2(\mathbf x-\mathbf\mu)^\text T\mathbf\Sigma^{-1}(\mathbf x - \mathbf \mu)\right\}</script><p>where $\alpha$ is the precision of the distribution(<em>hyperparameter</em>), and $M+1$ is the total number of elements in the vector $\bf w$ for an $M^\text{th}$ order polynomial.</p>
-<p>Bayes’ Theorem: the posterior distribution for $\bf w$ is proportional to the product of the prior distribution and the likelihood function:</p>
+p(\mathbf t\vert \mathbf x,\mathbf w_{ML},\beta_{ML})=\prod\limits_{n=1}^N\mathcal N(t_n\vert y(x_n,\mathbf w_{ML}),\beta^{-1}_{ML})</script><h4 id="MAP-Maximum-Posteriori"><a href="#MAP-Maximum-Posteriori" class="headerlink" title="MAP: Maximum Posteriori"></a>MAP: Maximum Posteriori</h4><p><a name="prior">The prior distribution</a>:</p>
+<script type="math/tex; mode=display">
+p(\mathbf w\vert \alpha)=\mathcal N(\mathbf w|\mathbf 0,\alpha^{-1}\mathbf I)=(\frac\alpha{2\pi})^{(M+1)/2} \exp\{-\frac\alpha 2 \mathbf w^\text{T}\mathbf w\}</script><p>Review: <a href="#multigaussian">the Multivariate Gaussian</a>:</p>
+<p>where $\alpha$ is the precision of the distribution(<em>hyperparameter</em>), and $M+1$ is the total number of elements in the vector $\bf w$ for an $M^\text{th}$ order polynomial.</p>
+<p>Bayes’ Theorem: the posterior distribution for $\bf w$ is proportional to the product of the prior distribution and the likelihood function.</p>
+<p><a name="posterior">The posterior distribution</a>:</p>
 <script type="math/tex; mode=display">
 \begin{align*}
 &p(\mathbf w \vert\mathbf x,\mathbf t,\alpha,\beta)&\propto\quad&p(\mathbf t\vert \mathbf x,\mathbf w,\beta)&p(\mathbf w\vert\alpha)\\
 &\text{posteriori}&\propto\quad&\text{likelihood}&\text{priori}
-\end{align*}</script><script type="math/tex; mode=display">
-\beta\widetilde E(\mathbf w)=\frac\beta 2\sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2+\frac\alpha 2 \mathbf w^\text{T}\mathbf w</script><p><strong>Maximizing the posterior distribution</strong> is equivalent to <strong>minimizing the regularized sum-of-squares error function</strong></p>
-]]></content>
+\end{align*}</script><p>Take the logarithm of the rhs, we already know the <a href="#likeli">likelihood function</a> and <a href="#prior">prior distribution</a> mentioned above, therefore maximizing posterior is to minimizing the following:</p>
+<script type="math/tex; mode=display">
+\frac\beta 2\sum\limits_{n=1}^N\{y(x_n,\mathbf w)-t_n\}^2+\frac\alpha 2 \mathbf w^\text{T}\mathbf w</script><p><strong>Maximizing the posterior distribution</strong> is equivalent to <strong>minimizing the regularized sum-of-squares error function</strong>, with regularization parameter $\lambda = \frac\alpha\beta$.</p>
+<h4 id="Bayesian-Curve-Fitting"><a href="#Bayesian-Curve-Fitting" class="headerlink" title="Bayesian Curve Fitting"></a>Bayesian Curve Fitting</h4><p>Assume that the parameters $\alpha$ and $\beta$ are fixed and known in advance.</p>
+<p>In Bayesian treatment, the predictive distribution can be written as:</p>
+<script type="math/tex; mode=display">
+p(t\vert x,\mathbf x, \mathbf t)=\int p(t\vert x,\mathbf w)p(\mathbf w\vert\mathbf x,\mathbf t)\text d\mathbf w</script><p>$p(t\vert x,\mathbf x, \mathbf t)$ is the <a href="#likeli">likelihood function</a> with omitted dependence on  $\alpha$ and $\beta$ .</p>
+<p>$p(\mathbf w\vert\mathbf x,\mathbf t)$ is the <a href="#posterior">posterior distribution</a> which can be found by normalizing the rhs.</p>
+<blockquote>
+<p>For problems such as curve-fitting, this posterior distribution is a Gaussian and can be evaluated analytically. Similarly, the integration can also be performed analytically.</p>
+</blockquote>
+<p>The predictive distribution is given by a Gaussian of the form</p>
+<script type="math/tex; mode=display">
+p(t\vert x,\mathbf x,\mathbf t)=\mathcal N(t\vert m(x),s^2(x))</script><p>where the mean and variance are given by</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+m(x)&=\beta\phi(x)^\text T\textbf S\sum\limits_{n=1}^N \phi(x_n)t_n\\
+s^2(x)&=\beta^{-1}+\phi(x)^\text T\textbf S\phi(x)
+\end{align*}</script><p>Here the matrix $\textbf S$ is given by</p>
+<script type="math/tex; mode=display">
+\textbf S^{-1}=\alpha \textbf I + \beta\sum\limits_{n=1}^N\phi(x_n)\phi(x)^\text T</script><p>where $\textbf I$ is the unit matrix, the vector $\phi(x)$ with elements $\phi_i(x)=x^i$ for $i=0,\cdots,M$.</p>
+<ul>
+<li>The variance and the mean depend on $x$.</li>
+<li>$\beta^{-1}$ represents the uncertainty in the predicted value of $t$, expressed in the <a href="#predictive_distribution">maximum likelihood predictive distribution</a> through $\beta^{-1}_{ML}$.</li>
+<li>$\phi(x)^\text T\textbf S\phi(x)$ arises from the uncertainty in $\mathbf w$ and is a consequence of the Bayesian treatment.</li>
+</ul>
+<h3 id="Model-Selection"><a href="#Model-Selection" class="headerlink" title="Model Selection"></a>Model Selection</h3><p>S-fold Cross Validation</p>
+<p><img src="https://s2.loli.net/2023/10/08/sa2LJItkVQEUCeS.png" alt="image.png" style="zoom: 50%;" /></p>
+<p><em>leave-one-out</em>: $S=N$</p>
+<h3 id="Curse-of-Dimensionality"><a href="#Curse-of-Dimensionality" class="headerlink" title="Curse of Dimensionality"></a>Curse of Dimensionality</h3><script type="math/tex; mode=display">
+y(\mathbf x,\mathbf w)=w_0+\sum\limits_{i=1}^D w_ix_i+\sum\limits_{i=1}^D\sum\limits_{j=1}^Dw_{ij}x_ix_j+\sum\limits_{i=1}^D\sum\limits_{j=1}^D\sum\limits_{k=1}^Dw_{ijk}x_ix_jx_k+\cdots</script><p>For a polynomial of order $M$, the growth in the number of coefficients is $D^M$.</p>
+<p>In spaces of high dimensionality, most of the volume of a sphere is concentrated in a thin shell near the surface, most of the probability mass of a Gaussian is located within a thin shell at a specific radius.</p>
+<h3 id="Decision-Theory"><a href="#Decision-Theory" class="headerlink" title="Decision Theory"></a>Decision Theory</h3>]]></content>
       <categories>
         <category>CS</category>
       </categories>
