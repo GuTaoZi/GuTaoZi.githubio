@@ -9736,6 +9736,7 @@ n_{i}
     <content><![CDATA[<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><ol>
 <li>Introduction</li>
 <li>Preliminary</li>
+<li>Distributions</li>
 </ol>
 <h2 id="Chapter-1-Introduction"><a href="#Chapter-1-Introduction" class="headerlink" title="Chapter 1 - Introduction"></a>Chapter 1 - Introduction</h2><h3 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h3><ul>
 <li><strong>Machine Learning</strong>—minimization of some loss function for generalizing data sets with models.</li>
@@ -10089,7 +10090,66 @@ p(\text{model}\vert\theta)\propto e^{-\frac{(t-\mu)^2}{2}}</script><script type=
 \text H[X]=-\sum\limits_{n=1}^N\frac 1 N\log\frac 1 N=\log N</script><p>For each time of weighing, the balance has three possible cases, therefore the information gain each time:</p>
 <script type="math/tex; mode=display">
 \text H[Y]=-\sum\limits_{n=1}^3\frac 1 3\log\frac 1 3=\log 3</script><p>So the least number of weighing to find the lighter ball is $\frac{\text H[X]}{\text H[Y]}=\frac{\log N}{\log 3}$.</p>
-]]></content>
+<h2 id="Chapter-3-Distributions"><a href="#Chapter-3-Distributions" class="headerlink" title="Chapter 3 - Distributions"></a>Chapter 3 - Distributions</h2><h3 id="Binary-Distributions"><a href="#Binary-Distributions" class="headerlink" title="Binary Distributions"></a>Binary Distributions</h3><h4 id="Bernoulli-Distribution"><a href="#Bernoulli-Distribution" class="headerlink" title="Bernoulli Distribution"></a>Bernoulli Distribution</h4><script type="math/tex; mode=display">
+\begin{align*}
+\text{Bern}(x\vert \mu)&=\mu^x(1-\mu)^{1-x}\\
+\mathbb E[x]&=\mu\\
+\text{var}[x]&=\mu(1-\mu)
+\end{align*}</script><p>Given $\mathcal D=\{x_1,\cdots,x_N\}$, $m$ heads, $N-m$ tails.</p>
+<script type="math/tex; mode=display">
+\ln p(\mathcal D\vert\mu)=\sum\limits_{n=1}^N\ln p(x_n\vert\mu)=\sum\limits_{n=1}^N\{x_n\ln\mu+(1-x_n\ln(1-\mu)\}</script><script type="math/tex; mode=display">
+\mu_\text{ML}=\frac 1 N\sum\limits_{n=1}^Nx_n=\frac m N</script><h4 id="Binomial-Distribution"><a href="#Binomial-Distribution" class="headerlink" title="Binomial Distribution"></a>Binomial Distribution</h4><script type="math/tex; mode=display">
+\begin{align*}
+\text{Bin}(m\vert N,\mu)&=\left(\begin{matrix*}N\\m\end{matrix*}\right)\mu^m(1-\mu)^{N-m}\\
+\mathbb E[m]&=\sum\limits_{m=0}^Nm\text{Bin}(m\vert N,\mu)=N\mu\\
+\text{var}[m]&=\sum\limits_{m=0}^N(m-\mathbb E[m])^2\text{Bin}(m\vert N,\mu)=N\mu(1-\mu)
+\end{align*}</script><h4 id="Beta-Distribution"><a href="#Beta-Distribution" class="headerlink" title="Beta Distribution"></a>Beta Distribution</h4><script type="math/tex; mode=display">
+\begin{align*}
+\text{Beta}(\mu\vert a,b)&=\frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}\mu^{a-1}(1-\mu)^{b-1}\\
+\mathbb E[\mu]&=\frac a {a+b}\\
+\text{var}[\mu]&=\frac{ab}{(a+b)^2(a+b+1)}
+\end{align*}</script><h3 id="Multinomial-Distributions"><a href="#Multinomial-Distributions" class="headerlink" title="Multinomial Distributions"></a>Multinomial Distributions</h3><h4 id="1-of-K-coding-scheme"><a href="#1-of-K-coding-scheme" class="headerlink" title="1-of-K coding scheme"></a>1-of-K coding scheme</h4><p>1-of-K coding scheme: $\mathbf x=(0,0,1,0,0,0)^\text T,\ \sum\limits_{k=1}^Kx_k=1$.</p>
+<script type="math/tex; mode=display">
+p(\text x\vert\boldsymbol\mu)=\prod\limits_{k=1}^K\mu_k^{x_k}</script><p>where $\boldsymbol\mu=(\mu_1,\cdots,\mu_K)^\text T$, $\mu_k=p(x_k=1)$.</p>
+<script type="math/tex; mode=display">
+\mathbb E[\mathbf x\vert\boldsymbol \mu]=\sum\limits_{\mathbf x}p(\mathbf x\vert\boldsymbol\mu)\mathbf x=(\mu_1,\cdots,\mu_K)^\text T=\boldsymbol \mu</script><script type="math/tex; mode=display">
+\mu_k=-\frac{m_k}\lambda\quad \mu^\text{ML}_k=\frac {m_k} N</script><h4 id="Multinomial-Distribution"><a href="#Multinomial-Distribution" class="headerlink" title="Multinomial Distribution"></a>Multinomial Distribution</h4><h4 id="Dirichlet-Distribution"><a href="#Dirichlet-Distribution" class="headerlink" title="Dirichlet Distribution"></a>Dirichlet Distribution</h4><h3 id="Gaussian-Distribution-1"><a href="#Gaussian-Distribution-1" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h3><ul>
+<li><p>The Gaussian Distribution</p>
+<script type="math/tex; mode=display">
+\mathcal N(x|\mu,\sigma^2)=\frac 1 {(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac 1 {2\sigma^2}(x-\mu)^2\right\}</script></li>
+<li><p>The Multivariate Gaussian</p>
+<script type="math/tex; mode=display">
+\mathcal N(\mathbf x|\mathbf\mu,\mathbf\Sigma)=\frac 1 {(2\pi)^{D/2}}\frac 1 {|\mathbf\Sigma|^{1/2}}\exp\left\{-\frac 1 2(\mathbf x-\mathbf\mu)^\text T\mathbf\Sigma^{-1}(\mathbf x - \mathbf \mu)\right\}</script></li>
+</ul>
+<h4 id="Central-Limit-Theorem"><a href="#Central-Limit-Theorem" class="headerlink" title="Central Limit Theorem"></a>Central Limit Theorem</h4><p>The distribution of the sum of $N$ i.i.d. random variables becomes increasingly Gaussian as $N$ grows.</p>
+<h4 id="Moments-of-the-Multivariate-Gaussian"><a href="#Moments-of-the-Multivariate-Gaussian" class="headerlink" title="Moments of the Multivariate Gaussian"></a>Moments of the Multivariate Gaussian</h4><h4 id="Properties-of-Gaussians"><a href="#Properties-of-Gaussians" class="headerlink" title="Properties of Gaussians"></a>Properties of Gaussians</h4><ol>
+<li>Linear transformation</li>
+</ol>
+<script type="math/tex; mode=display">
+\begin{align*}
+X&\sim\mathcal N(\mu,\sigma^2)\\
+Y&=aX+b\\
+Y&\sim\mathcal N(a\mu+b,a^2\sigma^2)
+\end{align*}</script><ol>
+<li><p>Product of Gaussian r.v.</p>
+<script type="math/tex; mode=display">
+\begin{align*}X_1&\sim\mathcal N(\mu_1,\sigma_1^2)\\X_2&\sim\mathcal N(\mu_2,\sigma_2^2)\\\
+p(Y)&=p(X_1)p(X_2)\\
+Y&\sim\mathcal N(\frac{\sigma^2_2}{\sigma_1^2+\sigma_2^2}\mu_1+\frac{\sigma^2_1}{\sigma_1^2+\sigma_2^2}\mu_2,\frac 1 {\sigma_1^{-2}+\sigma_2^{-2}})
+\end{align*}</script><script type="math/tex; mode=display">
+\left\{\begin{align*}\sigma^{-2}&=\sigma_1^{-2}+\sigma_2^{-2}\\\sigma^{-2}\mu&=\sigma_1^{-2}\mu_1+\sigma_2^{-2}\mu_2\end{align*}\right .</script></li>
+</ol>
+<h4 id="Bayes’-Theorem-for-Gaussian-Variables"><a href="#Bayes’-Theorem-for-Gaussian-Variables" class="headerlink" title="Bayes’ Theorem for Gaussian Variables"></a>Bayes’ Theorem for Gaussian Variables</h4><p>Given $y=Ax+v$, $p(x)=\mathcal N(x\vert\mu,\Sigma)$, $p(v)=\mathcal N(v\vert,0,Q)$.</p>
+<p>Hence we have</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p(y)&=\mathcal N(y\vert A\mu,A\Sigma A^\text T+Q)\\
+p(y\vert x)&=\mathcal N(y\vert Ax,Q)
+\end{align*}</script><p>Therefore</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p(x\vert y)\propto p(y\vert x)p(x)=\mathcal N(y\vert Ax,Q)\mathcal N(x\vert \mu,\Sigma)
+\end{align*}</script>]]></content>
       <categories>
         <category>CS</category>
       </categories>
@@ -10427,15 +10487,15 @@ p(\text{model}\vert\theta)\propto e^{-\frac{(t-\mu)^2}{2}}</script><script type=
 <h3 id="Context-Free-Grammars"><a href="#Context-Free-Grammars" class="headerlink" title="Context-Free Grammars"></a>Context-Free Grammars</h3><h4 id="Formal-definition-of-CFG"><a href="#Formal-definition-of-CFG" class="headerlink" title="Formal definition of CFG"></a>Formal definition of CFG</h4><p>4 components of a CFG:</p>
 <ul>
 <li><strong>Terminals</strong>: Basic symbols token names</li>
-<li><strong>Non-terminals</strong>: Syntactic variables that denote sets of strings</li>
-<li><strong>Start symbol(non-terminal)</strong>: The set of strings denoted by the start symbol is the language generated by the CFG</li>
-<li><strong>Productions</strong>: Specify how the terminals and non-terminals can be combined to form strings<ul>
+<li><strong>Nonterminals</strong>: Syntactic variables that denote sets of strings</li>
+<li><strong>Start symbol(nonterminal)</strong>: The set of strings denoted by the start symbol is the language generated by the CFG</li>
+<li><strong>Productions</strong>: Specify how the terminals and nonterminals can be combined to form strings<ul>
 <li>Format: $\text{head}\rightarrow\text{body}$</li>
-<li>head must be a non-terminal; body consists of zero or more terminals/non-terminals</li>
+<li>head must be a nonterminal; body consists of zero or more terminals/nonterminals</li>
 </ul>
 </li>
 </ul>
-<h4 id="Derivation-and-parse-tree"><a href="#Derivation-and-parse-tree" class="headerlink" title="Derivation and parse tree"></a>Derivation and parse tree</h4><p><strong>Derivation</strong>: Starting with the start symbol, non-terminals are rewritten using productions until only terminals remain.</p>
+<h4 id="Derivation-and-parse-tree"><a href="#Derivation-and-parse-tree" class="headerlink" title="Derivation and parse tree"></a>Derivation and parse tree</h4><p><strong>Derivation</strong>: Starting with the start symbol, nonterminals are rewritten using productions until only terminals remain.</p>
 <p><strong>Examples.</strong></p>
 <p>CFG: $E\rightarrow -E\ \vert\ E+E\ \vert\ E\times E\ \vert\ (E)\ \vert\ \ \textbf{id}$</p>
 <p><strong>Derivation Notations</strong></p>
@@ -10447,11 +10507,11 @@ p(\text{model}\vert\theta)\propto e^{-\frac{(t-\mu)^2}{2}}</script><script type=
 <p><strong>Terminologies</strong></p>
 <ul>
 <li>For the start symbol $S$ of a grammar $G$, $\alpha$ is a <strong>sentential form</strong> of $G$ if $S\mathop{\Rightarrow}\limits^{\star}\alpha$.</li>
-<li>A sentential form without non-terminals is a <strong>sentence</strong>.</li>
+<li>A sentential form without nonterminals is a <strong>sentence</strong>.</li>
 <li>The <strong>language</strong> generated by a grammar is its set of <strong>sentences</strong>.</li>
 </ul>
 <p><strong>Leftmost/Rightmost Derivations</strong></p>
-<p>The leftmost/rightmost non-terminal in each sentential form is always chosen to be replaced.</p>
+<p>The leftmost/rightmost nonterminal in each sentential form is always chosen to be replaced.</p>
 <p><strong>Parse Trees</strong></p>
 <ul>
 <li>Root node: start symbol</li>
@@ -10471,7 +10531,7 @@ p(\text{model}\vert\theta)\propto e^{-\frac{(t-\mu)^2}{2}}</script><script type=
 </ol>
 <p><strong>Construct CFG from a Regex</strong></p>
 <ul>
-<li>State of NFA → non-terminal symbol</li>
+<li>State of NFA → nonterminal symbol</li>
 <li>State transition on input $a$ → production $A_i\rightarrow a A_j$</li>
 <li>State transition on input $\epsilon$ → production $A_i\rightarrow A_j$</li>
 <li>Accepting state → $A_i\rightarrow \epsilon$</li>
@@ -10501,14 +10561,80 @@ L=\{a^nb^n\vert n>0\}</script><p>CFG: $S\rightarrow aSb\vert ab$</p>
 <li>At each step, the frontier of the tree is a left-sentential form.</li>
 </ul>
 <blockquote>
-<p>Key decision in top-down parsing: Which production to apply at each step?</p>
+<p>Key decision: Which production to apply at each step?</p>
 </blockquote>
 <p><strong>Bottom-Up Parsing</strong></p>
 <p>Constructing a parse tree for an input string beginning at the leaves (terminals) and working up towards the root (start symbol of the grammar)</p>
 <ol>
 <li><strong>Shift</strong>: Move an input symbol onto the stack</li>
-<li><strong>Reduce</strong>: Replace a string at the stack top with a non-terminal that can produce the string (the reverse of a rewrite step in a derivation)</li>
+<li><strong>Reduce</strong>: Replace a string at the stack top with a nonterminal that can produce the string (the reverse of a rewrite step in a derivation)</li>
 </ol>
+<ul>
+<li>Equivalent to finding a rightmost derivation.</li>
+<li>At each step, stack + remaining input is a right-sentential form.</li>
+</ul>
+<blockquote>
+<p>Key decision: When to shift/reduce? Which production to apply when reducing?</p>
+</blockquote>
+<h3 id="Top-Down-Parsing"><a href="#Top-Down-Parsing" class="headerlink" title="Top-Down Parsing"></a>Top-Down Parsing</h3><h4 id="Recursive-Descent-Parsing"><a href="#Recursive-Descent-Parsing" class="headerlink" title="Recursive-Descent Parsing"></a>Recursive-Descent Parsing</h4><p>One procedure for each nonterminal, handling a substring of the input.</p>
+<p><strong>Naive procedure</strong></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">A</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Choose an A-production, A → X[<span class="number">1</span>-k];</span><br><span class="line">    <span class="keyword">for</span> i = <span class="number">1</span> to k</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(X[i] is a nonterminal)</span><br><span class="line">        &#123;</span><br><span class="line">            call procedure X[i]();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(X[i] equals the current input symbol a)</span><br><span class="line">        &#123;</span><br><span class="line">            advance the input too the next symbol;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">/* Failed to match using A-production A→X[1-k] */</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Backtracking</strong></p>
+<p>General recursive-descent parsing may require repeated scans over the input (backtracking).</p>
+<ul>
+<li>Try each possible production in some order.</li>
+<li>When failure occurs, return, reset the input pointer and try another A-production.</li>
+</ul>
+<p><strong>Looking Ahead</strong></p>
+<p>Left recursion in a CFG traps the recursive-descent parser into an infinite loop.</p>
+<p>Looking ahead, checking the next character avoids bad choices.</p>
+<p><strong>Computing $\text{FIRST}(X)$</strong></p>
+<p>$\text{FIRST}(X)$ denotes the set of beginning terminals of strings derived from $X$.</p>
+<ul>
+<li>If $X$ is a terminal, $\text{FIRST}(X)=\{X\}$</li>
+<li>If $X$ is a nonterminal and $X\rightarrow \epsilon$, then add $\epsilon$ to $\text{FIRST}(X)$.</li>
+<li>If $X$ is a nonterminal and $X\rightarrow Y_1Y_2\cdots Y_k\ \ (k\ge1)$ is a production<ul>
+<li>If for some $i$, $a\in \text{FIRST}(Y_i)$ and $\epsilon \in \text{FIRST}(Y_1),\cdots,\text{FIRST}(Y_{i-1})$, then add $a$ to $\text{FIRST}(X)$.</li>
+<li>If $\epsilon\in \text{FIRST}(Y_1),\cdots,\text{FIRST}(Y_k)$, then add $\epsilon$ to $\text{FIRST}(X)$.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Computing $\text{FIRST}(X_1X_2\cdots X_n)$</strong></p>
+<ul>
+<li>Add all non-$\epsilon$ symbols of $\text{FIRST}(X_1)$ to $\text{FIRST}(X_1X_2\cdots X_n)$.</li>
+<li>If for some $i$, $\epsilon\in \text{FIRST}(X_1),\cdots,\text{FIRST}(X_{i-1})$, then add  all non-$\epsilon$ symbols of $\text{FIRST}(X_i)$ to $\text{FIRST}(X_1X_2\cdots X_n)$.</li>
+<li>If $\forall i,\ \epsilon\in \text{FIRST}(X_i)$, then add $\epsilon$ to $\text{FIRST}(X_1X_2\cdots X_n)$.</li>
+</ul>
+<p><strong>Computing $\text{FOLLOW}$</strong></p>
+<p>Whether to choose: $A\rightarrow \alpha,\ \epsilon\in\text{FIRST}(\alpha)$?</p>
+<ul>
+<li>For start symbol $S$, add right endmarker $$$ to $\text{FOLLOW}(S)$.</li>
+<li>Apply the rules below, until all $\text{FOLLOW}$ sets do not change:<ul>
+<li>For production $A\rightarrow \alpha B\beta$, add $\text{FIRST}(\beta)/\epsilon$ to $\text{FOLLOW}(B)$</li>
+<li>For production $A\rightarrow \alpha B$ (or $\epsilon\in \text{FIRST}(\beta)$), then add $\text{FOLLOW}(A)$ to $\text{FOLLOW}(B)$.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>By definition, $\epsilon$ will not appear in any $\text{FOLLOW}$ set.</p>
+</blockquote>
+<p>If the next input symbol is in $\text{FIRST(body)}$, the production $\text{head}\rightarrow \text{body}$ may be a good choice.</p>
+<p>If the next input symbol is in $\text{FOLLOW(head)}$, the production $\text{head}\rightarrow\epsilon$ may be a good choice.</p>
+<p><strong>LL(1) Grammars</strong></p>
+<p>No backtracking recursive-descent parser can be constructed for LL(1)</p>
+<ul>
+<li>scanning the input from left to right.</li>
+<li>producing a leftmost derivation (top-down parsing).</li>
+<li>using one input symbol of lookahead each step to make parsing decision.</li>
+</ul>
+<p>A grammar $G$ is LL(1) IFF for any two distinct productions $A\rightarrow \alpha\vert\beta$:</p>
+<ul>
+<li>$\text{FIRST}(\alpha)\bigcap\text{FIRST}(\beta)=\emptyset$</li>
+<li>If $\epsilon\in\text{FIRST}(\beta)$, then $\text{FIRST}(\alpha)\bigcap\text{FOLLOW}(A)=\emptyset$ and vice versa.</li>
+</ul>
+<blockquote>
+<p>There is a unique choice of production at each step by looking ahead.</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>CS</category>
