@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://s2.loli.net/2023/10/08/sF7Khkg2mebAyVP.png">
 <meta property="og:image" content="https://s2.loli.net/2023/10/08/sq5Oz4LW1bVXuvG.png">
 <meta property="article:published_time" content="2023-09-12T02:20:32.703Z">
-<meta property="article:modified_time" content="2023-10-10T03:48:38.476Z">
+<meta property="article:modified_time" content="2023-10-16T16:24:38.967Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Machine Learning">
 <meta property="article:tag" content="Artificial Intelligence">
@@ -235,7 +235,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-10-10 11:48:38" itemprop="dateModified" datetime="2023-10-10T11:48:38+08:00">2023-10-10</time>
+                <time title="Modified: 2023-10-17 00:24:38" itemprop="dateModified" datetime="2023-10-17T00:24:38+08:00">2023-10-17</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -626,20 +626,38 @@ p(\text{model}\vert\theta)\propto e^{-\frac{(t-\mu)^2}{2}}</script><script type=
 \ln p(\mathcal D\vert\mu)=\sum\limits_{n=1}^N\ln p(x_n\vert\mu)=\sum\limits_{n=1}^N\{x_n\ln\mu+(1-x_n\ln(1-\mu)\}</script><script type="math/tex; mode=display">
 \mu_\text{ML}=\frac 1 N\sum\limits_{n=1}^Nx_n=\frac m N</script><h4 id="Binomial-Distribution"><a href="#Binomial-Distribution" class="headerlink" title="Binomial Distribution"></a>Binomial Distribution</h4><script type="math/tex; mode=display">
 \begin{align*}
-\text{Bin}(m\vert N,\mu)&=\left(\begin{matrix*}N\\m\end{matrix*}\right)\mu^m(1-\mu)^{N-m}\\
+\text{Bin}(m\vert N,\mu)&=\left(\begin{matrix}N\\m\end{matrix}\right)\mu^m(1-\mu)^{N-m}\\
 \mathbb E[m]&=\sum\limits_{m=0}^Nm\text{Bin}(m\vert N,\mu)=N\mu\\
 \text{var}[m]&=\sum\limits_{m=0}^N(m-\mathbb E[m])^2\text{Bin}(m\vert N,\mu)=N\mu(1-\mu)
-\end{align*}</script><h4 id="Beta-Distribution"><a href="#Beta-Distribution" class="headerlink" title="Beta Distribution"></a>Beta Distribution</h4><script type="math/tex; mode=display">
+\end{align*}</script><h4 id="Beta-Distribution"><a href="#Beta-Distribution" class="headerlink" title="Beta Distribution"></a><a target="_blank" rel="noopener" href="http://varianceexplained.org/statistics/beta_distribution_and_baseball/">Beta Distribution</a></h4><script type="math/tex; mode=display">
 \begin{align*}
+\Gamma(x)&\equiv\int_0^\infty u^{x-1}e^{-u}du\\
 \text{Beta}(\mu\vert a,b)&=\frac{\Gamma(a+b)}{\Gamma(a)\Gamma(b)}\mu^{a-1}(1-\mu)^{b-1}\\
 \mathbb E[\mu]&=\frac a {a+b}\\
 \text{var}[\mu]&=\frac{ab}{(a+b)^2(a+b+1)}
+\end{align*}</script><p>The Beta distribution provides the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Conjugate_prior"><strong>conjugate prior</strong></a> for the Bernoulli distribution.</p>
+<p>Given $\mathcal D=\{x_1,\cdots,x_N\}$, $m$ heads, $N-m$ tails.</p>
+<script type="math/tex; mode=display">
+\begin{matrix}
+p(\mu\vert a_0,b_0,\mathcal D)\propto p(\mathcal D\vert\mu)p(\mu\vert a_0,b_0)\propto \text{Beta}(\mu\vert a_N,b_N)\\
+a_N=a_0+m\quad\quad b_N=b_0+(N-m)
+\end{matrix}</script><p>As the size of the dataset $N$ increases,</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+a_N &\rightarrow m\\
+b_N &\rightarrow N-m\\
+\mathbb E[\mu]&\rightarrow \mu_\text{ML}\\
+\text{var}[\mu]&\rightarrow 0
 \end{align*}</script><h3 id="Multinomial-Distributions"><a href="#Multinomial-Distributions" class="headerlink" title="Multinomial Distributions"></a>Multinomial Distributions</h3><h4 id="1-of-K-coding-scheme"><a href="#1-of-K-coding-scheme" class="headerlink" title="1-of-K coding scheme"></a>1-of-K coding scheme</h4><p>1-of-K coding scheme: $\mathbf x=(0,0,1,0,0,0)^\text T,\ \sum\limits_{k=1}^Kx_k=1$.</p>
 <script type="math/tex; mode=display">
-p(\text x\vert\boldsymbol\mu)=\prod\limits_{k=1}^K\mu_k^{x_k}</script><p>where $\boldsymbol\mu=(\mu_1,\cdots,\mu_K)^\text T$, $\mu_k=p(x_k=1)$.</p>
+p(\text x\vert\boldsymbol\mu)=\prod\limits_{k=1}^K\mu_k^{x_k}</script><p>where $\boldsymbol\mu=(\mu_1,\cdots,\mu_K)^\text T$, $\sum\limits_k\mu_k=1$.</p>
 <script type="math/tex; mode=display">
-\mathbb E[\mathbf x\vert\boldsymbol \mu]=\sum\limits_{\mathbf x}p(\mathbf x\vert\boldsymbol\mu)\mathbf x=(\mu_1,\cdots,\mu_K)^\text T=\boldsymbol \mu</script><script type="math/tex; mode=display">
-\mu_k=-\frac{m_k}\lambda\quad \mu^\text{ML}_k=\frac {m_k} N</script><h4 id="Multinomial-Distribution"><a href="#Multinomial-Distribution" class="headerlink" title="Multinomial Distribution"></a>Multinomial Distribution</h4><h4 id="Dirichlet-Distribution"><a href="#Dirichlet-Distribution" class="headerlink" title="Dirichlet Distribution"></a>Dirichlet Distribution</h4><h3 id="Gaussian-Distribution-1"><a href="#Gaussian-Distribution-1" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h3><ul>
+\mathbb E[\mathbf x\vert\boldsymbol \mu]=\sum\limits_{\mathbf x}p(\mathbf x\vert\boldsymbol\mu)\mathbf x=(\mu_1,\cdots,\mu_K)^\text T=\boldsymbol \mu</script><p>Given $\mathcal D=\{\bf x_1,\cdots,x_N\}$, the likelihood</p>
+<script type="math/tex; mode=display">
+p(\mathcal D\vert\mu)=\prod\limits_{n=1}^N\prod\limits_{k=1}^K\mu_k^{x_{nk}}=\prod_{k=1}^K\mu_k^{\left(\sum\limits_{n=1}^Nx_{nk}\right)}=\prod_{k=1}^K\mu_k^{m_k}</script><p>where $ m_k=\sum\limits_{n=1}^Nx_{nk}$ denotes the number of observations of $x_k = 1$.</p>
+<p>Using Lagrange method, we obtain</p>
+<script type="math/tex; mode=display">
+\mu^\text{ML}_k=\frac {m_k} N</script><h4 id="Multinomial-Distribution"><a href="#Multinomial-Distribution" class="headerlink" title="Multinomial Distribution"></a>Multinomial Distribution</h4><h4 id="Dirichlet-Distribution"><a href="#Dirichlet-Distribution" class="headerlink" title="Dirichlet Distribution"></a>Dirichlet Distribution</h4><h3 id="Gaussian-Distribution-1"><a href="#Gaussian-Distribution-1" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h3><ul>
 <li><p>The Gaussian Distribution</p>
 <script type="math/tex; mode=display">
 \mathcal N(x|\mu,\sigma^2)=\frac 1 {(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac 1 {2\sigma^2}(x-\mu)^2\right\}</script></li>
@@ -663,7 +681,9 @@ Y&\sim\mathcal N(a\mu+b,a^2\sigma^2)
 p(Y)&=p(X_1)p(X_2)\\
 Y&\sim\mathcal N(\frac{\sigma^2_2}{\sigma_1^2+\sigma_2^2}\mu_1+\frac{\sigma^2_1}{\sigma_1^2+\sigma_2^2}\mu_2,\frac 1 {\sigma_1^{-2}+\sigma_2^{-2}})
 \end{align*}</script><script type="math/tex; mode=display">
-\left\{\begin{align*}\sigma^{-2}&=\sigma_1^{-2}+\sigma_2^{-2}\\\sigma^{-2}\mu&=\sigma_1^{-2}\mu_1+\sigma_2^{-2}\mu_2\end{align*}\right .</script></li>
+\left\{\begin{align*}\sigma^{-2}&=\sigma_1^{-2}+\sigma_2^{-2}\\\sigma^{-2}\mu&=\sigma_1^{-2}\mu_1+\sigma_2^{-2}\mu_2\end{align*}\right .</script><p>For multivariate Gaussians, use $\Sigma$ to replace $\sigma^2$.</p>
+</li>
+<li></li>
 </ol>
 <h4 id="Bayes’-Theorem-for-Gaussian-Variables"><a href="#Bayes’-Theorem-for-Gaussian-Variables" class="headerlink" title="Bayes’ Theorem for Gaussian Variables"></a>Bayes’ Theorem for Gaussian Variables</h4><p>Given $y=Ax+v$, $p(x)=\mathcal N(x\vert\mu,\Sigma)$, $p(v)=\mathcal N(v\vert,0,Q)$.</p>
 <p>Hence we have</p>
@@ -674,8 +694,14 @@ p(y\vert x)&=\mathcal N(y\vert Ax,Q)
 \end{align*}</script><p>Therefore</p>
 <script type="math/tex; mode=display">
 \begin{align*}
-p(x\vert y)\propto p(y\vert x)p(x)=\mathcal N(y\vert Ax,Q)\mathcal N(x\vert \mu,\Sigma)
-\end{align*}</script>
+p(x\vert y)&\propto p(y\vert x)p(x)=\mathcal N(y\vert Ax,Q)\mathcal N(x\vert \mu,\Sigma)\\
+p(x\vert y) &= \mathcal N(x\vert Hy,L)\\
+\end{align*}</script><p>where</p>
+<script type="math/tex; mode=display">
+\left\{ \begin{align*}
+L^{-1}&=A^TQ^{-1}A + \Sigma^{-1}\\
+Hy &= L\{A^TQ^{-1}y+\Sigma^{-1}\mu\}
+\end{align*}\right.</script>
     </div>
 
     
