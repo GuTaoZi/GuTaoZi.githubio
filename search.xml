@@ -10131,7 +10131,25 @@ p(\text x\vert\boldsymbol\mu)=\prod\limits_{k=1}^K\mu_k^{x_k}</script><p>where $
 p(\mathcal D\vert\mu)=\prod\limits_{n=1}^N\prod\limits_{k=1}^K\mu_k^{x_{nk}}=\prod_{k=1}^K\mu_k^{\left(\sum\limits_{n=1}^Nx_{nk}\right)}=\prod_{k=1}^K\mu_k^{m_k}</script><p>where $ m_k=\sum\limits_{n=1}^Nx_{nk}$ denotes the number of observations of $x_k = 1$.</p>
 <p>Using Lagrange method, we obtain</p>
 <script type="math/tex; mode=display">
-\mu^\text{ML}_k=\frac {m_k} N</script><h4 id="Multinomial-Distribution"><a href="#Multinomial-Distribution" class="headerlink" title="Multinomial Distribution"></a>Multinomial Distribution</h4><h4 id="Dirichlet-Distribution"><a href="#Dirichlet-Distribution" class="headerlink" title="Dirichlet Distribution"></a>Dirichlet Distribution</h4><h3 id="Gaussian-Distribution-1"><a href="#Gaussian-Distribution-1" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h3><ul>
+\mu^\text{ML}_k=\frac {m_k} N</script><h4 id="Multinomial-Distribution"><a href="#Multinomial-Distribution" class="headerlink" title="Multinomial Distribution"></a>Multinomial Distribution</h4><script type="math/tex; mode=display">
+\begin{align*}
+\text{Mult}(m_1,\cdots,m_K\vert\boldsymbol\mu,N)&=\left(\begin{matrix}N\\m_1\cdots m_K\end{matrix}\right)\prod\limits_{k=1}^K\mu_k^{m_k}\\
+\mathbb E[m_k]&=N\mu_k\\
+\text{var}[m_k]&=N\mu_k(1-\mu_k)\\
+\text{cov}[m_jm_k]&=-N\mu_j\mu_k
+\end{align*}</script><h4 id="Dirichlet-Distribution"><a href="#Dirichlet-Distribution" class="headerlink" title="Dirichlet Distribution"></a>Dirichlet Distribution</h4><p>Conjugate prior for the multinomial distribution.</p>
+<script type="math/tex; mode=display">
+\begin{matrix}
+\text{Dir}(\boldsymbol\mu\vert\boldsymbol\alpha)=\frac{\Gamma(\alpha_0)}{\Gamma(\alpha_1)\cdots\Gamma(\alpha_K)}\prod\limits_{k=1}^K\mu_k^{\alpha_k-1}\\
+\alpha_0=\sum\limits_{k=1}^K\alpha_k
+\end{matrix}</script><p>Given $\mathcal D=\{m_1,\cdots,m_K\}$, the likelihood</p>
+<script type="math/tex; mode=display">
+\begin{matrix}
+p(\boldsymbol\mu\vert\mathcal D,\boldsymbol\alpha)\propto p(\mathcal D\vert\boldsymbol\mu)p(\boldsymbol\mu\vert\boldsymbol\alpha)\propto\prod\limits_{k=1}^K\mu_k^{\alpha_k+m_k-1}\\
+p(\boldsymbol\mu\vert\mathcal D,\boldsymbol\alpha)=\text{Dir}(\boldsymbol\mu\vert\boldsymbol\alpha+\bf m)
+\end{matrix}</script><p>where $\mathbf m=(m_1,\cdots,m_K)^\text T$.</p>
+<p>We can interpret the parameters $\alpha_k$ of the Dirichlet prior as an effective number of observations of $x_k = 1$.</p>
+<h3 id="Gaussian-Distribution-1"><a href="#Gaussian-Distribution-1" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h3><ul>
 <li><p>The Gaussian Distribution</p>
 <script type="math/tex; mode=display">
 \mathcal N(x|\mu,\sigma^2)=\frac 1 {(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac 1 {2\sigma^2}(x-\mu)^2\right\}</script></li>
@@ -10140,7 +10158,13 @@ p(\mathcal D\vert\mu)=\prod\limits_{n=1}^N\prod\limits_{k=1}^K\mu_k^{x_{nk}}=\pr
 \mathcal N(\mathbf x|\mathbf\mu,\mathbf\Sigma)=\frac 1 {(2\pi)^{D/2}}\frac 1 {|\mathbf\Sigma|^{1/2}}\exp\left\{-\frac 1 2(\mathbf x-\mathbf\mu)^\text T\mathbf\Sigma^{-1}(\mathbf x - \mathbf \mu)\right\}</script></li>
 </ul>
 <h4 id="Central-Limit-Theorem"><a href="#Central-Limit-Theorem" class="headerlink" title="Central Limit Theorem"></a>Central Limit Theorem</h4><p>The distribution of the sum of $N$ i.i.d. random variables becomes increasingly Gaussian as $N$ grows.</p>
-<h4 id="Moments-of-the-Multivariate-Gaussian"><a href="#Moments-of-the-Multivariate-Gaussian" class="headerlink" title="Moments of the Multivariate Gaussian"></a>Moments of the Multivariate Gaussian</h4><h4 id="Properties-of-Gaussians"><a href="#Properties-of-Gaussians" class="headerlink" title="Properties of Gaussians"></a>Properties of Gaussians</h4><ol>
+<h4 id="Moments-of-the-Multivariate-Gaussian"><a href="#Moments-of-the-Multivariate-Gaussian" class="headerlink" title="Moments of the Multivariate Gaussian"></a>Moments of the Multivariate Gaussian</h4><script type="math/tex; mode=display">
+\begin{align*}
+\mathbb E[\mathbf x]&=\boldsymbol\mu\\
+\mathbb E[\mathbf x\mathbf x^\text T]&=\boldsymbol\mu\boldsymbol\mu^\text T+\boldsymbol\Sigma\\
+\text{cov}[\mathbf x]&=\boldsymbol\Sigma\\
+\text{cov}[A\mathbf x]&=A\boldsymbol\Sigma A^\text T
+\end{align*}</script><h4 id="Properties-of-Gaussians"><a href="#Properties-of-Gaussians" class="headerlink" title="Properties of Gaussians"></a>Properties of Gaussians</h4><ol>
 <li>Linear transformation</li>
 </ol>
 <script type="math/tex; mode=display">
@@ -10157,9 +10181,8 @@ Y&\sim\mathcal N(\frac{\sigma^2_2}{\sigma_1^2+\sigma_2^2}\mu_1+\frac{\sigma^2_1}
 \end{align*}</script><script type="math/tex; mode=display">
 \left\{\begin{align*}\sigma^{-2}&=\sigma_1^{-2}+\sigma_2^{-2}\\\sigma^{-2}\mu&=\sigma_1^{-2}\mu_1+\sigma_2^{-2}\mu_2\end{align*}\right .</script><p>For multivariate Gaussians, use $\Sigma$ to replace $\sigma^2$.</p>
 </li>
-<li></li>
 </ol>
-<h4 id="Bayes’-Theorem-for-Gaussian-Variables"><a href="#Bayes’-Theorem-for-Gaussian-Variables" class="headerlink" title="Bayes’ Theorem for Gaussian Variables"></a>Bayes’ Theorem for Gaussian Variables</h4><p>Given $y=Ax+v$, $p(x)=\mathcal N(x\vert\mu,\Sigma)$, $p(v)=\mathcal N(v\vert,0,Q)$.</p>
+<h4 id="Bayes’-Theorem-for-Gaussian-Variables-Slides"><a href="#Bayes’-Theorem-for-Gaussian-Variables-Slides" class="headerlink" title="Bayes’ Theorem for Gaussian Variables(Slides)"></a>Bayes’ Theorem for Gaussian Variables(Slides)</h4><p>Given $y=Ax+v$, $p(x)=\mathcal N(x\vert\mu,\Sigma)$, $p(v)=\mathcal N(v\vert,0,Q)$.</p>
 <p>Hence we have</p>
 <script type="math/tex; mode=display">
 \begin{align*}
@@ -10175,7 +10198,58 @@ p(x\vert y) &= \mathcal N(x\vert Hy,L)\\
 \left\{ \begin{align*}
 L^{-1}&=A^TQ^{-1}A + \Sigma^{-1}\\
 Hy &= L\{A^TQ^{-1}y+\Sigma^{-1}\mu\}
-\end{align*}\right.</script>]]></content>
+\end{align*}\right.</script><h4 id="Conditional-Gaussian-distributions"><a href="#Conditional-Gaussian-distributions" class="headerlink" title="Conditional Gaussian distributions"></a>Conditional Gaussian distributions</h4><p>If two sets of variables are jointly Gaussian, then the conditional distribution of one set conditioned on the other is again Gaussian.</p>
+<p>Given a $D$-dimensional vector $\mathbf x$ with Gaussian distribution $\mathcal N(\mathbf x\vert\boldsymbol\mu,\boldsymbol\Sigma)$, partitioned into two disjoint subsets $\mathbf x_a$ and $\mathbf x_b$.</p>
+<script type="math/tex; mode=display">
+\mathbf x=\left(\begin{matrix}\mathbf x_a\\\mathbf x_b\end{matrix}\right)\quad\boldsymbol\mu=\left(\begin{matrix}\boldsymbol \mu_a\\\boldsymbol \mu_b\end{matrix}\right)\quad\boldsymbol\Sigma=\begin{pmatrix}\boldsymbol\Sigma_{aa}&\boldsymbol\Sigma_{ab}\\\boldsymbol\Sigma_{ba}&\boldsymbol\Sigma_{bb}\end{pmatrix}</script><p>For conditional distribution $p(\mathbf x_a\vert\mathbf x_b)$,</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p(\mathbf x_a\vert\mathbf x_b)&=\mathcal N(x_a\vert\boldsymbol\mu_{a\vert b},\boldsymbol\Sigma_{a\vert b})\\
+\boldsymbol\mu_{a\vert b}&=\boldsymbol\mu_a+\boldsymbol\Sigma_{ab}\boldsymbol\Sigma_{bb}^{-1}(\mathbf x_b-\boldsymbol\mu_b)\\
+\boldsymbol\Sigma_{a\vert b}&=\boldsymbol\Sigma_{aa}-\boldsymbol\Sigma_{ab}\boldsymbol\Sigma_{bb}^{-1}\boldsymbol\Sigma_{ba}
+\end{align*}</script><p>And marginal distribution $p(\mathbf x_a)=\mathcal N(\mathbf x_a\vert\boldsymbol\mu_a,\boldsymbol\Sigma_{aa})$.</p>
+<h4 id="Bayes’-Theorem-for-Gaussian-Variables-Textbook"><a href="#Bayes’-Theorem-for-Gaussian-Variables-Textbook" class="headerlink" title="Bayes’ Theorem for Gaussian Variables(Textbook)"></a>Bayes’ Theorem for Gaussian Variables(Textbook)</h4><p>Given</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p(\mathbf x)&=\mathcal N(\mathbf x\vert\boldsymbol\mu,\boldsymbol\Lambda^{-1})\\
+p(\mathbf y\vert \mathbf x)&=\mathcal N(\bf y\vert Ax+b, L^{-1})
+\end{align*}</script><p>Obtain</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p(\mathbf y)&=\mathcal N(\bf y\vert A\mu+b,L^{-1}+A\Lambda^{-1}A^\text T)\\
+p(\mathbf x\vert\mathbf y)&=\mathcal N(\bf x\vert\boldsymbol \Sigma\{A^\text TL(y-b)+\Lambda\boldsymbol\mu\},\Sigma)
+\end{align*}</script><p>where</p>
+<script type="math/tex; mode=display">
+\boldsymbol\Sigma=(\bf\Lambda+A^\text{T}LA)^{-1}.</script><h4 id="Maximum-Likelihood-for-the-Gaussian"><a href="#Maximum-Likelihood-for-the-Gaussian" class="headerlink" title="Maximum Likelihood for the Gaussian"></a>Maximum Likelihood for the Gaussian</h4><p>Sufficient statistics: $\sum\limits_{n=1}^N\mathbf x_n$ and $\sum\limits_{n=1}^N\mathbf x_n\mathbf x_n^\text T$</p>
+<p>Solve the maximum likelihood</p>
+<script type="math/tex; mode=display">
+\boldsymbol\mu_\text{ML}=\frac 1 N\sum\limits_{n=1}^N\mathbf x_n\quad \boldsymbol\Sigma_\text{ML}=\frac 1 N\sum\limits_{n=1}^N(\mathbf x_n-\boldsymbol\mu_\text{ML})(\mathbf x_n-\boldsymbol\mu_\text{ML})^\text T.</script><p>Under the true distribution</p>
+<script type="math/tex; mode=display">
+\mathbb E[\boldsymbol \mu_\text{ML}]=\boldsymbol\mu\quad\mathbb E[\boldsymbol \Sigma_\text{ML}]=\frac{N-1}N\boldsymbol\Sigma.</script><p>Hence define</p>
+<script type="math/tex; mode=display">
+\widetilde{\boldsymbol\Sigma}=\frac 1 {N-1}\sum\limits_{n=1}^N(\mathbf x_n-\boldsymbol\mu_\text{ML})(\mathbf x_n-\boldsymbol\mu_\text{ML})^\text T.</script><h4 id="Sequential-estimation"><a href="#Sequential-estimation" class="headerlink" title="Sequential estimation"></a>Sequential estimation</h4><p><a href="https://en.wikipedia.org/wiki/Stochastic_approximation#Robbins%E2%80%93Monro_algorithm">The Robbins-Monro Algorithm</a></p>
+<h4 id="Bayesian-Inference-for-the-Gaussian"><a href="#Bayesian-Inference-for-the-Gaussian" class="headerlink" title="Bayesian Inference for the Gaussian"></a>Bayesian Inference for the Gaussian</h4><h4 id="Student’s-t-distribution"><a href="#Student’s-t-distribution" class="headerlink" title="Student’s t-distribution"></a><a href="https://en.wikipedia.org/wiki/Student%27s_t-distribution">Student’s t-distribution</a></h4><h4 id="Periodic-variables"><a href="#Periodic-variables" class="headerlink" title="Periodic variables"></a>Periodic variables</h4><h4 id="Mixtures-of-Gaussians"><a href="#Mixtures-of-Gaussians" class="headerlink" title="Mixtures of Gaussians"></a>Mixtures of Gaussians</h4><script type="math/tex; mode=display">
+p(\mathbf x)=\sum\limits_{k=1}^K\pi_k\mathcal N(\mathbf x\vert\boldsymbol\mu_k,\boldsymbol\Sigma_k)</script><ul>
+<li><p>$\pi_k$: mixing coefficients</p>
+<p> $\sum\limits_{k=1}^K\pi_k=1,0\le\pi_k\le 1$</p>
+</li>
+<li><p>$N(\mathbf x\vert\boldsymbol\mu_k,\boldsymbol\Sigma_k)$: component</p>
+</li>
+</ul>
+<p>Log likelihood of mixtures</p>
+<script type="math/tex; mode=display">
+\ln p(\mathbf X\vert\boldsymbol \pi,\boldsymbol\mu,\boldsymbol\Sigma)=\sum\limits_{n=1}^N\ln\left\{\sum\limits_{k=1}^K\pi_k\mathcal N(\mathbf x\vert\boldsymbol\mu_k,\boldsymbol\Sigma_k)\right\}</script><p>The maximum likelihood solution for the parameters no longer has a closed-form analytical solution. Alternatives: iterative numerical optimization, expectation maximization.</p>
+<h3 id="Exponential-Families"><a href="#Exponential-Families" class="headerlink" title="Exponential Families"></a>Exponential Families</h3><p>The exponential family of distributions over $\mathbf x$, given parameters $\boldsymbol \eta$</p>
+<script type="math/tex; mode=display">
+p(\mathbf x\vert\boldsymbol\eta)=h(\mathbf x)g(\boldsymbol\eta)\exp\{\boldsymbol\eta^\text T\mathbf u(\mathbf x)\}</script><ul>
+<li>$\bf x$: scalar or vector, discrete or continuous.</li>
+<li>$\boldsymbol\eta$: natural parameters</li>
+</ul>
+<h4 id="Maximum-likelihood-and-sufficient-statistics"><a href="#Maximum-likelihood-and-sufficient-statistics" class="headerlink" title="Maximum likelihood and sufficient statistics"></a>Maximum likelihood and sufficient statistics</h4><p>Likelihood function</p>
+<script type="math/tex; mode=display">
+p(\mathbf{X} \mid \boldsymbol{\eta})=\left(\prod_{n=1}^{N} h\left(\mathbf{x}_{n}\right)\right) g(\boldsymbol{\eta})^{N} \exp \left\{\boldsymbol{\eta}^{T} \sum_{n=1}^{N} \mathbf{u}\left(\mathbf{x}_{n}\right)\right\}.</script><p>Condition of maximum likelihood estimator $\boldsymbol\eta_\text{ML}$</p>
+<script type="math/tex; mode=display">
+-\nabla\ln g(\boldsymbol \eta_\text{ML})=\frac 1 N \sum\limits_{n=1}^N\mathbf u(\mathbf x_n)</script>]]></content>
       <categories>
         <category>CS</category>
       </categories>
