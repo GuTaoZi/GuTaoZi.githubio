@@ -10149,7 +10149,7 @@ p(\boldsymbol\mu\vert\mathcal D,\boldsymbol\alpha)\propto p(\mathcal D\vert\bold
 p(\boldsymbol\mu\vert\mathcal D,\boldsymbol\alpha)=\text{Dir}(\boldsymbol\mu\vert\boldsymbol\alpha+\bf m)
 \end{matrix}</script><p>where $\mathbf m=(m_1,\cdots,m_K)^\text T$.</p>
 <p>We can interpret the parameters $\alpha_k$ of the Dirichlet prior as an effective number of observations of $x_k = 1$.</p>
-<h3 id="Gaussian-Distribution-1"><a href="#Gaussian-Distribution-1" class="headerlink" title="Gaussian Distribution"></a>Gaussian Distribution</h3><ul>
+<h3 id="Gaussian-Distributions"><a href="#Gaussian-Distributions" class="headerlink" title="Gaussian Distributions"></a>Gaussian Distributions</h3><ul>
 <li><p>The Gaussian Distribution</p>
 <script type="math/tex; mode=display">
 \mathcal N(x|\mu,\sigma^2)=\frac 1 {(2\pi\sigma^2)^{1/2}}\exp\left\{-\frac 1 {2\sigma^2}(x-\mu)^2\right\}</script></li>
@@ -10685,8 +10685,7 @@ L=\{a^nb^n\vert n>0\}</script><p>CFG: $S\rightarrow aSb\vert ab$</p>
 <li>Try each possible production in some order.</li>
 <li>When failure occurs, return, reset the input pointer and try another A-production.</li>
 </ul>
-<p><strong>Looking Ahead</strong></p>
-<p>Left recursion in a CFG traps the recursive-descent parser into an infinite loop.</p>
+<h4 id="Looking-Ahead"><a href="#Looking-Ahead" class="headerlink" title="Looking Ahead"></a><strong>Looking Ahead</strong></h4><p>Left recursion in a CFG traps the recursive-descent parser into an infinite loop.</p>
 <p>Looking ahead, checking the next character avoids bad choices.</p>
 <p><strong>Computing $\text{FIRST}(X)$</strong></p>
 <p>$\text{FIRST}(X)$ denotes the set of beginning terminals of strings derived from $X$.</p>
@@ -10720,8 +10719,7 @@ L=\{a^nb^n\vert n>0\}</script><p>CFG: $S\rightarrow aSb\vert ab$</p>
 </blockquote>
 <p>If the next input symbol is in $\text{FIRST(body)}$, the production $\text{head}\rightarrow \text{body}$ may be a good choice.</p>
 <p>If the next input symbol is in $\text{FOLLOW(head)}$, the production $\text{head}\rightarrow\epsilon$ may be a good choice.</p>
-<p><strong>LL(1) Grammars</strong></p>
-<p>No backtracking recursive-descent parser can be constructed for LL(1)</p>
+<h4 id="LL-1-Grammars"><a href="#LL-1-Grammars" class="headerlink" title="LL(1) Grammars"></a><strong>LL(1) Grammars</strong></h4><p>No backtracking recursive-descent parser can be constructed for LL(1)</p>
 <ul>
 <li>scanning the input from left to right.</li>
 <li>producing a leftmost derivation (top-down parsing).</li>
@@ -10735,6 +10733,40 @@ L=\{a^nb^n\vert n>0\}</script><p>CFG: $S\rightarrow aSb\vert ab$</p>
 <blockquote>
 <p>There is a unique choice of production at each step by looking ahead.</p>
 </blockquote>
+<h4 id="Parsing-Table"><a href="#Parsing-Table" class="headerlink" title="Parsing Table"></a>Parsing Table</h4><p>For a nonterminal $A$ and a symbol $a$ on its input stream, determines which production the parser should choose.</p>
+<p>The parsing table of an LL(1) parser has no entries with multiple productions.</p>
+<p>For each production $A\rightarrow\alpha$ of grammar $G$, do the following:</p>
+<ol>
+<li>For each terminal $a$ in $\text{FIRST}(\alpha)$, add $A\rightarrow\alpha$ to $M[A,a]$</li>
+<li>If $\epsilon\in\text{FIRST}(\alpha)$, then for each terminal $b$ (including the right endmarker $) in $\text{FOLLOW}(A)$, add $A\rightarrow\alpha$ to $M[A,b]$</li>
+<li>Set all empty entries in the table to <strong>error</strong>.</li>
+</ol>
+<h4 id="Non-Recursive-Predictive-Parsing"><a href="#Non-Recursive-Predictive-Parsing" class="headerlink" title="Non-Recursive Predictive Parsing"></a>Non-Recursive Predictive Parsing</h4><p>A non-recursive predictive parser can be built by explicitly maintaining a stack.</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">let a be the first symbol of w;</span><br><span class="line">let X be the top stack symbol;</span><br><span class="line"><span class="keyword">while</span> ( X ≠ $ )</span><br><span class="line">&#123; <span class="comment">/* stack is not empty */</span></span><br><span class="line">    <span class="keyword">if</span> ( X = a ) pop the stack <span class="keyword">and</span> let a be the next symbol of w;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ( X is a terminal) <span class="built_in">error</span>(); <span class="comment">/* X can only match a, cannot be another terminal */</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ( M[X, a] is an error entry ) <span class="built_in">error</span>();</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ( M[X, a] = X -&gt; Y[<span class="number">1.</span>..k])</span><br><span class="line">    &#123;</span><br><span class="line">        output the production X -&gt; Y[<span class="number">1.</span>..k];</span><br><span class="line">        pop the stack;</span><br><span class="line">        push Y[k..<span class="number">.1</span>] onto the stack, with Y[<span class="number">1</span>] on top; <span class="comment">/* order is critical */</span></span><br><span class="line">    &#125;</span><br><span class="line">    let X be the top stack symbol;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Bottom-Up-Parsing"><a href="#Bottom-Up-Parsing" class="headerlink" title="Bottom-Up Parsing"></a>Bottom-Up Parsing</h3><h4 id="Shift-Reduce-Parsing"><a href="#Shift-Reduce-Parsing" class="headerlink" title="Shift-Reduce Parsing"></a>Shift-Reduce Parsing</h4><ol>
+<li>Shift zero or more input symbols onto the stack, until it is ready to reduce a string $\beta$ on top of the stack</li>
+<li>Reduce $\beta$ to the head of the appropriate production</li>
+</ol>
+<h4 id="LR-k-Parsers"><a href="#LR-k-Parsers" class="headerlink" title="LR(k) Parsers"></a>LR(k) Parsers</h4><ul>
+<li>left-to-right scan of the input</li>
+<li>construct a rightmost derivation in reverse</li>
+<li>use $k$ input symbols of lookahead in making parsing decisions</li>
+</ul>
+<p>An LR parser makes shift-reduce decisions by maintaining <strong>states</strong> to keep track of what have been seen during parsing.</p>
+<p><strong>States</strong>: sets of LR(0) items</p>
+<h4 id="LR-0-Items"><a href="#LR-0-Items" class="headerlink" title="LR(0) Items"></a>LR(0) Items</h4><p>An <strong>item</strong> is a production with a dot, indicating how much we have seen at a given time point in the parsing process.</p>
+<p>The production $A\rightarrow \epsilon$ generates only $A\rightarrow \cdot$</p>
+<p><strong>Canonical LR(0) collection</strong>:</p>
+<p>One collection of states, provides <u>the basis for constructing a DFA</u> to make parsing decisions.</p>
+<h4 id="Augmented-Grammar"><a href="#Augmented-Grammar" class="headerlink" title="Augmented Grammar"></a>Augmented Grammar</h4><p>Add a new production $S^\prime\rightarrow S$ to introduce a new start symbol $S^\prime$.</p>
+<script type="math/tex; mode=display">
+L(G)=L(G^\prime)</script><p>Acceptance occurs IFF the parser is about to reduce by $S^\prime\rightarrow S$.</p>
+<h4 id="Closure-of-Item-Sets"><a href="#Closure-of-Item-Sets" class="headerlink" title="Closure of Item Sets"></a>Closure of Item Sets</h4><p>Grammar $G$, set of items $I$</p>
+<ol>
+<li>Add every item in $I$ to $\text{CLOSURE} (I)$</li>
+<li>If $A\rightarrow \alpha\cdot B\beta$ is in $\text{CLOSURE} (I)$ and $B\rightarrow \gamma$ is a production, then add the item $B\rightarrow\cdot \gamma$ to $\text{CLOSURE} (I)$. Repeat until no more new items can be added to $\text{CLOSURE} (I)$.</li>
+</ol>
+<h4 id="The-Function-GOTO"><a href="#The-Function-GOTO" class="headerlink" title="The Function GOTO"></a>The Function GOTO</h4><p>$\text{GOTO}(I,X)$ is defined to be the closure of the set of all items $[A\rightarrow \alpha X\cdot\beta]$, where $[A\rightarrow \alpha\cdot X\beta]$ is in $I$.</p>
 ]]></content>
       <categories>
         <category>CS</category>
