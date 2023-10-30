@@ -10743,30 +10743,81 @@ L=\{a^nb^n\vert n>0\}</script><p>CFG: $S\rightarrow aSb\vert ab$</p>
 </ol>
 <h4 id="Non-Recursive-Predictive-Parsing"><a href="#Non-Recursive-Predictive-Parsing" class="headerlink" title="Non-Recursive Predictive Parsing"></a>Non-Recursive Predictive Parsing</h4><p>A non-recursive predictive parser can be built by explicitly maintaining a stack.</p>
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">let a be the first symbol of w;</span><br><span class="line">let X be the top stack symbol;</span><br><span class="line"><span class="keyword">while</span> ( X ≠ $ )</span><br><span class="line">&#123; <span class="comment">/* stack is not empty */</span></span><br><span class="line">    <span class="keyword">if</span> ( X = a ) pop the stack <span class="keyword">and</span> let a be the next symbol of w;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ( X is a terminal) <span class="built_in">error</span>(); <span class="comment">/* X can only match a, cannot be another terminal */</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ( M[X, a] is an error entry ) <span class="built_in">error</span>();</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> ( M[X, a] = X -&gt; Y[<span class="number">1.</span>..k])</span><br><span class="line">    &#123;</span><br><span class="line">        output the production X -&gt; Y[<span class="number">1.</span>..k];</span><br><span class="line">        pop the stack;</span><br><span class="line">        push Y[k..<span class="number">.1</span>] onto the stack, with Y[<span class="number">1</span>] on top; <span class="comment">/* order is critical */</span></span><br><span class="line">    &#125;</span><br><span class="line">    let X be the top stack symbol;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Bottom-Up-Parsing"><a href="#Bottom-Up-Parsing" class="headerlink" title="Bottom-Up Parsing"></a>Bottom-Up Parsing</h3><h4 id="Shift-Reduce-Parsing"><a href="#Shift-Reduce-Parsing" class="headerlink" title="Shift-Reduce Parsing"></a>Shift-Reduce Parsing</h4><ol>
+<h3 id="Bottom-Up-Parsing"><a href="#Bottom-Up-Parsing" class="headerlink" title="Bottom-Up Parsing"></a>Bottom-Up Parsing</h3><h4 id="Simple-LR-SLR"><a href="#Simple-LR-SLR" class="headerlink" title="Simple LR(SLR)"></a>Simple LR(SLR)</h4><h5 id="Shift-Reduce-Parsing"><a href="#Shift-Reduce-Parsing" class="headerlink" title="Shift-Reduce Parsing"></a>Shift-Reduce Parsing</h5><ol>
 <li>Shift zero or more input symbols onto the stack, until it is ready to reduce a string $\beta$ on top of the stack</li>
 <li>Reduce $\beta$ to the head of the appropriate production</li>
 </ol>
-<h4 id="LR-k-Parsers"><a href="#LR-k-Parsers" class="headerlink" title="LR(k) Parsers"></a>LR(k) Parsers</h4><ul>
+<h5 id="LR-k-Parsers"><a href="#LR-k-Parsers" class="headerlink" title="LR(k) Parsers"></a>LR(k) Parsers</h5><ul>
 <li>left-to-right scan of the input</li>
 <li>construct a rightmost derivation in reverse</li>
 <li>use $k$ input symbols of lookahead in making parsing decisions</li>
 </ul>
 <p>An LR parser makes shift-reduce decisions by maintaining <strong>states</strong> to keep track of what have been seen during parsing.</p>
-<p><strong>States</strong>: sets of LR(0) items</p>
-<h4 id="LR-0-Items"><a href="#LR-0-Items" class="headerlink" title="LR(0) Items"></a>LR(0) Items</h4><p>An <strong>item</strong> is a production with a dot, indicating how much we have seen at a given time point in the parsing process.</p>
+<h5 id="LR-0-Items"><a href="#LR-0-Items" class="headerlink" title="LR(0) Items"></a>LR(0) Items</h5><p>An <strong>item</strong> is a production with a dot, indicating how much we have seen at a given time point in the parsing process.</p>
 <p>The production $A\rightarrow \epsilon$ generates only $A\rightarrow \cdot$</p>
+<p><strong>States</strong>: sets of LR(0) items</p>
 <p><strong>Canonical LR(0) collection</strong>:</p>
 <p>One collection of states, provides <u>the basis for constructing a DFA</u> to make parsing decisions.</p>
-<h4 id="Augmented-Grammar"><a href="#Augmented-Grammar" class="headerlink" title="Augmented Grammar"></a>Augmented Grammar</h4><p>Add a new production $S^\prime\rightarrow S$ to introduce a new start symbol $S^\prime$.</p>
+<h5 id="Augmented-Grammar"><a href="#Augmented-Grammar" class="headerlink" title="Augmented Grammar"></a>Augmented Grammar</h5><p>Add a new production $S^\prime\rightarrow S$ to introduce a new start symbol $S^\prime$.</p>
 <script type="math/tex; mode=display">
 L(G)=L(G^\prime)</script><p>Acceptance occurs IFF the parser is about to reduce by $S^\prime\rightarrow S$.</p>
-<h4 id="Closure-of-Item-Sets"><a href="#Closure-of-Item-Sets" class="headerlink" title="Closure of Item Sets"></a>Closure of Item Sets</h4><p>Grammar $G$, set of items $I$</p>
+<h5 id="Closure-of-Item-Sets"><a href="#Closure-of-Item-Sets" class="headerlink" title="Closure of Item Sets"></a>Closure of Item Sets</h5><p>Grammar $G$, set of items $I$</p>
 <ol>
 <li>Add every item in $I$ to $\text{CLOSURE} (I)$</li>
 <li>If $A\rightarrow \alpha\cdot B\beta$ is in $\text{CLOSURE} (I)$ and $B\rightarrow \gamma$ is a production, then add the item $B\rightarrow\cdot \gamma$ to $\text{CLOSURE} (I)$. Repeat until no more new items can be added to $\text{CLOSURE} (I)$.</li>
 </ol>
-<h4 id="The-Function-GOTO"><a href="#The-Function-GOTO" class="headerlink" title="The Function GOTO"></a>The Function GOTO</h4><p>$\text{GOTO}(I,X)$ is defined to be the closure of the set of all items $[A\rightarrow \alpha X\cdot\beta]$, where $[A\rightarrow \alpha\cdot X\beta]$ is in $I$.</p>
+<h5 id="The-Function-GOTO"><a href="#The-Function-GOTO" class="headerlink" title="The Function GOTO"></a>The Function GOTO</h5><p>$\text{GOTO}(I,X)$ is defined to be the closure of the set of all items $[A\rightarrow \alpha X\cdot\beta]$, where $[A\rightarrow \alpha\cdot X\beta]$ is in $I$.</p>
+<p><img src="https://s2.loli.net/2023/10/30/oQ9C7ZeFxlgnGVz.png" alt="image.png" style="zoom:50%;" /></p>
+<h5 id="LR-0-Automaton"><a href="#LR-0-Automaton" class="headerlink" title="LR(0) Automaton"></a>LR(0) Automaton</h5><ul>
+<li>states: item sets in canonical LR(0) collection</li>
+<li>transitions: GOTO</li>
+<li>start state: $\text{CLOSURE}(\{[S’\rightarrow \cdot S]\})$</li>
+</ul>
+<p><strong>Shift</strong> when the state has a transition on the incoming symbol.</p>
+<p><strong>Reduce</strong> when there is no further move, push a new state into the stack corresponding to the reduced symbol.</p>
+<h5 id="LR-Parser-Structure"><a href="#LR-Parser-Structure" class="headerlink" title="LR Parser Structure"></a>LR Parser Structure</h5><ul>
+<li>input, output, stack, driver program, parsing table(ACTION+GOTO)</li>
+<li>only the parsing table differs (depending on the parsing algorithm)</li>
+<li>stack-top state + next input terminal → next action</li>
+</ul>
+<h5 id="ACTION-i-a"><a href="#ACTION-i-a" class="headerlink" title="ACTION$[i,a]$"></a>ACTION$[i,a]$</h5><ul>
+<li>state $i$, terminal $a$</li>
+<li>Shift $j$: shift input $a$ to the stack, use state $j$ to represent $a$.</li>
+<li>Reduce $A\rightarrow \beta$: reduce stack-top $\beta$ to non-terminal $A$.</li>
+<li>Accept: accept the input, finish parsing.</li>
+<li>Error: syntax error detected.</li>
+</ul>
+<h5 id="LR-Parser-Configurations"><a href="#LR-Parser-Configurations" class="headerlink" title="LR Parser Configurations"></a>LR Parser Configurations</h5><p>Configuration: \<Stack contents, Remaining input\></p>
+<p>By construction, each state (except $s_0$) in an LR parser corresponds to a set of items and a grammar symbol (the symbol that leads to the state transition)</p>
+<p>Suppose $X_i$ is the grammar symbol for state $s_i$, then $X_0X_1\cdots X_ma_ia_{i+1}\cdots a_n$ is a right-sentential form (assume no errors).</p>
+<p>ACTION$[s_m,a_i]$</p>
+<ul>
+<li>Shift $s$: $(s_0s_1\cdots s_ms,a_{i+1}\cdots a_n$)$</li>
+<li>Reduce $A\rightarrow \beta$: $(s_0s_1\cdots s_{m-r}s,a_ia_{i+1}\cdots a_n$)$, where $r$ is the length of $\beta$, and $s=\text{GOTO}(s_{m-r},A)$</li>
+</ul>
+<h5 id="Constructing-SLR-Parsing-Tables"><a href="#Constructing-SLR-Parsing-Tables" class="headerlink" title="Constructing SLR-Parsing Tables"></a>Constructing SLR-Parsing Tables</h5><ol>
+<li><p>Construct canonical LR(0) collection $\{I_0,\cdots,I_n\}$ for the augmented grammar $G^\prime$.</p>
+</li>
+<li><p>State $i$ is constructed from $I_i$. ACTION can be determined as follows:</p>
+<p><img src="https://s2.loli.net/2023/10/30/Hzdupvr4iQgjnZ7.png" alt="image.png" style="zoom:50%;" /></p>
+</li>
+<li><p>The GOTO transitions for state $i$ are constructed for all nonterminals $A$ using the rule: If $\text{GOTO}(I_i,A)=I_j$, then $\text{GOTO}(i,A)=j$.</p>
+</li>
+<li><p>All entries not defined in steps 2 and 3 are set to “error”</p>
+</li>
+<li><p>Initial state is the one constructed from the item set containing $[S^\prime\rightarrow\cdot S]$</p>
+</li>
+</ol>
+<p>If there is no conflict (i.e., multiple actions for a table entry), the grammar is <strong>SLR(1)</strong>.</p>
+<h5 id="Weakness"><a href="#Weakness" class="headerlink" title="Weakness"></a>Weakness</h5><p>Stack-top reduction: $\beta\alpha\Rightarrow\beta A$ when $a\in\text{FOLLOW}(A)$, but <script type="math/tex">a\not\in\text{FOLLOW}(\beta A)</script>.</p>
+<h4 id="Canonical-LR-CLR"><a href="#Canonical-LR-CLR" class="headerlink" title="Canonical LR(CLR)"></a>Canonical LR(CLR)</h4><h5 id="LR-1-Item-A-rightarrow-alpha-cdot-beta-a"><a href="#LR-1-Item-A-rightarrow-alpha-cdot-beta-a" class="headerlink" title="LR(1) Item: $[A\rightarrow \alpha\cdot\beta,a]$"></a>LR(1) Item: $[A\rightarrow \alpha\cdot\beta,a]$</h5><ul>
+<li>$A\rightarrow \alpha\beta$ is a production, $a$ is a terminal or $$$.</li>
+<li>1: length of the lookahead</li>
+<li>The lookahead symbol only works if $\beta=\epsilon$.</li>
+</ul>
+<p>$[A\rightarrow\alpha\cdot,a]$ calls for a reduction by $A\rightarrow\alpha$ only if the next input symbol is $a$.</p>
+<p>When calculating CLOSURE, generate a new item $[B\rightarrow \cdot\gamma,b]$ from $[A\rightarrow\alpha\cdot B\beta,a]$ if $b\in\text{FIRST}(\beta a)$.</p>
+<p>\&lt;$\cdots\alpha\gamma,b\cdots$> → \&lt;$\cdots\alpha B,b\cdots$> → \&lt;$\cdots\alpha Bb,\cdots$></p>
 ]]></content>
       <categories>
         <category>CS</category>
