@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"slideLeftBigIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="頼むよ神様。 こんな人生だったんだ。 せめて一度くらい、幸せな梦を见させて。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS205 Assignment Pandora Box">
+<meta property="og:url" content="https://gutaozi.github.io/2023/11/02/CS205_Pandora_Box/index.html">
+<meta property="og:site_name" content="咕桃w！">
+<meta property="og:description" content="頼むよ神様。 こんな人生だったんだ。 せめて一度くらい、幸せな梦を见させて。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-02T08:57:59.143Z">
+<meta property="article:modified_time" content="2023-11-02T09:12:48.536Z">
+<meta property="article:author" content="咕桃">
+<meta property="article:tag" content="C&#x2F;C++">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://gutaozi.github.io/2023/11/02/CS205_Pandora_Box/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>CS205 Assignment Pandora Box | 咕桃w！</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">咕桃w！</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/11/02/CS205_Pandora_Box/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
+      <meta itemprop="name" content="咕桃">
+      <meta itemprop="description" content="Just Do It, But Not Just Do It.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="咕桃w！">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS205 Assignment Pandora Box
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2023-11-02 16:57:59 / Modified: 17:12:48" itemprop="dateCreated datePublished" datetime="2023-11-02T16:57:59+08:00">2023-11-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">頼むよ神様。 こんな人生だったんだ。 せめて一度くらい、幸せな梦を见させて。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h3><p><i><b><span style="color:#eb234b;">「奇迹ってのはタダじゃないんだ。希望を祈ればそれと同じ分だけの绝望が撒き散らされる。」</span></b></i></p>
+<p><i><b><span style="color:#eb234b;">「そうやって差し引きを0にして世の中のバランスは成り立ってるんだよ。」</span></b></i></p>
+<h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><blockquote>
+<p>This question is designed to examine your mastery of pointers using C for memory management. You can also use this question as an initial exploration of exception handling for your final project :)</p>
+</blockquote>
+<p>Still frustrated that you can only put the same type of data in an STL vector? Missing Python’s lists that can store any type of data? Now, try implementing a Pandora’s Box that can store anything of any type in C!</p>
+<p><span style="color: rgb(51, 51, 51);">Ofcourse, GuTao is not so boring that letting everyone who is new to C write a complete Pandora’s Box from scratch, that would be too difficult. So GuTao decided to give you the blueprint of the Pandora’s Box, y</span>our task is just to implementseveral key operations to manage and interact with the <code>PandoraBox</code>structure.</p>
+<p>The <code>PandoraBox</code> should provide the flexibility to append, write, and read data of different types, all stored within the same container.</p>
+<p>In consideration of robustness, data written to the <code>PandoraBox</code> should be correctly handled even when its size doesn’t match the item size, including handling data padding and negative values.</p>
+<p>The following operations should be supported by your <code>PandoraBox</code> :</p>
+<ol>
+<li><code>create</code>: Create an empty <code>PandoraBox</code> with specified item counts and their respective sizes.</li>
+<li><code>append</code>: Extend the memory of the <code>PandoraBox</code> to append an item.</li>
+<li><code>write</code>: Write data into a specific item within the <code>PandoraBox</code> .</li>
+<li><code>read</code>: Copy the content of a particular item from the <code>PandoraBox</code> into newly allocated memory.</li>
+<li><code>destroy</code>: Properly deallocate the memory associated with the <code>PandoraBox</code> and its data to prevent memory leaks.</li>
+<li><code>printc</code>: Print bytes as characters in a given range, with proper handling of negative values.</li>
+<li><code>printx</code>: Print bytes as a single hexadecimal value in a given range.</li>
+<li><code>hex2byte</code>: Convert the given string to hexadecimal, and save it into the given address.</li>
+</ol>
+<p>Ofcourse, GuTao is not so boring that letting everyone who is new to C write a complete Pandora’s Box from scratch, that would be too difficult. So GuTao decided to give you the blueprint of the Pandora’s Box, and you only need to implement a few simple functions.</p>
+<h3 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h3><p><del>Actually you don’t need to worry about this part because the main function is given by GuTao.</del></p>
+<p>The first line contains an integer $T$, the number of operations.</p>
+<p>Then the following $T$ lines are operations.</p>
+<ul>
+<li><code>C n a[0] a[1] ... a[n-1]</code>: create a Panbox with $n$ items, the sizes of items are $a[0]…a[n-1]$, split by spaces(All indices in this problem start from 0).</li>
+<li><code>A l s</code>: append an item to the Panbox, where $l$ represents the length of a subsequent string, and $s$ represents the hexadecimal string, starting with “0x” and [a-f] in lowercase. For example, <code>A 9 0x514cafe</code>.</li>
+<li><code>W i l s</code>: write the item with index $i$ with the value represented in the following hexadecimal string $s$ of length $l$.</li>
+<li><code>R i o</code>: read the content of the item with index $i$. If $o$ is 1, then print the item in format of characters, otherwise in format of a single hexadecimal.</li>
+<li><code>D</code>: Open the Pandora’s box and free everything, including HOPE.</li>
+<li><code>Q</code>: Display the information of the current Panbox.</li>
+</ul>
+<h3 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h3><p><del>Actually you don’t need to worry about this part because the main function is given by GuTao.</del></p>
+<ul>
+<li>For <code>R</code> instructions, print the content of item[i] in the format given by $o$.</li>
+<li>For <code>Q</code> instructions, if the Panbox pointer is NULL, output NULL in a single line; otherwise the number of the items in the Panbox in a single line, then print the size of every item in a new line.</li>
+<li>For <code>D</code> instructions, print every item in character format, and in reverse order(FILO), then free the memory.</li>
+</ul>
+<h3 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input #1"></a>Sample Input #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">12</span><br><span class="line">C 1 4</span><br><span class="line">W 0 10 0x45504F48</span><br><span class="line">A 18 0x6e6f697469626d41</span><br><span class="line">A 24 0x6e6f6974697465706d6f43</span><br><span class="line">A 12 0x6465657247</span><br><span class="line">A 10 0x79766e45</span><br><span class="line">A 18 0x7973756f6c61654a</span><br><span class="line">A 14 0x646572746148</span><br><span class="line">A 20 0x6563697473756a6e49</span><br><span class="line">A 20 0x797265686361657254</span><br><span class="line">A 22 0x68746c6165682d6c6c49</span><br><span class="line">D</span><br></pre></td></tr></table></figure>
+<h3 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output #1"></a>Sample Output #1</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">I l l - h e a l t h </span><br><span class="line">T r e a c h e r y </span><br><span class="line">I n j u s t i c e </span><br><span class="line">H a t r e d </span><br><span class="line">J e a l o u s y </span><br><span class="line">E n v y </span><br><span class="line">G r e e d </span><br><span class="line">C o m p e t i t i o n </span><br><span class="line">A m b i t i o n </span><br><span class="line">H O P E </span><br></pre></td></tr></table></figure>
+<h3 id="Hint"><a href="#Hint" class="headerlink" title="Hint"></a>Hint</h3><p>To make this problem more interesting, <code>memcpy</code> and <code>memset</code>  of <code>&lt;string.h&gt;</code> are banned.</p>
+<p>Try to implement them by your self!</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">mymemcpy</span><span class="params">(<span class="type">void</span> *dst, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> n)</span>;</span><br><span class="line"><span class="type">void</span> *<span class="title function_">mymemset</span><span class="params">(<span class="type">void</span> *dst, <span class="type">int</span> c, <span class="type">size_t</span> n)</span>;</span><br></pre></td></tr></table></figure>
+<p>Also, this problem has NO Special Judge :)</p>
+<h3 id="Template"><a href="#Template" class="headerlink" title="Template"></a>Template</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">PandoraBox</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">int</span> item_count; <span class="comment">// Number of items stored in the PandoraBox.</span></span><br><span class="line">    <span class="type">int</span> *item_size; <span class="comment">// Array of item sizes in bytes.</span></span><br><span class="line">    <span class="type">void</span> *data;     <span class="comment">// A type-agnostic pointer to store data.</span></span><br><span class="line">&#125; Panbox;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">A PandoraBox capable of storing various data types within a continuous memory space.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">- item_count: Number of items stored in this box.</span></span><br><span class="line"><span class="comment">- item_size: An array of integers; item_size[i] represents the size (in bytes) of the i-th item in the box.</span></span><br><span class="line"><span class="comment">- data: A type-agnostic pointer, enabling interpretation of different data types by reading segments with varying</span></span><br><span class="line"><span class="comment">lengths.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=Your code starts from here+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">mymemcpy</span><span class="params">(<span class="type">void</span> *dst, <span class="type">const</span> <span class="type">void</span> *src, <span class="type">size_t</span> size)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function: See memcpy in &lt;string.h&gt;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Notes:</span></span><br><span class="line"><span class="comment">- It is not a must to implement this function, but with it you can implement the following functions more easily.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">mymemset</span><span class="params">(<span class="type">void</span> *dst, <span class="type">int</span> n, <span class="type">size_t</span> size)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function: See memset in &lt;string.h&gt;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Notes:</span></span><br><span class="line"><span class="comment">- It is not a must to implement this function, but with it you can implement the following functions more easily.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">Panbox *<span class="title function_">create</span><span class="params">(<span class="type">int</span> item_count, <span class="type">int</span> item_size[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function: Create an empty PandoraBox with specified item counts and their respective sizes.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Parameters:</span></span><br><span class="line"><span class="comment">- item_count: The number of items to be stored in the PandoraBox.</span></span><br><span class="line"><span class="comment">- item_size: An array specifying the size (in bytes) of each item.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Returns:</span></span><br><span class="line"><span class="comment">A pointer to the created PandoraBox.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Note:</span></span><br><span class="line"><span class="comment">- You CAN create a Panbox with no initial items, i.e., item_count=0 and item_size=NULL.</span></span><br><span class="line"><span class="comment">- The size of any item should be positive.</span></span><br><span class="line"><span class="comment">- However, negative item_count is not supported, and item_size should not be NULL when item_count is non-zero.</span></span><br><span class="line"><span class="comment">- You should return NULL immediately if any failure happens.</span></span><br><span class="line"><span class="comment">- Good news: GuTao guarantees that [item_size, item_size+item_count-1] is allocated in advance, unless item_size is</span></span><br><span class="line"><span class="comment">NULL.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">append</span><span class="params">(Panbox *panbox, <span class="type">void</span> *value, <span class="type">int</span> width)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function: Extend the memory of the PandoraBox to append an item.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Parameters:</span></span><br><span class="line"><span class="comment">- panbox: A pointer to the PandoraBox.</span></span><br><span class="line"><span class="comment">- value: A pointer to the data to be added to the PandoraBox.</span></span><br><span class="line"><span class="comment">- width: The size of the data in value (in bytes).</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Note:</span></span><br><span class="line"><span class="comment">- You should not append this item if any failure happens.</span></span><br><span class="line"><span class="comment">- Good news: GuTao guarantees that [value, value+width-1] is allocated in advance, unless value is NULL.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">write</span><span class="params">(Panbox *panbox, <span class="type">int</span> item_id, <span class="type">void</span> *value, <span class="type">int</span> width)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function: COPY the data stored in &#x27;value&#x27; into the segment of the item with index item_id in the PandoraBox.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Parameters:</span></span><br><span class="line"><span class="comment">- panbox: A pointer to the PandoraBox.</span></span><br><span class="line"><span class="comment">- item_id: The index of the item in the PandoraBox where data will be written.</span></span><br><span class="line"><span class="comment">- value: A pointer to the data that needs to be written to the PandoraBox.</span></span><br><span class="line"><span class="comment">- width: The size of the data in value (in bytes).</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Notes:</span></span><br><span class="line"><span class="comment">- If &#x27;item_id&#x27; is out of valid bounds, the data won&#x27;t be written.</span></span><br><span class="line"><span class="comment">- If the item size cannot hold all data in value, the data won&#x27;t be written.</span></span><br><span class="line"><span class="comment">- If the width of value is smaller than the item size, the data will be placed in the lower address and padded with the</span></span><br><span class="line"><span class="comment">highest bit. Example: inserting a 1-byte value into a 2-byte item: (0x7f -&gt; 0x007f), (0xf7 -&gt; 0xfff7).</span></span><br><span class="line"><span class="comment">- The item_size should not change in this function.</span></span><br><span class="line"><span class="comment">- You should not write the item if any failure happens.</span></span><br><span class="line"><span class="comment">- Good news: GuTao guarantees that [value, value+width-1] is allocated in advance, unless value is NULL.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">read</span><span class="params">(Panbox *panbox, <span class="type">int</span> item_id)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function: COPY the item with index item_id from the PandoraBox into a newly allocated memory, and return a pointer to</span></span><br><span class="line"><span class="comment">this memory.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Parameters:</span></span><br><span class="line"><span class="comment">- panbox: A pointer to the PandoraBox.</span></span><br><span class="line"><span class="comment">- item_id: The index of the item in the PandoraBox that should be read.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Returns:</span></span><br><span class="line"><span class="comment">A pointer to the newly allocated memory containing a copy of the specified item.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Notes:</span></span><br><span class="line"><span class="comment">- You should return NULL immediately if any failure happens.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">destroy</span><span class="params">(Panbox *panbox)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function: Deallocate the memory associated with the PandoraBox and its data.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Parameters:</span></span><br><span class="line"><span class="comment">- panbox: A pointer to the PandoraBox that should be destroyed.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Notes:</span></span><br><span class="line"><span class="comment">- This function should be used when the PandoraBox is no longer needed to prevent memory leak.</span></span><br><span class="line"><span class="comment">- You should check before freeing a pointer.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">printc</span><span class="params">(<span class="type">void</span> *value, <span class="type">int</span> width)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function: Print every 1 byte (char) in [value, value+width-1] as a character, split by a space.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Notes:</span></span><br><span class="line"><span class="comment">- Good news: GuTao guarantees that [value, value+width-1] is allocated in advance, unless value is NULL.</span></span><br><span class="line"><span class="comment">- If the value of the byte is in [0, 32] or equals to 127, do not print anything(they are special characters).</span></span><br><span class="line"><span class="comment">- If the value of the byte is negative, print &#x27;-&#x27; instead.</span></span><br><span class="line"><span class="comment">- You should return immediately if any failure happens.</span></span><br><span class="line"><span class="comment">- Please print a `\n` before returning.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">printx</span><span class="params">(<span class="type">void</span> *value, <span class="type">int</span> width)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function: Print the value in [value, value+width-1] as a single hexadecimal, in format of 0x12345678.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Notes:</span></span><br><span class="line"><span class="comment">- Good news: GuTao guarantees that [value, value+width-1] is allocated in advance, unless value is NULL.</span></span><br><span class="line"><span class="comment">- You should return immediately if any failure happens.</span></span><br><span class="line"><span class="comment">- If the highest byte is less than 0x10, please output a leading 0, e.g., 0x0514. But more than 1 leading 0s is not</span></span><br><span class="line"><span class="comment">allowed, like 0x00ff.</span></span><br><span class="line"><span class="comment">- Please print a `\n` before returning.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">hex2byte</span><span class="params">(<span class="type">void</span> *dst, <span class="type">char</span> *hex)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function: For the given hex string &quot;0x12345678&quot;, write 0x12345678 into dst.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Notes:</span></span><br><span class="line"><span class="comment">- The length of hex might be ODD, make sure to put all data into dst. For example, &quot;0xfff&quot;(12 bits) should be stored</span></span><br><span class="line"><span class="comment">using 2 bytes as 0x0fff(different from write(), just add a padding 0 here).</span></span><br><span class="line"><span class="comment">- You should return immediately if any failure happens.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=Your code ends here+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">show_info</span><span class="params">(Panbox *p)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, p-&gt;item_count);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; p-&gt;item_count; i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, p-&gt;item_size[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;NULL\n&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Function: Display the basic information of given PandoraBox</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Implemented by GuTao.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line">Panbox *p = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="type">char</span> op;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">&quot; %c&quot;</span>, &amp;op);</span><br><span class="line">        <span class="keyword">switch</span> (op)</span><br><span class="line">        &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;C&#x27;</span>: &#123;</span><br><span class="line">            <span class="type">int</span> item_count;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;item_count);</span><br><span class="line">            <span class="type">int</span> *item_size = (<span class="type">int</span> *)<span class="built_in">malloc</span>(item_count * <span class="keyword">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; item_count; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;item_size[i]);</span><br><span class="line">            &#125;</span><br><span class="line">            p = create(item_count, item_size);</span><br><span class="line">            <span class="built_in">free</span>(item_size);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;D&#x27;</span>: &#123;</span><br><span class="line">            <span class="keyword">if</span> (p != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="type">int</span> i = p-&gt;item_count - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="type">void</span> *data = read(p, i);</span><br><span class="line">                    <span class="keyword">if</span> (data != <span class="literal">NULL</span>)</span><br><span class="line">                    &#123;</span><br><span class="line">                        printc(data, p-&gt;item_size[i]);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            destroy(p);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;A&#x27;</span>: &#123;</span><br><span class="line">            <span class="type">int</span> len;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;len);</span><br><span class="line">            <span class="type">char</span> *hex_str = (<span class="type">char</span> *)<span class="built_in">malloc</span>(len + <span class="number">1</span>);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, hex_str);</span><br><span class="line">            <span class="type">int</span> num_of_byte = (<span class="built_in">strlen</span>(hex_str) - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">            <span class="type">void</span> *data = (<span class="type">void</span> *)<span class="built_in">malloc</span>(num_of_byte);</span><br><span class="line">            hex2byte(data, hex_str);</span><br><span class="line">            append(p, data, num_of_byte);</span><br><span class="line">            <span class="built_in">free</span>(hex_str);</span><br><span class="line">            <span class="built_in">free</span>(data);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;W&#x27;</span>: &#123;</span><br><span class="line">            <span class="type">int</span> item_id;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;item_id);</span><br><span class="line">            <span class="type">int</span> len;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;len);</span><br><span class="line">            <span class="type">char</span> *hex_str = (<span class="type">char</span> *)<span class="built_in">malloc</span>(len);</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, hex_str);</span><br><span class="line">            <span class="type">int</span> num_of_byte = (<span class="built_in">strlen</span>(hex_str) - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">            <span class="type">void</span> *data = (<span class="type">void</span> *)<span class="built_in">malloc</span>(num_of_byte);</span><br><span class="line">            hex2byte(data, hex_str);</span><br><span class="line">            write(p, item_id, data, num_of_byte);</span><br><span class="line">            <span class="built_in">free</span>(hex_str);</span><br><span class="line">            <span class="built_in">free</span>(data);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;R&#x27;</span>: &#123;</span><br><span class="line">            <span class="type">int</span> item_id;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;item_id);</span><br><span class="line">            <span class="type">int</span> is_printc;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>, &amp;is_printc);</span><br><span class="line">            <span class="type">void</span> *data = read(p, item_id);</span><br><span class="line">            <span class="keyword">if</span> (data != <span class="literal">NULL</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (is_printc)</span><br><span class="line">                &#123;</span><br><span class="line">                    printc(data, p-&gt;item_size[item_id]);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    printx(data, p-&gt;item_size[item_id]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> <span class="string">&#x27;Q&#x27;</span>: &#123;</span><br><span class="line">            show_info(p);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">default</span>: &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">Main function implemented by GuTao, you cannot rewrite one for yourself.</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">- Just for you to understand how the functions you implement would be invoked.</span></span><br><span class="line"><span class="comment">- Not exact the main function to test on OJ, this one does not check your error handling.</span></span><br><span class="line"><span class="comment">- You can test your functions on your PC with your own main(),</span></span><br><span class="line"><span class="comment">- You may want to hack with your own main function, but this won&#x27;t work for the reason mentioned above :)</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="Test-cases"><a href="#Test-cases" class="headerlink" title="Test cases"></a>Test cases</h3><ol>
+<li>NULL pointer handling for each function, create and destroy empty box.</li>
+<li>create, write items using data of exact lengths, read items, printc, destroy</li>
+<li>create, write items using data of exact lengths, read items, printx, destroy</li>
+<li>create, write items using data of random lengths, read items, printc, destroy</li>
+<li>create, write items using data of random lengths, read items, printx, destroy</li>
+<li>create, append items, read items, printc, destroy</li>
+<li>create, append items, read items, printx, destroy</li>
+<li>create, append items, write items, read items, printx, destroy</li>
+<li>Memory leak check: (create, append items, destroy) *n</li>
+<li>Large amount of create, append items, write items, read items, printx, destroy</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/10/31/CS329_Quiz_1/" rel="prev" title="CS329 Machine Learning Quiz 1">
+      <i class="fa fa-chevron-left"></i> CS329 Machine Learning Quiz 1
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script>
+  const gitalk = new Gitalk({
+    clientID: '79118b0b29b4170f24af',
+    clientSecret: '48ee47026d13b8a3a954b2b089ea320510282527',
+    repo: 'GuTaoZi.github.io',      // The repository of store comments,
+    owner: 'GuTaoZi',
+    admin: ['GuTaoZi'],
+    id: location.pathname,      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+  gitalk.render('gitalk-container')
+  </script>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Background"><span class="nav-number">1.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Description"><span class="nav-number">2.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Input"><span class="nav-number">3.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Output"><span class="nav-number">4.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample-Input-1"><span class="nav-number">5.</span> <span class="nav-text">Sample Input #1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sample-Output-1"><span class="nav-number">6.</span> <span class="nav-text">Sample Output #1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hint"><span class="nav-number">7.</span> <span class="nav-text">Hint</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Template"><span class="nav-number">8.</span> <span class="nav-text">Template</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-cases"><span class="nav-number">9.</span> <span class="nav-text">Test cases</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="咕桃"
+      src="https://avatars.githubusercontent.com/u/109007949?v=4">
+  <p class="site-author-name" itemprop="name">咕桃</p>
+  <div class="site-description" itemprop="description">Just Do It, But Not Just Do It.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/GuTaoZi" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;GuTaoZi" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:first_fan@outlook.com" title="E-Mail → mailto:first_fan@outlook.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">咕桃</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+
+</body>
+</html>
