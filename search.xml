@@ -9737,6 +9737,8 @@ n_{i}
 <li>Introduction</li>
 <li>Preliminary</li>
 <li>Distributions</li>
+<li>Linear Models for Regression</li>
+<li>Linear Models for Classification</li>
 </ol>
 <h2 id="Chapter-1-Introduction"><a href="#Chapter-1-Introduction" class="headerlink" title="Chapter 1 - Introduction"></a>Chapter 1 - Introduction</h2><h3 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h3><ul>
 <li><strong>Machine Learning</strong>—minimization of some loss function for generalizing data sets with models.</li>
@@ -9754,11 +9756,14 @@ L(x)=\frac 1 2 (Y-AX)^\text TR^{-1}(Y-AX)\\</script><p>Find $X^\star$ to minimiz
 &\Rightarrow X^\star = (A^\text T R^{-1}A)A^{\text T}R^{-1}Y
 \end{align*}</script><h3 id="Euclidean-Distance-Optimization"><a href="#Euclidean-Distance-Optimization" class="headerlink" title="Euclidean Distance Optimization"></a>Euclidean Distance Optimization</h3><p>Point $x_0$, model $\mathbf b^\text Tx=d$.</p>
 <script type="math/tex; mode=display">
-x^\star = \min\limits_{x}(x-x_0)^\text T(x-x_0), \text{s.t.}\ \mathbf{b}^\text Tx-d=0</script><p>Lagrange optimization:</p>
+x^\star = \min\limits_{x}(x-x_0)^\text T(x-x_0), \text{s.t.}\ \mathbf{b}^\text Tx-d=0</script><p>We have:</p>
 <script type="math/tex; mode=display">
 \begin{align*}
 d&=\mathbf b^\text T(x_0-\lambda \mathbf b)\\
-\lambda &= \frac{\mathbf b^\text Tx_0-d}{\mathbf b^\text T\mathbf b}\\
+\lambda &= \frac{\mathbf b^\text Tx_0-d}{\mathbf b^\text T\mathbf b}
+\end{align*}</script><p>Lagrange optimization:</p>
+<script type="math/tex; mode=display">
+\begin{align*}
 L(x,\lambda)&=\frac 1 2 (x-x_0)^\text T(x-x_0)+\lambda(\mathbf b^\text Tx-d)\\
 \frac{\partial L}{\partial x^\text T}&=x^\star-x_0+\lambda \mathbf b=0\\
 x^\star&=x_0-\frac{(\mathbf b^\text Tx_0-d)\mathbf b}{\mathbf b^\text T\mathbf b}
@@ -10085,12 +10090,21 @@ p(\text{model}\vert\theta)\propto e^{-\frac{(t-\mu)^2}{2}}</script><script type=
 &=-\iint p(\mathbf x,\mathbf y)\ln\left(\frac{p(\mathbf x)p(\mathbf y)}{p(\mathbf x,\mathbf y)}\right)\text d\mathbf x\text d\mathbf y
 \end{align*}</script><script type="math/tex; mode=display">
 \text I[\mathbf x,\mathbf y]=\text H[\mathbf x]-\text H[\mathbf x\vert\mathbf y]=\text H[\mathbf y]-\text H[\mathbf y\vert\mathbf x]</script><h4 id="Information-Gain"><a href="#Information-Gain" class="headerlink" title="Information Gain"></a>Information Gain</h4><p>Given $N$ balls and a balance, one of these balls is lighter.</p>
-<p>In $N$ balls, the probability of each ball being lighter is $\frac 1 N$. Total information: </p>
+<p>$x$: one ball is lighter</p>
+<p>$y$: weighing once</p>
+<p>$\text H[x]$: uncertain of balls</p>
+<p>$\text H[x\vert y]$: uncertain of balls after weighing once</p>
 <script type="math/tex; mode=display">
-\text H[X]=-\sum\limits_{n=1}^N\frac 1 N\log\frac 1 N=\log N</script><p>For each time of weighing, the balance has three possible cases, therefore the information gain each time:</p>
+\begin{align*}
+\text H[x\vert y_1,\cdots,y_t]-\text H[x\vert y_1,\cdots,y_{t+1}]&=\text H[y_{t+1}\vert y_1,\cdots,y_t]-H[y_{t+1}\vert y_1,\cdots,y_t,x]\\
+&=\text H[y_{t+1}\vert y_1,\cdots,y_t]\\
+&\le \text H[y_{t+1}]=\log_23
+\end{align*}</script><p>Sum the equation above with $t=0,1,\cdots,T$, </p>
 <script type="math/tex; mode=display">
-\text H[Y]=-\sum\limits_{n=1}^3\frac 1 3\log\frac 1 3=\log 3</script><p>So the least number of weighing to find the lighter ball is $\frac{\text H[X]}{\text H[Y]}=\frac{\log N}{\log 3}$.</p>
-<h2 id="Chapter-3-Distributions"><a href="#Chapter-3-Distributions" class="headerlink" title="Chapter 3 - Distributions"></a>Chapter 3 - Distributions</h2><h3 id="Binary-Distributions"><a href="#Binary-Distributions" class="headerlink" title="Binary Distributions"></a>Binary Distributions</h3><h4 id="Bernoulli-Distribution"><a href="#Bernoulli-Distribution" class="headerlink" title="Bernoulli Distribution"></a>Bernoulli Distribution</h4><script type="math/tex; mode=display">
+\begin{matrix*}
+\log_2N = \text H[x]-\text H[x\vert y_1,\cdots,y_T]\le T\log_23\\
+T\ge \log_3N
+\end{matrix*}</script><h2 id="Chapter-3-Distributions"><a href="#Chapter-3-Distributions" class="headerlink" title="Chapter 3 - Distributions"></a>Chapter 3 - Distributions</h2><h3 id="Binary-Distributions"><a href="#Binary-Distributions" class="headerlink" title="Binary Distributions"></a>Binary Distributions</h3><h4 id="Bernoulli-Distribution"><a href="#Bernoulli-Distribution" class="headerlink" title="Bernoulli Distribution"></a>Bernoulli Distribution</h4><script type="math/tex; mode=display">
 \begin{align*}
 \text{Bern}(x\vert \mu)&=\mu^x(1-\mu)^{1-x}\\
 \mathbb E[x]&=\mu\\
@@ -10245,11 +10259,23 @@ p(\mathbf x\vert\boldsymbol\eta)=h(\mathbf x)g(\boldsymbol\eta)\exp\{\boldsymbol
 <li>$\bf x$: scalar or vector, discrete or continuous.</li>
 <li>$\boldsymbol\eta$: natural parameters</li>
 </ul>
-<h4 id="Maximum-likelihood-and-sufficient-statistics"><a href="#Maximum-likelihood-and-sufficient-statistics" class="headerlink" title="Maximum likelihood and sufficient statistics"></a>Maximum likelihood and sufficient statistics</h4><p>Likelihood function</p>
+<script type="math/tex; mode=display">
+g(\boldsymbol\eta)\int h(\mathbf x)\exp\left\{\boldsymbol\eta^\text T \mathbf u(\mathbf x)\right\}\text d\mathbf x=1</script><p><strong>The Bernoulli Distribution</strong>: </p>
+<script type="math/tex; mode=display">
+p(x\vert \mu)=(1-\mu)\exp\left\{\ln(\frac{\mu}{1-\mu})x\right\}</script><p>So</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\eta = \ln(\frac \mu{1-\mu}), \mu=&\sigma(\eta)=\frac 1{1+\exp(-\eta)}\\
+&\uparrow\text{Logistic Sigmoid}
+\end{align*}</script><p><strong>The Multinomial Distribution:</strong></p>
+<script type="math/tex; mode=display">
+p(\mathbf x\vert\boldsymbol \mu)=\exp\left\{\sum\limits_{k=1}^Mx_k\ln\mu_k\right\}</script><p>Let $\mu_M=1-\sum\limits_{k=1}^{M-1}\mu_k$,</p>
+<script type="math/tex; mode=display">
+\eta_k=\ln\left(\frac {\mu_k} {1-\sum_{j=1}^{M-1}\mu_j}\right), \mu_k = \frac{\exp(\eta_k)}{1+\sum_{j=1}^{M-1}\exp(\eta_j)}</script><h4 id="Maximum-likelihood-and-sufficient-statistics"><a href="#Maximum-likelihood-and-sufficient-statistics" class="headerlink" title="Maximum likelihood and sufficient statistics"></a>Maximum likelihood and sufficient statistics</h4><p>Likelihood function</p>
 <script type="math/tex; mode=display">
 p(\mathbf{X} \mid \boldsymbol{\eta})=\left(\prod_{n=1}^{N} h\left(\mathbf{x}_{n}\right)\right) g(\boldsymbol{\eta})^{N} \exp \left\{\boldsymbol{\eta}^{T} \sum_{n=1}^{N} \mathbf{u}\left(\mathbf{x}_{n}\right)\right\}.</script><p>Condition of maximum likelihood estimator $\boldsymbol\eta_\text{ML}$</p>
 <script type="math/tex; mode=display">
--\nabla\ln g(\boldsymbol \eta_\text{ML})=\frac 1 N \sum\limits_{n=1}^N\mathbf u(\mathbf x_n)</script>]]></content>
+-\nabla\ln g(\boldsymbol \eta_\text{ML})=\frac 1 N \sum\limits_{n=1}^N\mathbf u(\mathbf x_n)</script><h2 id="Chapter-4-Linear-Models-for-Regression"><a href="#Chapter-4-Linear-Models-for-Regression" class="headerlink" title="Chapter 4 - Linear Models for Regression"></a>Chapter 4 - Linear Models for Regression</h2><h2 id="Chapter-5-Linear-Models-for-Classification"><a href="#Chapter-5-Linear-Models-for-Classification" class="headerlink" title="Chapter 5 - Linear Models for Classification"></a>Chapter 5 - Linear Models for Classification</h2>]]></content>
       <categories>
         <category>CS</category>
       </categories>
