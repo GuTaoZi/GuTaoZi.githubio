@@ -10273,9 +10273,59 @@ p(\mathbf x\vert\boldsymbol \mu)=\exp\left\{\sum\limits_{k=1}^Mx_k\ln\mu_k\right
 <script type="math/tex; mode=display">
 \eta_k=\ln\left(\frac {\mu_k} {1-\sum_{j=1}^{M-1}\mu_j}\right), \mu_k = \frac{\exp(\eta_k)}{1+\sum_{j=1}^{M-1}\exp(\eta_j)}</script><h4 id="Maximum-likelihood-and-sufficient-statistics"><a href="#Maximum-likelihood-and-sufficient-statistics" class="headerlink" title="Maximum likelihood and sufficient statistics"></a>Maximum likelihood and sufficient statistics</h4><p>Likelihood function</p>
 <script type="math/tex; mode=display">
-p(\mathbf{X} \mid \boldsymbol{\eta})=\left(\prod_{n=1}^{N} h\left(\mathbf{x}_{n}\right)\right) g(\boldsymbol{\eta})^{N} \exp \left\{\boldsymbol{\eta}^{T} \sum_{n=1}^{N} \mathbf{u}\left(\mathbf{x}_{n}\right)\right\}.</script><p>Condition of maximum likelihood estimator $\boldsymbol\eta_\text{ML}$</p>
+p(\mathbf{X} \vert \boldsymbol{\eta})=\left(\prod_{n=1}^{N} h\left(\mathbf{x}_{n}\right)\right) g(\boldsymbol{\eta})^{N} \exp \left\{\boldsymbol{\eta}^{T} \sum_{n=1}^{N} \mathbf{u}\left(\mathbf{x}_{n}\right)\right\}.</script><p>Condition of maximum likelihood estimator $\boldsymbol\eta_\text{ML}$</p>
 <script type="math/tex; mode=display">
--\nabla\ln g(\boldsymbol \eta_\text{ML})=\frac 1 N \sum\limits_{n=1}^N\mathbf u(\mathbf x_n)</script><h2 id="Chapter-4-Linear-Models-for-Regression"><a href="#Chapter-4-Linear-Models-for-Regression" class="headerlink" title="Chapter 4 - Linear Models for Regression"></a>Chapter 4 - Linear Models for Regression</h2><h2 id="Chapter-5-Linear-Models-for-Classification"><a href="#Chapter-5-Linear-Models-for-Classification" class="headerlink" title="Chapter 5 - Linear Models for Classification"></a>Chapter 5 - Linear Models for Classification</h2>]]></content>
+-\nabla\ln g(\boldsymbol \eta_\text{ML})=\frac 1 N \sum\limits_{n=1}^N\mathbf u(\mathbf x_n)</script><h2 id="Chapter-4-Linear-Models-for-Regression"><a href="#Chapter-4-Linear-Models-for-Regression" class="headerlink" title="Chapter 4 - Linear Models for Regression"></a>Chapter 4 - Linear Models for Regression</h2><h2 id="Chapter-5-Linear-Models-for-Classification"><a href="#Chapter-5-Linear-Models-for-Classification" class="headerlink" title="Chapter 5 - Linear Models for Classification"></a>Chapter 5 - Linear Models for Classification</h2><h3 id="Three-Approaches-to-Classification"><a href="#Three-Approaches-to-Classification" class="headerlink" title="Three Approaches to Classification"></a>Three Approaches to Classification</h3><ul>
+<li>Use discriminant functions directly</li>
+<li>Infer the posterior probabilities with generative models</li>
+<li>Directly construct posterior conditional class probabilities</li>
+</ul>
+<h3 id="Discriminant-Functions"><a href="#Discriminant-Functions" class="headerlink" title="Discriminant Functions"></a>Discriminant Functions</h3><p><strong>Discriminant Functions for $N$ classes</strong></p>
+<ul>
+<li>use $N$ two-way discriminant functions</li>
+<li>use $\frac{N(N-1)}{2}$ two-way discriminant functions</li>
+</ul>
+<h3 id="Least-Square-Classification"><a href="#Least-Square-Classification" class="headerlink" title="Least Square Classification"></a>Least Square Classification</h3><ul>
+<li>Reduce <strong>classification</strong> to least squares <strong>regression</strong>.</li>
+<li>Treat each class as a separate problem, pick the max.</li>
+</ul>
+<p>Least square regression is sensitive to outliers, use logistic regression to solve this problem:</p>
+<p><img src="https://s2.loli.net/2023/11/07/bdLjc4yTiRkGEI7.png" alt="image.png" style="zoom: 33%;" /></p>
+<h3 id="Fisher’s-Linear-Discriminants-LDA"><a href="#Fisher’s-Linear-Discriminants-LDA" class="headerlink" title="Fisher’s Linear Discriminants(LDA)"></a>Fisher’s Linear Discriminants(LDA)</h3><p>See the <a href="https://github.com/GuTaoZi/CS329_Machine_Learning/blob/main/Lab_Materials/Lab06.Linear%20Discriminant%20Analysis/Lab6.Linear%20Discriminant%20Analysis.ipynb">course material for Lab06: LDA</a></p>
+<p><img src="https://raw.githubusercontent.com/GuTaoZi/CS329_Machine_Learning/daad03239f0966cd39434cf8312ce640a226cb1f/Lab_Materials/Lab06.Linear%20Discriminant%20Analysis/images/example.png" style="zoom:50%;" /></p>
+<h3 id="Perceptron"><a href="#Perceptron" class="headerlink" title="Perceptron"></a>Perceptron</h3><script type="math/tex; mode=display">
+y(\mathbf x)=f(\mathbf w^\text T\phi(\mathbf x))\quad f(a) = \left\{\begin{matrix}+1,a\ge0 \\ -1, a<0\end{matrix}\right.</script><h4 id="Training"><a href="#Training" class="headerlink" title="Training"></a>Training</h4><p>Criterion:</p>
+<script type="math/tex; mode=display">
+E_P(\mathbf w)=-\sum\limits_{n\in\mathcal M}\mathbf w^\text T\phi_nt_n</script><p>where $t_n\in\{1,-1\}$ is the label. </p>
+<script type="math/tex; mode=display">
+\mathbf w^{(\tau+1)}=\mathbf w^\tau-\eta\nabla E_P(\mathbf w)=\mathbf w^\tau + \eta\phi_nt_n</script><p>where $\eta$ is the learning rate.</p>
+<script type="math/tex; mode=display">
+-\mathbf (w^{(\tau+1)})^\text T\phi_nt_n<-(w^{\tau})^\text T\phi_nt_n</script><p>indicating the convergence of perceptron training.</p>
+<h4 id="Simplified-Training"><a href="#Simplified-Training" class="headerlink" title="Simplified Training"></a>Simplified Training</h4><script type="math/tex; mode=display">
+\mathbf w^\text{new}=\mathbf w^\text{old}-0.5(y_n-t_n)x_n</script><ul>
+<li>guaranteed to find a set of weights that gets the right answer on the whole training set if any such a set exists.</li>
+<li>no need to choose a learning rate.</li>
+</ul>
+<h3 id="Probabilistic-Generative-Models"><a href="#Probabilistic-Generative-Models" class="headerlink" title="Probabilistic Generative Models"></a>Probabilistic Generative Models</h3><script type="math/tex; mode=display">
+p(C_1\vert\mathbf x)=\frac{p(C_1)p(\mathbf x\vert C_1)}{p(\mathbf x)}=\frac{1}{1+e^{-z}}=\sigma(z)</script><p>where $z$ is called the logit</p>
+<script type="math/tex; mode=display">
+z=\ln\frac{p(C_1)p(x\vert C_1)}{\sum\limits_{i\neq 1}p(C_i)p(x\vert C_i)}=\ln \frac{p(C_1\vert \mathbf x)}{1-p(C_1\vert \mathbf x)}</script><h4 id="K-Case-Classification"><a href="#K-Case-Classification" class="headerlink" title="K-Case Classification"></a>K-Case Classification</h4><script type="math/tex; mode=display">
+p(C_k\vert\mathbf x)=\frac{p(C_k)p(\mathbf x\vert C_k)}{\sum\limits_{i}p(C_i)p(x\vert C_i)}</script><h4 id="Generative-ML-Gaussian-Mixtures"><a href="#Generative-ML-Gaussian-Mixtures" class="headerlink" title="Generative: ML Gaussian Mixtures"></a>Generative: ML Gaussian Mixtures</h4><script type="math/tex; mode=display">
+\begin{array}{l}
+p(x, C_{1})=p(C_{1}) p(x \vert C_{1})=\pi \mathcal N(x \vert \mu_{1}, \Sigma) \\
+p(x, C_{2})=p(C_{2}) p(x \vert C_{2})=(1-\pi) \mathcal N(x \vert \mu_{2}, \Sigma)
+\end{array}</script><p>Likelihood $p\left(\boldsymbol{t}, \boldsymbol{X} \vert \pi, \mu_{1}, \mu_{2}, \Sigma\right)=\prod_{n=1}^{N}\left[\pi N\left(x_{n} \vert \mu_{1}, \Sigma\right)\right]^{t_{n}}\left[(1-\pi) N\left(x_{n} \vert \mu_{2}, \Sigma\right)\right]^{1-t_{n}}$</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\pi_{M L}&=\frac{1}{N} \sum_{n=1}^{N} t_{n}=\frac{N_{1}}{N}=\frac{N_{1}}{N_{1}+N_{2}} \\
+\mu_{1 \mathrm{ML}}&=\frac{1}{N_{1}} \sum_{n=1}^{N} t_{n} x_{n} \\ \mu_{2 \mathrm{ML}}&=\frac{1}{N_{2}} \sum_{n=1}^{N}\left(1-t_{n}\right) x_{n} \\
+\Sigma&=\pi \Sigma_{1}+(1-\pi) \Sigma_{2} \\ \Sigma_{i \mathrm{ML}}&=\frac{1}{N_{i}} \sum_{x_{n} \in C_{i}}\left(x_{n}-\mu_{i}\right)\left(x_{n}-\mu_{i}\right)^{T} \quad \mathrm{i}=1,2
+\end{align*}</script><p>这里各个参数的意义待补。</p>
+<h4 id="Generative-MAP-Gaussian-Mixtures"><a href="#Generative-MAP-Gaussian-Mixtures" class="headerlink" title="Generative: MAP Gaussian Mixtures"></a>Generative: MAP Gaussian Mixtures</h4><script type="math/tex; mode=display">
+\pi_0=\frac{N_{10}}{N_{10}+N_{20}}, x\in\mathcal C_i\sim(x\vert\mu_{i0},\Sigma_{i0})</script><script type="math/tex; mode=display">
+\pi_\text{MAP} = \frac{N_1+N_{10}}{N+N_0}=\frac{N_1+N_{10}}{N_1+N_2+N_{10}+N_{20}}</script><script type="math/tex; mode=display">
+\left\{\begin{align*}\Sigma_{i\text{MAP}}^{-1}&=\Sigma_{i\text{ML}}^{-1}+\Sigma_{i0}^{-1}\\\Sigma_{i\text{MAP}}^{-1}\mu_{i\text{MAP}}&=\Sigma_{i\text{ML}}^{-1}\mu_{i\text{ML}}+\Sigma_{i0}^{-1}\mu_{i0}\end{align*}\right.</script><p>这里各个参数的意义待补。</p>
+<h3 id="Probabilistic-Discriminative-Models"><a href="#Probabilistic-Discriminative-Models" class="headerlink" title="Probabilistic Discriminative Models"></a>Probabilistic Discriminative Models</h3><h3 id="Bayesian-Information-Criterion"><a href="#Bayesian-Information-Criterion" class="headerlink" title="Bayesian Information Criterion"></a>Bayesian Information Criterion</h3>]]></content>
       <categories>
         <category>CS</category>
       </categories>
@@ -10314,6 +10364,7 @@ p(\mathbf{X} \mid \boldsymbol{\eta})=\left(\prod_{n=1}^{N} h\left(\mathbf{x}_{n}
 <li>Lexical Analysis</li>
 <li>Finite Automata</li>
 <li>Syntax Analysis</li>
+<li>Syntax-Directed Translation</li>
 </ol>
 <h2 id="Lecture-1-Introduction"><a href="#Lecture-1-Introduction" class="headerlink" title="Lecture 1 - Introduction"></a>Lecture 1 - Introduction</h2><blockquote>
 <p>To be continued</p>
@@ -10844,6 +10895,19 @@ L(G)=L(G^\prime)</script><p>Acceptance occurs IFF the parser is about to reduce 
 <p>$[A\rightarrow\alpha\cdot,a]$ calls for a reduction by $A\rightarrow\alpha$ only if the next input symbol is $a$.</p>
 <p>When calculating CLOSURE, generate a new item $[B\rightarrow \cdot\gamma,b]$ from $[A\rightarrow\alpha\cdot B\beta,a]$ if $b\in\text{FIRST}(\beta a)$.</p>
 <p>\&lt;$\cdots\alpha\gamma,b\cdots$> → \&lt;$\cdots\alpha B,b\cdots$> → \&lt;$\cdots\alpha Bb,\cdots$></p>
+<blockquote>
+<p>$\beta=\epsilon, b=a ;\beta\not= \epsilon, b\in \text{FIRST}(\beta)\equiv b\in\text{FIRST}(\beta a)$</p>
+</blockquote>
+<h4 id="Look-ahead-LR-LALR"><a href="#Look-ahead-LR-LALR" class="headerlink" title="Look-ahead LR (LALR)"></a>Look-ahead LR (LALR)</h4><p>Merge sets of LR(1) items with the same <strong>core</strong>.</p>
+<p>The core of an LR(1) item set is the set of the first components, a set of LR(0) items.</p>
+<p>Merging states may cause reduce/reduce conflicts:</p>
+<p><img src="https://s2.loli.net/2023/11/06/uoc1pBe6k59AlbW.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Merging states in LR(1) parsing table; If there is no reduce-reduce conflict, the grammar is LALR(1), otherwise not LALR(1).</p>
+<h4 id="Comparisons-Among-LR-Parsers"><a href="#Comparisons-Among-LR-Parsers" class="headerlink" title="Comparisons Among LR Parsers"></a>Comparisons Among LR Parsers</h4><p>Languages/Grammars supported:$\text{CLR&gt;LALR&gt;SLR}$</p>
+<p>number of states in the parsing table: $\text{CLR&gt;LALR=SLR}$</p>
+<p>Driver programs: $\text{CLR=LALR=SLR}$</p>
+<h2 id="Lecture-5-Syntax-Directed-Translation"><a href="#Lecture-5-Syntax-Directed-Translation" class="headerlink" title="Lecture 5 - Syntax-Directed Translation"></a>Lecture 5 - Syntax-Directed Translation</h2><p>Syntax-Directed Definitions: attributes + semantic rules</p>
+<p>Synthesized Attributes: value at a parse-tree node $N$ is only determined from attribute values at the children of $N$ and at $N$ itself</p>
 ]]></content>
       <categories>
         <category>CS</category>
@@ -10969,7 +11033,10 @@ p(D\vert m_0,\Sigma_0,Q)&=\int p(D\vert u,Q)p(u\vert m_0,\Sigma_0) du\\
 </ul>
 <h3 id="Solution-2-2"><a href="#Solution-2-2" class="headerlink" title="Solution 2.2"></a>Solution 2.2</h3><p>$y=Ax+v$.</p>
 <p>$p(y | D, m_0, \Sigma_0, Q) =\mathcal N(Am_x, A\Sigma_xA^T + Q)$</p>
-<h3 id="Solution-2-3"><a href="#Solution-2-3" class="headerlink" title="Solution 2.3"></a>Solution 2.3</h3>]]></content>
+<h3 id="Solution-2-3"><a href="#Solution-2-3" class="headerlink" title="Solution 2.3"></a>Solution 2.3</h3><h3 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h3><h4 id="Learning"><a href="#Learning" class="headerlink" title="Learning"></a>Learning</h4><script type="math/tex; mode=display">
+p(\theta\vert\mathcal D)\propto p(\mathcal D\vert\theta)\cdot p(\theta)</script><h4 id="Prediction"><a href="#Prediction" class="headerlink" title="Prediction"></a>Prediction</h4><script type="math/tex; mode=display">
+p(t\vert x,\mathcal D)=\int p(t\vert x,\mathcal \theta) \cdot p(\theta\vert\mathcal D) \text d \theta</script><h4 id="Evidence"><a href="#Evidence" class="headerlink" title="Evidence"></a>Evidence</h4><script type="math/tex; mode=display">
+p(\mathcal D)=\int p(\mathcal D\vert\theta)\cdot p(\theta) \text d\theta</script>]]></content>
       <categories>
         <category>CS</category>
       </categories>
