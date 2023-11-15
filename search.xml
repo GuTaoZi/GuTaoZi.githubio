@@ -8889,12 +8889,13 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <li>试验前知道所有可能结果</li>
 <li>试验前无法确定会出现哪个结果</li>
 </ul>
-<p><strong>样本空间$𝛀$</strong>：试验的全部样本点构成的集合</p>
-<p><strong>样本点$𝛀$</strong>：不可分的试验结果</p>
+<p><strong>样本空间 $𝛀$</strong>：试验的全部样本点构成的集合</p>
+<p><strong>样本点$\omega$</strong>：不可分的试验结果</p>
 <h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p><strong>随机事件(事件)</strong>：满足一定条件的样本点的集合</p>
 <p><strong>基本事件</strong>：一个样本点构成的单点集</p>
 <p><strong>必然事件</strong>：每次试验都总发生的事件</p>
-<p><strong>不可能事件</strong>：每次试验都不会发生的事件$A = \{ A | A ⊂𝛀 , A 是 事 件 \}$</p>
+<p><strong>不可能事件</strong>：每次试验都不会发生的事件</p>
+<p><strong>事件域</strong>：$\mathcal A = \{ A | A ⊂𝛀 , A 是 事 件 \}$</p>
 <p><strong>事件运算</strong>：</p>
 <div class="table-container">
 <table>
@@ -11093,7 +11094,116 @@ p(D\vert m_0,\Sigma_0,Q)&=\int p(D\vert u,Q)p(u\vert m_0,\Sigma_0) du\\
 <h3 id="Solution-2-3"><a href="#Solution-2-3" class="headerlink" title="Solution 2.3"></a>Solution 2.3</h3><h3 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h3><h4 id="Learning"><a href="#Learning" class="headerlink" title="Learning"></a>Learning</h4><script type="math/tex; mode=display">
 p(\theta\vert\mathcal D)\propto p(\mathcal D\vert\theta)\cdot p(\theta)</script><h4 id="Prediction"><a href="#Prediction" class="headerlink" title="Prediction"></a>Prediction</h4><script type="math/tex; mode=display">
 p(t\vert x,\mathcal D)=\int p(t\vert x,\mathcal \theta) \cdot p(\theta\vert\mathcal D) \text d \theta</script><h4 id="Evidence"><a href="#Evidence" class="headerlink" title="Evidence"></a>Evidence</h4><script type="math/tex; mode=display">
-p(\mathcal D)=\int p(\mathcal D\vert\theta)\cdot p(\theta) \text d\theta</script>]]></content>
+p(\mathcal D)=\int p(\mathcal D\vert\theta)\cdot p(\theta) \text d\theta</script><h2 id="Review-on-Nov-14"><a href="#Review-on-Nov-14" class="headerlink" title="Review on Nov. 14"></a>Review on Nov. 14</h2><p>$x\sim p(x\vert \mu,\Sigma)$, $x = [x_0,\dots,x_N]$, $\mu\sim p(\mu\vert m_0,\Sigma_0)$</p>
+<p>posterior $p(\mu\vert x,m_0,\Sigma_0)\propto p(x\vert \mu) p(\mu)$</p>
+<script type="math/tex; mode=display">
+-\frac 1 2 (\mu-m_\text{MAP})^\text T \Sigma_\text{MAP}^{-1}(\mu-m_\text{MAP}) = -\sum\limits_{i=1}^N\frac 1 2 (x_i-\mu)^\text T \Sigma_\text{ML}^{-1}(x_i-\mu) - \frac 1 2 (\mu-m_0)^\text T \Sigma_0^{-1}(\mu-m_0)</script>]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
+        <tag>Artificial Intelligence</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CS329 Machine Learning Quiz 2</title>
+    <url>/2023/11/14/CS329_Quiz_2/</url>
+    <content><![CDATA[<h2 id="CS329-Machine-Learning-H-Quiz-2"><a href="#CS329-Machine-Learning-H-Quiz-2" class="headerlink" title="CS329 Machine Learning(H) Quiz 2"></a>CS329 Machine Learning(H) Quiz 2</h2><p>樊斯特 12111624</p>
+<h3 id="Before-Quiz"><a href="#Before-Quiz" class="headerlink" title="Before Quiz"></a>Before Quiz</h3><script type="math/tex; mode=display">
+\begin{align*}
+&-(a_0-1)\ln\pi - (b_0-1)\ln(1-\pi) \quad &\text{prior of }\pi\\
+&+\frac 1 2(\mu_1-m_{10})^\text T \Sigma_{10}^{-1}(\mu_1-m_{10}) \quad &\text{prior of }\mu_1\\
+&+\frac 1 2(\mu_2-m_{20})^\text T \Sigma_{20}^{-1}(\mu_2-m_{20})\quad &\text{prior of }\mu_2\\
+&+\sum\limits_{n=1}^N[t_n\ln\left(\pi\mathcal N (x\vert\mu_1,\Sigma_1)\right)+(1-t_n)\ln((1-\pi)\mathcal N (x\vert\mu_2,\Sigma_2))]\quad&\text{Likelihood}
+\end{align*}</script><hr>
+<h3 id="Question-1-Generative-Gaussian-Mixture"><a href="#Question-1-Generative-Gaussian-Mixture" class="headerlink" title="Question 1 Generative Gaussian Mixture"></a>Question 1 Generative Gaussian Mixture</h3><h4 id="Question-1-1"><a href="#Question-1-1" class="headerlink" title="Question 1.1"></a>Question 1.1</h4><p>$p(x)=\pi\mathcal N(x\vert\mu_1,\Sigma_1)+(1-\pi)\mathcal N(x\vert\mu_2,\Sigma_2)$</p>
+<p>Given $\mathbf x=[x_1,\dots,x_N]$, $\mathbf t=[t_1,\dots,t_N]$</p>
+<p>What’s the ML estimation of $\mu_1,\Sigma_1,\mu_2,\Sigma_2,\pi$?</p>
+<h4 id="Solution-1-1"><a href="#Solution-1-1" class="headerlink" title="Solution 1.1"></a>Solution 1.1</h4><p>Derive log-likelihood function w.r.t. $\pi$,</p>
+<script type="math/tex; mode=display">
+\frac{\partial}{\partial \pi}L=\frac{\partial}{\partial \pi}\sum\limits_{n=1}^N \{t_n\ln\pi+(1-t_n)\ln(1-\pi)\}=\frac{N_1}{\pi}+\frac{N_2}{\pi-1}=0</script><p>Derive log-likelihood function w.r.t. $\mu_i$,</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\frac{\partial}{\partial \mu_1}L &= \frac{\partial}{\partial \mu_1} \sum\limits_{n=1}^N t_n\ln\mathcal N(x_n\vert,\mu_1,\Sigma_1)\\
+&=\frac{\partial}{\partial \mu_1} -\frac 1 2 \sum\limits_{n=1}^N t_n(x_n-\mu_1)^\text T \Sigma_1^{-1}(x_n-\mu_1)\\
+&=0\\
+\frac{\partial}{\partial \mu_2}L &= \frac{\partial}{\partial \mu_2} \sum\limits_{n=1}^N (1-t_n)\ln\mathcal N(x_n\vert,\mu_2,\Sigma_2)\\
+&=\frac{\partial}{\partial \mu_2} -\frac 1 2 \sum\limits_{n=1}^N (1-t_n)(x_n-\mu_2)^\text T \Sigma_1^{-1}(x_n-\mu_2)\\
+&=0
+\end{align*}</script><p>Derive log-likelihood function w.r.t. $\Sigma_i$,</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\frac{\partial}{\partial \Sigma_1} L &= \frac{\partial}{\partial \Sigma_1} \left(-\frac 1 2 \sum\limits_{n=1}^N t_n\ln |\Sigma_1|-\frac1 2 \sum\limits_{n=1}^N t_n(x_n-\mu_1)^\text T \Sigma_1^{-1}(x_n-\mu_1)\right)=0\\
+\frac{\partial}{\partial \Sigma_2} L &= \frac{\partial}{\partial \Sigma_2} \left(-\frac 1 2 \sum\limits_{n=1}^N (1-t_n)\ln |\Sigma_2|-\frac1 2 \sum\limits_{n=1}^N (1-t_n)(x_n-\mu_2)^\text T \Sigma_2^{-1}(x_n-\mu_2)\right)=0
+\end{align*}</script><p>Hence we have</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\pi_\text{ML} &= \frac 1 N \sum\limits_{n=1}^N t_n =\frac{N_1}{N}=\frac{N_1}{N_1+N_2}\\
+\mu_{1\text{ML}} &= \frac 1 {N_1}\sum\limits_{n=1}^Nt_n x_n\\
+\mu_{2\text{ML}} &= \frac 1 {N_2}\sum\limits_{n=1}^N(1-t_n) x_n\\
+\Sigma_{1\text{ML}} &=\frac 1 {N_1}\sum\limits_{x_n\in\mathcal C_1} (x_n-\mu_{1\text{ML}})(x_n-\mu_{1\text{ML}})^\text T\\
+\Sigma_{2\text{ML}} &=\frac 1 {N_2}\sum\limits_{x_n\in\mathcal C_2} (x_n-\mu_{2\text{ML}})(x_n-\mu_{2\text{ML}})^\text T
+\end{align*}</script><p>where</p>
+<ul>
+<li>$N_1$ is the number of data points in class 1,</li>
+<li>$N_2$ is the number of data points in class 2.</li>
+</ul>
+<h4 id="Question-1-2"><a href="#Question-1-2" class="headerlink" title="Question 1.2"></a>Question 1.2</h4><p>$\pi\sim beta(a_0,b_0), p(\mu_i) = \mathcal N(m_{i0},\Sigma_{i0}), i=1,2$</p>
+<p>Given $\mathbf x=[x_1,\dots,x_N]$, $\mathbf t=[t_1,\dots,t_N]$</p>
+<p>What’s the MAP estimation of $\mu_1,\Sigma_1,\mu_2,\Sigma_2,\pi$?</p>
+<h4 id="Solution-1-2"><a href="#Solution-1-2" class="headerlink" title="Solution 1.2"></a>Solution 1.2</h4><p>Posterior of $\pi$:</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p(\pi|\mathbf{t}) &\propto p(\mathbf{t}|\pi) \cdot p(\pi)\\
+&= \pi^{N_1} \cdot (1 - \pi)^{N_2} \cdot \pi^{a_0-1} \cdot (1-\pi)^{b_0-1}\\
+&= \pi^{N_1 + a_0 - 1} \cdot (1 - \pi)^{N_2 + b_0 - 1}
+\end{align*}</script><p>By using the property of product of Gaussian distributions, we obtain the MAP estimation of $\mu_i$ and $\Sigma_i$</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\pi_\text{MAP} &= \frac{N_1+a_{0}-1}{N+a_0+b_0-2}=\frac{N_1+a_0-1}{N_1+N_2+a_0+b_0-2}\\
+\Sigma_{1\text{MAP}} &=({\Sigma_{1\text{ML}}}^{-1}+{\Sigma_{10}}^{-1})^{-1}\\
+\Sigma_{2\text{MAP}} &=({\Sigma_{2\text{ML}}}^{-1}+{\Sigma_{20}}^{-1})^{-1}\\
+\mu_{1\text{MAP}} &= \Sigma_{1\text{MAP}}({\Sigma_{1\text{ML}}}^{-1}\mu_{1\text{ML}}+{\Sigma_{10}}^{-1}m_{10})\\
+\mu_{2\text{MAP}} &= \Sigma_{2\text{MAP}}({\Sigma_{2\text{ML}}}^{-1}\mu_{2\text{ML}}+{\Sigma_{20}}^{-1}m_{20})\\
+\end{align*}</script><h4 id="Question-1-3"><a href="#Question-1-3" class="headerlink" title="Question 1.3"></a>Question 1.3</h4><p>What’s $p(\mathcal C_1\vert x)$ for ML and MAP models respectively?</p>
+<h4 id="Solution-1-3"><a href="#Solution-1-3" class="headerlink" title="Solution 1.3"></a>Solution 1.3</h4><p>By Bayes’ Theorem,</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p_\text{ML}(\mathcal C_1\vert x)&=\frac{p_\text{ML}(x,\mathcal C_1)}{p_\text{ML}(x)}=\frac{\pi_\text{ML}\mathcal N(x\vert\mu_\text{1ML},\Sigma_\text{1ML})}{\pi_\text{ML}\mathcal N(x\vert\mu_\text{1ML},\Sigma_\text{1ML})+(1-\pi_\text{ML})\mathcal N(x\vert\mu_\text{2ML},\Sigma_\text{2ML})}\\
+p_\text{MAP}(\mathcal C_1\vert x)&=\frac{p_\text{MAP}(x,\mathcal C_1)}{p_\text{MAP}(x)}=\frac{\pi_\text{MAP}\mathcal N(x\vert\mu_\text{1MAP},\Sigma_\text{1MAP})}{\pi_\text{MAP}\mathcal N(x\vert\mu_\text{1MAP},\Sigma_\text{1MAP})+(1-\pi_\text{MAP})\mathcal N(x\vert\mu_\text{2MAP},\Sigma_\text{2MAP})}
+\end{align*}</script><hr>
+<h3 id="Question-2-Discriminative-Logistic-Regression"><a href="#Question-2-Discriminative-Logistic-Regression" class="headerlink" title="Question 2 Discriminative Logistic Regression"></a>Question 2 Discriminative Logistic Regression</h3><h4 id="Question-2-1"><a href="#Question-2-1" class="headerlink" title="Question 2.1"></a>Question 2.1</h4><p>$y=\sigma(w^\text T\phi(x))$</p>
+<p>Given $\mathbf x=[x_1,\dots,x_N]$, $\mathbf t=[t_1,\dots,t_N]$</p>
+<p>What’s the ML estimation of $q(w)$?</p>
+<h4 id="Solution-2-1"><a href="#Solution-2-1" class="headerlink" title="Solution 2.1"></a>Solution 2.1</h4><p>By Gauss-Newton iteration: $w^\text{new}=w^\text{old}-H^{-1}\nabla E(w)$, we obtain $w_\text{ML}$,</p>
+<p>where</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+E(w) &= -\sum\limits_{n=1}^N  [t_n\ln y_n + (1-t_n)\ln(1-y_n)]\\
+\nabla E(w) &= \sum\limits_{n=1}^N (y_n-t_n)\phi(x_n)\\
+\text{step size}\quad H &= \nabla^2 E(w) = \sum\limits_{n=1}^N y_n(1-y_n)\phi(x_n)\phi(x_n)^\text T
+\end{align*}</script><p>Hence</p>
+<script type="math/tex; mode=display">
+q(w) = \mathcal N(w\vert w_\text{ML}, H^{-1})</script><h4 id="Question-2-2"><a href="#Question-2-2" class="headerlink" title="Question 2.2"></a>Question 2.2</h4><p>$y=\sigma(w^\text T\phi(x))$, $p(w)\sim\mathcal N(m_0,\Sigma_0)$</p>
+<p>Given $\mathbf x=[x_1,\dots,x_N]$, $\mathbf t=[t_1,\dots,t_N]$</p>
+<p>What’s the MAP estimation of $q(w)$?</p>
+<h4 id="Solution-2-2"><a href="#Solution-2-2" class="headerlink" title="Solution 2.2"></a>Solution 2.2</h4><p>By Gauss-Newton iteration: $w^\text{new}=w^\text{old}-H^{-1}\nabla E(w)$, we obtain $w_\text{ML}$,</p>
+<p>where</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+E(w) &= \frac{1}{2} (w-m_0)^\text T\Sigma_0^{-1}(w-m_0)-\sum\limits_{n=1}^N  [t_n\ln y_n + (1-t_n)\ln(1-y_n)]\\
+\nabla E(w) &=\Sigma_0^{-1}(w-m_0)+ \sum\limits_{n=1}^N (y_n-t_n)\phi(x_n)\\
+\text{step size}\quad H &= \nabla^2 E(w) = \Sigma_0^{-1}+\sum\limits_{n=1}^N y_n(1-y_n)\phi(x_n)\phi(x_n)^\text T
+\end{align*}</script><p>Hence </p>
+<script type="math/tex; mode=display">
+q(w) = \mathcal N(w\vert w_\text{MAP}, H^{-1})</script><h4 id="Question-2-3"><a href="#Question-2-3" class="headerlink" title="Question 2.3"></a>Question 2.3</h4><p>What’s $p(t\vert y(w,x))$ for ML and MAP estimation, respectively?</p>
+<h4 id="Solution-2-3"><a href="#Solution-2-3" class="headerlink" title="Solution 2.3"></a>Solution 2.3</h4><p>Probability of $t=1$ w.r.t. ML and MAP estimations</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p_\text{ML}(t=1\vert y(w_\text{ML},x)) &= \sigma(w_\text{ML}^\text T\phi(x)) = \frac{1}{1+\exp(-w_\text{ML}^\text T\phi(x))}\\
+p_\text{MAP}(t=1\vert y(w_\text{MAP},x)) &= \sigma(w_\text{MAP}^\text T\phi(x))= \frac{1}{1+\exp(-w_\text{MAP}^\text T\phi(x))}\\
+\end{align*}</script>]]></content>
       <categories>
         <category>CS</category>
       </categories>

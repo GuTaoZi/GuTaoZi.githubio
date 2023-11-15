@@ -28,7 +28,7 @@
 <meta property="og:description" content="Quiz 1 for ML, really hard :(">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-10-31T03:13:42.305Z">
-<meta property="article:modified_time" content="2023-11-07T02:32:03.984Z">
+<meta property="article:modified_time" content="2023-11-14T00:09:12.992Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Machine Learning">
 <meta property="article:tag" content="Artificial Intelligence">
@@ -226,7 +226,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2023-11-07 10:32:03" itemprop="dateModified" datetime="2023-11-07T10:32:03+08:00">2023-11-07</time>
+                <time title="Modified: 2023-11-14 08:09:12" itemprop="dateModified" datetime="2023-11-14T08:09:12+08:00">2023-11-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -296,7 +296,10 @@ p(D\vert m_0,\Sigma_0,Q)&=\int p(D\vert u,Q)p(u\vert m_0,\Sigma_0) du\\
 <h3 id="Solution-2-3"><a href="#Solution-2-3" class="headerlink" title="Solution 2.3"></a>Solution 2.3</h3><h3 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h3><h4 id="Learning"><a href="#Learning" class="headerlink" title="Learning"></a>Learning</h4><script type="math/tex; mode=display">
 p(\theta\vert\mathcal D)\propto p(\mathcal D\vert\theta)\cdot p(\theta)</script><h4 id="Prediction"><a href="#Prediction" class="headerlink" title="Prediction"></a>Prediction</h4><script type="math/tex; mode=display">
 p(t\vert x,\mathcal D)=\int p(t\vert x,\mathcal \theta) \cdot p(\theta\vert\mathcal D) \text d \theta</script><h4 id="Evidence"><a href="#Evidence" class="headerlink" title="Evidence"></a>Evidence</h4><script type="math/tex; mode=display">
-p(\mathcal D)=\int p(\mathcal D\vert\theta)\cdot p(\theta) \text d\theta</script>
+p(\mathcal D)=\int p(\mathcal D\vert\theta)\cdot p(\theta) \text d\theta</script><h2 id="Review-on-Nov-14"><a href="#Review-on-Nov-14" class="headerlink" title="Review on Nov. 14"></a>Review on Nov. 14</h2><p>$x\sim p(x\vert \mu,\Sigma)$, $x = [x_0,\dots,x_N]$, $\mu\sim p(\mu\vert m_0,\Sigma_0)$</p>
+<p>posterior $p(\mu\vert x,m_0,\Sigma_0)\propto p(x\vert \mu) p(\mu)$</p>
+<script type="math/tex; mode=display">
+-\frac 1 2 (\mu-m_\text{MAP})^\text T \Sigma_\text{MAP}^{-1}(\mu-m_\text{MAP}) = -\sum\limits_{i=1}^N\frac 1 2 (x_i-\mu)^\text T \Sigma_\text{ML}^{-1}(x_i-\mu) - \frac 1 2 (\mu-m_0)^\text T \Sigma_0^{-1}(\mu-m_0)</script>
     </div>
 
     
@@ -394,7 +397,7 @@ p(\mathcal D)=\int p(\mathcal D\vert\theta)\cdot p(\theta) \text d\theta</script
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CS329-Machine-Learning-H-Quiz-1"><span class="nav-number">1.</span> <span class="nav-text">CS329 Machine Learning(H) Quiz 1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-1"><span class="nav-number">1.1.</span> <span class="nav-text">Question 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1-1"><span class="nav-number">1.2.</span> <span class="nav-text">Solution 1.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1-2"><span class="nav-number">1.3.</span> <span class="nav-text">Solution 1.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1-3"><span class="nav-number">1.4.</span> <span class="nav-text">Solution 1.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-2"><span class="nav-number">1.5.</span> <span class="nav-text">Question 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2-1"><span class="nav-number">1.6.</span> <span class="nav-text">Solution 2.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2-2"><span class="nav-number">1.7.</span> <span class="nav-text">Solution 2.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2-3"><span class="nav-number">1.8.</span> <span class="nav-text">Solution 2.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Review"><span class="nav-number">1.9.</span> <span class="nav-text">Review</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Learning"><span class="nav-number">1.9.1.</span> <span class="nav-text">Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prediction"><span class="nav-number">1.9.2.</span> <span class="nav-text">Prediction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Evidence"><span class="nav-number">1.9.3.</span> <span class="nav-text">Evidence</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CS329-Machine-Learning-H-Quiz-1"><span class="nav-number">1.</span> <span class="nav-text">CS329 Machine Learning(H) Quiz 1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-1"><span class="nav-number">1.1.</span> <span class="nav-text">Question 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1-1"><span class="nav-number">1.2.</span> <span class="nav-text">Solution 1.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1-2"><span class="nav-number">1.3.</span> <span class="nav-text">Solution 1.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1-3"><span class="nav-number">1.4.</span> <span class="nav-text">Solution 1.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-2"><span class="nav-number">1.5.</span> <span class="nav-text">Question 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2-1"><span class="nav-number">1.6.</span> <span class="nav-text">Solution 2.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2-2"><span class="nav-number">1.7.</span> <span class="nav-text">Solution 2.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2-3"><span class="nav-number">1.8.</span> <span class="nav-text">Solution 2.3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Review"><span class="nav-number">1.9.</span> <span class="nav-text">Review</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Learning"><span class="nav-number">1.9.1.</span> <span class="nav-text">Learning</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Prediction"><span class="nav-number">1.9.2.</span> <span class="nav-text">Prediction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Evidence"><span class="nav-number">1.9.3.</span> <span class="nav-text">Evidence</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Review-on-Nov-14"><span class="nav-number">2.</span> <span class="nav-text">Review on Nov. 14</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -410,7 +413,7 @@ p(\mathcal D)=\int p(\mathcal D\vert\theta)\cdot p(\theta) \text d\theta</script
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">41</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
