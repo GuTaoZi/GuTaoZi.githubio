@@ -20,17 +20,20 @@
     var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"slideLeftBigIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Just Do It, But Not Just Do It.">
+  <meta name="description" content="Project description for CS205 C&#x2F;C++ Program Design, SUSTech, 2023 Fall.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="咕桃w！">
+<meta property="og:title" content="CS205 C&#x2F;C++ Project Audio Convertor">
 <meta property="og:url" content="https://gutaozi.github.io/2023/11/25/CS205_Audio_Convertor/index.html">
 <meta property="og:site_name" content="咕桃w！">
-<meta property="og:description" content="Just Do It, But Not Just Do It.">
+<meta property="og:description" content="Project description for CS205 C&#x2F;C++ Program Design, SUSTech, 2023 Fall.">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://www.freeimg.cn/i/2023/11/23/655f3de106490.png">
 <meta property="article:published_time" content="2023-11-25T15:43:50.380Z">
-<meta property="article:modified_time" content="2023-11-25T15:43:50.380Z">
+<meta property="article:modified_time" content="2023-11-25T16:01:38.863Z">
 <meta property="article:author" content="咕桃">
+<meta property="article:tag" content="C&#x2F;C++">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.freeimg.cn/i/2023/11/23/655f3de106490.png">
 
 <link rel="canonical" href="https://gutaozi.github.io/2023/11/25/CS205_Audio_Convertor/">
 
@@ -45,7 +48,7 @@
   };
 </script>
 
-  <title> | 咕桃w！</title>
+  <title>CS205 C/C++ Project Audio Convertor | 咕桃w！</title>
   
 
 
@@ -207,7 +210,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          
+          CS205 C/C++ Project Audio Convertor
         </h1>
 
         <div class="post-meta">
@@ -219,8 +222,25 @@
 
               <time title="Created: 2023-11-25 23:43:50" itemprop="dateCreated datePublished" datetime="2023-11-25T23:43:50+08:00">2023-11-25</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-11-26 00:01:38" itemprop="dateModified" datetime="2023-11-26T00:01:38+08:00">2023-11-26</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index"><span itemprop="name">CS</span></a>
+                </span>
+            </span>
 
           
+            <div class="post-description">Project description for CS205 C/C++ Program Design, SUSTech, 2023 Fall.</div>
 
         </div>
       </header>
@@ -231,7 +251,142 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <p>By <a target="_blank" rel="noopener" href="https://github.com/Artanisax">Artanisax</a> and <a target="_blank" rel="noopener" href="https://github.com/GuTaoZi">GuTao</a>.</p>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>In this project, you need to implement a library in C/C++ that supports encoding conversion from <code>.pcm</code> raw audio files to <code>.wav</code> files and then to simple <code>.flac</code> files, as well as decoding wav and flac format files. Also you need to implement a CLI (Command Line Interface) to demonstrate your project.</p>
+<h2 id="Audio-Formats"><a href="#Audio-Formats" class="headerlink" title="Audio Formats"></a>Audio Formats</h2><h3 id="PCM"><a href="#PCM" class="headerlink" title="PCM"></a><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Pulse-code_modulation">PCM</a></h3><p>A <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Raw_audio_format">raw audio file</a> is any file containing un-containerized and uncompressed audio. The data is stored as <strong>raw pulse-code modulation (PCM)</strong> values <strong>without any metadata header information</strong> (such as sampling rate, bit depth, endian, or number of channels).</p>
+<h3 id="WAV"><a href="#WAV" class="headerlink" title="WAV"></a><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/WAV">WAV</a></h3><p>WAV, known for WAVE (Waveform Audio File Format), is a subset of Microsoft’s Resource Interchange File Format (RIFF) specification for storing digital audio files. The format doesn’t apply any compression to the bitstream and stores the audio recordings with different sampling rates and bitrates. This format is of <strong>little-endian</strong>!</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">                           RIFF Header                         </span><br><span class="line">+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+</span><br><span class="line">| 0                          15 | 16                       31 |</span><br><span class="line">|=============================================================|</span><br><span class="line">|                    RIFF header identifier                   |</span><br><span class="line">|-------------------------------------------------------------|</span><br><span class="line">|                          Total Size                         |</span><br><span class="line">|-------------------------------------------------------------|</span><br><span class="line">|                          File type                          |</span><br><span class="line">+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+</span><br><span class="line"></span><br><span class="line">                          Format Chunk                         </span><br><span class="line">+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+</span><br><span class="line">| 0                          15 | 16                       31 |</span><br><span class="line">|=============================================================|</span><br><span class="line">|                    Format chunk identifier                  |</span><br><span class="line">|-------------------------------------------------------------|</span><br><span class="line">|                         Chunk Size                          |</span><br><span class="line">|-------------------------------------------------------------|</span><br><span class="line">|         audio format         |      number of channels      |</span><br><span class="line">|-------------------------------------------------------------|</span><br><span class="line">|                         Sample Rate                         |</span><br><span class="line">|-------------------------------------------------------------|</span><br><span class="line">|                          Byte Rate                          |</span><br><span class="line">|-------------------------------------------------------------|</span><br><span class="line">|          Block Align         |        Bits Per Sample       | </span><br><span class="line">+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+</span><br><span class="line"></span><br><span class="line">                           Data Chunk                          </span><br><span class="line">+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+</span><br><span class="line">| 0                          15 | 16                       31 |</span><br><span class="line">|=============================================================|</span><br><span class="line">|                     Data chunk identifier                   |</span><br><span class="line">|-------------------------------------------------------------|</span><br><span class="line">|                          Data Size                          |</span><br><span class="line">|-------------------------------------------------------------|</span><br><span class="line">|                         Sample Data                         |  </span><br><span class="line">+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+</span><br></pre></td></tr></table></figure>
+<h3 id="FLAC"><a href="#FLAC" class="headerlink" title="FLAC"></a><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/FLAC">FLAC</a></h3><p><strong>FLAC</strong> stands for <strong>Free Lossless Audio Codec</strong>, an audio format similar to MP3, but lossless, meaning that audio is compressed in FLAC without any loss in quality.</p>
+<p>FLAC stands out as the fastest and most widely supported lossless audio codec, and the only one that at once is non-proprietary, is unencumbered by patents, has an open-source reference implementation, has a well documented format and API, and has several other independent implementations. This format is of <strong>big-endian</strong>!</p>
+<p>More information like the FLAC format specification can be found on the <a target="_blank" rel="noopener" href="https://xiph.org/flac/documentation.html">official documentation of FLAC</a>.</p>
+<h2 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h2><p>The tasks below are listed in ascending order of difficulty to implement, and we recommend that you implement them in this order.</p>
+<h3 id="Metadata-Display-amp-Edit-15-pts"><a href="#Metadata-Display-amp-Edit-15-pts" class="headerlink" title="Metadata Display &amp; Edit (15 pts)"></a>Metadata Display &amp; Edit (15 pts)</h3><p>In this part, you need to impement an executable file to display and edit the metadata of FLAC files. Given a <code>.flac</code> file, your program should be able to decode and display the information of metadata blocks of type 0 (STREAMINFO) and type 4 (VORBIS_COMMENT).</p>
+<p>A <code>.flac</code> file is given as the official testcase for this task.</p>
+<h3 id="Encoder-RAW-→-WAV-→-FLAC-30-pts"><a href="#Encoder-RAW-→-WAV-→-FLAC-30-pts" class="headerlink" title="Encoder: RAW → WAV → FLAC (30 pts)"></a>Encoder: RAW → WAV → FLAC (30 pts)</h3><p>In this part, you need to implement a convertor from .raw to <code>.wav</code> (10 pts), and then to <code>.flac</code> (20 pts).</p>
+<p>The first subtask is to convert a raw audio file to a <code>.wav</code> file. Since the raw audio file does not contain information like sample rate, bits per sample (depth), number of channel etc., when converting .raw to .wav, an additional .json file is needed to provide extra information in the header. In official test cases, a .json file is given along with each <code>.pcm</code> file.</p>
+<p>The second subtask is to convert a <code>.wav</code> file into a <code>.flac</code> file. For basic requirement, you only need to encode every subblock into a subframe using <a target="_blank" rel="noopener" href="https://xiph.org/flac/format.html#subframe_verbatim">Verbatim predictor</a> (no encodig), with STREAMINFO and VORBIS_COMMENT metadata.</p>
+<p>An important evaluation metric in this task is whether the audio files converted by your library can be played with commonly used media players.</p>
+<p>A <code>.pcm</code> file with .json is given as the official testcase for this task.</p>
+<h3 id="Decoder-FLAC-→-WAV-→-RAW-30-pts"><a href="#Decoder-FLAC-→-WAV-→-RAW-30-pts" class="headerlink" title="Decoder: FLAC → WAV → RAW (30 pts)"></a>Decoder: FLAC → WAV → RAW (30 pts)</h3><p>For the third task, you are required to implement a decoder for your library, to convert a <code>.flac</code> file into <code>.wav</code> format (20 pts), and then to <code>.pcm</code> format (10 pts).</p>
+<p>Same as above, you only need to handle simple <code>.flac</code> files with STREAMINFO and VORBIS_COMMENT metadata and Verbatim subframes.</p>
+<p>You can choose the <code>.flac</code> file generated in the second task as the input (testcase) for this task, and check if the <code>.wav</code> and <code>.pcm</code> files are the same as the input ones of the encoder.</p>
+<p>No official testcase is given for this task.</p>
+<h3 id="Possible-Bonus-Ideas-infty-pts"><a href="#Possible-Bonus-Ideas-infty-pts" class="headerlink" title="Possible Bonus Ideas ($\infty$ pts)"></a>Possible Bonus Ideas ($\infty$ pts)</h3><p>Here we offer some ideas about the possible bonus functions, with estimated difficulties. You are also encouraged to explore your own bonus ideas.</p>
+<p>The tasks below are listed in ascending order of difficulty to implement.</p>
+<ul>
+<li><p>😊 <strong>Excellent Project Management:</strong><br>How to manage a project during development can be very easy, or very hard. Try to manage your project structure well, keep a changelog for revision control, write a user-friendly document, cooperate via GitHub, GitLab…</p>
+<p>This should have been a basic requirement, but we set it as bonus to encourage you to learn how to manage a cooperating project well, which is an important skill that you can benefit from in future project development.</p>
+<blockquote>
+<p>Stop using QQ/Wechat to synchronize your project!<br>That’s too brutal!</p>
+</blockquote>
+</li>
+<li><p>😊 <strong>More Metadata Block Types:</strong><br>Support (analyze, display and edit) additional metadata block types, like PADDING, SEEKTABLE, PICTURE etc.</p>
+<ul>
+<li><p>If a COMMENT block is followed by a PADDING block, the additional comments to be appended should overwright part of the PADDING block first rather than insert directly.</p>
+</li>
+<li><p>If an existing SEEKTABLE block (one <code>.flac</code> file has atmost one SEEKTABLE block) has placeholder seekpoints, the added ones are supposed to replace the placeholders.</p>
+</li>
+</ul>
+</li>
+<li><p>😊 <strong>Extreme Robustness:</strong><br>  Although robustness is one of the basic requirements to obtain basic points, you can get bonus points if your library is excellent in terms of exception handling and memory management!</p>
+<p>  MD5 signiture and CRC check should also be covered in your decoder for this bonus.</p>
+<p>  However, to get this bonus part, you need to rethink what kind of robustness can be qualified as <strong>“extreme”</strong>.</p>
+<blockquote>
+<p>Oops! Why segmentation fault again!</p>
+</blockquote>
+</li>
+<li><p>🤔 <strong>Interchannel Decorrelation</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://xiph.org/flac/format.html#interchannel">Detailed introduction here</a>.</li>
+<li>To implement this function, you may need to modify both the encoder and decoder, to adapt to different channel assignment.</li>
+</ul>
+</li>
+<li><p>🤔 <strong>More Subframe Types</strong><br>Support additional subblock encoding patterns like SUBFRAME_CONSTANT, SUBFRAME_FIXED, SUBFRAME_LPC. You will learn the magic of lossless data compression during this bonus.</p>
+<ul>
+<li>When implementing this part, you are doing <strong>real lossless compression</strong>, the <code>.flac</code> file generated will reduce in size.</li>
+<li>CONSTANT is recommended, the other two may need some pre-knowledge of signal processing.</li>
+</ul>
+<blockquote>
+<p>My dad taught me that in Hawaii.</p>
+</blockquote>
+</li>
+<li><p>🤔 <strong>GUI</strong><br>Implement a pretty GUI for your convertor! However, you should still focus on the main part of this project: your library.</p>
+<blockquote>
+<p>Gold needs to shine, too.</p>
+</blockquote>
+</li>
+<li><p>😇 <strong>All-round Decoder</strong><br><a target="_blank" rel="noopener" href="https://github.com/ietf-wg-cellar/flac-test-files">FLAC decoder testbench</a> provides a collection of FLAC files that can be used to test various FLAC decoder abilities. Improve your decoder to pass as many testcases as possible <a target="_blank" rel="noopener" href="https://github.com/ietf-wg-cellar/flac-test-files/tree/main/subset">here</a>, the more robust your library is, the more bonus points you get.</p>
+<blockquote>
+<p>It’s a hexagonal warrior.</p>
+</blockquote>
+</li>
+<li><p>😇 <strong>More Audio Formats</strong></p>
+<p>Modify your library to make it work for more audio formats. A recommended challenge for those who are familiar with the audio file encoding formats.</p>
+<blockquote>
+<p>No pain, no gain.</p>
+</blockquote>
+</li>
+<li><p><strong>Anything You Regard as “Bonus”</strong></p>
+<p>  Your team is encouraged to come up with your own ideas, we will grade your bonus according to your workload and implementation.</p>
+</li>
+</ul>
+<p>Please describe your bonus clearly in your report, so that inspectors can fully understand and grade your bonus ideas.</p>
+<h3 id="Self-Prepared-Testcases-5-pts"><a href="#Self-Prepared-Testcases-5-pts" class="headerlink" title="Self-Prepared Testcases (5 pts)"></a>Self-Prepared Testcases (5 pts)</h3><p>You are required to prepare at least 1 testcase for each basic function.</p>
+<p>For your bonus part, you should prepare at least 1 testcase for each bonus function, otherwise the bonus is invalid.</p>
+<p>Good news: any valid testcases that check the full usability of your library will obtain all of the 5 points.</p>
+<h3 id="Report-10-pts"><a href="#Report-10-pts" class="headerlink" title="Report (10 pts)"></a>Report (10 pts)</h3><p>The report should be in <strong>PDF</strong> format, easy to understand and provide a clear description of the project, especially the <strong>highlights</strong>. <u>Notice that your report should contain everything that a good README has.</u></p>
+<p>The report should also includes a detailed description of each team member’s contribution, and contribution rated as</p>
+<ul>
+<li>A (significant contribution)</li>
+<li>B (moderate contribution)</li>
+<li>C (little contribution)</li>
+<li>D (free rider).</li>
+</ul>
+<p>Reports that meaninglessly pile up pages will result in lower scores. Please be as concise and brief as possible and just show the highlights. Please avoid pasting too much code in your report. Any non-technical detail should be discarded, that’s a waste of time for both your team and the inspectors.</p>
+<p>You are encouraged to use IEEE, ACM, or any other elegant templates, however this will not affect your score, just to ease the veins of inspectors.</p>
+<h2 id="Grading-Policy"><a href="#Grading-Policy" class="headerlink" title="Grading Policy"></a>Grading Policy</h2><p>The maximum of this project is 110 points, consists of:</p>
+<ul>
+<li>basic functions (75)</li>
+<li>report (10)</li>
+<li>self-prepared testcases (5)</li>
+<li>bonus functions (20 + overflow to make up for basic requirements)</li>
+</ul>
+<ol>
+<li><p>Your library need to support basic functions, including metadata display and editing, encoding and decoding, and pass all official testcases.<br> After implementing the basic part, the <strong>upper bound</strong> of your basic score will reach 65, failure to pass the basic usability test will make your upper bound less than 65.</p>
+</li>
+<li><p>If your bonus part gains over 20 points, the overflow part can fill the basic part loss.</p>
+</li>
+<li><p>Be careful of the memory management and exception handling! Your library should be robust enough for basic use. Bad memory management will reduce your score.</p>
+</li>
+<li><p>Attention should be paid to code style. Adequate time is given for code to be written correctly and with good style. Deductions on the score will be made for poor code style. Code style guides, such as the <a target="_blank" rel="noopener" href="http://google.github.io/styleguide/cppguide.html">Google C++ Style Guide</a>, can be used as a reference.</p>
+</li>
+</ol>
+<h2 id="Rules"><a href="#Rules" class="headerlink" title="Rules"></a>Rules</h2><ol>
+<li><p>To make this project more interesting, you are not allowed to use libFLAC, libFLAC++, ffmpeg, or any other library making it TOO easy to implement your convertor. Since your workload will be evaluated for grading.</p>
+</li>
+<li><p>The project files must be submitted before the deadline. Any submission after the deadline (even by 1 second) will result in a score of 0. The deadline is 23:59, on the Sunday of week 18.</p>
+</li>
+</ol>
+<h2 id="Utilities"><a href="#Utilities" class="headerlink" title="Utilities"></a>Utilities</h2><p>Heres some useful tools to help you understand the formats and file streams. Notice that you may <strong>NOT</strong> invoke them in your own source code.</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://xiph.org/flac/documentation_tools.html">FLAC</a><br>The official command-line tools, which contains two sub programs. <code>flac</code> is an encoder as well as a decoder, while <code>metaflac</code> is a metadata editor. Your project may imitate the CLI of this official tool.</p>
+<p>We highly recommend you to check the format of <code>.flac</code> files using <code>flac -a</code> rather than reading the file in hexadecimal when debugging.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">flac input.wav      # encode WAVE into FLAC</span><br><span class="line">flac -d input.flac  # decode FLAC into WAVE</span><br><span class="line">flac -a input.flac  # analyze audio frames</span><br></pre></td></tr></table></figure>
+<p>  <img src="https://www.freeimg.cn/i/2023/11/23/655f3de106490.png" alt="use-flac.png"></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://sourceforge.net/projects/sox/">Sound eXchange</a><br>SoX is the Swiss Army Knife of sound processing utilities. It can convert audio files to other popular audio file types and also apply sound effects and filters during the conversion.</p>
+<p>You may check if your convertor generates the same result as SoX does.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sox -i input.wav        # show WAVE header info</span><br><span class="line">sox input.wav -t raw output.raw  # decode WAVE into RAW</span><br><span class="line">sox -t raw -c 2 -e signed-integer -b 16 -r 44100 name.raw name.wav</span><br><span class="line">  # add headers for RAW and then encode them into WAVE</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.hexeditor">Hex Editor</a><br>A custom editor extension for Visual Studio Code which provides a hex editor for viewing and manipulating files in their raw hexadecimal representation.</p>
+</li>
+</ul>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/WAV">Wikipedia: Waveform Audio File Format</a></p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/FLAC">Wikipedia: Free Lossless Audio Codec</a></p>
+<p><a target="_blank" rel="noopener" href="https://xiph.org/flac/index.html">FLAC Official Webpage</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/xiph/flac">Github: xiph/flac</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/ietf-wg-cellar/flac-test-files">FLAC decoder testbench</a></p>
+
     </div>
 
     
@@ -239,6 +394,9 @@
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          </div>
 
         
 
@@ -322,6 +480,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Overview"><span class="nav-number">1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Audio-Formats"><span class="nav-number">2.</span> <span class="nav-text">Audio Formats</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PCM"><span class="nav-number">2.1.</span> <span class="nav-text">PCM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAV"><span class="nav-number">2.2.</span> <span class="nav-text">WAV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FLAC"><span class="nav-number">2.3.</span> <span class="nav-text">FLAC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Requirements"><span class="nav-number">3.</span> <span class="nav-text">Requirements</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Metadata-Display-amp-Edit-15-pts"><span class="nav-number">3.1.</span> <span class="nav-text">Metadata Display &amp; Edit (15 pts)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Encoder-RAW-%E2%86%92-WAV-%E2%86%92-FLAC-30-pts"><span class="nav-number">3.2.</span> <span class="nav-text">Encoder: RAW → WAV → FLAC (30 pts)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Decoder-FLAC-%E2%86%92-WAV-%E2%86%92-RAW-30-pts"><span class="nav-number">3.3.</span> <span class="nav-text">Decoder: FLAC → WAV → RAW (30 pts)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Possible-Bonus-Ideas-infty-pts"><span class="nav-number">3.4.</span> <span class="nav-text">Possible Bonus Ideas ($\infty$ pts)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Self-Prepared-Testcases-5-pts"><span class="nav-number">3.5.</span> <span class="nav-text">Self-Prepared Testcases (5 pts)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Report-10-pts"><span class="nav-number">3.6.</span> <span class="nav-text">Report (10 pts)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Grading-Policy"><span class="nav-number">4.</span> <span class="nav-text">Grading Policy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rules"><span class="nav-number">5.</span> <span class="nav-text">Rules</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Utilities"><span class="nav-number">6.</span> <span class="nav-text">Utilities</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
