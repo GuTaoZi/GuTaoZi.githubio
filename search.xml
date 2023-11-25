@@ -11481,7 +11481,7 @@ p_\text{MAP}(t=1\vert y(w_\text{MAP},x)) &= \sigma(w_\text{MAP}^\text T\phi(x))=
 <li><p><a href="https://xiph.org/flac/documentation_tools.html">FLAC</a><br>The official command-line tools, which contains two sub programs. <code>flac</code> is an encoder as well as a decoder, while <code>metaflac</code> is a metadata editor. Your project may imitate the CLI of this official tool.</p>
 <p>We highly recommend you to check the format of <code>.flac</code> files using <code>flac -a</code> rather than reading the file in hexadecimal when debugging.</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">flac input.wav      # encode WAVE into FLAC</span><br><span class="line">flac -d input.flac  # decode FLAC into WAVE</span><br><span class="line">flac -a input.flac  # analyze audio frames</span><br></pre></td></tr></table></figure>
-<p>  <img src="https://www.freeimg.cn/i/2023/11/23/655f3de106490.png" alt="use-flac.png"></p>
+<p><img src="https://s2.loli.net/2023/11/26/lZD8UhqR17aQeSk.png" alt="image.png"></p>
 </li>
 <li><p><a href="https://sourceforge.net/projects/sox/">Sound eXchange</a><br>SoX is the Swiss Army Knife of sound processing utilities. It can convert audio files to other popular audio file types and also apply sound effects and filters during the conversion.</p>
 <p>You may check if your convertor generates the same result as SoX does.</p>
