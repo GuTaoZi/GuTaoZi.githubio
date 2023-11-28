@@ -11533,16 +11533,19 @@ A&=\nabla^2 E(w) = \alpha\mathbf I + \mathbf H
 <p>where $\mathbf H$ is the Hessian matrix of the sum of error function.</p>
 <p>Hence we have $p(w_\text{MAP}\vert \mathcal D) = \mathcal N(w\vert w_\text{MAP},A^{-1})$.</p>
 <h4 id="Question-2-2"><a href="#Question-2-2" class="headerlink" title="Question 2.2"></a>Question 2.2</h4><p>What are the predictive distributions of a new data input $x_{N+1}$ and label $t_{N+1}$ for both cases?</p>
-<ol>
-<li>Regression<script type="math/tex; mode=display">
-p(t_{N+1}\vert x_{N+1}) = \mathcal N(y(x,w_\text{MAP}),\beta^{-1}+g^\text T Ag)</script></li>
+<h4 id="Solution-2-2"><a href="#Solution-2-2" class="headerlink" title="Solution 2.2"></a>Solution 2.2</h4><ol>
+<li><p>Regression</p>
+<script type="math/tex; mode=display">
+p(t_{N+1}\vert x_{N+1}, \mathcal{D}) = \mathcal N(y(x,w_\text{MAP}),\beta^{-1}+g^\text T Ag)</script><script type="math/tex; mode=display">
+p(t_{N+1}\vert x_{N+1},\mathcal D) =\mathcal N(y(x_{N+1},\theta_\text{MAP})+\bar q_\text{MAP}^\text{T}H^{-1}_\text{MAP}\bar q_\text{MAP})</script></li>
 </ol>
 <ol>
 <li><p>Classification</p>
-<p>$p(t_{N+1} \mid \boldsymbol{x_{N+1}}, \mathcal{D})=\sigma\left(\kappa\left(\sigma_{a}^{2}\right) a_{M A P}\right)$</p>
-</li>
+<script type="math/tex; mode=display">
+p(t_{N+1} \vert{x_{N+1}}, \mathcal{D})=\sigma\left(\kappa\left(\sigma_{a}^{2}\right) a_{M A P}\right)</script></li>
 </ol>
-]]></content>
+<script type="math/tex; mode=display">
+p(t_{N+1}\vert x_{N+1},\mathcal D) =p(t_{N+1}\vert x_{N+1},\mathcal \theta_\text{MAP}) =(y(x_{N+1},\theta_\text{MAP}))^{t_{N+1}}(1-y(x_{N+1},\theta_\text{MAP}))^{1-t_{N+1}}</script>]]></content>
       <categories>
         <category>CS</category>
       </categories>
