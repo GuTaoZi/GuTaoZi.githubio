@@ -20,21 +20,23 @@
     var CONFIG = {"hostname":"gutaozi.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"slideLeftBigIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="RL Seminar 1&#x2F;4 by Yansong Li">
+  <meta name="description" content="Quiz 3 for ML, Neural Networks">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Reinforcement Learning Seminar Ⅰ">
-<meta property="og:url" content="https://gutaozi.github.io/2023/07/02/RL_Seminar_1/index.html">
+<meta property="og:title" content="CS329 Machine Learning Quiz 3">
+<meta property="og:url" content="https://gutaozi.github.io/2023/11/28/CS329_Quiz_3/index.html">
 <meta property="og:site_name" content="咕桃w！">
-<meta property="og:description" content="RL Seminar 1&#x2F;4 by Yansong Li">
+<meta property="og:description" content="Quiz 3 for ML, Neural Networks">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-07-02T10:55:11.091Z">
-<meta property="article:modified_time" content="2023-07-02T12:20:40.230Z">
+<meta property="og:image" content="https://s2.loli.net/2023/11/28/b7tYKeFscGjp6Dw.png">
+<meta property="article:published_time" content="2023-11-28T01:00:00.000Z">
+<meta property="article:modified_time" content="2023-11-28T03:37:29.116Z">
 <meta property="article:author" content="咕桃">
+<meta property="article:tag" content="Machine Learning">
 <meta property="article:tag" content="Artificial Intelligence">
-<meta property="article:tag" content="Reinforcement Learning">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/11/28/b7tYKeFscGjp6Dw.png">
 
-<link rel="canonical" href="https://gutaozi.github.io/2023/07/02/RL_Seminar_1/">
+<link rel="canonical" href="https://gutaozi.github.io/2023/11/28/CS329_Quiz_3/">
 
 
 <script id="page-configurations">
@@ -47,7 +49,7 @@
   };
 </script>
 
-  <title>Reinforcement Learning Seminar Ⅰ | 咕桃w！</title>
+  <title>CS329 Machine Learning Quiz 3 | 咕桃w！</title>
   
 
 
@@ -196,7 +198,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/07/02/RL_Seminar_1/">
+    <link itemprop="mainEntityOfPage" href="https://gutaozi.github.io/2023/11/28/CS329_Quiz_3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://avatars.githubusercontent.com/u/109007949?v=4">
@@ -209,7 +211,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Reinforcement Learning Seminar Ⅰ
+          CS329 Machine Learning Quiz 3
         </h1>
 
         <div class="post-meta">
@@ -220,7 +222,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-07-02 18:55:11 / Modified: 20:20:40" itemprop="dateCreated datePublished" datetime="2023-07-02T18:55:11+08:00">2023-07-02</time>
+              <time title="Created: 2023-11-28 09:00:00 / Modified: 11:37:29" itemprop="dateCreated datePublished" datetime="2023-11-28T09:00:00+08:00">2023-11-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -233,7 +235,7 @@
             </span>
 
           
-            <div class="post-description">RL Seminar 1/4 by Yansong Li</div>
+            <div class="post-description">Quiz 3 for ML, Neural Networks</div>
 
         </div>
       </header>
@@ -244,30 +246,133 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Info"><a href="#Info" class="headerlink" title="Info"></a>Info</h2><p>Text editor: $\text{Textmacs}$</p>
-<p>Email: <a href="mailto: yli340@uic.edu">yli340@uic.edu</a></p>
-<h2 id="From-Physics-to-Control-Theory"><a href="#From-Physics-to-Control-Theory" class="headerlink" title="From Physics to Control Theory"></a>From Physics to Control Theory</h2><p>State of Newton’s System(deterministic):</p>
-<script type="math/tex; mode=display">s(t) = \begin{bmatrix}x(t)\\\dot x(t)\end{bmatrix}.</script><p>State-space form of Newton’s 2nd Law:</p>
-<script type="math/tex; mode=display">\begin{align*}\dot s(t) &=\begin{bmatrix}\dot x(t)\\\ddot x(t)\end{bmatrix}\\&= \begin{bmatrix}0\quad1\\0\quad0\end{bmatrix} \begin{bmatrix}x(t)\\\dot x(t)\end{bmatrix} + \begin{bmatrix}0\quad0\\0\quad1\end{bmatrix}\begin{bmatrix}0\\u\end{bmatrix}\\&=A s(t) + B\begin{bmatrix}0\\u\end{bmatrix}.\end{align*}</script><p>What’s a linear transformation? </p>
-<script type="math/tex; mode=display">\mathscr A(x) = \begin{bmatrix}\mathscr Ae_1\quad \mathscr Ae_2\end{bmatrix}x.</script><p>Group, Flow, Lie Group</p>
-<p>General form of state transform:</p>
-<script type="math/tex; mode=display">\dot s(t) = f(s(t), u(t)).</script><h2 id="From-Deterministic-to-Stochastic"><a href="#From-Deterministic-to-Stochastic" class="headerlink" title="From Deterministic to Stochastic"></a>From Deterministic to Stochastic</h2><blockquote>
-<p>Discrete System Only</p>
-</blockquote>
-<h3 id="Without-Controller"><a href="#Without-Controller" class="headerlink" title="Without Controller:"></a>Without Controller:</h3><p>$\dot s(t)=f(s(t)) \rightarrow s_{t+1} = f(s_t)$</p>
-<p>Stochastic dynamic system:</p>
-<p>$s_{t+1} = f(s_t) \rightarrow s_{t+1} \sim p(s_t)$</p>
-<p>Markov System (memoryless):</p>
-<p>$s_{t+1} \sim p(s_0,\cdots,s_t)=p(s_t)$</p>
-<h3 id="With-Controller"><a href="#With-Controller" class="headerlink" title="With Controller:"></a>With Controller:</h3><p>$x_{t+1}=f(x_t,u_t)\rightarrow s_{t+1}\sim p(s_t,a_t)$</p>
-<h2 id="Introduction-to-RL"><a href="#Introduction-to-RL" class="headerlink" title="Introduction to RL"></a>Introduction to RL</h2><p>Interact with environment</p>
-<p>Logic -&gt; Supervised -&gt; RL</p>
-<p>Safe RL</p>
-<p>Sim2Real</p>
-<h2 id="Next-Seminar-MDP"><a href="#Next-Seminar-MDP" class="headerlink" title="Next Seminar: MDP"></a>Next Seminar: MDP</h2><p>Maximize reward function</p>
-<p>$\pi: S\rightarrow\Delta(A)$</p>
-<p>$r: S\times A\rightarrow[0,1]$</p>
-
+        <h2 id="CS329-Machine-Learning-H-Quiz-3"><a href="#CS329-Machine-Learning-H-Quiz-3" class="headerlink" title="CS329 Machine Learning(H) Quiz 3"></a>CS329 Machine Learning(H) Quiz 3</h2><p>樊斯特 12111624</p>
+<h3 id="Before-Quiz"><a href="#Before-Quiz" class="headerlink" title="Before Quiz"></a>Before Quiz</h3><ol>
+<li><p>Learning </p>
+<p>$p(\theta\vert\mathcal D)$</p>
+<ul>
+<li>$p(\mathcal D\vert \theta)p(\theta)$ closed-form solution</li>
+<li>$L(\theta)$<ul>
+<li>$b=\nabla_\theta L(\theta)$</li>
+<li>$H=\nabla^2_\theta L(\theta)$</li>
+</ul>
+</li>
+</ul>
+<p>$\theta^+\leftarrow \theta - H^{-1}b$</p>
+<p>$p(\theta\vert\mathcal D)= \mathcal N(\theta_\text{MAP},H_\text{MAP}^{-1})$</p>
+</li>
+<li><p>Prediction</p>
+<script type="math/tex; mode=display">
+p(t_{N+1}\vert x_{N+1},\mathcal D) = \int p(t_{N+1},\theta\vert x_{N+1},\mathcal D) \text d \theta = \int p(t_{N+1}\vert x_{N+1},\theta)p(\theta\vert\mathcal D)\text d \theta</script><ul>
+<li><p>$t_{N+1} = y(x_{N+1},\theta)+v$, $v\sim \mathcal N(0,\beta^{-1})$</p>
+<p>$p(t_{N+1}\vert x_{N+1},\mathcal D) =\mathcal N(y(x_{N+1},\theta_\text{MAP})+\bar q_\text{MAP}^\text{T}H^{-1}_\text{MAP}\bar q_\text{MAP})$</p>
+</li>
+<li><p>$y(x_{N+1},\theta)=\delta?(\Phi^\text T(x_{N+1})\theta)$</p>
+<p>$p(t_{N+1}\vert x_{N+1},\mathcal D) =p(t_{N+1}\vert x_{N+1},\mathcal \theta_\text{MAP}) =(y(x_{N+1},\theta_\text{MAP}))^{t_{N+1}}(1-y(x_{N+1},\theta_\text{MAP}))^{1-t_{N+1}}$</p>
+</li>
+</ul>
+</li>
+<li><p>Evaluation</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+p(\mathcal D) &= \int p(\mathcal D\vert\theta)p(\theta)\text d \theta\\
+-\ln p(\mathcal D) &=\int- \ln p(\mathcal D\vert \theta)-\ln p(\theta)\text d\theta
+\\ &= -\ln p(\mathcal D\vert \theta_\text{MAP})-\ln p(\theta_\text{MAP})+\int\frac 1 2 (\theta-\theta_\text{MAP})^\text T H^{-1}_\text{MAP}(\theta-\theta_\text{MAP})\text d\theta\\
+&=-\ln p(\mathcal D\vert \theta_\text{MAP})-\ln p(\theta_\text{MAP})-\frac M 2 \ln(2\pi)+\frac M 2 \ln\vert H_\text{MAP} \vert
+\end{align*}</script></li>
+</ol>
+<hr>
+<h3 id="Question-1-Neural-Networks-without-Prior"><a href="#Question-1-Neural-Networks-without-Prior" class="headerlink" title="Question 1 Neural Networks without Prior"></a>Question 1 Neural Networks without Prior</h3><p><img src="https://s2.loli.net/2023/11/28/b7tYKeFscGjp6Dw.png" alt="image.png" style="zoom:50%;" /></p>
+<h4 id="Question-1-1"><a href="#Question-1-1" class="headerlink" title="Question 1.1"></a>Question 1.1</h4><p>What are the gradients of $\frac{\partial y_k}{\partial w_{kj}}$, $\frac{\partial y_k}{\partial w_{ji}}$ for regression and classification, respectively?</p>
+<h4 id="Solution-1-1"><a href="#Solution-1-1" class="headerlink" title="Solution 1.1"></a>Solution 1.1</h4><ol>
+<li><p>Regression</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+y_k&=a_k\\
+\frac{\partial y_k}{\partial w_{kj}}&=\frac{\partial a_k}{\partial w_{kj}}=z_j\\
+z_j&=h(a_j), \frac{\partial a_j}{\partial w_{ji}}=z_i\\
+\frac{\partial y_k}{\partial w_{ji}}&=\frac{\partial a_k}{\partial z_j}\frac{\partial z_j}{\partial a_j}\frac{\partial a_j}{\partial w_{ij}}=w_{kj} h'(a_j)z_i
+\end{align*}</script></li>
+<li><p>Classification</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+y_k&=\sigma(a_k)\\
+\frac{\partial y_k}{\partial w_{kj}}&=\frac{\partial y_k}{\partial a_k}\frac{\partial a_k}{\partial w_{kj}}=\sigma'(a_k)z_j=y_k(1-y_k)z_j\\
+z_j&=h(a_j), \frac{\partial a_j}{\partial w_{ji}}=z_i\\
+\frac{\partial y_k}{\partial w_{ji}}&=\frac{\partial y_k}{\partial a_k}\frac{\partial a_k}{\partial z_j}\frac{\partial z_j}{\partial a_j}\frac{\partial a_j}{\partial w_{ij}}=y_k(1-y_k)w_{kj} h'(a_j)z_i
+\end{align*}</script></li>
+</ol>
+<h4 id="Question-1-2"><a href="#Question-1-2" class="headerlink" title="Question 1.2"></a>Question 1.2</h4><p>What are the gradients of $\frac{\partial E_n}{\partial w_{kj}}$, $\frac{\partial E_n}{\partial w_{ji}}$ for regression and classification, respectively?</p>
+<h4 id="Solution-1-2"><a href="#Solution-1-2" class="headerlink" title="Solution 1.2"></a>Solution 1.2</h4><script type="math/tex; mode=display">
+\begin{align*}
+\delta_k &\equiv y_k-t_k \\
+\delta_j &\equiv \sum\limits_{k=1}^K\frac{\partial E_n}{\partial a_k}\frac{\partial a_k}{\partial a_j} =  h'(a_j) \sum\limits_{k=1}^K w_{kj}\delta_k \\
+\end{align*}</script><ol>
+<li><p>Regression</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+E_n &= \frac 1 2 \sum\limits_{k=1}^K (y_k-t_k)^2\\
+\frac{\partial E_n}{\partial w_{kj}} &=\frac{\partial E_n}{\partial y_k}\frac{\partial y_k}{\partial w_{kj}} =(y_k-t_k)z_j =\delta_kz_j\\
+\frac{\partial E_n}{\partial w_{ji}} &= \frac{\partial E_n}{\partial a_j}\frac{\partial a_j}{\partial w_{kj}} =h'(a_j)\sum\limits_{k=1}^N w_{kj}\delta_k z_i =\delta_jz_i
+\end{align*}</script></li>
+<li><p>Classification</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+E_n &= -\sum\limits_{k=1}^K t_k\ln y_k + (1-t_k)\ln (1-y_k)\\
+\frac{\partial E_n}{\partial w_{kj}} &=\frac{\partial E_n}{\partial y_k}\frac{\partial y_k}{\partial a_k}\frac{\partial a_k}{\partial w_{kj}} = (y_k-t_k)z_j = \delta_kz_j\\
+\frac{\partial E_n}{\partial w_{ji}} &= \frac{\partial E_n}{\partial a_j}\frac{\partial a_j}{\partial w_{kj}} = h'(a_j)\sum\limits_{k=1}^N w_{kj}\delta_k z_i = \delta_jz_i
+\end{align*}</script></li>
+</ol>
+<h4 id="Question-1-3"><a href="#Question-1-3" class="headerlink" title="Question 1.3"></a>Question 1.3</h4><p>What’s the gradients of $\frac{\partial y_k}{\partial z_i}$ for regression and classification, respectively?</p>
+<h4 id="Solution-1-3"><a href="#Solution-1-3" class="headerlink" title="Solution 1.3"></a>Solution 1.3</h4><ol>
+<li><p>Regression</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\frac{\partial y_k}{\partial z_i} = \frac{\partial y_k}{\partial a_k}\frac{\partial a_k}{\partial z_j}\frac{\partial z_j}{\partial a_j}\frac{\partial a_j}{\partial z_i} = w_{kj}h'(a_j)w_{ji}
+\end{align*}</script></li>
+<li><p>Classification</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\frac{\partial y_k}{\partial z_i} = \frac{\partial y_k}{\partial a_k}\frac{\partial a_k}{\partial z_j}\frac{\partial z_j}{\partial a_j}\frac{\partial a_j}{\partial z_i} = y_k(1-y_k)w_{kj}h'(a_j)w_{ji}
+\end{align*}</script></li>
+</ol>
+<h3 id="Question-2-Neural-Networks-with-Prior"><a href="#Question-2-Neural-Networks-with-Prior" class="headerlink" title="Question 2 Neural Networks with Prior"></a>Question 2 Neural Networks with Prior</h3><p>If the prior of $w\sim \mathcal N(m_0,\Sigma_0^{-1})$ for both regression and classification, then</p>
+<h4 id="Question-2-1"><a href="#Question-2-1" class="headerlink" title="Question 2.1"></a>Question 2.1</h4><p>What are the MAP solutions of $w,p(w\vert\mathcal D)$ for both cases?</p>
+<h4 id="Solution-2-1"><a href="#Solution-2-1" class="headerlink" title="Solution 2.1"></a>Solution 2.1</h4><p>By iterating $w^\text {new}=w^\text {old}-A^{-1}\nabla E(w)$, we obtain $w_\text{MAP}$.</p>
+<ol>
+<li><p>Regression</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+E(w) &= -\ln p(w\vert \mathbf t) = \frac\alpha 2 w^\text Tw +\frac\beta 2 \sum\limits_{n=1}^N [y(x_n,w)-t_n]^2 + C\\
+\nabla E(w) &=\alpha w + \beta \sum\limits_{n=1}^N (y_n-t_n)\mathbf g_n\\
+\mathbf g &= \nabla_{w} y(\mathbf x,w)\vert_{w=w_\text{MAP}}\\
+A&=\nabla^2 E(w) = \alpha\mathbf I + \beta \mathbf H
+\end{align*}</script></li>
+<li><p>Classification</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+E(w) &= -\ln p(w\vert \mathbf t) = \frac\alpha 2 w^\text Tw -\sum\limits_{n=1}^N [t_n\ln y_n + (1-t_n)\ln(1-y_n)]\\
+\nabla E(w) &=\alpha w + \sum\limits_{n=1}^N (y_n-t_n)\mathbf g_n\\
+\mathbf g &= \nabla_{w} y(\mathbf x,w)\vert_{w=w_\text{MAP}}\\
+A&=\nabla^2 E(w) = \alpha\mathbf I + \mathbf H
+\end{align*}</script></li>
+</ol>
+<p>where $\mathbf H$ is the Hessian matrix of the sum of error function.</p>
+<p>Hence we have $p(w_\text{MAP}\vert \mathcal D) = \mathcal N(w\vert w_\text{MAP},A^{-1})$.</p>
+<h4 id="Question-2-2"><a href="#Question-2-2" class="headerlink" title="Question 2.2"></a>Question 2.2</h4><p>What are the predictive distributions of a new data input $x_{N+1}$ and label $t_{N+1}$ for both cases?</p>
+<h4 id="Solution-2-2"><a href="#Solution-2-2" class="headerlink" title="Solution 2.2"></a>Solution 2.2</h4><ol>
+<li><p>Regression</p>
+<script type="math/tex; mode=display">
+p(t_{N+1}\vert x_{N+1}, \mathcal{D}) = \mathcal N(y(x,w_\text{MAP}),\beta^{-1}+g^\text T Ag)</script><script type="math/tex; mode=display">
+p(t_{N+1}\vert x_{N+1},\mathcal D) =\mathcal N(y(x_{N+1},\theta_\text{MAP})+\bar q_\text{MAP}^\text{T}H^{-1}_\text{MAP}\bar q_\text{MAP})</script></li>
+</ol>
+<ol>
+<li><p>Classification</p>
+<script type="math/tex; mode=display">
+p(t_{N+1} \vert{x_{N+1}}, \mathcal{D})=\sigma\left(\kappa\left(\sigma_{a}^{2}\right) a_{M A P}\right)</script></li>
+</ol>
+<script type="math/tex; mode=display">
+p(t_{N+1}\vert x_{N+1},\mathcal D) =p(t_{N+1}\vert x_{N+1},\mathcal \theta_\text{MAP}) =(y(x_{N+1},\theta_\text{MAP}))^{t_{N+1}}(1-y(x_{N+1},\theta_\text{MAP}))^{1-t_{N+1}}</script>
     </div>
 
     
@@ -276,8 +381,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
+              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
               <a href="/tags/Artificial-Intelligence/" rel="tag"># Artificial Intelligence</a>
-              <a href="/tags/Reinforcement-Learning/" rel="tag"># Reinforcement Learning</a>
           </div>
 
         
@@ -286,13 +391,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/06/23/Fisher_Info_Matrix/" rel="prev" title="Fisher Information Matrix">
-      <i class="fa fa-chevron-left"></i> Fisher Information Matrix
+    <a href="/2023/11/25/CS205_Audio_Convertor/" rel="prev" title="CS205 C/C++ Project Audio Convertor">
+      <i class="fa fa-chevron-left"></i> CS205 C/C++ Project Audio Convertor
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2023/07/09/RL_Seminar_2/" rel="next" title="Reinforcement Learning Seminar Ⅱ">
-      Reinforcement Learning Seminar Ⅱ <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -365,7 +467,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Info"><span class="nav-number">1.</span> <span class="nav-text">Info</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#From-Physics-to-Control-Theory"><span class="nav-number">2.</span> <span class="nav-text">From Physics to Control Theory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#From-Deterministic-to-Stochastic"><span class="nav-number">3.</span> <span class="nav-text">From Deterministic to Stochastic</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Without-Controller"><span class="nav-number">3.1.</span> <span class="nav-text">Without Controller:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#With-Controller"><span class="nav-number">3.2.</span> <span class="nav-text">With Controller:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction-to-RL"><span class="nav-number">4.</span> <span class="nav-text">Introduction to RL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next-Seminar-MDP"><span class="nav-number">5.</span> <span class="nav-text">Next Seminar: MDP</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CS329-Machine-Learning-H-Quiz-3"><span class="nav-number">1.</span> <span class="nav-text">CS329 Machine Learning(H) Quiz 3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Before-Quiz"><span class="nav-number">1.1.</span> <span class="nav-text">Before Quiz</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-1-Neural-Networks-without-Prior"><span class="nav-number">1.2.</span> <span class="nav-text">Question 1 Neural Networks without Prior</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-1-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">Question 1.1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution-1-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">Solution 1.1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-1-2"><span class="nav-number">1.2.3.</span> <span class="nav-text">Question 1.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution-1-2"><span class="nav-number">1.2.4.</span> <span class="nav-text">Solution 1.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-1-3"><span class="nav-number">1.2.5.</span> <span class="nav-text">Question 1.3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution-1-3"><span class="nav-number">1.2.6.</span> <span class="nav-text">Solution 1.3</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Question-2-Neural-Networks-with-Prior"><span class="nav-number">1.3.</span> <span class="nav-text">Question 2 Neural Networks with Prior</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-2-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">Question 2.1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution-2-1"><span class="nav-number">1.3.2.</span> <span class="nav-text">Solution 2.1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Question-2-2"><span class="nav-number">1.3.3.</span> <span class="nav-text">Question 2.2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution-2-2"><span class="nav-number">1.3.4.</span> <span class="nav-text">Solution 2.2</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
