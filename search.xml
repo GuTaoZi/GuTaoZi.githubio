@@ -9832,6 +9832,8 @@ p(x, C_{2})=p(C_{2}) p(x \vert C_{2})=(1-\pi) \mathcal N(x \vert \mu_{2}, \Sigma
 <li>Syntax Analysis</li>
 <li>Syntax-Directed Translation</li>
 <li>Intermediate-Code Generation</li>
+<li>Run-Time Environments</li>
+<li>Code Generation</li>
 </ol>
 <h2 id="Lecture-1-Introduction"><a href="#Lecture-1-Introduction" class="headerlink" title="Lecture 1 - Introduction"></a>Lecture 1 - Introduction</h2><blockquote>
 <p>To be continued</p>
@@ -10546,7 +10548,139 @@ B\rightarrow X\{a\} Y</script><p>If terminal $X$ is recognized, or all the termi
 </ol>
 <h4 id="Three-Address-Code-for-Booleans"><a href="#Three-Address-Code-for-Booleans" class="headerlink" title="Three-Address Code for Booleans"></a>Three-Address Code for Booleans</h4><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">B</span><br><span class="line">| E1 rel E2</span><br><span class="line">&#123;</span><br><span class="line">    E.code = E1.code || E2.code</span><br><span class="line">        || gen(<span class="string">&#x27;if&#x27;</span> E1.addr rel.op E2.addr <span class="string">&#x27;goto&#x27;</span> B.<span class="literal">true</span>)</span><br><span class="line">        || gen(<span class="string">&#x27;goto&#x27;</span> B.<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br><span class="line">| <span class="literal">true</span></span><br><span class="line">&#123;</span><br><span class="line">    B.code = gen(<span class="string">&#x27;goto&#x27;</span> B.<span class="literal">true</span>);</span><br><span class="line">&#125;</span><br><span class="line">| <span class="literal">false</span></span><br><span class="line">&#123;</span><br><span class="line">    B.code = gen(<span class="string">&#x27;goto&#x27;</span> B.<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line">B</span><br><span class="line">| B1 || B2</span><br><span class="line">&#123;</span><br><span class="line">    B1.<span class="literal">true</span> = B.<span class="literal">true</span>;</span><br><span class="line">    B1.<span class="literal">false</span> = newlabel();</span><br><span class="line">    B2.<span class="literal">true</span> = B.<span class="literal">true</span>;</span><br><span class="line">    B2.<span class="literal">false</span> = B.<span class="literal">false</span>;</span><br><span class="line">    B.code = B1.code || label(B1.<span class="literal">false</span>) || B2.code</span><br><span class="line">&#125;</span><br><span class="line">| B1 &amp;&amp; B2</span><br><span class="line">&#123;</span><br><span class="line">    B1.<span class="literal">true</span> = newlabel();</span><br><span class="line">    B1.<span class="literal">false</span> = B.<span class="literal">false</span>;</span><br><span class="line">    B2.<span class="literal">true</span> = B.<span class="literal">true</span>;</span><br><span class="line">    B2.<span class="literal">false</span> = B.<span class="literal">false</span>;</span><br><span class="line">    B.code = B1.code || label(B1.<span class="literal">false</span>) || B2.code</span><br><span class="line">&#125;</span><br><span class="line">| !B1</span><br><span class="line">&#123;</span><br><span class="line">    B1.<span class="literal">true</span> = B.<span class="literal">false</span>;</span><br><span class="line">    B1.<span class="literal">false</span> = B.<span class="literal">true</span>;</span><br><span class="line">    B.code = B1.code;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
+<h2 id="Lecture-7-Run-Time-Environments"><a href="#Lecture-7-Run-Time-Environments" class="headerlink" title="Lecture 7 - Run-Time Environments"></a>Lecture 7 - Run-Time Environments</h2><h3 id="Run-Time-Environment"><a href="#Run-Time-Environment" class="headerlink" title="Run-Time Environment"></a>Run-Time Environment</h3><p><strong>Source-language abstractions</strong></p>
+<p>Names, scopes, data types, operators, procedures, parameters, flow-of-control constructs…</p>
+<p><strong>Run-time Environment</strong></p>
+<ul>
+<li><strong>Layout and allocation of storage locations</strong> for data in the source program</li>
+<li>Mechanisms to <strong>access variables</strong></li>
+<li><strong>Linkages between procedures</strong>, the mechanisms for <strong>passing parameters</strong></li>
+</ul>
+<h3 id="Storage-Organization"><a href="#Storage-Organization" class="headerlink" title="Storage Organization"></a>Storage Organization</h3><p><img src="https://s2.loli.net/2023/12/04/1MVKkRTN7OhLD92.png" alt="image.png"></p>
+<p><strong>Static</strong>:</p>
+<p>Storage-allocation decision can be made by looking only the program text.</p>
+<p>Global constants, global variables</p>
+<p><strong>Dynamic</strong>: </p>
+<p>Storage-allocation decision can be made only while the program is running</p>
+<ul>
+<li><p>Stack</p>
+<p>Lifetime same as that of the called procedure</p>
+</li>
+<li><p>Heap</p>
+<p>Hold data that may outlive the call to the procedure that created it</p>
+<p>Manual memory deallocation</p>
+<p>Automatic memory deallocation(GC)</p>
+</li>
+</ul>
+<h3 id="Stack-Space-Allocation"><a href="#Stack-Space-Allocation" class="headerlink" title="Stack Space Allocation"></a>Stack Space Allocation</h3><p>Procedure calls (<em>activation</em> of procedures): FI(called) LO(return)</p>
+<h4 id="Activation-tree"><a href="#Activation-tree" class="headerlink" title="Activation tree"></a>Activation tree</h4><ul>
+<li>node: corresponds to an activation (children nodes are ordered)</li>
+<li>root: activation of <code>main()</code> procedure</li>
+<li>pre-order traversal: sequence of procedure calls</li>
+<li>post-order traversal: sequence of returns</li>
+</ul>
+<h4 id="Activation-Record"><a href="#Activation-Record" class="headerlink" title="Activation Record"></a>Activation Record</h4><ul>
+<li>Procedure calls and returns maintained by a run-time stack: call stack(control stack)</li>
+<li>Each live activation has an activation record (stack frame) on the control stack</li>
+</ul>
+<h4 id="Calling-Return-Sequences"><a href="#Calling-Return-Sequences" class="headerlink" title="Calling/Return Sequences"></a>Calling/Return Sequences</h4><p><strong>Calling sequences</strong></p>
+<ul>
+<li>allocating activation records on the stack</li>
+<li>entering information into its fields</li>
+</ul>
+<p><strong>Return sequences</strong></p>
+<ul>
+<li>restoring the machine state so that the caller can continue execution</li>
+</ul>
+<p>Divided between caller and callee. Put as much code as possible into the callee.</p>
+<p><strong>Data perspective</strong>: pass arguments and return values.</p>
+<p><strong>Control perspective</strong>: transfer the control between the caller and  the callee.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Descriptions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Actual parameters</td>
+<td>Actual parameters used by the caller</td>
+</tr>
+<tr>
+<td>Returned values</td>
+<td>Values to be returned to the caller</td>
+</tr>
+<tr>
+<td>Control link</td>
+<td>Point to the activation record of the caller</td>
+</tr>
+<tr>
+<td>Access link</td>
+<td></td>
+</tr>
+<tr>
+<td>Saved machine status</td>
+<td>Information about the state of the machine before the call, including the return address and the contents of the registers used by the caller</td>
+</tr>
+<tr>
+<td>Local data</td>
+<td>Store the value of local variables</td>
+</tr>
+<tr>
+<td>Temporaries</td>
+<td>Temporary values such as those arising from the evaluation of expressions</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Values passed between caller and callee are put at the beginning of the callee’s activation record (next to the caller’s record)</p>
+<p>Fixed-length items (control link, access link, saved machine status) are in the middle</p>
+<p>Items whose size may not be known early enough are placed at the end</p>
+<p>stack top pointer <code>sp</code> points to the end of the fixed length fields</p>
+<h4 id="Steps-of-a-calling-return-sequence"><a href="#Steps-of-a-calling-return-sequence" class="headerlink" title="Steps of a calling-return sequence"></a>Steps of a calling-return sequence</h4><ol>
+<li>The caller evaluates the <strong>actual parameters</strong></li>
+<li>The caller stores return address and <strong><code>sp</code></strong> into the callee’s activation record</li>
+<li>The caller increases <strong><code>sp</code></strong> accordingly</li>
+<li>The callee saves the <strong>register values</strong> and other status info</li>
+<li>The callee initializes its <strong>local data</strong> and begins execution</li>
+<li>Callee execution</li>
+<li>The callee places the return value next to the actual parameters fields in its activation record</li>
+<li>Using information in the machine-status field, the callee restores <strong><code>sp</code></strong> and other registers</li>
+<li>Go to the return address set by the caller</li>
+</ol>
+<h3 id="Heap-Management"><a href="#Heap-Management" class="headerlink" title="Heap Management"></a>Heap Management</h3><h4 id="The-Memory-Manager"><a href="#The-Memory-Manager" class="headerlink" title="The Memory Manager"></a>The Memory Manager</h4><p>Heap: data that lives indefinitely</p>
+<p>Memory manager allocates and deallocates space within the heap</p>
+<p><strong>Allocation</strong>: Provide contiguous heap memory</p>
+<ul>
+<li>use free space in heap</li>
+<li>extend the heap by getting consecutive virtual memory</li>
+</ul>
+<p><strong>Deallocation</strong>: Return deallocated space to the pool of free space for reuse</p>
+<ul>
+<li>memory managers do not return memory to the OS</li>
+</ul>
+<p><strong>Desirable Properties</strong></p>
+<ul>
+<li>Space efficiency</li>
+<li>Program efficiency</li>
+<li>Low overhead</li>
+</ul>
+<h4 id="Leveraging-Program-Locality"><a href="#Leveraging-Program-Locality" class="headerlink" title="Leveraging Program Locality"></a>Leveraging Program Locality</h4><p>Use memory hierarchy to minimize the average memory-access time</p>
+<ul>
+<li>Temporal locality</li>
+<li>Spatial locality</li>
+</ul>
+<h4 id="Reducing-Fragmentation"><a href="#Reducing-Fragmentation" class="headerlink" title="Reducing Fragmentation"></a>Reducing Fragmentation</h4><p><strong>Fragmentation</strong></p>
+<p><img src="https://s2.loli.net/2023/12/04/2PFSER4gfVUXeDs.png" alt="image.png" style="zoom:33%;" /></p>
+<p><strong>Best-fit algorithm</strong></p>
+<p> improve space utilization, but slow</p>
+<p><strong>First-fit algorithm</strong></p>
+<p>faster and improves spatial locality, but fragmentation</p>
+<p><strong><a href="https://cw.fel.cvut.cz/old/_media/courses/a4m33pal/04_dynamic_memory_v6.pdf">The Doug Lea’s Strategy</a></strong></p>
+<p><img src="https://s2.loli.net/2023/12/04/nXtKLFJpgyzlRPq.png" alt="image.png" style="zoom:50%;" /></p>
+<h2 id="Lecture-8-Code-Generation"><a href="#Lecture-8-Code-Generation" class="headerlink" title="Lecture 8 - Code Generation"></a>Lecture 8 - Code Generation</h2>]]></content>
       <categories>
         <category>CS</category>
       </categories>
