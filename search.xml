@@ -9156,6 +9156,8 @@ n_{i}
 <li>Distributions</li>
 <li>Linear Models for Regression</li>
 <li>Linear Models for Classification</li>
+<li>Neural Networks</li>
+<li>Sparse Kernel Machines</li>
 </ol>
 <h2 id="Chapter-1-Introduction"><a href="#Chapter-1-Introduction" class="headerlink" title="Chapter 1 - Introduction"></a>Chapter 1 - Introduction</h2><h3 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h3><ul>
 <li><strong>Machine Learning</strong>—minimization of some loss function for generalizing data sets with models.</li>
@@ -9791,7 +9793,44 @@ p(x, C_{2})=p(C_{2}) p(x \vert C_{2})=(1-\pi) \mathcal N(x \vert \mu_{2}, \Sigma
 \pi_0=\frac{N_{10}}{N_{10}+N_{20}}, x\in\mathcal C_i\sim(x\vert\mu_{i0},\Sigma_{i0})</script><script type="math/tex; mode=display">
 \pi_\text{MAP} = \frac{N_1+N_{10}}{N+N_0}=\frac{N_1+N_{10}}{N_1+N_2+N_{10}+N_{20}}</script><script type="math/tex; mode=display">
 \left\{\begin{align*}\Sigma_{i\text{MAP}}^{-1}&=\Sigma_{i\text{ML}}^{-1}+\Sigma_{i0}^{-1}\\\Sigma_{i\text{MAP}}^{-1}\mu_{i\text{MAP}}&=\Sigma_{i\text{ML}}^{-1}\mu_{i\text{ML}}+\Sigma_{i0}^{-1}\mu_{i0}\end{align*}\right.</script><p>这里各个参数的意义待补。</p>
-<h3 id="Probabilistic-Discriminative-Models"><a href="#Probabilistic-Discriminative-Models" class="headerlink" title="Probabilistic Discriminative Models"></a>Probabilistic Discriminative Models</h3><h3 id="Bayesian-Information-Criterion"><a href="#Bayesian-Information-Criterion" class="headerlink" title="Bayesian Information Criterion"></a>Bayesian Information Criterion</h3>]]></content>
+<h3 id="Probabilistic-Discriminative-Models"><a href="#Probabilistic-Discriminative-Models" class="headerlink" title="Probabilistic Discriminative Models"></a>Probabilistic Discriminative Models</h3><h3 id="Bayesian-Information-Criterion"><a href="#Bayesian-Information-Criterion" class="headerlink" title="Bayesian Information Criterion"></a>Bayesian Information Criterion</h3><h2 id="Chapter-6-Neural-Networks"><a href="#Chapter-6-Neural-Networks" class="headerlink" title="Chapter 6 - Neural Networks"></a>Chapter 6 - Neural Networks</h2><p><img src="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
+<h2 id="Chapter-7-Sparse-Kernel-Machines"><a href="#Chapter-7-Sparse-Kernel-Machines" class="headerlink" title="Chapter 7 - Sparse Kernel Machines"></a>Chapter 7 - Sparse Kernel Machines</h2><h3 id="Support-Vector-Machines"><a href="#Support-Vector-Machines" class="headerlink" title="Support Vector Machines"></a>Support Vector Machines</h3><p>Model: $\quad y(\bold x) = \bold w^\text T \phi(\bold x) + b$</p>
+<p>Distance of a point to the decision surface</p>
+<script type="math/tex; mode=display">
+\frac{t_ny(\bold x_n)}{\vert\vert \bold w \vert\vert} = \frac{t_n(\bold w^\text T \phi(\bold x) + b)}{\vert\vert \bold w \vert\vert}</script><p>Rescaling $\bold w$ and $b$, the point closest to the surface(active constraint) satisfies:</p>
+<script type="math/tex; mode=display">
+\quad t_n(\bold w^\text T \phi(\bold x) + b)=1</script><p>Then the classification problem becomes:</p>
+<script type="math/tex; mode=display">
+\mathop{\arg\min}\limits_{\bold w, b} \frac 1 2 \vert\vert\bold w\vert\vert^2 \text{ subject to } t_n(\bold w^\text T \phi(\bold x) + b)\ge 1,\ n=1,\dots,N</script><h4 id="Hard-Margin-Classifier"><a href="#Hard-Margin-Classifier" class="headerlink" title="Hard Margin Classifier"></a>Hard Margin Classifier</h4><p>The classification problem:</p>
+<script type="math/tex; mode=display">
+\mathop{\arg\min}\limits_{\bold w, b} \sum\limits_{n=1}^N E_\infty (y(\bold x_n)t_n-1)+\lambda\vert\vert\bold w\vert\vert^2,\quad\lambda>0</script><p>where</p>
+<script type="math/tex; mode=display">
+E_\infty(z) = \left\{\begin{matrix}0, &z\ge 0 \\ \infty, &z<0\end{matrix}\right.</script><h4 id="Soft-Margin-Classifier"><a href="#Soft-Margin-Classifier" class="headerlink" title="Soft Margin Classifier"></a>Soft Margin Classifier</h4><p>Introduce slack variables $\xi_n\ge 0, n=1,\dots,N$ (sometimes $\xi_n&lt;0$ is allowed)</p>
+<p>The classification problem:</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+&\mathop{\arg\min}\limits_{\bold w, b}\ \ C\sum\limits_{n=1}^N \xi_n+\frac 1 2 \vert\vert\bold w\vert\vert^2 \\&\text{ subject to } t_n(\bold w^\text T \phi(\bold x) + b)\ge 1,\ n=1,\dots,N
+\end{align*}</script><p>where $C&gt;0$ is the trade-off between minimizing training errors and controlling  model complexity.</p>
+<h4 id="SVMs-and-Logistic-Regression"><a href="#SVMs-and-Logistic-Regression" class="headerlink" title="SVMs and Logistic Regression"></a>SVMs and Logistic Regression</h4><h4 id="Multiclass-SVMs"><a href="#Multiclass-SVMs" class="headerlink" title="Multiclass SVMs"></a>Multiclass SVMs</h4><ol>
+<li>One vs. Rest: $K$ separate SVMs<ul>
+<li>Can lead to inconsistent results</li>
+<li>Imbalanced training sets</li>
+</ul>
+</li>
+<li>One vs. One: $\frac{K(K-1)}{2}$ SVMs<ul>
+<li>dead zone</li>
+</ul>
+</li>
+</ol>
+<h4 id="SVMs-for-Regression"><a href="#SVMs-for-Regression" class="headerlink" title="SVMs for Regression"></a>SVMs for Regression</h4><p>过的很快，只用了一分半</p>
+<h3 id="※Relevance-Vector-Machines"><a href="#※Relevance-Vector-Machines" class="headerlink" title="※Relevance Vector Machines"></a>※Relevance Vector Machines</h3><p>Given an input vector $\bold x$, the conditional distribution for a real-valued target variable $t$:</p>
+<script type="math/tex; mode=display">
+p(t\vert\bold x,\bold w,\beta) = \mathcal N(t\vert y(\bold x),\beta^{-1})</script><p>where $\beta=\sigma^{-2}$ is the noise precision.</p>
+<p>The mean is given by a linear model, which can be written in an SVM-like form:</p>
+<script type="math/tex; mode=display">
+y(\bold x) = \sum\limits_{n=1}^N w_nk(\bold x,\bold x_n)+b</script><p>where $k(\bold x,\bold x_n)=\phi(\bold x)^\text T \phi(\bold x_n)$ is the kernel, and $b$ is 616.a bias parameter.</p>
+<p>……</p>
+]]></content>
       <categories>
         <category>CS</category>
       </categories>
