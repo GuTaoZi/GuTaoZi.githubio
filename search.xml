@@ -10719,7 +10719,56 @@ B\rightarrow X\{a\} Y</script><p>If terminal $X$ is recognized, or all the termi
 <p>faster and improves spatial locality, but fragmentation</p>
 <p><strong><a href="https://cw.fel.cvut.cz/old/_media/courses/a4m33pal/04_dynamic_memory_v6.pdf">The Doug Lea’s Strategy</a></strong></p>
 <p><img src="https://s2.loli.net/2023/12/04/nXtKLFJpgyzlRPq.png" alt="image.png" style="zoom:50%;" /></p>
-<h2 id="Lecture-8-Code-Generation"><a href="#Lecture-8-Code-Generation" class="headerlink" title="Lecture 8 - Code Generation"></a>Lecture 8 - Code Generation</h2>]]></content>
+<h2 id="Lecture-8-Code-Generation"><a href="#Lecture-8-Code-Generation" class="headerlink" title="Lecture 8 - Code Generation"></a>Lecture 8 - Code Generation</h2><h3 id="Target-Language"><a href="#Target-Language" class="headerlink" title="Target Language"></a>Target Language</h3><p>Three-address machine: load / store / computation / jump / conditional jump</p>
+<h4 id="Addressing-modes"><a href="#Addressing-modes" class="headerlink" title="Addressing modes"></a>Addressing modes</h4><ul>
+<li><p><strong>Variable name <code>x</code></strong></p>
+<p><code>x</code>‘s l-value</p>
+</li>
+<li><p><code>a(r)</code></p>
+<p><code>a</code>‘s l-value + value in <code>r</code></p>
+<p><code>a</code> is a variable, <code>r</code> is a register</p>
+</li>
+<li><p><code>const(r)</code></p>
+<p><code>const</code> + value in <code>r</code></p>
+<p>Indirect addressing mode</p>
+</li>
+<li><p><code>*const(r)</code></p>
+<p>Two indirect addressing mode</p>
+</li>
+<li><p><code>*r</code></p>
+<p>Two indirect addressing mode</p>
+</li>
+<li><p><code>#const</code></p>
+<p>Immediate constant addressing mode</p>
+</li>
+</ul>
+<h3 id="Addresses-in-the-Target-Code"><a href="#Addresses-in-the-Target-Code" class="headerlink" title="Addresses in the Target Code"></a>Addresses in the Target Code</h3><h4 id="Static-Allocation"><a href="#Static-Allocation" class="headerlink" title="Static Allocation"></a>Static Allocation</h4><p><strong>Size and layout</strong> of the activation records determined by the symbol table.</p>
+<ol>
+<li>Store the return address in the beginning of the callee’s activation record in the <em>stack</em> area</li>
+<li>Jump to <code>codeArea</code>, the address of the 1st instruction of the callee in the <em>code</em> area</li>
+<li>Transfer control to the address saved at the beginning of the callee’s activation record</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ST callee.staticArea, #here + offset</span><br><span class="line">BR callee.codeArea</span><br><span class="line">...</span><br><span class="line">BR *callee.staticArea</span><br></pre></td></tr></table></figure>
+<h4 id="Stack-Allocation"><a href="#Stack-Allocation" class="headerlink" title="Stack Allocation"></a>Stack Allocation</h4><p>Use relative addresses for storage in activation records.</p>
+<p>Maintain a <code>sp</code> register pointing to the beginning of the stack-top activation record</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ADD SP, SP, #caller.recordSize</span><br><span class="line">ST *SP, #here + const</span><br><span class="line">BR callee.codeArea</span><br><span class="line">...</span><br><span class="line">BR *0(SP)</span><br><span class="line">SUB SP, SP, #caller.recordSize</span><br></pre></td></tr></table></figure>
+<h3 id="Basic-Blocks-and-Flow-Graph"><a href="#Basic-Blocks-and-Flow-Graph" class="headerlink" title="Basic Blocks and Flow Graph"></a>Basic Blocks and Flow Graph</h3><p>Basic block: no halting/branching in the middle</p>
+<p>Flow graph: basic blocks as nodes, block-following relations as edges</p>
+<h4 id="Partitioning-Three-Address-Instructions-into-Basic-Blocks"><a href="#Partitioning-Three-Address-Instructions-into-Basic-Blocks" class="headerlink" title="Partitioning Three-Address Instructions into Basic Blocks"></a>Partitioning Three-Address Instructions into Basic Blocks</h4><p>Finding leader instructions:</p>
+<ol>
+<li>The 1st instruction of the entire intermediate code</li>
+<li>Target of any jump instruction</li>
+<li>Instructions immediately following jump instructions</li>
+</ol>
+<p>basic block: [leader instructions, min{next leader instructions, EOF}) </p>
+<p><img src="https://s2.loli.net/2023/12/11/znC6vQO8LWHBAmY.png" alt="image.png" style="zoom:50%;" /></p>
+<h4 id="Loops"><a href="#Loops" class="headerlink" title="Loops"></a>Loops</h4><ol>
+<li>A loop $L$ is a set of nodes in the flow graph</li>
+<li>$L$ contains a node $e$ called the loop entry (循环入口)</li>
+<li>No node in $L$ except $e$ has a predecessor outside $L$.</li>
+<li>Every node in $L$ has a nonempty path, completely within $L$, to $e$</li>
+</ol>
+]]></content>
       <categories>
         <category>CS</category>
       </categories>
@@ -11416,7 +11465,7 @@ p(t_{N+1}\vert x_{N+1},\mathcal D) =p(t_{N+1}\vert x_{N+1},\mathcal \theta_\text
 <p>已经没什么好怕的了，我还是十天前的我</p>
 <p>那个即将被图班亲手送走的图班班长。</p>
 <p>末日来临时在做什么？有没有空？</p>
-<p>可以来拯救那个还没有被图班欺骗的那个</p>
+<p>可以来拯救那个还没有被图班欺骗的，</p>
 <p>将在面试时说</p>
 <blockquote>
 <p>“今天我为进入图班骄傲，三年后我让图班为我自豪”</p>
