@@ -9873,6 +9873,7 @@ y(\bold x) = \sum\limits_{n=1}^N w_nk(\bold x,\bold x_n)+b</script><p>where $k(\
 <li>Intermediate-Code Generation</li>
 <li>Run-Time Environments</li>
 <li>Code Generation</li>
+<li>Introduction to Data-Flow Analysis</li>
 </ol>
 <h2 id="Lecture-1-Introduction"><a href="#Lecture-1-Introduction" class="headerlink" title="Lecture 1 - Introduction"></a>Lecture 1 - Introduction</h2><blockquote>
 <p>To be continued</p>
@@ -10768,6 +10769,103 @@ B\rightarrow X\{a\} Y</script><p>If terminal $X$ is recognized, or all the termi
 <li>No node in $L$ except $e$ has a predecessor outside $L$.</li>
 <li>Every node in $L$ has a nonempty path, completely within $L$, to $e$</li>
 </ol>
+<h3 id="Optimization-of-Basic-Blocks"><a href="#Optimization-of-Basic-Blocks" class="headerlink" title="Optimization of Basic Blocks"></a>Optimization of Basic Blocks</h3><p>The DAG (directed acyclic graph) of a basic block enables several code-improving transformations:</p>
+<ul>
+<li>Eliminate local common subexpressions</li>
+<li>Eliminate dead code</li>
+<li>Reorder operands of instructions by algebraic laws</li>
+</ul>
+<p><strong>Local Common Subexpression</strong></p>
+<p>same operator, same children nodes in the same order, create only one node.</p>
+<p><strong>Dead Code Elimination</strong></p>
+<p>Delete any root (node without ancestors) that has no live variables attached.</p>
+<p>Repeatedly applying the transformation until convergence.</p>
+<p><strong>Use of Algebraic Identities</strong></p>
+<ul>
+<li>Eliminate computations: $x\times 1 = x$</li>
+<li>Reduction in strength: $x / 2 = x * 0.5$</li>
+<li>Constant folding: $2 * 3.14 = 6.28$</li>
+</ul>
+<h3 id="Simple-Code-Generator"><a href="#Simple-Code-Generator" class="headerlink" title="Simple Code Generator"></a>Simple Code Generator</h3><p>Three-address code→Machine instructions</p>
+<p>Use registers wisely to avoid unnecessary <code>load</code> and <code>store</code> instructions.</p>
+<p><strong>Principal uses of registers</strong></p>
+<ol>
+<li>operands</li>
+<li>temporaries</li>
+<li>global values</li>
+<li>run-time storage management (<code>rsp</code>)</li>
+</ol>
+<h4 id="Code-Generation-Algorithm"><a href="#Code-Generation-Algorithm" class="headerlink" title="Code Generation Algorithm"></a>Code Generation Algorithm</h4><p>Generate <code>load</code> only when necessary, avoid overwriting register in use.</p>
+<p><strong>Register descriptor</strong></p>
+<p>register storing variable value → variable name</p>
+<p><strong>Address descriptor</strong></p>
+<p>variable → locations storing its value (register, memory address, stack location)</p>
+<p><strong><code>getReg(I)</code> Usages</strong></p>
+<p>Select registers for each memory location of 3-address instruction $I$.</p>
+<ul>
+<li>$\text{x = y + z}$<ol>
+<li>Invoke <code>getReg(I)</code> to select registers $\text{R}_\text{x}, \text{R}_\text{y},\text{R}_\text{z}$.</li>
+<li>If $\text{y}$ is not in $\text{R}_\text{y}$, according to the <strong>register descriptor</strong>, generate  $\text{LD \ R}_\text{y},\ \text y^\prime$, where $\text y^\prime$ is the memory location for $\text y$ according to the <strong>address descriptor</strong>.</li>
+<li>Generate $\text{ADD \ R}_\text x,\ \text R_\text y,\ \text R_\text z$</li>
+</ol>
+</li>
+<li>$\text{x = y}$<ol>
+<li><code>getReg(I)</code> selects the same register for $\text x$ and $\text y$.</li>
+<li>If $\text{y}$ is not in $\text{R}_\text{y}$, generate $\text{LD \ R}_\text{y},\ \text y^\prime$.</li>
+</ol>
+</li>
+<li>Ending a basic block<ol>
+<li>For temp variables, release the associated registers</li>
+<li>If a variable is live (not 100% dead) on block exit, generate $\text{ST x},\ \text R_\text x$ for $\text x$ whose value in the register is newer than that in memory.</li>
+</ol>
+</li>
+</ul>
+<p><strong>Updating descriptors</strong></p>
+<p>Values in registers are no older than those in memory.</p>
+<ol>
+<li>$\text{LD \ R},\ \text x$<ol>
+<li>Set the register descriptor for $\text R$ to $\text x$</li>
+<li>Add $\text R$ to address descriptor for $\text x$</li>
+<li>Remove $\text R$ from address descriptor of other variables</li>
+</ol>
+</li>
+<li>$\text{ST \ x},\ \text R$<ol>
+<li>Add memory location of $\text x$ to its address descriptor</li>
+</ol>
+</li>
+<li>$\text{ADD \ R}_\text x,\ \text R_\text y,\ \text R_\text z$<ol>
+<li>Set the register descriptor for $\text R_\text x$ to $\text x$</li>
+<li>Set the address descriptor for $\text x$ to only $\text R_\text x$</li>
+<li>Remove $\text R_\text x$ from address descriptor of other variables</li>
+</ol>
+</li>
+<li>$\text x = \text y$<ol>
+<li>Use rule 1 if $\text{LD \ R}_\text y,\ \text y$ is generated</li>
+<li>Remove $\text x$ from the register descriptor of $\text R_\text x$</li>
+<li>Add $\text x$ to the register descriptor of $\text R_\text y$</li>
+<li>Set the address descriptor for $\text x$ to only $\text R_\text y$</li>
+</ol>
+</li>
+</ol>
+<p><strong>Select registers</strong></p>
+<p>Pick registers for operands and result for each three-address instruction while avoiding <code>load</code> and <code>store</code> as possible.</p>
+<p><em>What if there’s no register available when attempting to allocate one?</em></p>
+<p>Example: $\text x = \text y + \text z$, allocating a register for $\text y$</p>
+<ol>
+<li>Check if the victim $\text R_\text v$ is <strong>safe</strong> to update<ul>
+<li>There exists somewhere else storing latest value of $\text v$ besides $\text R_\text v$</li>
+<li>$\text v$ is $\text x$ (lhs) and $\text x$ is not the other operand $\text z$</li>
+<li>$\text v$ is dead after this instruction</li>
+</ul>
+</li>
+<li>If there is no safe registers, generate $\text{ST\  v, \ R}$ to store $\text v$ into its memory location (spill).</li>
+</ol>
+<p>If $\text R$ holds multiple variables, repeat the process for each such variable $\text v$.</p>
+<p>Pick the register requiring the smallest number of <code>ST</code> instructions.</p>
+<h2 id="Lecture-9-Introduction-to-Data-Flow-Analysis"><a href="#Lecture-9-Introduction-to-Data-Flow-Analysis" class="headerlink" title="Lecture 9 - Introduction to Data-Flow Analysis"></a>Lecture 9 - Introduction to Data-Flow Analysis</h2><p><strong>Data-flow analysis</strong></p>
+<p>Derive information about the flow of data along program execution paths.</p>
+<p>Program point: points before and after each statement</p>
+<p>Execution path: sequence of points (within block / across block)</p>
 ]]></content>
       <categories>
         <category>CS</category>
