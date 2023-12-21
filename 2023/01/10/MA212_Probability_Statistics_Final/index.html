@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://s2.loli.net/2022/12/30/xOTFlhpsguVoaZD.jpg">
 <meta property="og:image" content="https://s2.loli.net/2022/12/31/LhebI7dEgq9fz3N.png">
 <meta property="article:published_time" content="2023-01-10T09:29:30.000Z">
-<meta property="article:modified_time" content="2023-01-10T09:29:30.000Z">
+<meta property="article:modified_time" content="2023-12-21T11:07:43.363Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Probability &amp; Statistics">
 <meta name="twitter:card" content="summary">
@@ -224,6 +224,13 @@
 
               <time title="Created: 2023-01-10 17:29:30" itemprop="dateCreated datePublished" datetime="2023-01-10T17:29:30+08:00">2023-01-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2023-12-21 19:07:43" itemprop="dateModified" datetime="2023-12-21T19:07:43+08:00">2023-12-21</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -257,13 +264,14 @@
 <p><img src="https://s2.loli.net/2023/01/10/P7CdEvfXxBheuwi.png" alt="image.png" style="zoom:25%;" /></p>
 <h1 id="Chapter-3"><a href="#Chapter-3" class="headerlink" title="Chapter 3"></a>Chapter 3</h1><h2 id="§3-6-联合分布随机变量函数"><a href="#§3-6-联合分布随机变量函数" class="headerlink" title="§3.6 联合分布随机变量函数"></a>§3.6 联合分布随机变量函数</h2><p><strong>r.v. 函数的分布</strong></p>
 <p>设$(X, Y)$是二维连续型随机向量，其联合概率密度函数为$f(x,y)$。 则$Z=g(X,Y)$的累积分布函数为</p>
-<script type="math/tex; mode=display">F_Z(z)=P\{Z\leq z\}=P\{g(X,Y)\leq z\}=\iint\limits_{g(x,y)\leq z}f(x,y)dxdy=\int_{-\infty}^{z}f_Z(u)du</script><p>求导可得其概率密度函数$Z\sim f_Z(z)$</p>
+<script type="math/tex; mode=display">
+F_Z(z)=P\{Z\leq z\}=P\{g(X,Y)\leq z\}=\iint\limits_{g(x,y)\leq z}f(x,y)dxdy=\int_{-\infty}^{z}f_Z(u)du</script><p>求导可得其概率密度函数$Z\sim f_Z(z)$</p>
 <p><strong>连续卷积公式</strong>：r.v. $(X,Y)\sim f(x,y)$，$Z=X+Y$</p>
-<p>$F_Z(z)=\int_{-\infty}^{\infty}\int_{-\infty}^{z-y}f(x,y)dxdy=\int_{-\infty}^{\infty}\int_{-\infty}^{z}f(u-y,y)dudy=\int_{-\infty}^{z}\int_{-\infty}^{\infty}f(u-y,y)dydu$</p>
-<p>求导得：$f_Z(z)=\int_{-\infty}^{\infty}f(z-y,y)dy=\int_{-\infty}^{\infty}f(x,z-x)dx$</p>
+<script type="math/tex; mode=display">
+F_Z(z)=\int_{-\infty}^{\infty}\int_{-\infty}^{z-y}f(x,y)dxdy=\int_{-\infty}^{\infty}\int_{-\infty}^{z}f(u-y,y)dudy=\int_{-\infty}^{z}\int_{-\infty}^{\infty}f(u-y,y)dydu</script><p>求导得：$f_Z(z)=\int_{-\infty}^{\infty}f(z-y,y)dy=\int_{-\infty}^{\infty}f(x,z-x)dx$</p>
 <p>若$X,Y$独立，$f(x,y)=f_X(x)\cdot f_Y(y)$，则</p>
-<p>$f_Z(z)=\int_{-\infty}^{\infty}f_X(z-y)f_Y(y)dy=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)dx$</p>
-<p><strong>独立正态r.v.之和</strong>：独立r.v. 集$\{X_n\}$，$X_i\sim N(\mu_i,\sigma_i^2)$</p>
+<script type="math/tex; mode=display">
+f_Z(z)=\int_{-\infty}^{\infty}f_X(z-y)f_Y(y)dy=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)dx</script><p><strong>独立正态r.v.之和</strong>：独立r.v. 集$\{X_n\}$，$X_i\sim N(\mu_i,\sigma_i^2)$</p>
 <p>则其非零线性组合$\overset{n}\sum\limits_{i=1}a_iX_i\sim N(\overset{n}\sum\limits_{i=1}a_i\mu_i,\overset{n}\sum\limits_{i=1}a_i^2\sigma_i^2)$</p>
 <p>即：独立正态r.v.的非零线性组合仍服从正态分布</p>
 <p><strong>非独立正态r.v.之和</strong>：</p>
@@ -469,19 +477,24 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <li>三反公式：$F_\alpha(n_1,n_2)=\frac{1}{F_{1-\alpha}(n_2,n_1)}$</li>
 </ul>
 <p><strong>抽样分布定理一</strong>：</p>
-<p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(\mu,\sigma^2)$的样本，则$\bar X\sim\mathbf N(\mu,\frac{\sigma^2}{n})$</p>
-<p><strong>抽样分布定理二</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(\mu,\sigma^2)$的样本，则</p>
+<script type="math/tex; mode=display">
+\bar X\sim\mathbf N(\mu,\frac{\sigma^2}{n})</script><p><strong>抽样分布定理二</strong>：</p>
+<p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(\mu,\sigma^2)$的样本，则</p>
 <ol>
 <li>$\bar X$，$S^2$相互独立</li>
 <li>$\frac{(n-1)S^2}{\sigma^2}\sim\chi^2(n-1)$</li>
 </ol>
 <p><strong>抽样分布定理三</strong>：</p>
 <p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(\mu,\sigma^2)$的样本，则</p>
-<script type="math/tex; mode=display">\frac{\bar X-\mu}{S/\sqrt{n}}\sim t(n-1)</script><p><strong>抽样分布定理四</strong>：</p>
+<script type="math/tex; mode=display">
+\frac{\bar X-\mu}{S/\sqrt{n}}\sim t(n-1)</script><p><strong>抽样分布定理四</strong>：</p>
 <p>设$X_1,X_2,\cdots,X_n$是总体$X\sim\mathbf N(\mu_1,\sigma_1^2)$的样本；$Y_1,Y_2,\cdots,Y_m$是总体$Y\sim\mathbf N(\mu_2,\sigma_2^2)$的样本，且两样本相互独立，两样本均值和样本方差分别为$\bar X,\bar Y,S_1^2,S_2^2$，则</p>
-<script type="math/tex; mode=display">\frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2}\sim F(n-1,m-1)</script><p><strong>抽样分布定理五</strong>：</p>
+<script type="math/tex; mode=display">
+\frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2}\sim F(n-1,m-1)</script><p><strong>抽样分布定理五</strong>：</p>
 <p>设$X_1,X_2,\cdots,X_n$是总体$X\sim\mathbf N(\mu_1,\sigma_1^2)$的样本；$Y_1,Y_2,\cdots,Y_m$是总体$Y\sim\mathbf N(\mu_2,\sigma_2^2)$的样本，且两样本相互独立，两样本均值和样本方差分别为$\bar X,\bar Y,S_1^2,S_2^2$，则</p>
-<script type="math/tex; mode=display">\frac{(\bar X-\bar Y)-(\mu_1-\mu_2)}{S_\omega\sqrt{\frac{1}{n}+\frac{1}{m}}}\sim t(n+m-2)</script><p>其中$S_\omega^2=\frac{(n-1)S_1^2+(m-1)S_2^2}{n+m-2}$，$S_\omega=\sqrt{S_\omega^2}$</p>
+<script type="math/tex; mode=display">
+\frac{(\bar X-\bar Y)-(\mu_1-\mu_2)}{S_\omega\sqrt{\frac{1}{n}+\frac{1}{m}}}\sim t(n+m-2)</script><p>其中$S_\omega^2=\frac{(n-1)S_1^2+(m-1)S_2^2}{n+m-2}$，$S_\omega=\sqrt{S_\omega^2}$</p>
 <p><strong>指数分布与$\chi^2$-分布</strong>：自由度为2的$\chi^2$-分布就是参数为$\frac 1 2$的指数分布</p>
 <h1 id="Chapter-7"><a href="#Chapter-7" class="headerlink" title="Chapter 7"></a>Chapter 7</h1><h2 id="§7-1-点估计"><a href="#§7-1-点估计" class="headerlink" title="§7.1 点估计"></a>§7.1 点估计</h2><p><strong>矩估计法</strong>：</p>
 <p>设总体$X\sim F(x;\theta_1,\theta_2,\cdots,\theta_m)$，其中$\theta_1,\theta_2,\cdots,\theta_m$为未知参数，$X_1,X_2,\cdots,X_n$为来自总体$X$的样本，设总体矩$\mu_k=E(X^k)\ (k=1,2,\cdots,m)$都存在，则$\mu_k$是$\theta_1,\theta_2,\cdots,\theta_m$的函数。</p>
