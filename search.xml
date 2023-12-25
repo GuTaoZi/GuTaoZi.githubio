@@ -10889,10 +10889,63 @@ B\rightarrow X\{a\} Y</script><p>If terminal $X$ is recognized, or all the termi
 </ol>
 <p>If $\text R$ holds multiple variables, repeat the process for each such variable $\text v$.</p>
 <p>Pick the register requiring the smallest number of <code>ST</code> instructions.</p>
-<h2 id="Lecture-9-Introduction-to-Data-Flow-Analysis"><a href="#Lecture-9-Introduction-to-Data-Flow-Analysis" class="headerlink" title="Lecture 9 - Introduction to Data-Flow Analysis"></a>Lecture 9 - Introduction to Data-Flow Analysis</h2><p><strong>Data-flow analysis</strong></p>
-<p>Derive information about the flow of data along program execution paths.</p>
-<p>Program point: points before and after each statement</p>
-<p>Execution path: sequence of points (within block / across block)</p>
+<h2 id="Lecture-9-Introduction-to-Data-Flow-Analysis"><a href="#Lecture-9-Introduction-to-Data-Flow-Analysis" class="headerlink" title="Lecture 9 - Introduction to Data-Flow Analysis"></a>Lecture 9 - Introduction to Data-Flow Analysis</h2><h3 id="The-Data-Flow-Abstraction"><a href="#The-Data-Flow-Abstraction" class="headerlink" title="The Data-Flow Abstraction"></a>The Data-Flow Abstraction</h3><p><strong>Data-flow analysis</strong>: Derive information about the flow of data along program execution paths.</p>
+<ul>
+<li>identify common subexpressions</li>
+<li>eliminate dead code</li>
+</ul>
+<p><strong>Program point</strong>: points <u>before</u> and <u>after</u> each statement.</p>
+<p><strong>Execution path</strong>: sequence of points (within block / across block).</p>
+<p><img src="https://s2.loli.net/2023/12/25/JalFPwqVXQy8Z6c.png" alt="image.png" style="zoom:50%;" /></p>
+<p>Program execution can be viewed as a series of transformations of the program state (<u>the values of all variables, etc.</u>)</p>
+<center>Input State→Statements→Output State</center>
+
+<p>Data-flow analysis : all the possible program states → a finite set of facts</p>
+<blockquote>
+<p>In general, there is an infinite number of possible paths, and no analysis is necessarily a perfect representation of the state.</p>
+</blockquote>
+<p><strong>Reaching definitions</strong></p>
+<p>The data-flow value at <code>program point</code> is the set of <code>var</code>‘s definitions that can reach this point.</p>
+<p><strong>Constant folding</strong></p>
+<p>The data-flow value for <code>var</code> at <code>program point</code> is (not) a constant.</p>
+<h4 id="The-Data-Flow-Analysis-Schema"><a href="#The-Data-Flow-Analysis-Schema" class="headerlink" title="The Data-Flow Analysis Schema"></a>The Data-Flow Analysis Schema</h4><ol>
+<li><p>Constraints based on the semantics of the statements (transfer functions)</p>
+<p><strong>Transfer function</strong>: the relationship between the data-flow values before and after each statement.</p>
+<p><strong>Forward-flow problem</strong>: information propagate forward along execution paths, $\text{OUT}[s]=f_s(\text{IN}[s])$.</p>
+</li>
+<li><p>Constraints based on the flow of control</p>
+<ol>
+<li><strong>Intra-block</strong>: $\text{IN}[s_{i+1}]=\text{OUT}[s_i]$</li>
+<li><strong>Inter-block</strong>: $\text{IN}[B]=\bigcup\limits_{P\text{ a predecessor of B}}\text{OUT}[P]$ (forward-flow)</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>Precise: code improvement</li>
+<li>Constraints: correct program semantics</li>
+</ul>
+<h3 id="Classic-Data-Flow-Problem"><a href="#Classic-Data-Flow-Problem" class="headerlink" title="Classic Data-Flow Problem"></a>Classic Data-Flow Problem</h3><h4 id="Reaching-Definitions"><a href="#Reaching-Definitions" class="headerlink" title="Reaching Definitions"></a>Reaching Definitions</h4><p>A definition $d$ of some variable $x$ reaches a point $p$ if there is a path from the program point after $d$ to $p$, such that $d$ is not “killed” along that path.</p>
+<p>If $d$ reaches the point $p$, then $d$ might be the last definition of $x$.</p>
+<p>Inaccuracies are allowed, but FALSE POSITIVE(reachable definitions killed) is not acceptable.</p>
+<h4 id="Transfer-Equations"><a href="#Transfer-Equations" class="headerlink" title="Transfer Equations"></a>Transfer Equations</h4><p>For a statement <code>d: u = v + w</code>,</p>
+<p>Generate a definition $d$ of variable $u$ and kill all other definitions of $u$.</p>
+<script type="math/tex; mode=display">
+f_d(x) = \text{gen}_d\cup (x-\text{kill}_d)</script><p><img src="https://s2.loli.net/2023/12/25/IbRe8LCfOJYjKio.png" alt="image.png" style="zoom:50%;" /></p>
+<p>For a block $B$ with $n$ statements,</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+f_B(x) &= \text{gen}_B\cup (x-\text{kill}_B)\\
+\text{gen}_B &= \bigcup\limits_{i=1}^n(\text{gen}_i-\sum\limits_{j=i+1}^n\text{kill}_j)\\
+\text{kill}_B &= \bigcup\limits_{i=1}^n \text{kill}_i
+\end{align*}</script><p>The <strong>kill set</strong> is the union of all the definitions killed by the individual statements.</p>
+<p>The <strong>gen set</strong> contains all the definitions inside the block that are downward exposed (visible immediately after the block).</p>
+<h4 id="Control-Flow-Equations"><a href="#Control-Flow-Equations" class="headerlink" title="Control-Flow Equations"></a>Control-Flow Equations</h4><p>For the ENTRY block: $\text{OUT}[\text{ENTRY}] = \emptyset$</p>
+<p>For any other basic block $B$:</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+\text{OUT}[B] &= \text{gen}_B \cup (\text{IN}[B]-\text{kill}_B)\\
+\text{IN}[B] &= \bigcup\limits_{P\text{ a predecessor of B}}\text{OUT}[P]
+\end{align*}</script><figure class="highlight c"><table><tr><td class="code"><pre><span class="line">OUT[ENTRY] = &#123;&#125;;</span><br><span class="line"><span class="keyword">for</span>(each basic block B other than ENTRY)</span><br><span class="line">    OUT[B] = &#123;&#125;;</span><br><span class="line"><span class="keyword">while</span>(changes to any OUT occur)</span><br><span class="line">    <span class="keyword">for</span>(each basic block B other than ENTRY)</span><br><span class="line">        update IN[B], OUT[B];</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>CS</category>
