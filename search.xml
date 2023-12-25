@@ -9802,10 +9802,10 @@ p(x, C_{2})=p(C_{2}) p(x \vert C_{2})=(1-\pi) \mathcal N(x \vert \mu_{2}, \Sigma
 \pi_\text{MAP} = \frac{N_1+N_{10}}{N+N_0}=\frac{N_1+N_{10}}{N_1+N_2+N_{10}+N_{20}}</script><script type="math/tex; mode=display">
 \left\{\begin{align*}\Sigma_{i\text{MAP}}^{-1}&=\Sigma_{i\text{ML}}^{-1}+\Sigma_{i0}^{-1}\\\Sigma_{i\text{MAP}}^{-1}\mu_{i\text{MAP}}&=\Sigma_{i\text{ML}}^{-1}\mu_{i\text{ML}}+\Sigma_{i0}^{-1}\mu_{i0}\end{align*}\right.</script><p>这里各个参数的意义待补。</p>
 <h3 id="Probabilistic-Discriminative-Models"><a href="#Probabilistic-Discriminative-Models" class="headerlink" title="Probabilistic Discriminative Models"></a>Probabilistic Discriminative Models</h3><h3 id="Bayesian-Information-Criterion"><a href="#Bayesian-Information-Criterion" class="headerlink" title="Bayesian Information Criterion"></a>Bayesian Information Criterion</h3><h2 id="Chapter-6-Neural-Networks"><a href="#Chapter-6-Neural-Networks" class="headerlink" title="Chapter 6 - Neural Networks"></a>Chapter 6 - Neural Networks</h2><p><img src="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
-<h2 id="Chapter-7-Sparse-Kernel-Machines"><a href="#Chapter-7-Sparse-Kernel-Machines" class="headerlink" title="Chapter 7 - Sparse Kernel Machines"></a>Chapter 7 - Sparse Kernel Machines</h2><h3 id="Support-Vector-Machines"><a href="#Support-Vector-Machines" class="headerlink" title="Support Vector Machines"></a>Support Vector Machines</h3><p>Model: $\quad y(\bold x) = \bold w^\text T \phi(\bold x) + b$</p>
+<h2 id="Chapter-7-Sparse-Kernel-Machines"><a href="#Chapter-7-Sparse-Kernel-Machines" class="headerlink" title="Chapter 7 - Sparse Kernel Machines"></a>Chapter 7 - Sparse Kernel Machines</h2><h3 id="Support-Vector-Machines"><a href="#Support-Vector-Machines" class="headerlink" title="Support Vector Machines"></a>Support Vector Machines</h3><p>Model: $\quad y(\mathbf x) = \mathbf w^\text T \phi(\mathbf x) + b$</p>
 <p>Distance of a point to the decision surface</p>
 <script type="math/tex; mode=display">
-\frac{t_ny(\bold x_n)}{\vert\vert \bold w \vert\vert} = \frac{t_n(\bold w^\text T \phi(\bold x) + b)}{\vert\vert \bold w \vert\vert}</script><p>Rescaling $\bold w$ and $b$, the point closest to the surface(active constraint) satisfies:</p>
+\frac{t_ny(\bold x_n)}{\vert\vert \bold w \vert\vert} = \frac{t_n(\bold w^\text T \phi(\bold x) + b)}{\vert\vert \bold w \vert\vert}</script><p>Rescaling $\mathbf w$ and $b$, the point closest to the surface(active constraint) satisfies:</p>
 <script type="math/tex; mode=display">
 \quad t_n(\bold w^\text T \phi(\bold x) + b)=1</script><p>Then the classification problem becomes:</p>
 <script type="math/tex; mode=display">
@@ -9831,12 +9831,12 @@ E_\infty(z) = \left\{\begin{matrix}0, &z\ge 0 \\ \infty, &z<0\end{matrix}\right.
 </li>
 </ol>
 <h4 id="SVMs-for-Regression"><a href="#SVMs-for-Regression" class="headerlink" title="SVMs for Regression"></a>SVMs for Regression</h4><p>过的很快，只用了一分半</p>
-<h3 id="※Relevance-Vector-Machines"><a href="#※Relevance-Vector-Machines" class="headerlink" title="※Relevance Vector Machines"></a>※Relevance Vector Machines</h3><p>Given an input vector $\bold x$, the conditional distribution for a real-valued target variable $t$:</p>
+<h3 id="※Relevance-Vector-Machines"><a href="#※Relevance-Vector-Machines" class="headerlink" title="※Relevance Vector Machines"></a>※Relevance Vector Machines</h3><p>Given an input vector $\mathbf x$, the conditional distribution for a real-valued target variable $t$:</p>
 <script type="math/tex; mode=display">
 p(t\vert\bold x,\bold w,\beta) = \mathcal N(t\vert y(\bold x),\beta^{-1})</script><p>where $\beta=\sigma^{-2}$ is the noise precision.</p>
 <p>The mean is given by a linear model, which can be written in an SVM-like form:</p>
 <script type="math/tex; mode=display">
-y(\bold x) = \sum\limits_{n=1}^N w_nk(\bold x,\bold x_n)+b</script><p>where $k(\bold x,\bold x_n)=\phi(\bold x)^\text T \phi(\bold x_n)$ is the kernel, and $b$ is 616.a bias parameter.</p>
+y(\bold x) = \sum\limits_{n=1}^N w_nk(\bold x,\bold x_n)+b</script><p>where $k(\mathbf x,\mathbf x_n)=\phi(\mathbf x)^\text T \phi(\mathbf x_n)$ is the kernel, and $b$ is 616.a bias parameter.</p>
 <p>……</p>
 <p>后面翘课了。</p>
 <h2 id="Chapter-8-Mixture-Models-and-EM-Learning"><a href="#Chapter-8-Mixture-Models-and-EM-Learning" class="headerlink" title="Chapter 8 - Mixture Models and EM Learning"></a>Chapter 8 - Mixture Models and EM Learning</h2><p>翘课了。</p>
@@ -9844,14 +9844,14 @@ y(\bold x) = \sum\limits_{n=1}^N w_nk(\bold x,\bold x_n)+b</script><p>where $k(\
 <p>Sequential data: dependent of the previous states</p>
 <p><strong>Markov models</strong></p>
 <ul>
-<li>first-order:<script type="math/tex; mode=display">
+<li><p>first-order:</p>
+<script type="math/tex; mode=display">
 \begin{align*}
 p(\mathbf x_1,\dots,\mathbf x_N) &= p(\mathbf x_1) \prod\limits_{n=2}^N p(\mathbf x_n\vert\mathbf x_{n-1})\\
 p(\mathbf x_n\vert\mathbf x_1,\dots,\mathbf x_{n-1}) &= p(\mathbf x_n\vert\mathbf x_{n-1})
 \end{align*}</script></li>
-</ul>
-<ul>
-<li>second-order:<script type="math/tex; mode=display">
+<li><p>second-order:</p>
+<script type="math/tex; mode=display">
 p(\mathbf x_1,\dots,\mathbf x_N) = p(\mathbf x_1)p(\mathbf x_2\vert\mathbf x_1) \prod\limits_{n=3}^N p(\mathbf x_n\vert\mathbf x_{n-1},\mathbf x_{n-2})</script></li>
 </ul>
 <h3 id="Hidden-Markov-Models"><a href="#Hidden-Markov-Models" class="headerlink" title="Hidden Markov Models"></a>Hidden Markov Models</h3><p>For each observation $\mathbf x_n$, introduce latent variable $\mathbf z_n$, such that $\mathbf z_{n+1}\perp!!!!\perp \mathbf z_{n-1} \vert \mathbf z_n$</p>
