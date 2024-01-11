@@ -7833,22 +7833,24 @@ f_Z(z)=\int_{-\infty}^{\infty}f_X(z-y)f_Y(y)dy=\int_{-\infty}^{\infty}f_X(x)f_Y(
 <p><strong>r.v.商的分布</strong>：$(X,Y)\sim f(x,y)$，$Z=\frac{X}{Y}$，$F_Z(z)=P\{\frac{x}{y}\leq z\}=\iint\limits_{\frac{x}{y}\leq z}f(x,y)dxdy$</p>
 <p>$F_Z(z)=\int_{0}^{\infty}\int_{-\infty}^{yz}f(x,y)dxdy+\int_{-\infty}^{0}\int_{yz}^{\infty}f(x,y)dxdy$</p>
 <p>设$u=x/y$，$dx=ydu$</p>
-<p>$F_Z(z)=\int_{0}^{\infty}\int_{-\infty}^{z}f(uy,y)ydudy+\int_{-\infty}^{0}\int_{z}^{-\infty}f(uy,y)ydudy$</p>
-<p>$F_Z(z)=\int_{-\infty}^{z}\int_{0}^{\infty}f(uy,y)ydydu+\int_{z}^{-\infty}\int_{-\infty}^{0}f(uy,y)ydydu=\int_{-\infty}^{z}\int_{-\infty}^{\infty}f(uy,y)|y|dydu$</p>
-<p>求导得$f_Z(z)=\int_{-\infty}^{\infty}f(zy,y)|y|dy$</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+F_Z(z)&=\int_{0}^{\infty}\int_{-\infty}^{z}f(uy,y)ydudy+\int_{-\infty}^{0}\int_{z}^{-\infty}f(uy,y)ydudy\\
+F_Z(z)&=\int_{-\infty}^{z}\int_{0}^{\infty}f(uy,y)ydydu+\int_{z}^{-\infty}\int_{-\infty}^{0}f(uy,y)ydydu=\int_{-\infty}^{z}\int_{-\infty}^{\infty}f(uy,y)|y|dydu
+\end{align*}</script><p>求导得$f_Z(z)=\int_{-\infty}^{\infty}f(zy,y)\vert y \vert dy$</p>
 <p><strong>Jacobi行列式</strong>：$J(u, v)=\frac{\partial(x, y)}{\partial(u, v)}=\det\left[ \begin{array}{ll}<br>\frac{\partial x}{\partial u} &amp; \frac{\partial x}{\partial v} \\<br>\frac{\partial y}{\partial u} &amp; \frac{\partial y}{\partial v}<br>\end{array}\right]$</p>
 <p>若连续可微变换$T(u,v)=(x(u,v),y(u,v))$为双射，且$J(u,v)≠0$，则</p>
-<p>$\iint_\Omega f(x,y)dxdy=\iint_{\Omega^{\prime}}f(x(u,v),y(u,v))|J(u,v)|dudv$</p>
-<p>则逆变换$U=g_1(X,Y),V=g_2(X,Y)$的联合密度为：</p>
-<p>$f_{UV}(u,v)=f_{XY}(x(u,v),y(u,v))|J(u,v)|$</p>
-<p><strong>正态分布与线性变换</strong>：</p>
+<script type="math/tex; mode=display">
+\iint_\Omega f(x,y)dxdy=\iint_{\Omega^{\prime}}f(x(u,v),y(u,v))|J(u,v)|dudv</script><p>则逆变换$U=g_1(X,Y),V=g_2(X,Y)$的联合密度为：</p>
+<script type="math/tex; mode=display">
+f_{UV}(u,v)=f_{XY}(x(u,v),y(u,v))|J(u,v)|</script><p><strong>正态分布与线性变换</strong>：</p>
 <p>两个独立标准正态r.v.的线性变换服从二元正态分布。</p>
 <p>更一般地，若两个r.v.的联合分布为二元正态分布，则其非奇异线性变换还是二元正态分布。</p>
 <p><strong>构造生成标准正态分布r.v.</strong>：构造独立r.v. $U_1\sim U[0,1]$，$U_2\sim U[0,1]$</p>
 <p>则$X=\sqrt{-2logU_1}\cos(2\pi U_2)，Y=\sqrt{-2logU_1}\sin(2\pi U_2)$是独立标准正态r.v.</p>
-<h2 id="§3-7-极值和顺序统计量"><a href="#§3-7-极值和顺序统计量" class="headerlink" title="§3.7 极值和顺序统计量"></a>§3.7 极值和顺序统计量</h2><h3 id="r-v-极值的分布"><a href="#r-v-极值的分布" class="headerlink" title="r.v.极值的分布"></a>r.v.极值的分布</h3><p><strong>max分布</strong>：$\{X_n\}$为独立r.v.集，$F_{max}(z)=P\{\bigcap\limits_{i=1}^{n} (X_i\leq z)\}=\prod\limits_{i=1}^{n}F_{X_i}(z)$</p>
-<p><strong>min分布</strong>：$\{X_n\}$为独立r.v.集，$F_{max}(z)=P\{\bigcup\limits_{i=1}^{n} (X_i\leq z)\}=1-\prod\limits_{i=1}^{n}(1-F_{X_i}(z))$</p>
-<p><strong>n个独立同分布r.v.的极值的密度</strong>：$f_{max}(z)=nf(z)[F(z)]^{n-1},\ f_{min}(z)=nf(z)[1-F(z)]^{n-1}$</p>
+<h2 id="§3-7-极值和顺序统计量"><a href="#§3-7-极值和顺序统计量" class="headerlink" title="§3.7 极值和顺序统计量"></a>§3.7 极值和顺序统计量</h2><h3 id="r-v-极值的分布"><a href="#r-v-极值的分布" class="headerlink" title="r.v.极值的分布"></a>r.v.极值的分布</h3><p><strong>max分布</strong>：$\{X_n\}$为独立r.v.集，$F_{\max}(z)=P\{\bigcap\limits_{i=1}^{n} (X_i\leq z)\}=\prod\limits_{i=1}^{n}F_{X_i}(z)$</p>
+<p><strong>min分布</strong>：$\{X_n\}$为独立r.v.集，$F_{\min}(z)=P\{\bigcup\limits_{i=1}^{n} (X_i\leq z)\}=1-\prod\limits_{i=1}^{n}(1-F_{X_i}(z))$</p>
+<p><strong>n个独立同分布r.v.的极值的密度</strong>：$f_{\max}(z)=nf(z)[F(z)]^{n-1},\ f_{\min}(z)=nf(z)[1-F(z)]^{n-1}$</p>
 <p>指数分布的<strong>串联系统</strong>仍服从指数分布，失效率为各部件失效率之和。</p>
 <p><strong>顺序统计量$X_{(k)}$的密度</strong>：$f_k(x)=\frac{n!}{(k-1)!(n-k)!}f(x)F^{k-1}(x)[1-F(x)]^{n-k}$</p>
 <p>若$X_i\sim \mathbf U[0,1]$且相互独立，则$X_{(k)}\sim \mathbf{Beta}(k,n-k+1)$</p>
@@ -7877,8 +7879,8 @@ f_Z(z)=\int_{-\infty}^{\infty}f_X(z-y)f_Y(y)dy=\int_{-\infty}^{\infty}f_X(x)f_Y(
 <li>$\{X_n\}$相互独立，则$E(\prod\limits_{k=1}^{n}X_k)=\prod\limits_{k=1}^{n}E(X_k)$</li>
 </ul>
 <p><strong>超几何分布等式</strong>：$N$件产品，$M$件次品，摸出次品个数的期望值(前置证明：每次摸中次品概率相同)</p>
-<p>$\sum\limits_{k=0}^{n}k\frac{C^k_MC^{n-k}_{N-M}}{C^n_N}=\frac{nM}{N}$</p>
-<h2 id="§4-2-方差与标准差"><a href="#§4-2-方差与标准差" class="headerlink" title="§4.2 方差与标准差"></a>§4.2 方差与标准差</h2><p><strong>方差</strong>：$Var(X)\overset{\Delta}=E[(X-E(X))^2]$</p>
+<script type="math/tex; mode=display">
+\sum\limits_{k=0}^{n}k\frac{C^k_MC^{n-k}_{N-M}}{C^n_N}=\frac{nM}{N}</script><h2 id="§4-2-方差与标准差"><a href="#§4-2-方差与标准差" class="headerlink" title="§4.2 方差与标准差"></a>§4.2 方差与标准差</h2><p><strong>方差</strong>：$Var(X)\overset{\Delta}=E[(X-E(X))^2]$</p>
 <p><strong>标准差</strong>：$\sqrt{Var(X)}$</p>
 <p><strong>方差的计算</strong>：$Var(X)=E(X^2)-[E(X)]^2$</p>
 <p><strong>方差的基本性质</strong>：</p>
@@ -7915,12 +7917,13 @@ f_Z(z)=\int_{-\infty}^{\infty}f_X(z-y)f_Y(y)dy=\int_{-\infty}^{\infty}f_X(x)f_Y(
 </ul>
 <p><strong>相关系数</strong>：$\rho_{XY}\overset{\Delta}=\frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$，$|\rho_{XY}|\leq1$，取等当且仅当$Y\overset{a.e}=a+bX$</p>
 <p><strong>均方误差</strong>：对于线性近似$\widehat Y=a+bX$，均方误差$e=E[(Y-\widehat Y)^2]$</p>
-<p>$e_{min}=Var(Y)(1-\rho^2_{XY})$，此时$b_0=\frac{Cov(X,Y)}{Var(X)}$，$a_0=E(Y)-b_0E(X)$</p>
+<p>$e_{\min}=Var(Y)(1-\rho^2_{XY})$，此时$b_0=\frac{Cov(X,Y)}{Var(X)}$，$a_0=E(Y)-b_0E(X)$</p>
 <p><strong>相关</strong>：正相关，负相关，不相关。不相关不一定独立，独立一定不相关。</p>
 <p><strong>协方差矩阵</strong>：对于n维r.v.$\{X_n\}$，记$c_{ij}=Cov(X_i,X_j)\ (i,j=1,2,\cdots,n)$</p>
 <p>将$c_{ij}$写成矩阵的形式$C$，则称其为$\{X_n\}$的协方差矩阵。协方差矩阵为<strong>非负定对称阵</strong>。</p>
 <p><strong>n维正态r.v.</strong>：令</p>
-<script type="math/tex; mode=display">X=\left[\begin{array}{c}
+<script type="math/tex; mode=display">
+X=\left[\begin{array}{c}
 x_{1} \\
 x_{2} \\
 \vdots \\
@@ -7973,11 +7976,17 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <p>若$\{X_n\}$两两独立且同分布，期望$\mu$存在，则$\bar X_n\stackrel{a.s.}{\longrightarrow}\mu$</p>
 <h2 id="§5-2-中心极限定理"><a href="#§5-2-中心极限定理" class="headerlink" title="§5.2 中心极限定理"></a>§5.2 中心极限定理</h2><p><strong>中心极限定理</strong>：</p>
 <p>若$Z_n=\frac{\sum_{k=1}^{n} X_{k}-\sum_{k=1}^{n} \mu_{k}}{\sqrt{\sum_{k=1}^{n} \sigma_{k}^{2}}}$的分布函数$F_n(x)$对任意$x$满足</p>
-<p>$\begin{aligned}<br>\lim _{n \rightarrow \infty} F_{n}(x) &amp; =\lim _{n \rightarrow \infty} P\left\{\frac{\sum_{k=1}^{n} X_{k}-\sum_{k=1}^{n} \mu_{k}}{\sqrt{\sum_{k=1}^{n} \sigma_{k}^{2}}} \leq x\right\} \\<br>&amp; =\int_{-\infty}^{x} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t=\Phi(x)<br>\end{aligned}$</p>
-<p>则称$\{X_k\}$服从中心极限定理。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\lim _{n \rightarrow \infty} F_{n}(x) & =\lim _{n \rightarrow \infty} P\left\{\frac{\sum_{k=1}^{n} X_{k}-\sum_{k=1}^{n} \mu_{k}}{\sqrt{\sum_{k=1}^{n} \sigma_{k}^{2}}} \leq x\right\} \\
+& =\int_{-\infty}^{x} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t=\Phi(x)
+\end{aligned}</script><p>则称$\{X_k\}$服从中心极限定理。</p>
 <p><strong>中心极限定理(独立同分布)</strong>：</p>
-<p>$\begin{aligned}<br>\lim _{n \rightarrow \infty} F_{n}(x) &amp; =\lim _{n \rightarrow \infty} P\left\{\frac{\sum_{k=1}^{n} X_{k}-n \mu}{\sqrt{n} \sigma} \leq x\right\} \\<br>&amp; =\int_{-\infty}^{x} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t=\Phi(x)<br>\end{aligned}$</p>
-<p><strong>中心极限定理的实际含义</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\lim _{n \rightarrow \infty} F_{n}(x) & =\lim _{n \rightarrow \infty} P\left\{\frac{\sum_{k=1}^{n} X_{k}-n \mu}{\sqrt{n} \sigma} \leq x\right\} \\
+& =\int_{-\infty}^{x} \frac{1}{\sqrt{2 \pi}} e^{-\frac{t^{2}}{2}} d t=\Phi(x)
+\end{aligned}</script><p><strong>中心极限定理的实际含义</strong>：</p>
 <p>对于均值为$\mu$，方差$\sigma^2&gt;0$的i.i.d.r.v.列$\{X_n\}$，有$\sum\limits_{k=1}^{n}X_k\overset{近似}\sim\mathbf N(n\mu,n\sigma^2)$，或$\bar X_n\overset{近似}\sim\mathbf N(\mu,\frac{\sigma^2}{n})$</p>
 <p><strong>棣莫弗-拉普拉斯中心极限定理</strong>：</p>
 <p>设$\{\eta_n\}$为服从参数为$n,p(0&lt;p&lt;1)$的二项分布r.v.列，则对任意$x$有</p>
@@ -8002,17 +8011,20 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <p><strong>样本均值与样本方差的数字特征</strong>：$E(\bar X)=\mu$，$Var(\bar X)=\frac{\sigma^2}{n}$，$E(S^2)=\sigma^2$</p>
 <h2 id="§6-3-抽样分布"><a href="#§6-3-抽样分布" class="headerlink" title="§6.3 抽样分布"></a>§6.3 抽样分布</h2><p><strong>$\chi^2$-分布</strong>：</p>
 <p>设$X_1,X_2,\cdots,X_n$是来自总体$X\sim\mathbf N(0,1)$的样本，令</p>
-<script type="math/tex; mode=display">\mathcal {X}^2=X_1^2+X_2^2+\cdots+X_n^2</script><p>称$\mathcal {X}^2$服从自由度为$n$的$\chi^2$-分布，记为$\mathcal {X}^2\sim\chi^2(n)$。</p>
+<script type="math/tex; mode=display">
+\mathcal {X}^2=X_1^2+X_2^2+\cdots+X_n^2</script><p>称$\mathcal {X}^2$服从自由度为$n$的$\chi^2$-分布，记为$\mathcal {X}^2\sim\chi^2(n)$。</p>
 <p><strong>$\chi^2$-分布的可加性</strong>：</p>
 <p>设$\chi_1^2\sim\chi^2(n_1)$，$\chi_2^2\sim\chi^2(n_2)$且相互独立，则$\chi_1^2+\chi_2^2\sim\chi^2(n_1+n_2)$</p>
 <p><strong>$\chi^2$-分布的数字特征</strong>：</p>
 <p>设$\chi^2\sim\chi^2(n)$，则$E(\chi^2)=n$，$Var(\chi^2)=2n$</p>
 <p><strong>$t$-分布</strong>：</p>
 <p>设$X\sim\mathbf N(0,1)$，$Y\sim\chi^2(n)$，且$X,Y$相互独立，令</p>
-<script type="math/tex; mode=display">t=\frac{X}{\sqrt{Y/n}}</script><p>称$t$服从自由度为$n$的$t$-分布，记为$t\sim t(n)$。当$n$较大时，可以认为$t(n)=N(0,1)$</p>
+<script type="math/tex; mode=display">
+t=\frac{X}{\sqrt{Y/n}}</script><p>称$t$服从自由度为$n$的$t$-分布，记为$t\sim t(n)$。当$n$较大时，可以认为$t(n)=N(0,1)$</p>
 <p><strong>$F$-分布</strong>：</p>
 <p>设$U\sim\chi^2(n_1)$，$V\sim\chi^2(n_2)$，且$U,V$相互独立，令</p>
-<script type="math/tex; mode=display">F=\frac{U/n_1}{V/n_2}</script><p>称$F$服从自由度为$(n_1,n_2)$的$F$-分布，记为$F\sim F(n_1,n_2)$</p>
+<script type="math/tex; mode=display">
+F=\frac{U/n_1}{V/n_2}</script><p>称$F$服从自由度为$(n_1,n_2)$的$F$-分布，记为$F\sim F(n_1,n_2)$</p>
 <p><strong>$F$-分布的性质</strong>：</p>
 <ul>
 <li>若$F\sim F(n_1,n_2)$，则$\frac{1}{F}\sim F(n_2,n_1)$</li>
@@ -8080,13 +8092,14 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <p>同一参数的不同无偏估计的线性组合(总比例为1)还是无偏估计。</p>
 <p><strong>估计量的均方误差</strong>：</p>
 <p>设$\widehat\theta(X_1,X_2,\cdots,X_n)$为待估参数$\theta$的估计量，称$E_\theta(\widehat\theta-\theta)^2$为$\widehat\theta$的均方误差。</p>
-<p>$E_\theta(\widehat\theta-\theta)^2=Var(\widehat\theta)+[E(\widehat\theta)-\theta]^2$</p>
-<p><strong>有效性</strong>：</p>
+<script type="math/tex; mode=display">
+E_\theta(\widehat\theta-\theta)^2=Var(\widehat\theta)+[E(\widehat\theta)-\theta]^2</script><p><strong>有效性</strong>：</p>
 <p>设$X_1,X_2,\cdots,X_n$是总体$X\sim F(x,\theta);\theta\in\Theta$的样本，</p>
 <script type="math/tex; mode=display">\widehat\theta_1=\widehat\theta_1(X_1,X_2,\cdots,X_n),\widehat\theta_2=\widehat\theta_2(X_1,X_2,\cdots,X_n)</script><p>都是$\theta$的无偏估计，即$E(\widehat\theta_1)=E(\widehat\theta_2)=\theta\ (\forall\theta\in\Theta)$。若$\forall\theta\in\Theta$有$Var(\widehat\theta_1)\leq Var(\widehat\theta_2)$，则称$\widehat\theta_1$较$\widehat\theta_2$有效。</p>
 <p><strong>相合性(一致性)</strong>：</p>
 <p>设$\widehat\theta_n=\widehat\theta(X_1,X_2,\cdots,X_n)$是位置参数$\theta$的点估计，若$\forall\theta\in\Theta$满足：$\forall\varepsilon&gt;0$有</p>
-<script type="math/tex; mode=display">\lim\limits_{n→\infty}P\{|\widehat\theta_n-\theta|\ge \varepsilon\}=0</script><p>即$\widehat\theta_n\stackrel{P}{\longrightarrow}\theta\ (n→\infty)$，则称$\widehat\theta_n$是$\theta$相合估计。</p>
+<script type="math/tex; mode=display">
+\lim\limits_{n→\infty}P\{|\widehat\theta_n-\theta|\ge \varepsilon\}=0</script><p>即$\widehat\theta_n\stackrel{P}{\longrightarrow}\theta\ (n→\infty)$，则称$\widehat\theta_n$是$\theta$相合估计。</p>
 <p>对任意总体$X$，若期望$\mu$与方差$\sigma^2$存在，则$\widehat\mu=\bar X$，$\widehat\sigma^2=S^2$都是相合估计。</p>
 <p><strong>关于相合估计的一般结论</strong>：</p>
 <ul>
@@ -8097,13 +8110,16 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 <li><p>$\theta$的相合估计不一定是无偏估计</p>
 </li>
 <li><p>若$\widehat\theta$是$\theta$的无偏估计，则由Chebyshev不等式有</p>
-<script type="math/tex; mode=display">P\{|\widehat\theta-\theta|\ge \varepsilon\}\leq \frac{Var(\widehat\theta)}{\varepsilon^2}</script><p>故当$\lim\limits_{n→\infty}Var(\widehat\theta)=0$时，$\widehat\theta$是$\theta$的相合估计(充分条件)</p>
+<script type="math/tex; mode=display">
+P\{|\widehat\theta-\theta|\ge \varepsilon\}\leq \frac{Var(\widehat\theta)}{\varepsilon^2}</script><p>故当$\lim\limits_{n→\infty}Var(\widehat\theta)=0$时，$\widehat\theta$是$\theta$的相合估计(充分条件)</p>
 </li>
 </ul>
 <h2 id="§7-3-区间估计"><a href="#§7-3-区间估计" class="headerlink" title="§7.3 区间估计"></a>§7.3 区间估计</h2><p><strong>区间估计</strong>：</p>
 <p>设总体$X\sim F(x;\theta)\ (\theta\in\Theta)$。若对给定的$0&lt;\alpha&lt;1$，存在两个统计量</p>
-<script type="math/tex; mode=display">\underline\theta=\underline\theta(X_1,X_2,\cdots,X_n),\ \overline\theta=\overline\theta(X_1,X_2,\cdots,X_n)\ (\underline\theta\leq \overline\theta)</script><p>使得$\forall\theta\in\Theta$，有</p>
-<script type="math/tex; mode=display">P\{\underline\theta\leq \theta\leq \overline\theta\}\ge 1-\alpha</script><p>则称随机区间$(\underline\theta,\overline\theta)$为$\theta$的置信水平为$1-\alpha$的<strong>置信区间</strong>，$\underline\theta,\overline\theta$分别称为<strong>置信下限</strong>和<strong>置信上限</strong>。</p>
+<script type="math/tex; mode=display">
+\underline\theta=\underline\theta(X_1,X_2,\cdots,X_n),\ \overline\theta=\overline\theta(X_1,X_2,\cdots,X_n)\ (\underline\theta\leq \overline\theta)</script><p>使得$\forall\theta\in\Theta$，有</p>
+<script type="math/tex; mode=display">
+P\{\underline\theta\leq \theta\leq \overline\theta\}\ge 1-\alpha</script><p>则称随机区间$(\underline\theta,\overline\theta)$为$\theta$的置信水平为$1-\alpha$的<strong>置信区间</strong>，$\underline\theta,\overline\theta$分别称为<strong>置信下限</strong>和<strong>置信上限</strong>。</p>
 <p>$1-\alpha$置信区间的含义是随机区间$[\underline\theta,\overline\theta]$至少以$1-\alpha$的概率套住$\theta$的真值。</p>
 <ul>
 <li><p>可靠性：置信度$1-\alpha$应尽量大，即要求估计尽量可信(可靠)。</p>
@@ -8204,7 +8220,6 @@ c_{n 1} & c_{n 2} & \cdots & c_{n n}
 </tbody>
 </table>
 </div>
-<p><del>这玩意能背下来就有鬼了= =</del></p>
 <p><strong>单侧置信区间</strong>：</p>
 <p>将上表中的区间两端值取出，将$\frac{\alpha}{2}$全部更换为$\alpha$，即可得到置信水平为$1-\alpha$的单侧置信限。</p>
 <p><strong>大样本下非正态总体参数的区间估计</strong>：</p>
@@ -9166,6 +9181,7 @@ n_{i}
 <li>Sparse Kernel Machines</li>
 <li>Mixture Models and EM Learning</li>
 <li>Sequential Data</li>
+<li>Markov Decision Process</li>
 </ol>
 <h2 id="Chapter-1-Introduction"><a href="#Chapter-1-Introduction" class="headerlink" title="Chapter 1 - Introduction"></a>Chapter 1 - Introduction</h2><h3 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h3><ul>
 <li><strong>Machine Learning</strong>—minimization of some loss function for generalizing data sets with models.</li>
@@ -9857,6 +9873,23 @@ p(\mathbf x_1,\dots,\mathbf x_N) = p(\mathbf x_1)p(\mathbf x_2\vert\mathbf x_1) 
 <h3 id="Hidden-Markov-Models"><a href="#Hidden-Markov-Models" class="headerlink" title="Hidden Markov Models"></a>Hidden Markov Models</h3><p>For each observation $\mathbf x_n$, introduce latent variable $\mathbf z_n$, such that $\mathbf z_{n+1}\perp!!!!\perp \mathbf z_{n-1} \vert \mathbf z_n$</p>
 <script type="math/tex; mode=display">
 p(\mathbf x_1,\dots,\mathbf x_N,\mathbf z_1,\dots,\mathbf z_N) = p(\mathbf z_1)[\prod\limits_{n=2}^N]p(\mathbf z_n\vert\mathbf z_{n-1})\prod\limits_{n=1}^N p(\mathbf x_n\vert\mathbf z_n)</script><p>Use 1-of-K encoding, the latent variable is K-dimensional binary vector. The transition probability matrix $A_{j,k}\equiv p(z_{n,k}=1\mid z_{n-1,j}=1)$. This matrix satisfies $\sum\limits_{k} A_{jk}=1$ therefore has $K(K-1)$ independent parameters.</p>
+<h2 id="Chapter-10-Markov-Decision-Process"><a href="#Chapter-10-Markov-Decision-Process" class="headerlink" title="Chapter 10 - Markov Decision Process"></a>Chapter 10 - Markov Decision Process</h2><h3 id="Markov-Decision-Process"><a href="#Markov-Decision-Process" class="headerlink" title="Markov Decision Process"></a>Markov Decision Process</h3><p>Given states $x$, actions $u$, transition probabilities $p(x’\mid u,x)$, reward function $r(x,u)$.</p>
+<p>Expected cumulative reward: </p>
+<script type="math/tex; mode=display">
+R_T^\pi(x_t) = \mathbb E[\sum\limits_{\tau=1}^T \gamma ^\tau r_{t+\tau}\mid u_{t+\tau} = \pi(z_{1:t+\tau-1},u_{1:t+\tau-1})]</script><ul>
+<li>$T=1$: greedy</li>
+<li>$T&gt;1$: finite horizon</li>
+<li>$T=\infty$: infinite horizon</li>
+</ul>
+<p>Goal: optimal policy</p>
+<script type="math/tex; mode=display">
+\pi^\star = \mathop{\arg\max}\limits_{\pi}\ R_T^\pi(x_t)</script><p><strong>T-Step Policy and Value Function</strong></p>
+<script type="math/tex; mode=display">
+\begin{align}
+V_T(x) &= \gamma \max\limits_u[r(x,u)+\int V_{T-1}(x')p(x'\mid u,x)\text d x']\\
+\pi_T(x) &= \mathop{\arg\max}\limits_u [r(x,u)+\int V_{T-1}(x')p(x'\mid u,x)\text d x']
+\end{align}</script><h3 id="Value-Iteration-and-Policy-Iteration"><a href="#Value-Iteration-and-Policy-Iteration" class="headerlink" title="Value Iteration and Policy Iteration"></a>Value Iteration and Policy Iteration</h3><p><img src="https://raw.githubusercontent.com/SUSTech-ML-Course/Machine-Learning-Course/f30ba2e42ace201a1b53180ccfd0a71e4a6905ce/lab-material/Lab13.Markov%20Decision%20Process/images/quicklatex.com-7996700c6b0398334741dd5d99ada04f_l3.svg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/SUSTech-ML-Course/Machine-Learning-Course/f30ba2e42ace201a1b53180ccfd0a71e4a6905ce/lab-material/Lab13.Markov%20Decision%20Process/images/quicklatex.com-c3ce8715b3d71e344a55011bddc16f20_l3.svg" alt=""></p>
 ]]></content>
       <categories>
         <category>CS</category>
@@ -11536,7 +11569,7 @@ p(x_i \vert \theta) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x_i \vert \mu_k, \Sigma_k
 <p><strong>M step</strong>. Re-estimate the parameters using the current responsibilities</p>
 <script type="math/tex; mode=display">
 \begin{align*}
-\mu_k^\text{new} &= (\frac 1 {N_k} \sum\limits_{n=1}^N \gamma(z_{nk})x_n + \Sigma_k\Sigma_{k0}^{-1}m_{k0})(\Sigma_k\Sigma_{k0}^{-1} + \frac 1 {N_k} \sum\limits_{n=1}^N \gamma(z_{nk}))^{-1}\\
+\mu_k^\text{new} &= (\Sigma_k\Sigma_{k0}^{-1} + \frac 1 {N_k} \sum\limits_{n=1}^N \gamma(z_{nk}))^{-1}(\frac 1 {N_k} \sum\limits_{n=1}^N \gamma(z_{nk})x_n + \Sigma_k\Sigma_{k0}^{-1}m_{k0})\\
 \Sigma_k^\text{new} &= (\frac 1 {N_k} \sum\limits_{n=1}^N (\gamma(z_{nk}) (x_n-\mu_k^\text{new})(x_n-\mu_k^\text{new})^\text T) - I)\Sigma_{k0}\\
 \pi_k^\text{new} &=\frac 1 {N+N_{0}} \sum\limits_{n=1}^N \gamma(z_{nk})=  \frac {N_k + N_{k0}} {N+N_0}
 \end{align*}</script><p>Then by EM method we can obtain $\theta_\text{MAP}$.</p>
@@ -11610,6 +11643,142 @@ p(z_2,z_3\vert D,\pi, A,B) &= p(z_3\vert z_2)p(z_2\vert D,\pi, A,B) \\&=\begin{b
 p(z_4\vert D,\pi,A,B) &= p(z_4\vert z_3)p(z_3\vert D,\pi,A,B) = \begin{bmatrix}0.0954*0.8+0.023925*0.3\\0.0954*0.2+0.023925*0.7\end{bmatrix}=\begin{bmatrix}0.0834975\\0.0358275\end{bmatrix}\\
 p(x_4=\text{rise}\vert \pi,A,B) &= \sum\limits_{z_4}p(x_4\vert z_4,\pi,A,B)p(z_4\vert D,\pi,A,B) = 0.9*0.08349 + 0.4*0.03582 = 0.08947875
 \end{align*}</script>]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Machine Learning</tag>
+        <tag>Artificial Intelligence</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CS323 编译原理 期末复习</title>
+    <url>/2023/12/25/CS323_Final_Review/</url>
+    <content><![CDATA[<h3 id="引论"><a href="#引论" class="headerlink" title="引论"></a>引论</h3><p>编程语⾔的演化</p>
+<ul>
+<li>机器语⾔ -&gt; 汇编语⾔ -&gt; ⾼级语⾔</li>
+<li>各种典型语⾔的特征</li>
+</ul>
+<p>编译器的结构</p>
+<ul>
+<li>前端和后端的划分</li>
+<li>各组成部分及其作⽤</li>
+</ul>
+<p>编译器 V.S. 解释器</p>
+<h3 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h3><p>token, pattern, lexeme, string, language</p>
+<p>Grammar calculation: 并，连接，Kleene闭包，正闭包</p>
+<p>正则表达式及正则语⾔</p>
+<p>有穷⾃动机</p>
+<ul>
+<li>NFA：⾮确定有穷⾃动机</li>
+<li>DFA：确定有穷⾃动机</li>
+</ul>
+<p>两个关键算法</p>
+<ul>
+<li>正则表达式转NFA（Thompson构造法）</li>
+<li>NFA转DFA（⼦集构造法）</li>
+</ul>
+<h3 id="语法分析"><a href="#语法分析" class="headerlink" title="语法分析"></a>语法分析</h3><p>上下⽂⽆关⽂法及上下⽂⽆关语⾔：终结符、⾮终结符、产⽣式</p>
+<p>推导 (derivation)：最左最右推导</p>
+<p>⽂法的句型 (sentential form)</p>
+<p>⽂法的句⼦ (sentence)</p>
+<p>语法分析树 (parse tree)</p>
+<p>抽象语法树 (abstract syntax tree)</p>
+<p>⽂法的⼆义性</p>
+<p>正则表达式 V.S. 上下⽂⽆关⽂法：正则语⾔ V.S. 上下⽂⽆关语⾔</p>
+<p>语法分析技术</p>
+<ul>
+<li><p>⾃顶向下分析⽅法</p>
+<ul>
+<li>递归下降语法分析 (Recursive-descent parsing)</li>
+<li>LL(1)⽂法及预测分析表的构造</li>
+<li>⾮递归表格驱动的语法分析</li>
+</ul>
+</li>
+<li><p>⾃底向上分析⽅法</p>
+<ul>
+<li>移⼊-归约语法分析框架 (Shift-reduce parsing)</li>
+<li>LR语法分析器及分析算法<ul>
+<li>SLR⽅法 (尤其是LR(0) 项集族构造)</li>
+<li>CLR、LALR算法细节不考，但三种LR算法的基本原理和优劣需要了解</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="语法制导的翻译"><a href="#语法制导的翻译" class="headerlink" title="语法制导的翻译"></a>语法制导的翻译</h3><p>语法制导定义 (Syntax-directed definitions)</p>
+<p>语法制导的翻译⽅案 (Syntax-directed translation schemes)</p>
+<p>属性：合成属性和继承属性</p>
+<p>语义规则 (semantic rules) 和 语义动作(semantic actions)</p>
+<p>语法制导定义属性值的计算顺序：依赖图</p>
+<p>S属性的语法制导定义、L属性的语法制导定义</p>
+<h3 id="中间代码⽣成"><a href="#中间代码⽣成" class="headerlink" title="中间代码⽣成"></a>中间代码⽣成</h3><p>三地址码指令及其表示⽅法：四元式、三元式、间接三元式</p>
+<p>类型检查</p>
+<ul>
+<li>类型表达式</li>
+<li>类型等价：名等价、结构等价</li>
+<li>强类型、弱类型</li>
+</ul>
+<p>数组元素相对地址计算</p>
+<ul>
+<li>⾏优先布局</li>
+<li>列优先布局</li>
+</ul>
+<p>类型转化：拓宽、窄化</p>
+<p>控制流翻译中的回填技术（了解基本思想、不考细节）</p>
+<h3 id="运⾏时刻环境"><a href="#运⾏时刻环境" class="headerlink" title="运⾏时刻环境"></a>运⾏时刻环境</h3><p>运⾏时刻内存的逻辑构成（代码区、堆区、栈区等）</p>
+<p>⽅法调⽤</p>
+<ul>
+<li>活动树（activation tree）</li>
+<li>活动记录（activation record）</li>
+<li>⽅法调⽤栈</li>
+<li>调⽤代码序列和返回代码序列的作⽤</li>
+</ul>
+<p>内存管理</p>
+<ul>
+<li>内存的分配和回收</li>
+<li>程序局部性现象</li>
+<li>内存碎⽚化现象</li>
+</ul>
+<h3 id="代码⽣成"><a href="#代码⽣成" class="headerlink" title="代码⽣成"></a>代码⽣成</h3><p>如何为⽅法调⽤及返回⽣成代码</p>
+<ul>
+<li>静态分配</li>
+<li>栈式分配</li>
+</ul>
+<p>基本块和控制流图</p>
+<ul>
+<li>基本块切分算法</li>
+<li>控制流图构造算法</li>
+</ul>
+<p>控制流图中的循环</p>
+<p>寄存器分配</p>
+<ul>
+<li>寄存器描述符和地址描述符的作⽤</li>
+<li>寄存器分配算法（掌握基本原则即可）</li>
+</ul>
+<h3 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h3><p>常⻅局部优化技术</p>
+<ul>
+<li>局部公共⼦表达式消除</li>
+<li>死代码消除</li>
+<li>代数恒等式的应⽤</li>
+</ul>
+<p>数据流分析框架及经典问题（到达定值）</p>
+]]></content>
+      <categories>
+        <category>CS</category>
+      </categories>
+      <tags>
+        <tag>Compiler</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CS329 机器学习 期末复习</title>
+    <url>/2024/01/02/CS329_Final_Review/</url>
+    <content><![CDATA[<blockquote>
+<p>圣   经   吟   唱</p>
+<p>CS329 机器学习(H)是一款非常优质的计算机系课程，课程没有任何缺点，理论课内容多是为了更丰富的知识传授，公式推导一黑板每次都不同也很正常只是我没见过世面，学不明白是我天赋不够，课件讲解如丝般顺滑，Project要求两人组队为了节约协作沟通成本，一分钟过5页PPT高效又快捷，不仅如此课程还大量使用多样体系各类符号，理论作业丰富又不肝，每次作业都靠答案带飞菜菜体验极好，是课程之鉴，Lab题面十分简洁，编程作业非常动脑，期中考试出得也很用心，Quiz难度适中，课程体验非常好。作业做不动是我手和脑子不配，上课听不懂都是座位风水不好，小测考试爆炸都是我的问题。</p>
+</blockquote>
+<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2>]]></content>
       <categories>
         <category>CS</category>
       </categories>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="Quiz 4 for ML, GMM and HMM.">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-26T03:45:23.995Z">
-<meta property="article:modified_time" content="2023-12-26T03:46:33.131Z">
+<meta property="article:modified_time" content="2023-12-26T04:07:51.539Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Machine Learning">
 <meta property="article:tag" content="Artificial Intelligence">
@@ -220,7 +220,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2023-12-26 11:45:23 / Modified: 11:46:33" itemprop="dateCreated datePublished" datetime="2023-12-26T11:45:23+08:00">2023-12-26</time>
+              <time title="Created: 2023-12-26 11:45:23 / Modified: 12:07:51" itemprop="dateCreated datePublished" datetime="2023-12-26T11:45:23+08:00">2023-12-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -297,7 +297,7 @@ p(x_i \vert \theta) = \sum_{k=1}^{K} \pi_k \mathcal{N}(x_i \vert \mu_k, \Sigma_k
 <p><strong>M step</strong>. Re-estimate the parameters using the current responsibilities</p>
 <script type="math/tex; mode=display">
 \begin{align*}
-\mu_k^\text{new} &= (\frac 1 {N_k} \sum\limits_{n=1}^N \gamma(z_{nk})x_n + \Sigma_k\Sigma_{k0}^{-1}m_{k0})(\Sigma_k\Sigma_{k0}^{-1} + \frac 1 {N_k} \sum\limits_{n=1}^N \gamma(z_{nk}))^{-1}\\
+\mu_k^\text{new} &= (\Sigma_k\Sigma_{k0}^{-1} + \frac 1 {N_k} \sum\limits_{n=1}^N \gamma(z_{nk}))^{-1}(\frac 1 {N_k} \sum\limits_{n=1}^N \gamma(z_{nk})x_n + \Sigma_k\Sigma_{k0}^{-1}m_{k0})\\
 \Sigma_k^\text{new} &= (\frac 1 {N_k} \sum\limits_{n=1}^N (\gamma(z_{nk}) (x_n-\mu_k^\text{new})(x_n-\mu_k^\text{new})^\text T) - I)\Sigma_{k0}\\
 \pi_k^\text{new} &=\frac 1 {N+N_{0}} \sum\limits_{n=1}^N \gamma(z_{nk})=  \frac {N_k + N_{k0}} {N+N_0}
 \end{align*}</script><p>Then by EM method we can obtain $\theta_\text{MAP}$.</p>
@@ -389,10 +389,13 @@ p(x_4=\text{rise}\vert \pi,A,B) &= \sum\limits_{z_4}p(x_4\vert z_4,\pi,A,B)p(z_4
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/11/28/CS329_Quiz_3/" rel="prev" title="CS329 Machine Learning Quiz 3">
-      <i class="fa fa-chevron-left"></i> CS329 Machine Learning Quiz 3
+    <a href="/2023/12/25/CS323_Final_Review/" rel="prev" title="CS323 编译原理 期末复习">
+      <i class="fa fa-chevron-left"></i> CS323 编译原理 期末复习
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2024/01/02/CS329_Final_Review/" rel="next" title="CS329 机器学习 期末复习">
+      CS329 机器学习 期末复习 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -481,7 +484,7 @@ p(x_4=\text{rise}\vert \pi,A,B) &= \sum\limits_{z_4}p(x_4\vert z_4,\pi,A,B)p(z_4
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">43</span>
+          <span class="site-state-item-count">45</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -529,7 +532,7 @@ p(x_4=\text{rise}\vert \pi,A,B) &= \sum\limits_{z_4}p(x_4\vert z_4,\pi,A,B)p(z_4
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
