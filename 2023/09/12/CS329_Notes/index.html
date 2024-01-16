@@ -39,10 +39,12 @@
 <meta property="og:image" content="https://s2.loli.net/2023/11/07/bdLjc4yTiRkGEI7.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/GuTaoZi/CS329_Machine_Learning/daad03239f0966cd39434cf8312ce640a226cb1f/Lab_Materials/Lab06.Linear%20Discriminant%20Analysis/images/example.png">
 <meta property="og:image" content="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png">
+<meta property="og:image" content="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/SUSTech-ML-Course/Machine-Learning-Course/f30ba2e42ace201a1b53180ccfd0a71e4a6905ce/lab-material/Lab13.Markov%20Decision%20Process/images/quicklatex.com-7996700c6b0398334741dd5d99ada04f_l3.svg">
 <meta property="og:image" content="https://raw.githubusercontent.com/SUSTech-ML-Course/Machine-Learning-Course/f30ba2e42ace201a1b53180ccfd0a71e4a6905ce/lab-material/Lab13.Markov%20Decision%20Process/images/quicklatex.com-c3ce8715b3d71e344a55011bddc16f20_l3.svg">
 <meta property="article:published_time" content="2023-09-12T02:20:32.703Z">
-<meta property="article:modified_time" content="2024-01-02T03:35:49.923Z">
+<meta property="article:modified_time" content="2024-01-15T07:17:21.768Z">
 <meta property="article:author" content="咕桃">
 <meta property="article:tag" content="Machine Learning">
 <meta property="article:tag" content="Artificial Intelligence">
@@ -241,7 +243,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-01-02 11:35:49" itemprop="dateModified" datetime="2024-01-02T11:35:49+08:00">2024-01-02</time>
+                <time title="Modified: 2024-01-15 15:17:21" itemprop="dateModified" datetime="2024-01-15T15:17:21+08:00">2024-01-15</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -906,12 +908,10 @@ p(x, C_{2})=p(C_{2}) p(x \vert C_{2})=(1-\pi) \mathcal N(x \vert \mu_{2}, \Sigma
 \pi_{M L}&=\frac{1}{N} \sum_{n=1}^{N} t_{n}=\frac{N_{1}}{N}=\frac{N_{1}}{N_{1}+N_{2}} \\
 \mu_{1 \mathrm{ML}}&=\frac{1}{N_{1}} \sum_{n=1}^{N} t_{n} x_{n} \\ \mu_{2 \mathrm{ML}}&=\frac{1}{N_{2}} \sum_{n=1}^{N}\left(1-t_{n}\right) x_{n} \\
 \Sigma&=\pi \Sigma_{1}+(1-\pi) \Sigma_{2} \\ \Sigma_{i \mathrm{ML}}&=\frac{1}{N_{i}} \sum_{x_{n} \in C_{i}}\left(x_{n}-\mu_{i}\right)\left(x_{n}-\mu_{i}\right)^{T} \quad \mathrm{i}=1,2
-\end{align*}</script><p>这里各个参数的意义待补。</p>
-<h4 id="Generative-MAP-Gaussian-Mixtures"><a href="#Generative-MAP-Gaussian-Mixtures" class="headerlink" title="Generative: MAP Gaussian Mixtures"></a>Generative: MAP Gaussian Mixtures</h4><script type="math/tex; mode=display">
+\end{align*}</script><h4 id="Generative-MAP-Gaussian-Mixtures"><a href="#Generative-MAP-Gaussian-Mixtures" class="headerlink" title="Generative: MAP Gaussian Mixtures"></a>Generative: MAP Gaussian Mixtures</h4><script type="math/tex; mode=display">
 \pi_0=\frac{N_{10}}{N_{10}+N_{20}}, x\in\mathcal C_i\sim(x\vert\mu_{i0},\Sigma_{i0})</script><script type="math/tex; mode=display">
 \pi_\text{MAP} = \frac{N_1+N_{10}}{N+N_0}=\frac{N_1+N_{10}}{N_1+N_2+N_{10}+N_{20}}</script><script type="math/tex; mode=display">
-\left\{\begin{align*}\Sigma_{i\text{MAP}}^{-1}&=\Sigma_{i\text{ML}}^{-1}+\Sigma_{i0}^{-1}\\\Sigma_{i\text{MAP}}^{-1}\mu_{i\text{MAP}}&=\Sigma_{i\text{ML}}^{-1}\mu_{i\text{ML}}+\Sigma_{i0}^{-1}\mu_{i0}\end{align*}\right.</script><p>这里各个参数的意义待补。</p>
-<h3 id="Probabilistic-Discriminative-Models"><a href="#Probabilistic-Discriminative-Models" class="headerlink" title="Probabilistic Discriminative Models"></a>Probabilistic Discriminative Models</h3><h3 id="Bayesian-Information-Criterion"><a href="#Bayesian-Information-Criterion" class="headerlink" title="Bayesian Information Criterion"></a>Bayesian Information Criterion</h3><h2 id="Chapter-6-Neural-Networks"><a href="#Chapter-6-Neural-Networks" class="headerlink" title="Chapter 6 - Neural Networks"></a>Chapter 6 - Neural Networks</h2><p><img src="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
+\left\{\begin{align*}\Sigma_{i\text{MAP}}^{-1}&=\Sigma_{i\text{ML}}^{-1}+\Sigma_{i0}^{-1}\\\Sigma_{i\text{MAP}}^{-1}\mu_{i\text{MAP}}&=\Sigma_{i\text{ML}}^{-1}\mu_{i\text{ML}}+\Sigma_{i0}^{-1}\mu_{i0}\end{align*}\right.</script><h3 id="Probabilistic-Discriminative-Models"><a href="#Probabilistic-Discriminative-Models" class="headerlink" title="Probabilistic Discriminative Models"></a>Probabilistic Discriminative Models</h3><h3 id="Bayesian-Information-Criterion"><a href="#Bayesian-Information-Criterion" class="headerlink" title="Bayesian Information Criterion"></a>Bayesian Information Criterion</h3><h2 id="Chapter-6-Neural-Networks"><a href="#Chapter-6-Neural-Networks" class="headerlink" title="Chapter 6 - Neural Networks"></a>Chapter 6 - Neural Networks</h2><p><img src="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
 <h2 id="Chapter-7-Sparse-Kernel-Machines"><a href="#Chapter-7-Sparse-Kernel-Machines" class="headerlink" title="Chapter 7 - Sparse Kernel Machines"></a>Chapter 7 - Sparse Kernel Machines</h2><h3 id="Support-Vector-Machines"><a href="#Support-Vector-Machines" class="headerlink" title="Support Vector Machines"></a>Support Vector Machines</h3><p>Model: $\quad y(\mathbf x) = \mathbf w^\text T \phi(\mathbf x) + b$</p>
 <p>Distance of a point to the decision surface</p>
 <script type="math/tex; mode=display">
@@ -947,9 +947,8 @@ p(t\vert\mathbf  x,\mathbf w,\beta) = \mathcal N(t\vert y(\mathbf x),\beta^{-1})
 <p>The mean is given by a linear model, which can be written in an SVM-like form:</p>
 <script type="math/tex; mode=display">
 y(\mathbf x) = \sum\limits_{n=1}^N w_nk(\mathbf x,\mathbf x_n)+b</script><p>where $k(\mathbf x,\mathbf x_n)=\phi(\mathbf x)^\text T \phi(\mathbf x_n)$ is the kernel, and $b$ is 616.a bias parameter.</p>
-<p>……</p>
-<p>后面翘课了。</p>
-<h2 id="Chapter-8-Mixture-Models-and-EM-Learning"><a href="#Chapter-8-Mixture-Models-and-EM-Learning" class="headerlink" title="Chapter 8 - Mixture Models and EM Learning"></a>Chapter 8 - Mixture Models and EM Learning</h2><p>翘课了。</p>
+<p><img src="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
+<h2 id="Chapter-8-Mixture-Models-and-EM-Learning"><a href="#Chapter-8-Mixture-Models-and-EM-Learning" class="headerlink" title="Chapter 8 - Mixture Models and EM Learning"></a>Chapter 8 - Mixture Models and EM Learning</h2><p><img src="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
 <h2 id="Chapter-9-Sequential-Data"><a href="#Chapter-9-Sequential-Data" class="headerlink" title="Chapter 9 - Sequential Data"></a>Chapter 9 - Sequential Data</h2><p>Conditional data: independent of the previous states</p>
 <p>Sequential data: dependent of the previous states</p>
 <p><strong>Markov models</strong></p>
@@ -1098,7 +1097,7 @@ V_T(x) &= \gamma \max\limits_u[r(x,u)+\int V_{T-1}(x')p(x'\mid u,x)\text d x']\\
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
