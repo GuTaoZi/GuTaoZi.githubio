@@ -12109,4 +12109,13 @@ p(x_4=\text{rise}\vert \pi,A,B) &= \sum\limits_{z_4}p(x_4\vert z_4,\pi,A,B)p(z_4
         <tag>Compiler</tag>
       </tags>
   </entry>
+  <entry>
+    <title></title>
+    <url>/2024/07/25/Hadoop_Cluster_Setup/</url>
+    <content><![CDATA[<h1 id="Sample-Hadoop-Cluster"><a href="#Sample-Hadoop-Cluster" class="headerlink" title="Sample-Hadoop-Cluster"></a>Sample-Hadoop-Cluster</h1><p>A sample Hadoop cluster augmented with ZKFC and YARN, for MapReduce tasks.</p>
+<p>The official Docker image of <a href="https://hub.docker.com/r/apache/hadoop">Apache Hadoop</a> is based on CentOS 7, but as the EOL of CentOS 7 on June 30th, 2024, no new updates for CentOS will be made available. Time to deploy a Hadoop cluster in Docker on our own!</p>
+<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p>In this article, we will set up a Hadoop cluster in Docker with 2 name nodes and 3 data nodes, along with ZKFC (Zookeeper Failover Controller) and YARN (Yet Another Resource Negotiator). </p>
+<p><img src="https://s2.loli.net/2023/01/01/8pS9IbAPfWXDOgt.png" alt=""></p>
+]]></content>
+  </entry>
 </search>
