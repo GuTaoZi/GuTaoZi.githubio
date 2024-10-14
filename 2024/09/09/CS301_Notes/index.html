@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://s2.loli.net/2024/09/14/rO67Yqtdfxhel8i.png">
 <meta property="og:image" content="https://s2.loli.net/2024/09/30/QCSmB3q9OAjvIGh.png">
 <meta property="article:published_time" content="2024-09-09T08:44:09.017Z">
-<meta property="article:modified_time" content="2024-09-30T10:11:34.937Z">
+<meta property="article:modified_time" content="2024-10-14T10:08:26.146Z">
 <meta property="article:author" content="Site Fan">
 <meta property="article:tag" content="Embedded System">
 <meta name="twitter:card" content="summary">
@@ -229,7 +229,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2024-09-30 18:11:34" itemprop="dateModified" datetime="2024-09-30T18:11:34+08:00">2024-09-30</time>
+                <time title="Modified: 2024-10-14 18:08:26" itemprop="dateModified" datetime="2024-10-14T18:08:26+08:00">2024-10-14</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -258,6 +258,7 @@
 <li>Lecture 2: STM32 MCU &amp; GPIO</li>
 <li>Lecture 3: C for Embedded System</li>
 <li>Lecture 4: ARM Assembly</li>
+<li>Lecture 5: Interrupt</li>
 </ul>
 <h2 id="Lecture-2-STM32-MCU-amp-GPIO"><a href="#Lecture-2-STM32-MCU-amp-GPIO" class="headerlink" title="Lecture 2: STM32 MCU &amp; GPIO"></a>Lecture 2: STM32 MCU &amp; GPIO</h2><h3 id="Recall"><a href="#Recall" class="headerlink" title="Recall"></a>Recall</h3><p><strong>Value Notions</strong>: KMGTPEZ</p>
 <p><strong>Number System</strong>: </p>
@@ -327,6 +328,8 @@
 <p><code>switch</code> is faster than <code>if-else</code> when the number of branches is large.</p>
 <h2 id="Lecture-4-ARM-Assembly"><a href="#Lecture-4-ARM-Assembly" class="headerlink" title="Lecture 4: ARM Assembly"></a>Lecture 4: ARM Assembly</h2><p><strong>Mnemonic</strong> — <strong>Assembler</strong> —&gt; <strong>Machine Code</strong></p>
 <p>In ARM mode, each inst. is 4-byte (32-bit) long. Cortex-M is <em>Thumb-2</em> mode, inst. could be 16 or 32 bits long.</p>
+<script type="math/tex; mode=display">
+\text{label, opcode, operand 1, operand 2, operand3; comments}</script><p><strong>Program Status Register (PSR)</strong></p>
 <p><img src="https://s2.loli.net/2024/09/30/QCSmB3q9OAjvIGh.png" alt="image.png"></p>
 <ul>
 <li><p><strong>Negative bit</strong></p>
@@ -357,7 +360,117 @@
 </ul>
 </li>
 </ul>
-<p>Little-endian vs. Big-endian</p>
+<p><strong>Little-endian vs. Big-endian</strong></p>
+<p><strong>Addressing Mode</strong></p>
+<ul>
+<li>Register addressing</li>
+<li>Immediate addressing<ul>
+<li>Immediate specified using 12 bits</li>
+<li><code>&lt;immediate&gt; = imm[0:7]&gt;&gt;(2*imm[8:11])</code></li>
+</ul>
+</li>
+<li>Indirect addressing<ul>
+<li><code>LDR r1, [r2,#12]</code></li>
+<li>Pre-indexing: <code>LDR r1, [r2,#12]!</code></li>
+<li>Post-indexing: <code>LDR r1, [r2],#12</code></li>
+</ul>
+</li>
+</ul>
+<p>Branch: if-else/loops</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Complex Instruction Set Computer</th>
+<th>Complex Instruction Set Computer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complicated CPU</td>
+<td>Simple CPU</td>
+</tr>
+<tr>
+<td>Each instruction takes longer to execute</td>
+<td>Machine code instructions execute quickly</td>
+</tr>
+<tr>
+<td>Fewer machine code instructions for each high level instruction</td>
+<td>More machine code instructions for each high level instruction</td>
+</tr>
+<tr>
+<td>Good code density</td>
+<td>Poor code density</td>
+</tr>
+<tr>
+<td>Smaller semantic gap</td>
+<td>Larger semantic gap</td>
+</tr>
+<tr>
+<td>Simple compiler</td>
+<td>Complicated compiler</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Lecture-5-Interrupt"><a href="#Lecture-5-Interrupt" class="headerlink" title="Lecture 5: Interrupt"></a>Lecture 5: Interrupt</h2><h3 id="Subroutine"><a href="#Subroutine" class="headerlink" title="Subroutine"></a>Subroutine</h3><p><strong>Branch and Link</strong></p>
+<p>Call a subroutine while saving the return address in the link register <code>LR</code>.</p>
+<p><strong>Branch and Exchange</strong></p>
+<p>Branch to an address specified in a register. The processor copies <code>LR</code> to <code>PC</code> after the program is finished.</p>
+<p><strong>Full Descending Stack (FILO)</strong></p>
+<ul>
+<li>The bottom(base) is fixed at a particular memory address</li>
+<li>The top is identified by stack pointer register <code>SP</code></li>
+</ul>
+<p><strong>Call a subroutine</strong></p>
+<ol>
+<li>Save current registers <code>CPSR</code>, <code>PC</code>, <code>LR</code>, <code>R12</code>, <code>R3</code>, <code>R2</code>, <code>R1</code>, and <code>R0</code> to stack.</li>
+<li>Update link register <code>LR</code> to return address</li>
+<li>Update program counter register <code>PC</code></li>
+<li>Enter subroutine execution</li>
+<li>Restore registers in stack</li>
+</ol>
+<h3 id="Interrupt"><a href="#Interrupt" class="headerlink" title="Interrupt"></a>Interrupt</h3><p>Polling vs. Interrupt</p>
+<p><strong>Process a interrupt</strong></p>
+<ol>
+<li>Finish processing current instruction.</li>
+<li>Save return address and register context to stack.</li>
+<li>Run interrupt service routine.</li>
+<li>Restore return address and register context from stack.</li>
+<li>Resume main program</li>
+</ol>
+<p><strong>Interrupt Service Routines (ISR)</strong></p>
+<ul>
+<li>Subroutines to serve interrupts</li>
+<li>Invoked by hardware asynchronously (not controlled by program logic)</li>
+<li>Cortex-M: interrupt vector table, with pre-defined ISR addresses</li>
+</ul>
+<p><strong>Types of Interrupts</strong></p>
+<ul>
+<li>Interrupts from peripherals modules</li>
+<li>External pin interrupts ( <code>IRQ0</code> to <code>IRQ15</code>)</li>
+<li>Software interrupts</li>
+<li>Non Maskable interrupts (<code>Reset</code> pin)</li>
+</ul>
+<p>Interrupts are managed by Nested Vectored Interrupt Controller (<code>NVIC</code>)</p>
+<ul>
+<li>Program AIRCR register to set priority group</li>
+<li>Program IPRx register to set priority value</li>
+<li>Enable/Disable interrupts with ISER/ICER registers</li>
+</ul>
+<p><strong>Interrupt Priority</strong></p>
+<ul>
+<li><p>Types</p>
+<ul>
+<li>preempt priority</li>
+<li>sub-priority</li>
+<li>natural-priority (the priority within the interrupt vector table)</li>
+</ul>
+</li>
+<li><p>The smaller value, the higher priority</p>
+</li>
+<li>Reset has highest priority</li>
+</ul>
 
     </div>
 
@@ -455,7 +568,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline"><span class="nav-number">1.</span> <span class="nav-text">Outline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-2-STM32-MCU-amp-GPIO"><span class="nav-number">2.</span> <span class="nav-text">Lecture 2: STM32 MCU &amp; GPIO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Recall"><span class="nav-number">2.1.</span> <span class="nav-text">Recall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU-Overview"><span class="nav-number">2.2.</span> <span class="nav-text">CPU Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU-Registers-amp-Memory-Map"><span class="nav-number">2.3.</span> <span class="nav-text">CPU Registers &amp; Memory Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Purpose-Input-Output"><span class="nav-number">2.4.</span> <span class="nav-text">General Purpose Input Output</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-3-C-for-Embedded-System"><span class="nav-number">3.</span> <span class="nav-text">Lecture 3: C for Embedded System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-4-ARM-Assembly"><span class="nav-number">4.</span> <span class="nav-text">Lecture 4: ARM Assembly</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Outline"><span class="nav-number">1.</span> <span class="nav-text">Outline</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-2-STM32-MCU-amp-GPIO"><span class="nav-number">2.</span> <span class="nav-text">Lecture 2: STM32 MCU &amp; GPIO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Recall"><span class="nav-number">2.1.</span> <span class="nav-text">Recall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU-Overview"><span class="nav-number">2.2.</span> <span class="nav-text">CPU Overview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU-Registers-amp-Memory-Map"><span class="nav-number">2.3.</span> <span class="nav-text">CPU Registers &amp; Memory Map</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#General-Purpose-Input-Output"><span class="nav-number">2.4.</span> <span class="nav-text">General Purpose Input Output</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-3-C-for-Embedded-System"><span class="nav-number">3.</span> <span class="nav-text">Lecture 3: C for Embedded System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-4-ARM-Assembly"><span class="nav-number">4.</span> <span class="nav-text">Lecture 4: ARM Assembly</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-5-Interrupt"><span class="nav-number">5.</span> <span class="nav-text">Lecture 5: Interrupt</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Subroutine"><span class="nav-number">5.1.</span> <span class="nav-text">Subroutine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Interrupt"><span class="nav-number">5.2.</span> <span class="nav-text">Interrupt</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

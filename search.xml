@@ -12132,6 +12132,7 @@ p(x_4=\text{rise}\vert \pi,A,B) &= \sum\limits_{z_4}p(x_4\vert z_4,\pi,A,B)p(z_4
 <li>Lecture 2: STM32 MCU &amp; GPIO</li>
 <li>Lecture 3: C for Embedded System</li>
 <li>Lecture 4: ARM Assembly</li>
+<li>Lecture 5: Interrupt</li>
 </ul>
 <h2 id="Lecture-2-STM32-MCU-amp-GPIO"><a href="#Lecture-2-STM32-MCU-amp-GPIO" class="headerlink" title="Lecture 2: STM32 MCU &amp; GPIO"></a>Lecture 2: STM32 MCU &amp; GPIO</h2><h3 id="Recall"><a href="#Recall" class="headerlink" title="Recall"></a>Recall</h3><p><strong>Value Notions</strong>: KMGTPEZ</p>
 <p><strong>Number System</strong>: </p>
@@ -12201,6 +12202,8 @@ p(x_4=\text{rise}\vert \pi,A,B) &= \sum\limits_{z_4}p(x_4\vert z_4,\pi,A,B)p(z_4
 <p><code>switch</code> is faster than <code>if-else</code> when the number of branches is large.</p>
 <h2 id="Lecture-4-ARM-Assembly"><a href="#Lecture-4-ARM-Assembly" class="headerlink" title="Lecture 4: ARM Assembly"></a>Lecture 4: ARM Assembly</h2><p><strong>Mnemonic</strong> — <strong>Assembler</strong> —&gt; <strong>Machine Code</strong></p>
 <p>In ARM mode, each inst. is 4-byte (32-bit) long. Cortex-M is <em>Thumb-2</em> mode, inst. could be 16 or 32 bits long.</p>
+<script type="math/tex; mode=display">
+\text{label, opcode, operand 1, operand 2, operand3; comments}</script><p><strong>Program Status Register (PSR)</strong></p>
 <p><img src="https://s2.loli.net/2024/09/30/QCSmB3q9OAjvIGh.png" alt="image.png"></p>
 <ul>
 <li><p><strong>Negative bit</strong></p>
@@ -12231,7 +12234,117 @@ p(x_4=\text{rise}\vert \pi,A,B) &= \sum\limits_{z_4}p(x_4\vert z_4,\pi,A,B)p(z_4
 </ul>
 </li>
 </ul>
-<p>Little-endian vs. Big-endian</p>
+<p><strong>Little-endian vs. Big-endian</strong></p>
+<p><strong>Addressing Mode</strong></p>
+<ul>
+<li>Register addressing</li>
+<li>Immediate addressing<ul>
+<li>Immediate specified using 12 bits</li>
+<li><code>&lt;immediate&gt; = imm[0:7]&gt;&gt;(2*imm[8:11])</code></li>
+</ul>
+</li>
+<li>Indirect addressing<ul>
+<li><code>LDR r1, [r2,#12]</code></li>
+<li>Pre-indexing: <code>LDR r1, [r2,#12]!</code></li>
+<li>Post-indexing: <code>LDR r1, [r2],#12</code></li>
+</ul>
+</li>
+</ul>
+<p>Branch: if-else/loops</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Complex Instruction Set Computer</th>
+<th>Complex Instruction Set Computer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Complicated CPU</td>
+<td>Simple CPU</td>
+</tr>
+<tr>
+<td>Each instruction takes longer to execute</td>
+<td>Machine code instructions execute quickly</td>
+</tr>
+<tr>
+<td>Fewer machine code instructions for each high level instruction</td>
+<td>More machine code instructions for each high level instruction</td>
+</tr>
+<tr>
+<td>Good code density</td>
+<td>Poor code density</td>
+</tr>
+<tr>
+<td>Smaller semantic gap</td>
+<td>Larger semantic gap</td>
+</tr>
+<tr>
+<td>Simple compiler</td>
+<td>Complicated compiler</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Lecture-5-Interrupt"><a href="#Lecture-5-Interrupt" class="headerlink" title="Lecture 5: Interrupt"></a>Lecture 5: Interrupt</h2><h3 id="Subroutine"><a href="#Subroutine" class="headerlink" title="Subroutine"></a>Subroutine</h3><p><strong>Branch and Link</strong></p>
+<p>Call a subroutine while saving the return address in the link register <code>LR</code>.</p>
+<p><strong>Branch and Exchange</strong></p>
+<p>Branch to an address specified in a register. The processor copies <code>LR</code> to <code>PC</code> after the program is finished.</p>
+<p><strong>Full Descending Stack (FILO)</strong></p>
+<ul>
+<li>The bottom(base) is fixed at a particular memory address</li>
+<li>The top is identified by stack pointer register <code>SP</code></li>
+</ul>
+<p><strong>Call a subroutine</strong></p>
+<ol>
+<li>Save current registers <code>CPSR</code>, <code>PC</code>, <code>LR</code>, <code>R12</code>, <code>R3</code>, <code>R2</code>, <code>R1</code>, and <code>R0</code> to stack.</li>
+<li>Update link register <code>LR</code> to return address</li>
+<li>Update program counter register <code>PC</code></li>
+<li>Enter subroutine execution</li>
+<li>Restore registers in stack</li>
+</ol>
+<h3 id="Interrupt"><a href="#Interrupt" class="headerlink" title="Interrupt"></a>Interrupt</h3><p>Polling vs. Interrupt</p>
+<p><strong>Process a interrupt</strong></p>
+<ol>
+<li>Finish processing current instruction.</li>
+<li>Save return address and register context to stack.</li>
+<li>Run interrupt service routine.</li>
+<li>Restore return address and register context from stack.</li>
+<li>Resume main program</li>
+</ol>
+<p><strong>Interrupt Service Routines (ISR)</strong></p>
+<ul>
+<li>Subroutines to serve interrupts</li>
+<li>Invoked by hardware asynchronously (not controlled by program logic)</li>
+<li>Cortex-M: interrupt vector table, with pre-defined ISR addresses</li>
+</ul>
+<p><strong>Types of Interrupts</strong></p>
+<ul>
+<li>Interrupts from peripherals modules</li>
+<li>External pin interrupts ( <code>IRQ0</code> to <code>IRQ15</code>)</li>
+<li>Software interrupts</li>
+<li>Non Maskable interrupts (<code>Reset</code> pin)</li>
+</ul>
+<p>Interrupts are managed by Nested Vectored Interrupt Controller (<code>NVIC</code>)</p>
+<ul>
+<li>Program AIRCR register to set priority group</li>
+<li>Program IPRx register to set priority value</li>
+<li>Enable/Disable interrupts with ISER/ICER registers</li>
+</ul>
+<p><strong>Interrupt Priority</strong></p>
+<ul>
+<li><p>Types</p>
+<ul>
+<li>preempt priority</li>
+<li>sub-priority</li>
+<li>natural-priority (the priority within the interrupt vector table)</li>
+</ul>
+</li>
+<li><p>The smaller value, the higher priority</p>
+</li>
+<li>Reset has highest priority</li>
+</ul>
 ]]></content>
       <categories>
         <category>CS</category>
@@ -12274,6 +12387,7 @@ H(X,Y)=-\sum\limits_{x\in\mathcal X}\sum\limits_{y\in\mathcal Y}p(x,y)\log p(x,y
 <p><strong>Conditional Entropy</strong>: </p>
 <script type="math/tex; mode=display">
 H(Y\mid X)=-\sum\limits_{x\in\mathcal X}\sum\limits_{y\in\mathcal Y}p(x,y)\log p(y\mid x) = -E[\log p(Y\mid X)]</script><p><strong>Chain Rule of Entropy</strong>:</p>
+<p>Proof by induction.</p>
 <script type="math/tex; mode=display">
 \begin{align*}
 \text{Joint} &=\ \ \  \text{Single} +\text{Conditional}\\
@@ -12312,7 +12426,61 @@ D(p(y \mid x) \parallel q(y \mid x)) & =\sum_{x} p(x) \sum_{y} p(y \mid x) \log 
 & =E_{p(x, y)} \log \frac{p(Y \mid X)}{q(Y \mid X)}
 \end{align*}</script><p><strong>Chain Rule for Relative Entropy</strong></p>
 <script type="math/tex; mode=display">
-D(p(x,y)\parallel q(x,y)) = D(p(x)\parallel q(x)) + D (p(y\mid x)\parallel q(y\mid x))</script>]]></content>
+D(p(x,y)\parallel q(x,y)) = D(p(x)\parallel q(x)) + D (p(y\mid x)\parallel q(y\mid x))</script><p><strong>Another way to explain mutual information</strong></p>
+<script type="math/tex; mode=display">
+I(X;Y) = D(p(x,y)\| p(x)p(y))</script><p>For r.v. $X,Y \sim p(x,y) $, $\tilde X, \tilde Y \sim q(x,y)$:</p>
+<p>If $q(x,y) = p(x)\cdot p(y)$, then $q(x) = p(x)$, $q(y) = p(y)$</p>
+<p>Therefore $q(x,y) = q(x) \cdot q(y)$, $\tilde X \bot \tilde Y$ .</p>
+<h2 id="Lecture-3-Inequality"><a href="#Lecture-3-Inequality" class="headerlink" title="Lecture 3: Inequality"></a>Lecture 3: Inequality</h2><p>$f(x)$ is <strong>convex</strong> IFF over $(a,b)$, $\forall x_1,x_2 \in (a,b)$ and $0\le \lambda \le 1$ :</p>
+<script type="math/tex; mode=display">
+f(\lambda x_1+(1-\lambda)x_2) \le \lambda f(x_1) + (1-\lambda) f(x_2)</script><p>$f(x)$ is <strong>strictly convex</strong> if equality holds only if $\lambda = 0/1$.</p>
+<p>$f(x)$ is <strong>concave</strong> if $-f(x)$ is convex. </p>
+<p><strong>Theorem: Jensen’s Equality</strong></p>
+<p>For convex function $f(x)$ and r.v. $X$, $E[f(X)] \ge f(E[X])$. If strict convex, equality holds only if $X$ is constant.</p>
+<p>Proof by induction.</p>
+<p><strong>Theorem: Information Inequality</strong></p>
+<p>For any probability mass function $p(x)$ and $q(x)$, $D(p(x)|q(x)) \ge 0$.</p>
+<p>Equality IFF $\forall x, p(x)=q(x)$.</p>
+<p><strong>Theorem: Nonnegativity of mutual information</strong></p>
+<p>For any random variables $X$, $Y$, $I(X;Y)=D(p(x,y)|p(x)p(y))\ge 0$.</p>
+<p>Equality IFF $X \bot Y$.</p>
+<blockquote>
+<p>Corollaries</p>
+<ul>
+<li><p>$D(p(y|x)|q(y|x))\ge0$, with equality IFF</p>
+<script type="math/tex; mode=display">
+\forall y\forall x \text{\ s.t.\ } p(x)>0, p(y|x)=q(y|x).</script></li>
+<li></li>
+<li><p>$I(X;Y|Z)\ge0$, with equality IFF $X$ and $Y$ are conditionally independent given $Z$.</p>
+</li>
+</ul>
+</blockquote>
+<p><strong>Theorem: The maximum entropy distribution</strong></p>
+<p>For discrete r.v. $X$, $H(X)\le \log | \mathcal X |$, with equality IFF $X$ has a uniform distribution over $|\mathcal X|$.</p>
+<script type="math/tex; mode=display">
+u(x)=\frac 1 {|\mathcal X|}, \forall p(x), 0 \le D(p\|u)=\sum\limits_x p(x) \log \frac{p(x)}{u(x)} = \log |\mathcal X| - H(X)</script><p><strong>Theorem: Conditioning reduces entropy</strong></p>
+<p>$H(X|Y)\le H(X)$ with equality IFF $X\bot Y$.</p>
+<p><strong>Theorem: Independence bound on entropy</strong></p>
+<p>$H(X_1,\dots,X_n)\le\sum\limits_{i=1}^n H(X_i)$ with equality IFF $\forall i\ne j, X_i\bot X_j$</p>
+<p><strong>Markov Chain</strong></p>
+<p>Random variables $\{X_n\}$ form a Markov chain $X_1\rightarrow\cdots\rightarrow X_n$if the p.m.f. satisfies</p>
+<script type="math/tex; mode=display">
+p(x_i|x_1,\dots,x_{i-1}) = p(x_i|x_i-1)</script><blockquote>
+<p>Properties</p>
+<ul>
+<li>$X\rightarrow  Y\rightarrow Z\implies p(x,z|y)=p(x|y)p(z|y)$</li>
+<li>$X\rightarrow  Y\rightarrow Z\implies  Z\rightarrow  Y\rightarrow X$</li>
+<li>If $Z=f(Y)$, then $X\rightarrow  Y\rightarrow Z$.</li>
+</ul>
+</blockquote>
+<p><strong>Theorem: Data-processing inequality</strong></p>
+<p>If $X\rightarrow Y \rightarrow Z$, then $I(X;Y)\ge I(X;Z)$.</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+I(X;Y,Z) &= I(X;Z) + I(X;Y|Z)\\
+&= I(X;Y) + I(X;Z|Y)
+\end{align*}</script><p>Since $X\rightarrow Y \rightarrow Z$, we have $I(X;Z|Y)=0$. Since $I(X;Y|Z)\ge 0$, it holds.</p>
+]]></content>
       <categories>
         <category>CS</category>
       </categories>
